@@ -1,9 +1,9 @@
 <template>
   <div class="min-h-screen gradient-bg-calm safe-top safe-bottom">
     <div class="max-w-6xl mx-auto px-4 py-6 sm:py-8">
-      <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">Anonymous Chat</h1>
-        <p class="text-gray-600">Connect with colleagues anonymously</p>
+      <div class="mb-6 sm:mb-8">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Anonymous Chat</h1>
+        <p class="text-sm sm:text-base text-gray-600">Connect with colleagues anonymously</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

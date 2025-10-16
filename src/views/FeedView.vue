@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen gradient-bg-light safe-top safe-bottom">
     <div class="max-w-4xl mx-auto px-4 py-6 sm:py-8">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 sm:gap-0">
-      <h1 class="text-3xl font-bold text-neutral-800">MoodFlow</h1>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4 sm:gap-0">
+      <h1 class="text-2xl sm:text-3xl font-bold text-neutral-800">MoodFlow</h1>
       <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
         <div class="relative w-full sm:w-auto">
           <select
@@ -194,19 +194,19 @@
           class="card hover:scale-[1.02] transition-all duration-300 animate-slide-up"
           :style="{ animationDelay: (index * 0.1) + 's' }"
         >
-          <div class="flex items-start gap-4">
-            <div class="text-5xl float">{{ getMoodEmoji(post.mood) }}</div>
-            <div class="flex-1">
-              <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center gap-2">
-                  <span class="font-medium text-gray-900">
+          <div class="flex items-start gap-3 sm:gap-4">
+            <div class="text-4xl sm:text-5xl float flex-shrink-0">{{ getMoodEmoji(post.mood) }}</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between mb-2 gap-2">
+                <div class="flex items-center gap-1 sm:gap-2 flex-wrap min-w-0">
+                  <span class="font-medium text-gray-900 text-sm sm:text-base truncate">
                     {{ post.is_anonymous ? 'Anonymous' : (post.profiles?.display_name || 'User') }}
                   </span>
-                  <span class="text-sm text-gray-500">•</span>
-                  <span class="text-sm text-gray-500">{{ post.service }}</span>
-                  <span class="text-sm text-gray-500">•</span>
-                  <span class="text-sm text-gray-500">{{ formatDate(post.created_at) }}</span>
-                  <span v-if="post.anonymous_id" class="text-xs text-gray-400 ml-1">#{{ post.anonymous_id.substring(0, 8) }}</span>
+                  <span class="text-xs sm:text-sm text-gray-500 hidden sm:inline">•</span>
+                  <span class="text-xs sm:text-sm text-gray-500 truncate">{{ post.service }}</span>
+                  <span class="text-xs sm:text-sm text-gray-500 hidden sm:inline">•</span>
+                  <span class="text-xs sm:text-sm text-gray-500">{{ formatDate(post.created_at) }}</span>
+                  <span v-if="post.anonymous_id" class="text-2xs sm:text-xs text-gray-400 ml-1 hidden sm:inline">#{{ post.anonymous_id.substring(0, 8) }}</span>
                 </div>
                 
                 <!-- Bouton de suppression (seulement pour le propriétaire du post) -->

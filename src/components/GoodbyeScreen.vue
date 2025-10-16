@@ -27,12 +27,12 @@
     </div>
 
     <!-- Contenu principal -->
-    <div class="text-center relative z-10 max-w-2xl mx-auto px-6">
+    <div class="text-center relative z-10 max-w-2xl mx-auto px-4 sm:px-6">
       <!-- Animation d'au revoir -->
-      <div class="mb-8 animate-scale-in">
+      <div class="mb-6 sm:mb-8 animate-scale-in">
         <div class="inline-block relative">
-          <div class="w-36 h-36 mx-auto bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-glow-lg animate-glow">
-            <div class="text-6xl">✨</div>
+          <div class="w-28 h-28 sm:w-36 sm:h-36 mx-auto bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-glow-lg animate-glow">
+            <div class="text-5xl sm:text-6xl">✨</div>
           </div>
           <!-- Effet de particules autour du logo -->
           <div class="absolute inset-0">
@@ -51,25 +51,25 @@
       </div>
 
       <!-- Titre avec animation -->
-      <h1 class="text-5xl font-bold text-white mb-6 animate-slide-down" style="animation-delay: 0.3s">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 animate-slide-down" style="animation-delay: 0.3s">
         Thank You!
       </h1>
       
-      <p class="text-white/90 text-xl mb-12 animate-fade-in" style="animation-delay: 0.5s">
+      <p class="text-white/90 text-base sm:text-lg md:text-xl mb-8 sm:mb-12 animate-fade-in" style="animation-delay: 0.5s">
         Your wellness journey continues beyond this session
       </p>
 
       <!-- Messages d'encouragement -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
         <div 
           v-for="(message, index) in messages" 
           :key="index"
-          class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 animate-slide-up"
+          class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/20 animate-slide-up"
           :style="{ animationDelay: (0.7 + index * 0.2) + 's' }"
         >
-          <div class="text-4xl mb-4">{{ message.icon }}</div>
-          <h3 class="text-white font-semibold text-lg mb-2">{{ message.title }}</h3>
-          <p class="text-white/80 text-sm">{{ message.description }}</p>
+          <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">{{ message.icon }}</div>
+          <h3 class="text-white font-semibold text-base sm:text-lg mb-2">{{ message.title }}</h3>
+          <p class="text-white/80 text-xs sm:text-sm">{{ message.description }}</p>
         </div>
       </div>
 
@@ -77,7 +77,7 @@
       <div class="animate-fade-in" style="animation-delay: 1.3s">
         <button 
           @click="$emit('close')"
-          class="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold text-lg border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105 shadow-glow"
+          class="bg-white/20 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105 shadow-glow w-full sm:w-auto"
         >
           Continue Your Journey
         </button>

@@ -29,10 +29,10 @@
     <!-- Contenu principal -->
     <div class="text-center relative z-10 max-w-lg mx-auto px-6">
       <!-- Logo avec effet de glow -->
-      <div class="mb-8">
+      <div class="mb-6 sm:mb-8">
         <div class="inline-block relative">
-          <div class="w-24 h-24 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-glow animate-glow">
-            <img src="/src/assets/mood_flow_logo.png" alt="MoodFlow" class="w-16 h-16 object-contain" />
+          <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-glow animate-glow">
+            <img src="/src/assets/mood_flow_logo.png" alt="MoodFlow" class="w-14 h-14 sm:w-16 sm:h-16 object-contain" />
           </div>
           <!-- Effet de shimmer -->
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-2xl animate-shimmer"></div>
@@ -40,11 +40,11 @@
       </div>
 
       <!-- Titre avec animation -->
-      <h1 class="text-4xl font-bold text-white mb-4 animate-fade-in" style="animation-delay: 0.5s">
+      <h1 class="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4 animate-fade-in" style="animation-delay: 0.5s">
         MoodFlow
       </h1>
       
-      <p class="text-white/80 text-lg mb-8 animate-fade-in" style="animation-delay: 0.7s">
+      <p class="text-white/80 text-base sm:text-lg mb-6 sm:mb-8 animate-fade-in" style="animation-delay: 0.7s">
         Corporate Wellness Platform
       </p>
 
