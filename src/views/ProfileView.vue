@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen gradient-bg-calm">
+  <div class="min-h-screen gradient-bg-calm safe-top safe-bottom">
     <div class="max-w-4xl mx-auto px-4 py-6 sm:py-8">
       <div class="mb-8">
         <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Profile Settings</h1>

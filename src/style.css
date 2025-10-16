@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,10 +16,11 @@
   }
 
   body {
-    @apply m-0 min-h-screen bg-neutral-50 text-neutral-900 antialiased;
-    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    @apply m-0 min-h-screen text-neutral-900 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     /* Empêcher le body de déborder */
     position: relative;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
   }
 
   #app {
@@ -34,9 +35,9 @@
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar */
+  /* Scrollbar personnalisée */
   ::-webkit-scrollbar {
-    width: 6px;
+    @apply w-2;
   }
 
   ::-webkit-scrollbar-track {
@@ -53,29 +54,29 @@
 }
 
 @layer components {
-  /* Boutons style Headspace/Calm - Modern & Premium */
+  /* Boutons style Awwwards - Modern & Premium */
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-2xl font-medium 
-           shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300;
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-3 rounded-2xl font-semibold 
+           shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300 backdrop-blur-sm;
   }
   
   .btn-secondary {
-    @apply bg-gradient-to-r from-sky-500 to-sky-600 text-white px-6 py-3 rounded-2xl font-medium 
+    @apply bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-2xl font-semibold border border-white/30 
            shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300;
   }
 
   .btn-accent {
-    @apply bg-gradient-to-r from-lavender-500 to-lavender-600 text-white px-6 py-3 rounded-2xl font-medium 
-           shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300;
+    @apply bg-gradient-to-r from-accent-500 to-primary-500 text-white px-6 py-3 rounded-2xl font-semibold 
+           shadow-glow hover:shadow-glow-lg hover:scale-105 transition-all duration-300;
   }
 
   .btn-outline {
     @apply border-2 border-primary-400 text-primary-600 px-6 py-3 rounded-2xl hover:bg-primary-50 
-           transition-all duration-300 font-medium;
+           transition-all duration-300 font-semibold backdrop-blur-sm;
   }
 
   .btn-ghost {
-    @apply bg-white/60 backdrop-blur-sm text-neutral-700 px-6 py-3 rounded-2xl font-medium 
+    @apply bg-white/60 backdrop-blur-sm text-neutral-700 px-6 py-3 rounded-2xl font-semibold 
            hover:bg-white/80 transition-all duration-300;
   }
   
@@ -90,351 +91,330 @@
   }
 
   .card-gradient {
-    @apply bg-gradient-to-br from-primary-50 to-lavender-50 rounded-3xl shadow-soft p-6 
-           border border-primary-100/50;
+    @apply bg-gradient-to-br from-white/90 via-white/70 to-white/50 backdrop-blur-sm rounded-3xl 
+           shadow-soft-lg border border-white/50 p-8;
   }
 
   .card-glass {
     @apply bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/60 shadow-soft;
   }
-  
-  /* Inputs modernes et raffinés */
+
+  /* Inputs modernes */
   .input-field {
-    @apply w-full px-5 py-3 border-2 border-neutral-200 rounded-2xl 
-           focus:ring-2 focus:ring-primary-400 focus:border-transparent 
-           transition-all duration-300 bg-white placeholder:text-neutral-400;
+    @apply w-full px-4 py-3 border border-neutral-200 rounded-2xl focus:ring-2 focus:ring-primary-500 
+           focus:border-transparent transition-all duration-300 bg-white/90 backdrop-blur-sm;
   }
 
-  .input-field:focus {
-    @apply shadow-soft;
+  .input-glass {
+    @apply w-full px-4 py-3 border border-white/30 rounded-2xl focus:ring-2 focus:ring-white/50 
+           focus:border-transparent transition-all duration-300 bg-white/20 backdrop-blur-sm text-white 
+           placeholder-white/70;
   }
 
-  /* Gradients de fond apaisants */
+  /* Backgrounds avec gradients */
   .gradient-bg {
-    @apply bg-gradient-to-br from-primary-500 via-primary-600 to-lavender-500;
+    @apply bg-gradient-to-br from-primary-50 via-accent-50 to-primary-100;
   }
 
   .gradient-bg-light {
-    @apply bg-gradient-to-br from-cream-50 via-primary-50 to-lavender-50;
+    @apply bg-gradient-to-br from-primary-100 via-accent-100 to-primary-200;
   }
 
   .gradient-bg-calm {
-    @apply bg-gradient-to-br from-sky-50 via-cream-50 to-sage-50;
+    @apply bg-gradient-to-br from-sky-50 via-primary-50 to-accent-50;
   }
 
-  /* Couleurs de mood avec nouvelle palette */
+  .gradient-bg-dark {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  }
+
+  /* Animations pour les moods */
   .mood-very-happy {
-    @apply bg-sage-500 text-white;
+    @apply bg-gradient-to-br from-success-400 to-success-600 text-white;
   }
 
   .mood-happy {
-    @apply bg-sage-400 text-white;
+    @apply bg-gradient-to-br from-primary-400 to-primary-600 text-white;
   }
 
   .mood-neutral {
-    @apply bg-cream-500 text-neutral-800;
+    @apply bg-gradient-to-br from-warning-400 to-warning-600 text-white;
   }
 
   .mood-sad {
-    @apply bg-primary-400 text-white;
+    @apply bg-gradient-to-br from-orange-400 to-orange-600 text-white;
   }
 
   .mood-very-sad {
-    @apply bg-primary-500 text-white;
+    @apply bg-gradient-to-br from-error-400 to-error-600 text-white;
   }
 
-  /* Glassmorphism moderne */
-  .glass {
-    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-soft;
-  }
-
-  .glass-dark {
-    @apply bg-neutral-900/40 backdrop-blur-md border border-white/10;
-  }
-
-  /* Animations organiques et douces */
-  .float {
+  /* Animations personnalisées */
+  .animate-float {
     animation: float 6s ease-in-out infinite;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    33% { transform: translateY(-8px) rotate(1deg); }
-    66% { transform: translateY(4px) rotate(-1deg); }
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
   }
 
-  .breathe {
-    animation: breathe 4s ease-in-out infinite;
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
   }
 
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
   }
 
-  /* Pulse subtle pour les éléments interactifs */
-  .pulse-soft {
-    animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
   }
 
-  @keyframes pulse-soft {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.85; }
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out;
   }
 
-  /* Effet de scintillement doux */
-  .shimmer {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.3) 50%,
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
+  .animate-slide-down {
+    animation: slide-down 0.5s ease-out;
   }
 
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-}
-
-/* Mobile Native Optimizations */
-@layer utilities {
-  /* Safe area padding for notched devices */
-  .safe-top {
-    padding-top: env(safe-area-inset-top);
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
   }
 
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out;
   }
 
-  .safe-left {
-    padding-left: env(safe-area-inset-left);
-  }
-
-  .safe-right {
-    padding-right: env(safe-area-inset-right);
-  }
-
-  /* Disable text selection on mobile for better UX */
+  /* Utilitaires pour mobile */
   .no-select {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Better touch targets */
   .touch-target {
     min-height: 44px;
     min-width: 44px;
   }
 
-  /* Prevent iOS zoom on input focus */
-  @supports (-webkit-touch-callout: none) {
-    input,
-    select,
-    textarea {
-      font-size: 16px !important;
+  /* Capacitor Status Bar adjustments - OPTIMISÉ pour iOS */
+  .safe-top {
+    /* Fallback minimal pour les anciens navigateurs */
+    padding-top: 20px;
+    /* iOS 11+ avec safe area - mais on réduit l'espace */
+    padding-top: calc(constant(safe-area-inset-top) + 8px); /* iOS 11.0-11.2 */
+    padding-top: calc(env(safe-area-inset-top) + 8px); /* iOS 11.2+ */
+  }
+
+  .safe-bottom {
+    /* Fallback minimal pour home indicator */
+    padding-bottom: 20px;
+    /* iOS 11+ avec safe area */
+    padding-bottom: calc(constant(safe-area-inset-bottom) + 8px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+  }
+
+  .safe-left {
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Header sticky avec safe area OPTIMISÉ pour iOS */
+  header.safe-top {
+    /* Dynamic Island = ~59px, Encoche standard = ~44px - mais on réduit */
+    padding-top: 20px !important;
+    padding-top: calc(constant(safe-area-inset-top) + 8px) !important;
+    padding-top: calc(env(safe-area-inset-top) + 8px) !important;
+  }
+
+  /* iOS body sans padding supplémentaire */
+  .ios body {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Android pas de padding supplémentaire */
+  .android .safe-top {
+    padding-top: 0;
+  }
+
+  .android .safe-bottom {
+    padding-bottom: 0;
+  }
+
+  /* Splash screens - Safe area spécifique pour mobile */
+  .splash-screen {
+    /* Fallback pour les anciens navigateurs */
+    padding-top: 44px;
+    padding-bottom: 34px;
+    /* iOS 11+ avec safe area */
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Android - pas de padding sur les splash screens */
+  .android .splash-screen {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* Prevent pull-to-refresh on mobile */
+  body {
+    overscroll-behavior-y: contain;
+  }
+
+  /* Carousel styles */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+
+  /* Smooth scroll snap pour le carousel d'emojis */
+  .emoji-carousel {
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+
+  .emoji-item {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* Reddit-style thread layout */
+  .reply-thread {
+    display: flex;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .reply-connector {
+    position: relative;
+    width: 20px;
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  .reply-line {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #e5e7eb, transparent);
+  }
+
+  .reply-dot {
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    background: #9ca3af;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #e5e7eb;
+  }
+
+  .reply-content {
+    flex: 1;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+  }
+
+  .reply-content:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  /* Nested replies (future enhancement) */
+  .reply-thread .reply-thread {
+    margin-left: 20px;
+    margin-top: 8px;
+  }
+
+  .reply-thread .reply-thread .reply-line {
+    background: linear-gradient(to bottom, #d1d5db, transparent);
+  }
+
+  .reply-thread .reply-thread .reply-dot {
+    background: #6b7280;
+  }
+
+  /* Better mobile scroll */
+  @media (max-width: 768px) {
+    * {
+      -webkit-overflow-scrolling: touch;
     }
   }
-}
 
-/* Keyboard open state adjustments */
-body.keyboard-open {
-  /* Adjust layout when keyboard is visible */
-  height: 100vh;
-  overflow: hidden;
-}
-
-body.keyboard-open #app {
-  max-height: 100vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Capacitor Status Bar adjustments - OPTIMISÉ pour iOS */
-.safe-top {
-  /* Fallback minimal pour les anciens navigateurs */
-  padding-top: 20px;
-  /* iOS 11+ avec safe area - mais on réduit l'espace */
-  padding-top: calc(constant(safe-area-inset-top) + 8px); /* iOS 11.0-11.2 */
-  padding-top: calc(env(safe-area-inset-top) + 8px); /* iOS 11.2+ */
-}
-
-.safe-bottom {
-  /* Fallback minimal pour home indicator */
-  padding-bottom: 20px;
-  /* iOS 11+ avec safe area */
-  padding-bottom: calc(constant(safe-area-inset-bottom) + 8px);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
-}
-
-.safe-left {
-  padding-left: constant(safe-area-inset-left);
-  padding-left: env(safe-area-inset-left);
-}
-
-.safe-right {
-  padding-right: constant(safe-area-inset-right);
-  padding-right: env(safe-area-inset-right);
-}
-
-/* Header sticky avec safe area OPTIMISÉ pour iOS */
-header.safe-top {
-  /* Dynamic Island = ~59px, Encoche standard = ~44px - mais on réduit */
-  padding-top: 20px !important;
-  padding-top: calc(constant(safe-area-inset-top) + 8px) !important;
-  padding-top: calc(env(safe-area-inset-top) + 8px) !important;
-}
-
-/* iOS body sans padding supplémentaire */
-.ios body {
-  padding: 0;
-  margin: 0;
-}
-
-/* Android pas de padding supplémentaire */
-.android .safe-top {
-  padding-top: 0;
-}
-
-.android .safe-bottom {
-  padding-bottom: 0;
-}
-
-/* Splash screens - Safe area spécifique pour mobile */
-.splash-screen {
-  /* Fallback pour les anciens navigateurs */
-  padding-top: 44px;
-  padding-bottom: 34px;
-  /* iOS 11+ avec safe area */
-  padding-top: constant(safe-area-inset-top);
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* Android - pas de padding sur les splash screens */
-.android .splash-screen {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* Prevent pull-to-refresh on mobile */
-body {
-  overscroll-behavior-y: contain;
-}
-
-/* Carousel styles */
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-}
-.scrollbar-hide::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
-}
-
-/* Smooth scroll snap pour le carousel d'emojis */
-.emoji-carousel {
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-}
-
-.emoji-item {
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-}
-
-/* Reddit-style thread layout */
-.reply-thread {
-  display: flex;
-  margin-bottom: 16px;
-  position: relative;
-}
-
-.reply-connector {
-  position: relative;
-  width: 20px;
-  flex-shrink: 0;
-  margin-right: 12px;
-}
-
-.reply-line {
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #e5e7eb, transparent);
-}
-
-.reply-dot {
-  position: absolute;
-  left: 4px;
-  top: 8px;
-  width: 8px;
-  height: 8px;
-  background: #9ca3af;
-  border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 0 0 1px #e5e7eb;
-}
-
-.reply-content {
-  flex: 1;
-  background: #f9fafb;
-  border-radius: 8px;
-  padding: 12px;
-  border: 1px solid #e5e7eb;
-  transition: all 0.2s ease;
-}
-
-.reply-content:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-}
-
-/* Nested replies (future enhancement) */
-.reply-thread .reply-thread {
-  margin-left: 20px;
-  margin-top: 8px;
-}
-
-.reply-thread .reply-thread .reply-line {
-  background: linear-gradient(to bottom, #d1d5db, transparent);
-}
-
-.reply-thread .reply-thread .reply-dot {
-  background: #6b7280;
-}
-
-/* Better mobile scroll */
-@media (max-width: 768px) {
-  * {
-    -webkit-overflow-scrolling: touch;
+  /* Keyboard adjustments */
+  .keyboard-open {
+    padding-bottom: 0;
   }
 
-  /* Larger touch targets on mobile */
-  button,
-  a,
-  input[type="checkbox"],
-  input[type="radio"] {
-    @apply touch-target;
+  /* Platform-specific adjustments */
+  .ios {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
   }
 
-  /* Better spacing on mobile */
-  .card {
-    @apply rounded-2xl p-4;
+  .android {
+    -webkit-tap-highlight-color: transparent;
   }
+}
 
-  /* Optimize text for mobile */
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+/* Keyframes pour les animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+  100% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.6); }
+}
+
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  0% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
 }

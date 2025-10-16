@@ -7,117 +7,106 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Palette Peach/Coral (inspirée Headspace) - Couleur principale
+        // Palette premium inspirée des sites Awwwards
         primary: {
-          50: '#fff5f0',    // Pêche très clair
-          100: '#ffe8dd',   // Pêche clair
-          200: '#ffd4c4',   // Pêche doux
-          300: '#ffb89a',   // Pêche medium
-          400: '#ff9d70',   // Pêche vif - Couleur signature
-          500: '#ff7e46',   // Orange pêche intense
-          600: '#f96332',   // Orange coral
-          700: '#e64920',   // Orange profond
-          800: '#c23b16',   // Orange foncé
-          900: '#9e3014',   // Orange très foncé
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
         },
-        // Palette Cream/Beige (tons neutres chauds)
-        cream: {
-          50: '#fffef9',    // Crème très clair
-          100: '#fffcf0',   // Crème clair
-          200: '#fff7db',   // Crème doux
-          300: '#fff0c2',   // Beige clair
-          400: '#ffe8a3',   // Beige doux
-          500: '#ffd978',   // Beige chaud
-          600: '#f5c754',   // Jaune doré doux
-          700: '#d9a536',   // Or vintage
-          800: '#b8842a',   // Bronze
-          900: '#8f6621',   // Bronze foncé
+        
+        // Couleurs secondaires modernes
+        accent: {
+          50: '#fdf4ff',
+          100: '#fae8ff',
+          200: '#f5d0fe',
+          300: '#f0abfc',
+          400: '#e879f9',
+          500: '#d946ef',
+          600: '#c026d3',
+          700: '#a21caf',
+          800: '#86198f',
+          900: '#701a75',
         },
-        // Palette Sky/Calm (bleu apaisant inspiré Calm)
-        sky: {
-          50: '#f0f9ff',    // Ciel très clair
-          100: '#e0f2fe',   // Ciel clair
-          200: '#bae6fd',   // Bleu ciel doux
-          300: '#7dd3fc',   // Bleu ciel medium
-          400: '#38bdf8',   // Bleu ciel vif
-          500: '#0ea5e9',   // Bleu océan
-          600: '#0284c7',   // Bleu profond
-          700: '#0369a1',   // Bleu intense
-          800: '#075985',   // Bleu foncé
-          900: '#0c4a6e',   // Bleu nuit
+        
+        // Gradients premium
+        gradient: {
+          from: '#667eea',
+          via: '#764ba2',
+          to: '#f093fb',
         },
-        // Palette Lavender (violet doux)
-        lavender: {
-          50: '#faf5ff',    // Lavande très clair
-          100: '#f3e8ff',   // Lavande clair
-          200: '#e9d5ff',   // Lavande doux
-          300: '#d8b4fe',   // Lavande medium
-          400: '#c084fc',   // Lavande vif
-          500: '#a855f7',   // Violet lavande
-          600: '#9333ea',   // Violet
-          700: '#7e22ce',   // Violet profond
-          800: '#6b21a8',   // Violet foncé
-          900: '#581c87',   // Violet intense
-        },
-        // Palette Sage (vert sauge apaisant)
-        sage: {
-          50: '#f6f7f6',    // Vert très clair
-          100: '#e8f0e8',   // Vert clair
-          200: '#d1e4d1',   // Vert sauge très doux
-          300: '#afd1af',   // Vert sauge doux
-          400: '#8aba8a',   // Vert sauge medium
-          500: '#6a9d6a',   // Vert sauge
-          600: '#528052',   // Vert foncé
-          700: '#3e6440',   // Vert profond
-          800: '#2d4a2f',   // Vert très foncé
-          900: '#1f3422',   // Vert nuit
-        },
-        // Palette Neutral (gris chauds)
+        
+        // Couleurs neutres sophistiquées
         neutral: {
-          50: '#fafaf9',    // Blanc cassé
-          100: '#f5f5f4',   // Gris très clair
-          200: '#e7e5e4',   // Gris clair
-          300: '#d6d3d1',   // Gris doux
-          400: '#a8a29e',   // Gris medium
-          500: '#78716c',   // Gris
-          600: '#57534e',   // Gris foncé
-          700: '#44403c',   // Gris profond
-          800: '#292524',   // Gris très foncé
-          900: '#1c1917',   // Presque noir
+          50: '#fafafa',
+          100: '#f5f5f5',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
         },
-        // Couleurs fonctionnelles (subtle et élégantes)
+        
+        // Couleurs d'état modernes
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
           400: '#4ade80',
           500: '#22c55e',
           600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
         },
+        
         warning: {
           50: '#fffbeb',
           100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
           400: '#fbbf24',
           500: '#f59e0b',
           600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
         },
+        
         error: {
           50: '#fef2f2',
           100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
           400: '#f87171',
           500: '#ef4444',
           600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
         },
-        // Couleurs pour les moods (plus douces et cohérentes)
+        
+        // Couleurs pour les moods - palette moderne
         mood: {
-          very_happy: '#6a9d6a',    // Vert sauge joyeux
-          happy: '#8aba8a',         // Vert clair
-          neutral: '#ffd978',       // Beige neutre
-          sad: '#ff9d70',           // Pêche mélancolique
-          very_sad: '#ff7e46',      // Coral triste
-        }
+          very_happy: '#22c55e', // success-500
+          happy: '#3b82f6',      // blue-500
+          neutral: '#f59e0b',    // warning-500
+          sad: '#f97316',        // orange-500
+          very_sad: '#ef4444',   // error-500
+        },
       },
       fontFamily: {
-        sans: ['Inter', 'Poppins', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Cal Sans', 'Inter', 'sans-serif'],
       },
       fontSize: {
@@ -130,6 +119,53 @@ export default {
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 20px 60px -15px rgba(0, 0, 0, 0.06)',
+        'glow': '0 0 20px rgba(14, 165, 233, 0.3)',
+        'glow-lg': '0 0 40px rgba(14, 165, 233, 0.4)',
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'float-slow': 'float 8s ease-in-out infinite',
+        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'glow': 'glow 2s ease-in-out infinite alternate',
+        'slide-up': 'slide-up 0.5s ease-out',
+        'slide-down': 'slide-down 0.5s ease-out',
+        'fade-in': 'fade-in 0.5s ease-out',
+        'scale-in': 'scale-in 0.3s ease-out',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        'pulse-soft': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.8' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        glow: {
+          '0%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.3)' },
+          '100%': { boxShadow: '0 0 40px rgba(14, 165, 233, 0.6)' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'slide-down': {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { transform: 'scale(0.9)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
       },
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen gradient-bg-light">
+  <div class="min-h-screen gradient-bg-light safe-top safe-bottom">
     <div class="max-w-4xl mx-auto px-4 py-6 sm:py-8">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 sm:gap-0">
       <h1 class="text-3xl font-bold text-neutral-800">MoodFlow</h1>
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-      <div class="card-gradient mb-8">
+      <div class="card-gradient mb-8 animate-fade-in">
         <form @submit.prevent="createPost" class="space-y-6">
           <div>
             <label class="block text-lg font-semibold text-neutral-700 mb-6">
@@ -189,9 +189,10 @@
         </div>
 
         <div
-          v-for="post in posts"
+          v-for="(post, index) in posts"
           :key="post.id"
-          class="card hover:scale-[1.02] transition-all duration-300"
+          class="card hover:scale-[1.02] transition-all duration-300 animate-slide-up"
+          :style="{ animationDelay: (index * 0.1) + 's' }"
         >
           <div class="flex items-start gap-4">
             <div class="text-5xl float">{{ getMoodEmoji(post.mood) }}</div>
