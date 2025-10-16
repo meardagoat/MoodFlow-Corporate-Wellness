@@ -1,72 +1,80 @@
 <template>
   <div 
     v-if="show" 
-    class="fixed inset-0 z-50 flex items-center justify-center gradient-bg overflow-hidden"
-    @click="closeSplash"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-cream-100 via-cream-50 to-primary-50 overflow-hidden"
   >
-    <!-- Particules flottantes -->
-    <div class="absolute inset-0 overflow-hidden">
+    <!-- Animation de cercles organiques (respiration) -->
+    <div class="absolute inset-0 flex items-center justify-center">
       <div 
-        v-for="i in 20" 
-        :key="i"
-        class="absolute w-2 h-2 bg-white/30 rounded-full animate-pulse-soft"
-        :style="{
-          left: Math.random() * 100 + '%',
-          top: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 3 + 's',
-          animationDuration: (2 + Math.random() * 3) + 's'
-        }"
+        class="absolute w-64 h-64 bg-primary-300/20 rounded-full blur-3xl animate-breathe"
+        style="animation-delay: 0s"
+      ></div>
+      <div 
+        class="absolute w-96 h-96 bg-lavender-300/15 rounded-full blur-3xl animate-breathe"
+        style="animation-delay: 1s"
+      ></div>
+      <div 
+        class="absolute w-80 h-80 bg-sky-300/10 rounded-full blur-3xl animate-breathe"
+        style="animation-delay: 2s"
       ></div>
     </div>
 
     <!-- Contenu principal -->
-    <div class="text-center relative z-10">
-      <!-- Logo/Icone animé -->
-      <div class="mb-8">
-        <div class="w-24 h-24 mx-auto bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md border border-white/30 shadow-2xl float">
-          <span class="text-4xl">🧘‍♀️</span>
+    <div class="text-center relative z-10 px-6">
+      <!-- Logo avec animation de pulsation douce -->
+      <div class="mb-12">
+        <div class="relative inline-block">
+          <!-- Cercle extérieur pulsant -->
+          <div class="absolute inset-0 -m-4 bg-primary-400/20 rounded-full animate-pulse-ring"></div>
+          
+          <!-- Logo principal -->
+          <div class="relative w-32 h-32 bg-gradient-to-br from-primary-400 to-primary-500 rounded-full flex items-center justify-center shadow-soft-lg">
+            <img 
+              src="../assets/mood_flow_logo.png" 
+              alt="MoodFlow" 
+              class="w-24 h-24 object-contain"
+            />
+          </div>
         </div>
       </div>
 
-      <!-- Titre principal -->
-      <h1 class="text-5xl font-bold text-white mb-4 tracking-tight">
+      <!-- Titre avec typographie élégante -->
+      <h1 class="text-6xl font-bold text-neutral-800 mb-3 tracking-tight font-display">
         MoodFlow
       </h1>
 
-      <!-- Sous-titre -->
-      <p class="text-xl text-white/90 mb-8 font-light">
-        Votre espace de bien-être au travail
+      <!-- Sous-titre raffiné -->
+      <p class="text-lg text-neutral-600 mb-12 font-light max-w-md mx-auto leading-relaxed">
+        Cultivez votre bien-être au quotidien
       </p>
 
-      <!-- Barre de progression -->
-      <div class="w-64 mx-auto mb-8">
-        <div class="h-1 bg-white/20 rounded-full overflow-hidden">
-          <div 
-            class="h-full bg-white/60 rounded-full transition-all duration-500 ease-out"
-            :style="{ width: progress + '%' }"
-          ></div>
-        </div>
+      <!-- Indicateur de progression minimaliste -->
+      <div class="flex items-center justify-center space-x-2 mb-4">
+        <div 
+          v-for="i in 3" 
+          :key="i"
+          class="w-2 h-2 rounded-full transition-all duration-500"
+          :class="[
+            progress > (i * 33) 
+              ? 'bg-primary-500 w-8' 
+              : 'bg-neutral-300'
+          ]"
+        ></div>
       </div>
 
-      <!-- Message de chargement -->
-      <p class="text-white/70 text-sm">
+      <!-- Message de chargement subtil -->
+      <p class="text-sm text-neutral-500 font-light">
         {{ loadingMessage }}
       </p>
-
-      <!-- Bouton pour fermer manuellement -->
-      <button 
-        v-if="progress >= 100"
-        @click="closeSplash"
-        class="mt-6 px-8 py-3 bg-white/20 text-white rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300 backdrop-blur-md font-medium"
-      >
-        Commencer
-      </button>
     </div>
 
-    <!-- Effet de vague en bas -->
-    <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1200 120" class="w-full h-20 fill-white/10">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
+    <!-- Forme organique décorative en bas -->
+    <div class="absolute bottom-0 left-0 right-0 pointer-events-none">
+      <svg viewBox="0 0 1440 120" class="w-full h-24" preserveAspectRatio="none">
+        <path 
+          d="M0,64 C240,96 480,80 720,64 C960,48 1200,64 1440,80 L1440,120 L0,120 Z" 
+          class="fill-primary-100/40"
+        />
       </svg>
     </div>
   </div>
@@ -139,21 +147,39 @@ function closeSplash() {
 </script>
 
 <style scoped>
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Animation de respiration (breathing) inspirée Headspace */
+@keyframes breathe {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
 }
 
-.float {
-  animation: float 6s ease-in-out infinite;
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
 }
 
-@keyframes pulse-soft {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
+/* Animation de pulsation pour le logo */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
 }
 
-.animate-pulse-soft {
-  animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.animate-pulse-ring {
+  animation: pulse-ring 3s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
 }
 </style>

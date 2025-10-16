@@ -1,79 +1,87 @@
 <template>
   <div 
     v-if="show" 
-    class="fixed inset-0 z-50 flex items-center justify-center gradient-bg overflow-hidden"
-    @click="closeGoodbye"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-lavender-100 via-sky-50 to-cream-100 overflow-hidden"
   >
-    <!-- Particules douces -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div 
-        v-for="i in 12" 
-        :key="i"
-        class="absolute w-3 h-3 bg-white/20 rounded-full animate-float-slow"
-        :style="{
-          left: Math.random() * 100 + '%',
-          top: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 3 + 's',
-          animationDuration: (4 + Math.random() * 2) + 's'
-        }"
-      ></div>
+    <!-- Cercles organiques apaisants -->
+    <div class="absolute inset-0">
+      <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-lavender-300/25 rounded-full blur-3xl animate-breathe-slow"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-96 h-96 bg-sky-300/20 rounded-full blur-3xl animate-breathe-slow" style="animation-delay: 1.5s"></div>
+      <div class="absolute top-1/2 right-1/3 w-64 h-64 bg-sage-300/15 rounded-full blur-3xl animate-breathe-slow" style="animation-delay: 3s"></div>
     </div>
 
     <!-- Contenu principal -->
-    <div class="text-center relative z-10 max-w-md mx-auto px-6">
-      <!-- Icône d'au revoir -->
-      <div class="mb-8">
-        <div class="w-28 h-28 mx-auto bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md border border-white/30 shadow-2xl float">
-          <span class="text-5xl">👋</span>
+    <div class="text-center relative z-10 max-w-lg mx-auto px-6">
+      <!-- Animation d'au revoir -->
+      <div class="mb-10">
+        <div class="inline-block relative">
+          <div class="w-32 h-32 mx-auto bg-gradient-to-br from-sky-400 to-lavender-500 rounded-full flex items-center justify-center shadow-soft-lg animate-gentle-wave">
+            <span class="text-6xl">✨</span>
+          </div>
+          <!-- Étoiles décoratives -->
+          <div class="absolute top-0 right-0 w-6 h-6 bg-cream-400 rounded-full opacity-80 animate-twinkle"></div>
+          <div class="absolute bottom-2 left-2 w-5 h-5 bg-lavender-300 rounded-full opacity-70 animate-twinkle" style="animation-delay: 0.5s"></div>
+          <div class="absolute top-2 left-0 w-4 h-4 bg-sky-300 rounded-full opacity-60 animate-twinkle" style="animation-delay: 1s"></div>
         </div>
       </div>
 
       <!-- Message d'au revoir -->
-      <h1 class="text-4xl font-bold text-white mb-4">
-        À bientôt !
+      <h1 class="text-5xl font-bold text-neutral-800 mb-4 font-display">
+        À très bientôt !
       </h1>
 
-      <p class="text-lg text-white/90 mb-8 leading-relaxed">
-        Merci d'avoir partagé votre humeur avec nous. Prenez soin de vous !
+      <p class="text-lg text-neutral-600 mb-10 leading-relaxed font-light max-w-md mx-auto">
+        Merci d'avoir partagé ce moment avec nous. Prenez soin de vous ! 🌸
       </p>
 
-      <!-- Statistiques de session -->
-      <div class="glass rounded-2xl p-6 mb-8">
-        <h3 class="text-white font-semibold mb-4">Votre session</h3>
-        <div class="grid grid-cols-2 gap-4 text-center">
+      <!-- Statistiques de session élégantes -->
+      <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-8 mb-8 shadow-soft">
+        <h3 class="text-neutral-700 font-medium mb-6 text-sm uppercase tracking-wide">Votre session</h3>
+        <div class="grid grid-cols-2 gap-6">
           <div>
-            <div class="text-2xl mb-1">📊</div>
-            <div class="text-xs text-white/70 mb-1">Moods partagés</div>
-            <div class="text-lg font-bold text-white">{{ sessionStats.posts || 0 }}</div>
+            <div class="w-14 h-14 mx-auto mb-3 bg-sage-100 rounded-2xl flex items-center justify-center">
+              <span class="text-2xl">📊</span>
+            </div>
+            <div class="text-xs text-neutral-500 mb-1 font-medium">Posts partagés</div>
+            <div class="text-3xl font-bold text-sage-600">{{ sessionStats.posts || 0 }}</div>
           </div>
           <div>
-            <div class="text-2xl mb-1">💬</div>
-            <div class="text-xs text-white/70 mb-1">Messages</div>
-            <div class="text-lg font-bold text-white">{{ sessionStats.messages || 0 }}</div>
+            <div class="w-14 h-14 mx-auto mb-3 bg-lavender-100 rounded-2xl flex items-center justify-center">
+              <span class="text-2xl">💬</span>
+            </div>
+            <div class="text-xs text-neutral-500 mb-1 font-medium">Conversations</div>
+            <div class="text-3xl font-bold text-lavender-600">{{ sessionStats.messages || 0 }}</div>
           </div>
         </div>
       </div>
 
-      <!-- Message inspirant -->
-      <div class="glass rounded-2xl p-4 mb-8">
-        <p class="text-white/90 text-sm italic">
-          "Le bien-être commence par la conscience de soi"
+      <!-- Citation inspirante -->
+      <div class="bg-gradient-to-r from-primary-100/60 to-lavender-100/60 backdrop-blur-sm rounded-2xl p-5 mb-8 border border-white/60">
+        <p class="text-sm text-neutral-700 font-light italic leading-relaxed">
+          "Chaque fin est un nouveau commencement. Revenez quand vous le souhaitez"
         </p>
       </div>
 
       <!-- Bouton de fermeture -->
       <button 
         @click="closeGoodbye"
-        class="px-8 py-3 bg-white/20 text-white rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300 backdrop-blur-md font-medium"
+        class="px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl font-medium shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300"
       >
         Fermer
       </button>
     </div>
 
-    <!-- Effet de vague en bas -->
-    <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1200 120" class="w-full h-20 fill-white/10">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
+    <!-- Formes organiques décoratives -->
+    <div class="absolute bottom-0 left-0 right-0 pointer-events-none">
+      <svg viewBox="0 0 1440 120" class="w-full h-32" preserveAspectRatio="none">
+        <path 
+          d="M0,64 C240,32 480,96 720,64 C960,32 1200,96 1440,64 L1440,120 L0,120 Z" 
+          class="fill-lavender-200/30"
+        />
+        <path 
+          d="M0,80 C240,48 480,112 720,80 C960,48 1200,112 1440,80 L1440,120 L0,120 Z" 
+          class="fill-sky-200/20"
+        />
       </svg>
     </div>
   </div>
@@ -112,21 +120,52 @@ if (props.show) {
 </script>
 
 <style scoped>
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
+/* Animation de respiration lente et apaisante */
+@keyframes breathe-slow {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% { 
+    transform: scale(1.15);
+    opacity: 0.4;
+  }
 }
 
-.animate-float-slow {
-  animation: float-slow ease-in-out infinite;
+.animate-breathe-slow {
+  animation: breathe-slow 6s ease-in-out infinite;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Animation de vague douce */
+@keyframes gentle-wave {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  66% {
+    transform: scale(0.95) rotate(-2deg);
+  }
 }
 
-.float {
-  animation: float 6s ease-in-out infinite;
+.animate-gentle-wave {
+  animation: gentle-wave 4s ease-in-out infinite;
+}
+
+/* Animation de scintillement */
+@keyframes twinkle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
 }
 </style>

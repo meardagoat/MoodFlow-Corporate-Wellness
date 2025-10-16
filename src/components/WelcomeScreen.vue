@@ -1,84 +1,92 @@
 <template>
   <div 
     v-if="show" 
-    class="fixed inset-0 z-50 flex items-center justify-center gradient-bg-light overflow-hidden"
-    @click="closeWelcome"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-cream-50 via-primary-50 to-lavender-50 overflow-hidden"
   >
-    <!-- Particules de confettis -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div 
-        v-for="i in 15" 
-        :key="i"
-        class="absolute animate-confetti"
-        :style="{
-          left: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 2 + 's',
-          animationDuration: (2 + Math.random() * 2) + 's'
-        }"
-      >
-        <span class="text-2xl">{{ getRandomEmoji() }}</span>
-      </div>
+    <!-- Cercles organiques d'arrière-plan -->
+    <div class="absolute inset-0">
+      <div class="absolute top-1/4 -left-20 w-64 h-64 bg-primary-300/20 rounded-full blur-3xl animate-float-slow"></div>
+      <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-lavender-300/15 rounded-full blur-3xl animate-float-slow" style="animation-delay: 1s"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sky-200/10 rounded-full blur-3xl animate-float-slow" style="animation-delay: 2s"></div>
     </div>
 
     <!-- Contenu principal -->
-    <div class="text-center relative z-10 max-w-md mx-auto px-6">
-      <!-- Animation de célébration -->
-      <div class="mb-8">
-        <div class="w-32 h-32 mx-auto bg-gradient-to-br from-primary-400 to-accent-400 rounded-full flex items-center justify-center shadow-2xl animate-bounce">
-          <span class="text-6xl">🎉</span>
+    <div class="text-center relative z-10 max-w-lg mx-auto px-6">
+      <!-- Animation douce du logo -->
+      <div class="mb-10">
+        <div class="inline-block relative">
+          <div class="w-28 h-28 mx-auto bg-gradient-to-br from-primary-400 via-primary-500 to-primary-600 rounded-full flex items-center justify-center shadow-soft-lg animate-gentle-scale">
+            <span class="text-5xl">👋</span>
+          </div>
+          <!-- Cercles décoratifs -->
+          <div class="absolute -top-2 -right-2 w-8 h-8 bg-sage-400 rounded-full opacity-80"></div>
+          <div class="absolute -bottom-2 -left-2 w-6 h-6 bg-lavender-400 rounded-full opacity-60"></div>
         </div>
       </div>
 
       <!-- Message de bienvenue -->
-      <h1 class="text-4xl font-bold text-neutral-800 mb-4">
-        Bienvenue{{ userDisplayName ? `, ${userDisplayName}` : '' }} !
+      <h1 class="text-5xl font-bold text-neutral-800 mb-3 font-display">
+        Content de vous revoir{{ userDisplayName ? `, ${userDisplayName}` : '' }} !
       </h1>
 
-      <p class="text-lg text-neutral-600 mb-8 leading-relaxed">
-        Nous sommes ravis de vous revoir. Prêt à partager votre humeur du jour ?
+      <p class="text-base text-neutral-600 mb-10 leading-relaxed font-light">
+        Prêt à cultiver votre bien-être aujourd'hui ?
       </p>
 
-      <!-- Statistiques rapides -->
-      <div class="grid grid-cols-2 gap-4 mb-8">
-        <div class="card text-center">
-          <div class="text-2xl mb-2">📊</div>
-          <div class="text-sm text-neutral-600">Moods partagés</div>
-          <div class="text-lg font-bold text-primary-600">{{ stats.posts || 0 }}</div>
+      <!-- Statistiques élégantes -->
+      <div class="grid grid-cols-2 gap-4 mb-10">
+        <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-6 shadow-soft">
+          <div class="w-12 h-12 mx-auto mb-3 bg-sage-100 rounded-2xl flex items-center justify-center">
+            <span class="text-2xl">📊</span>
+          </div>
+          <div class="text-xs text-neutral-500 font-medium mb-1">Posts partagés</div>
+          <div class="text-3xl font-bold text-sage-600">{{ stats.posts || 0 }}</div>
         </div>
-        <div class="card text-center">
-          <div class="text-2xl mb-2">💬</div>
-          <div class="text-sm text-neutral-600">Messages</div>
-          <div class="text-lg font-bold text-accent-600">{{ stats.messages || 0 }}</div>
+        <div class="bg-white/60 backdrop-blur-sm rounded-3xl p-6 shadow-soft">
+          <div class="w-12 h-12 mx-auto mb-3 bg-lavender-100 rounded-2xl flex items-center justify-center">
+            <span class="text-2xl">💬</span>
+          </div>
+          <div class="text-xs text-neutral-500 font-medium mb-1">Conversations</div>
+          <div class="text-3xl font-bold text-lavender-600">{{ stats.messages || 0 }}</div>
         </div>
       </div>
 
-      <!-- Boutons d'action -->
-      <div class="space-y-3">
+      <!-- Boutons d'action modernes -->
+      <div class="space-y-3 mb-8">
         <button 
           @click="goToFeed"
-          class="w-full btn-primary"
+          class="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-4 rounded-2xl font-medium shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300"
         >
-          🌟 Voir le Feed
+          Voir le Feed →
         </button>
         
         <button 
           @click="closeWelcome"
-          class="w-full btn-outline"
+          class="w-full bg-white/60 backdrop-blur-sm text-neutral-700 px-6 py-4 rounded-2xl font-medium hover:bg-white/80 transition-all duration-300"
         >
           Continuer
         </button>
       </div>
 
-      <!-- Message inspirant -->
-      <p class="text-sm text-neutral-500 mt-6 italic">
-        "Chaque journée est une nouvelle opportunité de bien-être"
-      </p>
+      <!-- Citation inspirante subtile -->
+      <div class="bg-white/40 backdrop-blur-sm rounded-2xl p-4 border border-white/60">
+        <p class="text-sm text-neutral-600 font-light italic">
+          "Prenez soin de vous, un jour à la fois"
+        </p>
+      </div>
     </div>
 
-    <!-- Effet de vague décoratif -->
-    <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1200 120" class="w-full h-20 fill-primary-100">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
+    <!-- Forme organique décorative -->
+    <div class="absolute bottom-0 left-0 right-0 pointer-events-none">
+      <svg viewBox="0 0 1440 120" class="w-full h-28" preserveAspectRatio="none">
+        <path 
+          d="M0,64 C360,32 720,96 1080,64 C1200,48 1320,80 1440,64 L1440,120 L0,120 Z" 
+          class="fill-primary-200/30"
+        />
+        <path 
+          d="M0,80 C360,48 720,112 1080,80 C1200,64 1320,96 1440,80 L1440,120 L0,120 Z" 
+          class="fill-lavender-200/20"
+        />
       </svg>
     </div>
   </div>
@@ -136,37 +144,34 @@ if (props.show) {
 </script>
 
 <style scoped>
-@keyframes confetti {
-  0% {
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 1;
+/* Animation douce de flottement */
+@keyframes float-slow {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px);
   }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
+  33% { 
+    transform: translateY(-20px) translateX(10px);
   }
-}
-
-.animate-confetti {
-  animation: confetti linear infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 53%, 80%, 100% {
-    transform: translate3d(0,0,0);
-  }
-  40%, 43% {
-    transform: translate3d(0, -15px, 0);
-  }
-  70% {
-    transform: translate3d(0, -7px, 0);
-  }
-  90% {
-    transform: translate3d(0, -2px, 0);
+  66% { 
+    transform: translateY(10px) translateX(-10px);
   }
 }
 
-.animate-bounce {
-  animation: bounce 2s infinite;
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+/* Animation de scale douce */
+@keyframes gentle-scale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-gentle-scale {
+  animation: gentle-scale 3s ease-in-out infinite;
 }
 </style>

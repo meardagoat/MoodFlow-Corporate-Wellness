@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -42,90 +42,150 @@
 }
 
 @layer components {
+  /* Boutons style Headspace/Calm - Modern & Premium */
   .btn-primary {
-    @apply bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition font-medium;
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-2xl font-medium 
+           shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300;
   }
   
   .btn-secondary {
-    @apply bg-secondary-500 text-white px-4 py-2 rounded-lg hover:bg-secondary-600 transition font-medium;
+    @apply bg-gradient-to-r from-sky-500 to-sky-600 text-white px-6 py-3 rounded-2xl font-medium 
+           shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300;
   }
 
   .btn-accent {
-    @apply bg-accent-500 text-white px-4 py-2 rounded-lg hover:bg-accent-600 transition font-medium;
+    @apply bg-gradient-to-r from-lavender-500 to-lavender-600 text-white px-6 py-3 rounded-2xl font-medium 
+           shadow-soft hover:shadow-soft-lg hover:scale-105 transition-all duration-300;
   }
 
   .btn-outline {
-    @apply border border-primary-600 text-primary-600 px-4 py-2 rounded-lg hover:bg-primary-50 transition font-medium;
+    @apply border-2 border-primary-400 text-primary-600 px-6 py-3 rounded-2xl hover:bg-primary-50 
+           transition-all duration-300 font-medium;
+  }
+
+  .btn-ghost {
+    @apply bg-white/60 backdrop-blur-sm text-neutral-700 px-6 py-3 rounded-2xl font-medium 
+           hover:bg-white/80 transition-all duration-300;
   }
   
+  /* Cards modernes avec glassmorphism */
   .card {
-    @apply bg-white rounded-3xl shadow-lg p-6 border border-neutral-100 hover:shadow-xl transition-all duration-300;
+    @apply bg-white/80 backdrop-blur-sm rounded-3xl shadow-soft p-6 border border-white/60 
+           hover:shadow-soft-lg hover:scale-[1.02] transition-all duration-300;
+  }
+
+  .card-solid {
+    @apply bg-white rounded-3xl shadow-soft p-6 hover:shadow-soft-lg transition-all duration-300;
   }
 
   .card-gradient {
-    @apply bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl shadow-lg p-6 border border-primary-100;
+    @apply bg-gradient-to-br from-primary-50 to-lavender-50 rounded-3xl shadow-soft p-6 
+           border border-primary-100/50;
+  }
+
+  .card-glass {
+    @apply bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/60 shadow-soft;
   }
   
+  /* Inputs modernes et raffinés */
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition bg-white;
+    @apply w-full px-5 py-3 border-2 border-neutral-200 rounded-2xl 
+           focus:ring-2 focus:ring-primary-400 focus:border-transparent 
+           transition-all duration-300 bg-white placeholder:text-neutral-400;
   }
 
   .input-field:focus {
-    @apply shadow-md;
+    @apply shadow-soft;
   }
 
+  /* Gradients de fond apaisants */
   .gradient-bg {
-    @apply bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500;
+    @apply bg-gradient-to-br from-primary-500 via-primary-600 to-lavender-500;
   }
 
   .gradient-bg-light {
-    @apply bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50;
+    @apply bg-gradient-to-br from-cream-50 via-primary-50 to-lavender-50;
   }
 
-  /* Mood-specific colors */
+  .gradient-bg-calm {
+    @apply bg-gradient-to-br from-sky-50 via-cream-50 to-sage-50;
+  }
+
+  /* Couleurs de mood avec nouvelle palette */
   .mood-very-happy {
-    @apply bg-mood-very_happy text-white;
+    @apply bg-sage-500 text-white;
   }
 
   .mood-happy {
-    @apply bg-mood-happy text-white;
+    @apply bg-sage-400 text-white;
   }
 
   .mood-neutral {
-    @apply bg-mood-neutral text-white;
+    @apply bg-cream-500 text-neutral-800;
   }
 
   .mood-sad {
-    @apply bg-mood-sad text-white;
+    @apply bg-primary-400 text-white;
   }
 
   .mood-very-sad {
-    @apply bg-mood-very_sad text-white;
+    @apply bg-primary-500 text-white;
   }
 
-  /* Glass morphism effect */
+  /* Glassmorphism moderne */
   .glass {
-    @apply bg-white/80 backdrop-blur-md border border-white/20;
+    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-soft;
   }
 
-  /* Floating animation */
+  .glass-dark {
+    @apply bg-neutral-900/40 backdrop-blur-md border border-white/10;
+  }
+
+  /* Animations organiques et douces */
   .float {
     animation: float 6s ease-in-out infinite;
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-8px) rotate(1deg); }
+    66% { transform: translateY(4px) rotate(-1deg); }
   }
 
-  /* Pulse animation for interactive elements */
+  .breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  /* Pulse subtle pour les éléments interactifs */
   .pulse-soft {
-    animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
   @keyframes pulse-soft {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+    50% { opacity: 0.85; }
+  }
+
+  /* Effet de scintillement doux */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 
