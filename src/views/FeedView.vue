@@ -265,13 +265,13 @@
                 <div class="flex gap-2">
                   <input 
                     v-model="replyText[post.id]" 
-                    class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    class="flex-1 min-w-0 border border-gray-300 rounded-lg px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="Write a reply..."
                   />
                   <button 
                     @click="submitReply(post.id)"
                     :disabled="!replyText[post.id]"
-                    class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition disabled:opacity-50"
+                    class="bg-primary-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-primary-700 transition disabled:opacity-50 text-sm sm:text-base flex-shrink-0"
                   >
                     Send
                   </button>
@@ -279,45 +279,45 @@
               </div>
               
               <!-- Réponses (thread) - Style Reddit -->
-              <div v-if="getReplies(post.id).length > 0" class="mt-4">
+              <div v-if="getReplies(post.id).length > 0" class="mt-4 max-w-full overflow-hidden">
                 <div 
                   v-for="(reply, index) in getReplies(post.id)" 
                   :key="reply.id"
-                  class="reply-thread"
+                  class="reply-thread max-w-full"
                 >
                   <!-- Ligne de connexion verticale -->
-                  <div class="reply-connector">
+                  <div class="reply-connector flex-shrink-0">
                     <div class="reply-line"></div>
                     <div class="reply-dot"></div>
                   </div>
                   
                   <!-- Contenu de la réponse -->
-                  <div class="reply-content">
-                    <div class="flex items-center justify-between mb-2">
-                      <div class="flex items-center gap-2">
-                        <span class="font-medium text-gray-900 text-sm">
+                  <div class="reply-content flex-1 min-w-0">
+                    <div class="flex items-center justify-between mb-2 gap-2">
+                      <div class="flex items-center gap-1 sm:gap-2 flex-wrap min-w-0">
+                        <span class="font-medium text-gray-900 text-xs sm:text-sm truncate">
                           {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
                         </span>
-                        <span class="text-xs text-gray-500">{{ formatDate(reply.created_at) }}</span>
-                        <span v-if="reply.anonymous_id" class="text-xs text-gray-400">#{{ reply.anonymous_id.substring(0, 6) }}</span>
+                        <span class="text-2xs sm:text-xs text-gray-500">{{ formatDate(reply.created_at) }}</span>
+                        <span v-if="reply.anonymous_id" class="text-2xs sm:text-xs text-gray-400 hidden sm:inline">#{{ reply.anonymous_id.substring(0, 6) }}</span>
                       </div>
                       
                       <!-- Bouton de suppression pour les réponses -->
                       <button 
                         v-if="canDeleteReply(reply)"
                         @click="confirmDeleteReply(reply.id, post.id)"
-                        class="text-red-500 hover:text-red-700 transition p-1 rounded hover:bg-red-50"
+                        class="text-red-500 hover:text-red-700 transition p-1 rounded hover:bg-red-50 flex-shrink-0"
                         title="Delete reply"
                       >
-                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                         </svg>
                       </button>
                     </div>
-                    <p class="text-gray-700 text-sm leading-relaxed">{{ reply.message }}</p>
+                    <p class="text-gray-700 text-xs sm:text-sm leading-relaxed break-words">{{ reply.message }}</p>
                     
                     <!-- Réactions pour les réponses -->
-                    <div class="flex items-center gap-2 mt-3">
+                    <div class="flex items-center gap-1 sm:gap-2 mt-2 sm:mt-3 flex-wrap">
                       <button 
                         v-for="reaction in reactions" 
                         :key="reaction.emoji"
@@ -339,17 +339,17 @@
                     </div>
                     
                     <!-- Formulaire de réponse à une réponse -->
-                    <div v-if="isReplyToReplyOpen(reply.id)" class="mt-3">
-                      <div class="flex gap-2">
+                    <div v-if="isReplyToReplyOpen(reply.id)" class="mt-2 sm:mt-3">
+                      <div class="flex gap-1 sm:gap-2">
                         <input 
                           v-model="replyToReplyText[reply.id]" 
-                          class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-                          placeholder="Reply to this comment..."
+                          class="flex-1 min-w-0 border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          placeholder="Reply..."
                         />
                         <button 
                           @click="submitReplyToReply(reply.id, post.id)"
                           :disabled="!replyToReplyText[reply.id]"
-                          class="bg-primary-600 text-white px-3 py-2 rounded-lg hover:bg-primary-700 transition disabled:opacity-50 text-sm"
+                          class="bg-primary-600 text-white px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-primary-700 transition disabled:opacity-50 text-xs sm:text-sm flex-shrink-0"
                         >
                           Send
                         </button>

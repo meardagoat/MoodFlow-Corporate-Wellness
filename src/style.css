@@ -292,48 +292,80 @@
     scroll-snap-stop: always;
   }
 
-  /* Reddit-style thread layout */
+  /* Reddit-style thread layout - RESPONSIVE */
   .reply-thread {
     display: flex;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     position: relative;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .reply-connector {
     position: relative;
-    width: 20px;
+    width: 16px;
     flex-shrink: 0;
-    margin-right: 12px;
+    margin-right: 8px;
+  }
+
+  @media (min-width: 640px) {
+    .reply-connector {
+      width: 20px;
+      margin-right: 12px;
+    }
   }
 
   .reply-line {
     position: absolute;
-    left: 8px;
+    left: 6px;
     top: 0;
     bottom: 0;
     width: 2px;
     background: linear-gradient(to bottom, #e5e7eb, transparent);
   }
 
+  @media (min-width: 640px) {
+    .reply-line {
+      left: 8px;
+    }
+  }
+
   .reply-dot {
     position: absolute;
-    left: 4px;
-    top: 8px;
-    width: 8px;
-    height: 8px;
+    left: 3px;
+    top: 6px;
+    width: 6px;
+    height: 6px;
     background: #9ca3af;
     border-radius: 50%;
     border: 2px solid white;
     box-shadow: 0 0 0 1px #e5e7eb;
   }
 
+  @media (min-width: 640px) {
+    .reply-dot {
+      left: 4px;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+    }
+  }
+
   .reply-content {
     flex: 1;
+    min-width: 0;
     background: #f9fafb;
     border-radius: 8px;
-    padding: 12px;
+    padding: 8px;
     border: 1px solid #e5e7eb;
     transition: all 0.2s ease;
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .reply-content {
+      padding: 12px;
+    }
   }
 
   .reply-content:hover {
@@ -341,10 +373,17 @@
     border-color: #d1d5db;
   }
 
-  /* Nested replies (future enhancement) */
+  /* Nested replies (future enhancement) - RESPONSIVE */
   .reply-thread .reply-thread {
-    margin-left: 20px;
-    margin-top: 8px;
+    margin-left: 12px;
+    margin-top: 6px;
+  }
+
+  @media (min-width: 640px) {
+    .reply-thread .reply-thread {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
   }
 
   .reply-thread .reply-thread .reply-line {
