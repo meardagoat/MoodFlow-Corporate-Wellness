@@ -1,40 +1,18 @@
 <template>
   <div 
-    class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8 relative overflow-hidden"
-    @mousemove="handleMouseMove"
-    @touchmove="handleTouchMove"
-    ref="container"
+    class="min-h-screen flex items-center justify-center px-4 py-8 relative overflow-hidden"
+    ref="vantaContainer"
   >
-    <!-- Particules interactives -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div 
-        v-for="particle in particles" 
-        :key="particle.id"
-        class="absolute w-2 h-2 bg-accent-300/40 rounded-full transition-all duration-300 ease-out"
-        :style="{
-          left: particle.x + 'px',
-          top: particle.y + 'px',
-          transform: `scale(${particle.scale})`,
-          opacity: particle.opacity
-        }"
-      ></div>
-    </div>
-
-    <!-- Forme géométrique flottante -->
-    <div 
-      class="absolute w-72 h-72 bg-gradient-to-br from-accent-200/30 to-secondary-200/30 rounded-full blur-xl transition-all duration-500 ease-out"
-      :style="{
-        left: mousePosition.x - 144 + 'px',
-        top: mousePosition.y - 144 + 'px'
-      }"
-    ></div>
-
     <div class="max-w-md w-full relative z-10">
-      <div class="bg-white rounded-2xl shadow-xl p-8">
-        <!-- Logo animé -->
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8">
+        <!-- Logo -->
         <div class="text-center mb-8">
-          <div class="w-16 h-16 mx-auto bg-secondary-500 rounded-full flex items-center justify-center shadow-lg mb-4">
-            <span class="text-2xl">🌟</span>
+          <div class="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+            <img 
+              src="../assets/mood_flow_logo.png" 
+              alt="MoodFlow Logo" 
+              class="w-full h-full object-contain drop-shadow-lg"
+            />
           </div>
           <h1 class="text-3xl font-bold text-gray-900 mb-2">MoodFlow</h1>
           <p class="text-gray-600">Rejoignez notre communauté de bien-être</p>
@@ -165,9 +143,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { signUp } from '../lib/auth';
+import { useVantaEffect } from '../composables/useVantaEffect';
 
 const router = useRouter();
 
@@ -179,44 +158,9 @@ const role = ref('employee');
 const loading = ref(false);
 const error = ref('');
 
-// Interaction avec la souris/touch
-const mousePosition = ref({ x: 0, y: 0 });
-const particles = ref<Array<{ id: number; x: number; y: number; scale: number; opacity: number }>>([]);
-const container = ref<HTMLElement | null>(null);
-let particleId = 0;
-
-function handleMouseMove(event: MouseEvent) {
-  mousePosition.value = { x: event.clientX, y: event.clientY };
-  createParticle(event.clientX, event.clientY);
-}
-
-function handleTouchMove(event: TouchEvent) {
-  if (event.touches.length > 0) {
-    const touch = event.touches[0];
-    mousePosition.value = { x: touch.clientX, y: touch.clientY };
-    createParticle(touch.clientX, touch.clientY);
-  }
-}
-
-function createParticle(x: number, y: number) {
-  // Limiter le nombre de particules
-  if (particles.value.length > 20) {
-    particles.value.shift();
-  }
-
-  particles.value.push({
-    id: particleId++,
-    x: x + (Math.random() - 0.5) * 50,
-    y: y + (Math.random() - 0.5) * 50,
-    scale: Math.random() * 0.5 + 0.5,
-    opacity: Math.random() * 0.5 + 0.3
-  });
-
-  // Supprimer les particules après 1 seconde
-  setTimeout(() => {
-    particles.value = particles.value.filter(p => p.id !== particleId - 1);
-  }, 1000);
-}
+// Effet Vanta.js Clouds
+const vantaContainer = ref<HTMLElement | null>(null);
+useVantaEffect(vantaContainer);
 
 function getPasswordStrengthClass(index: number): string {
   const strength = getPasswordStrength();
@@ -243,11 +187,6 @@ function getPasswordStrength(): number {
   
   return strength;
 }
-
-onMounted(() => {
-  // Initialiser la position de la souris au centre
-  mousePosition.value = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-});
 
 async function handleSubmit() {
   loading.value = true;

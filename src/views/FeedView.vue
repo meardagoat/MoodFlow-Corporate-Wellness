@@ -6,17 +6,17 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
         <div class="relative w-full sm:w-auto">
           <select
-            v-model="selectedMood"
+            v-model="filterMood"
+            @change="loadPosts"
             class="w-full sm:w-auto appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value="">All moods</option>
             <option
               v-for="mood in moods"
-              :key="mood.id"
-              :value="mood.id"
-              :style="{ color: mood.color }"
+              :key="mood.value"
+              :value="mood.value"
             >
-              {{ mood.label }}
+              {{ mood.emoji }} {{ mood.label }}
             </option>
           </select>
           <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
@@ -26,10 +26,11 @@
           </div>
         </div>
         <button
-          @click="showPostModal = true"
-          class="w-full sm:w-auto btn-primary"
+          @click="loadRecentPosts"
+          class="w-full sm:w-auto btn-secondary"
+          :class="{ 'ring-2 ring-accent-400': showOnlyRecent }"
         >
-          ✨ New Post
+          🆕 New Posts
         </button>
       </div>
     </div>
@@ -138,7 +139,20 @@
       </div>
 
       <div class="space-y-4">
-        <h2 class="text-2xl font-bold text-neutral-800 mb-6">💫 Recent Moods</h2>
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-neutral-800">💫 Recent Moods</h2>
+          <div v-if="showOnlyRecent" class="flex items-center gap-2 text-sm">
+            <span class="px-3 py-1 bg-accent-100 text-accent-700 rounded-full font-medium">
+              🔥 Last 5 minutes only
+            </span>
+            <button 
+              @click="loadPosts" 
+              class="text-gray-600 hover:text-gray-800 underline"
+            >
+              Show all
+            </button>
+          </div>
+        </div>
 
         <div v-if="loadingPosts" class="text-center py-8 text-gray-500">
           Loading posts...
@@ -300,14 +314,20 @@ const reactions = [
   { emoji: '😢', name: 'sad' }
 ];
 
+// Variables pour le filtre (en haut)
+const filterMood = ref('');
+const showOnlyRecent = ref(false);
+
+// Variables pour le formulaire de création
 const selectedMood = ref('');
 const selectedTags = ref<string[]>([]);
 const message = ref('');
 const isAnonymous = ref(true);
 const loading = ref(false);
+
+// Variables pour les posts
 const loadingPosts = ref(true);
 const posts = ref<Post[]>([]);
-const showPostModal = ref(false);
 const replyText = reactive<Record<string, string>>({});
 const openReplyForms = ref<string[]>([]);
 const postReplies = ref<Record<string, any[]>>({});
@@ -503,6 +523,7 @@ function formatDate(dateString: string): string {
 
 async function loadPosts() {
   loadingPosts.value = true;
+  showOnlyRecent.value = false;
   
   try {
     let query = supabase
@@ -516,8 +537,9 @@ async function loadPosts() {
       .order('created_at', { ascending: false })
       .limit(50);
       
-    if (selectedMood.value) {
-      query = query.eq('mood', selectedMood.value);
+    // Filtre par mood si sélectionné
+    if (filterMood.value) {
+      query = query.eq('mood', filterMood.value);
     }
     
     const { data, error } = await query;
@@ -530,6 +552,51 @@ async function loadPosts() {
     await loadRepliesAndReactions();
   } catch (error) {
     console.error('Error loading posts:', error);
+  } finally {
+    loadingPosts.value = false;
+  }
+}
+
+// Fonction pour charger uniquement les posts récents (< 5 minutes)
+async function loadRecentPosts() {
+  loadingPosts.value = true;
+  showOnlyRecent.value = true;
+  
+  try {
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    
+    let query = supabase
+      .from('posts')
+      .select(`
+        *,
+        profiles:user_id (
+          display_name
+        )
+      `)
+      .gte('created_at', fiveMinutesAgo)
+      .order('created_at', { ascending: false });
+      
+    // Appliquer aussi le filtre de mood si actif
+    if (filterMood.value) {
+      query = query.eq('mood', filterMood.value);
+    }
+    
+    const { data, error } = await query;
+    
+    if (error) throw error;
+    
+    posts.value = data || [];
+    
+    if (posts.value.length === 0) {
+      // Si aucun post récent, revenir à tous les posts
+      showOnlyRecent.value = false;
+      await loadPosts();
+    } else {
+      // Charger les réponses et réactions
+      await loadRepliesAndReactions();
+    }
+  } catch (error) {
+    console.error('Error loading recent posts:', error);
   } finally {
     loadingPosts.value = false;
   }

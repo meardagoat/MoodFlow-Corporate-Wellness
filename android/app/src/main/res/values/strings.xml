@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MoodFlow</string>
+    <string name="title_activity_main">MoodFlow</string>
+    <string name="package_name">com.moodflow.app</string>
+    <string name="custom_url_scheme">com.moodflow.app</string>
+</resources>

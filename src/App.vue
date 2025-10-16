@@ -6,9 +6,13 @@ import SplashScreen from './components/SplashScreen.vue';
 import WelcomeScreen from './components/WelcomeScreen.vue';
 import GoodbyeScreen from './components/GoodbyeScreen.vue';
 import { currentUser, currentProfile, initAuth } from './lib/auth';
+import { useNative } from './composables/useNative';
 
 const route = useRoute();
 const router = useRouter();
+
+// Initialiser les fonctionnalités natives
+const { isNative, platform } = useNative();
 
 // États des splash screens
 const showSplash = ref(true);
