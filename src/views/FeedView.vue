@@ -196,15 +196,29 @@
           <div class="flex items-start gap-4">
             <div class="text-5xl float">{{ getMoodEmoji(post.mood) }}</div>
             <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="font-medium text-gray-900">
-                  {{ post.is_anonymous ? 'Anonymous' : (post.profiles?.display_name || 'User') }}
-                </span>
-                <span class="text-sm text-gray-500">•</span>
-                <span class="text-sm text-gray-500">{{ post.service }}</span>
-                <span class="text-sm text-gray-500">•</span>
-                <span class="text-sm text-gray-500">{{ formatDate(post.created_at) }}</span>
-                <span v-if="post.anonymous_id" class="text-xs text-gray-400 ml-1">#{{ post.anonymous_id.substring(0, 8) }}</span>
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="font-medium text-gray-900">
+                    {{ post.is_anonymous ? 'Anonymous' : (post.profiles?.display_name || 'User') }}
+                  </span>
+                  <span class="text-sm text-gray-500">•</span>
+                  <span class="text-sm text-gray-500">{{ post.service }}</span>
+                  <span class="text-sm text-gray-500">•</span>
+                  <span class="text-sm text-gray-500">{{ formatDate(post.created_at) }}</span>
+                  <span v-if="post.anonymous_id" class="text-xs text-gray-400 ml-1">#{{ post.anonymous_id.substring(0, 8) }}</span>
+                </div>
+                
+                <!-- Bouton de suppression (seulement pour le propriétaire du post) -->
+                <button 
+                  v-if="canDeletePost(post)"
+                  @click="confirmDeletePost(post.id)"
+                  class="text-red-500 hover:text-red-700 transition p-1 rounded hover:bg-red-50"
+                  title="Delete post"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
               </div>
               <p class="text-gray-700">{{ post.message }}</p>
               
@@ -278,12 +292,26 @@
                   
                   <!-- Contenu de la réponse -->
                   <div class="reply-content">
-                    <div class="flex items-center gap-2 mb-2">
-                      <span class="font-medium text-gray-900 text-sm">
-                        {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
-                      </span>
-                      <span class="text-xs text-gray-500">{{ formatDate(reply.created_at) }}</span>
-                      <span v-if="reply.anonymous_id" class="text-xs text-gray-400">#{{ reply.anonymous_id.substring(0, 6) }}</span>
+                    <div class="flex items-center justify-between mb-2">
+                      <div class="flex items-center gap-2">
+                        <span class="font-medium text-gray-900 text-sm">
+                          {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
+                        </span>
+                        <span class="text-xs text-gray-500">{{ formatDate(reply.created_at) }}</span>
+                        <span v-if="reply.anonymous_id" class="text-xs text-gray-400">#{{ reply.anonymous_id.substring(0, 6) }}</span>
+                      </div>
+                      
+                      <!-- Bouton de suppression pour les réponses -->
+                      <button 
+                        v-if="canDeleteReply(reply)"
+                        @click="confirmDeleteReply(reply.id, post.id)"
+                        class="text-red-500 hover:text-red-700 transition p-1 rounded hover:bg-red-50"
+                        title="Delete reply"
+                      >
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                      </button>
                     </div>
                     <p class="text-gray-700 text-sm leading-relaxed">{{ reply.message }}</p>
                     
@@ -561,6 +589,134 @@ function isReplyToReplyOpen(replyId) {
 
 function getReplies(postId) {
   return postReplies.value[postId] || [];
+}
+
+// Fonction pour vérifier si l'utilisateur peut supprimer le post
+function canDeletePost(post) {
+  if (!currentProfile.value) return false;
+  return post.user_id === currentProfile.value.id;
+}
+
+// Fonction pour confirmer la suppression
+function confirmDeletePost(postId) {
+  showDeleteConfirmation(
+    'Delete Post',
+    'Are you sure you want to delete this post? This action cannot be undone.',
+    () => deletePost(postId)
+  );
+}
+
+// Fonction pour supprimer le post
+async function deletePost(postId) {
+  try {
+    const { error } = await supabase
+      .from('posts')
+      .delete()
+      .eq('id', postId)
+      .eq('user_id', currentProfile.value.id); // Double sécurité
+      
+    if (error) throw error;
+    
+    // Supprimer le post de la liste locale
+    posts.value = posts.value.filter(post => post.id !== postId);
+    
+    // Supprimer aussi les réponses associées de l'état local
+    delete postReplies.value[postId];
+    delete postReactions.value[postId];
+    
+    console.log('Post deleted successfully');
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    alert('Error deleting post. Please try again.');
+  }
+}
+
+// Fonction pour vérifier si l'utilisateur peut supprimer la réponse
+function canDeleteReply(reply) {
+  if (!currentProfile.value) return false;
+  return reply.user_id === currentProfile.value.id;
+}
+
+// Fonction pour confirmer la suppression d'une réponse
+function confirmDeleteReply(replyId, postId) {
+  showDeleteConfirmation(
+    'Delete Reply',
+    'Are you sure you want to delete this reply? This action cannot be undone.',
+    () => deleteReply(replyId, postId)
+  );
+}
+
+// Fonction pour supprimer une réponse
+async function deleteReply(replyId, postId) {
+  try {
+    const { error } = await supabase
+      .from('post_replies')
+      .delete()
+      .eq('id', replyId)
+      .eq('user_id', currentProfile.value.id); // Double sécurité
+      
+    if (error) throw error;
+    
+    // Supprimer la réponse de la liste locale
+    if (postReplies.value[postId]) {
+      postReplies.value[postId] = postReplies.value[postId].filter(reply => reply.id !== replyId);
+    }
+    
+    // Supprimer aussi les réactions associées
+    delete postReactions.value[replyId];
+    
+    console.log('Reply deleted successfully');
+  } catch (error) {
+    console.error('Error deleting reply:', error);
+    alert('Error deleting reply. Please try again.');
+  }
+}
+
+// Fonction pour afficher une confirmation de suppression stylée
+function showDeleteConfirmation(title, message, onConfirm) {
+  // Créer une modal de confirmation personnalisée
+  const modal = document.createElement('div');
+  modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50';
+  modal.innerHTML = `
+    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 p-6">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+          <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900">${title}</h3>
+      </div>
+      <p class="text-gray-600 mb-6">${message}</p>
+      <div class="flex gap-3 justify-end">
+        <button id="cancel-btn" class="px-4 py-2 text-gray-600 hover:text-gray-800 transition">
+          Cancel
+        </button>
+        <button id="confirm-btn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+          Delete
+        </button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Gérer les clics
+  modal.querySelector('#cancel-btn').onclick = () => {
+    document.body.removeChild(modal);
+  };
+  
+  modal.querySelector('#confirm-btn').onclick = () => {
+    document.body.removeChild(modal);
+    onConfirm();
+  };
+  
+  // Fermer en cliquant sur le fond
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      document.body.removeChild(modal);
+    }
+  };
 }
 
 async function submitReply(postId) {
