@@ -133,7 +133,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, nextTick } from 'vue';
 import { Chart, registerables } from 'chart.js';
 import { supabase } from '../lib/supabase';
 import { isManager } from '../lib/auth';
@@ -276,12 +276,17 @@ async function loadData() {
     }
   }
 
+  // Attendre que les canvas soient rendus avant de créer les graphiques
+  await nextTick();
   await createMoodChart(moodsData || []);
   await createTrendChart();
 }
 
 async function createMoodChart(moodsData: any[]) {
-  if (!moodChartCanvas.value) return;
+  if (!moodChartCanvas.value) {
+    console.warn('Mood chart canvas not found');
+    return;
+  }
 
   const moodCounts = {
     very_happy: 0,
@@ -331,7 +336,10 @@ async function createMoodChart(moodsData: any[]) {
 }
 
 async function createTrendChart() {
-  if (!trendChartCanvas.value) return;
+  if (!trendChartCanvas.value) {
+    console.warn('Trend chart canvas not found');
+    return;
+  }
 
   const days = 7;
   const labels = [];
@@ -407,6 +415,8 @@ async function createTrendChart() {
 onMounted(async () => {
   if (isManager.value) {
     await supabase.rpc('update_service_analytics');
+    // Attendre que le DOM soit complètement rendu
+    await nextTick();
     await loadData();
   }
 });

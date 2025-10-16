@@ -1,7 +1,8 @@
 <template>
   <div 
     v-if="show" 
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-cream-100 via-cream-50 to-primary-50 overflow-hidden safe-top safe-bottom"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-cream-100 via-cream-50 to-primary-50 overflow-hidden"
+    style="padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);"
   >
     <!-- Animation de cercles organiques (respiration) -->
     <div class="absolute inset-0 flex items-center justify-center">

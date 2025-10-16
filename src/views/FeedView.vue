@@ -60,23 +60,49 @@
             </button>
           </div>
           
-          <!-- Version mobile: slider pour les émojis -->
+          <!-- Version mobile: carousel pour les émojis -->
           <div class="sm:hidden">
-            <div class="flex items-center justify-center mb-4">
-              <div class="text-5xl">{{ currentMoodEmoji }}</div>
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-2 animate-bounce">{{ currentMoodEmoji }}</div>
+              <div class="text-lg font-semibold text-neutral-700">{{ currentMoodLabel }}</div>
             </div>
-            <div class="text-center mb-2 font-medium">{{ currentMoodLabel }}</div>
-            <input 
-              type="range" 
-              v-model="moodSliderValue" 
-              min="0" 
-              :max="moods.length - 1" 
-              step="1"
-              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary-600"
-              @input="updateSelectedMoodFromSlider"
-            >
-            <div class="flex justify-between mt-2 text-xs text-gray-500">
-              <span v-for="(mood, index) in moods" :key="index">{{ mood.emoji }}</span>
+            
+            <!-- Carousel d'emojis -->
+            <div class="relative">
+              <div 
+                class="flex overflow-x-auto scrollbar-hide gap-4 px-4 py-2"
+                style="scroll-snap-type: x mandatory;"
+                ref="emojiCarousel"
+                @scroll="updateSelectedMoodFromCarousel"
+              >
+                <div 
+                  v-for="(mood, index) in moods" 
+                  :key="mood.value"
+                  :ref="`emoji-${index}`"
+                  @click="selectMoodFromCarousel(index)"
+                  :class="[
+                    'flex-shrink-0 w-20 h-20 rounded-2xl border-2 flex items-center justify-center transition-all duration-300 cursor-pointer',
+                    selectedMood === mood.value
+                      ? 'border-primary-400 bg-primary-100 shadow-lg scale-110'
+                      : 'border-neutral-200 bg-white hover:border-primary-300 hover:bg-primary-50'
+                  ]"
+                  style="scroll-snap-align: center;"
+                >
+                  <span class="text-3xl">{{ mood.emoji }}</span>
+                </div>
+              </div>
+              
+              <!-- Indicateurs de pagination -->
+              <div class="flex justify-center mt-4 gap-2">
+                <div 
+                  v-for="(mood, index) in moods" 
+                  :key="index"
+                  :class="[
+                    'w-2 h-2 rounded-full transition-all duration-300',
+                    selectedMood === mood.value ? 'bg-primary-500 scale-125' : 'bg-neutral-300'
+                  ]"
+                ></div>
+              </div>
             </div>
           </div>
           </div>
@@ -237,33 +263,69 @@
                 </div>
               </div>
               
-              <!-- Réponses (thread) -->
-              <div v-if="getReplies(post.id).length > 0" class="mt-4 pl-6 border-l-2 border-gray-200">
+              <!-- Réponses (thread) - Style Reddit -->
+              <div v-if="getReplies(post.id).length > 0" class="mt-4">
                 <div 
-                  v-for="reply in getReplies(post.id)" 
+                  v-for="(reply, index) in getReplies(post.id)" 
                   :key="reply.id"
-                  class="mb-3 last:mb-0"
+                  class="reply-thread"
                 >
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="font-medium text-gray-900">
-                      {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
-                    </span>
-                    <span class="text-xs text-gray-500">{{ formatDate(reply.created_at) }}</span>
+                  <!-- Ligne de connexion verticale -->
+                  <div class="reply-connector">
+                    <div class="reply-line"></div>
+                    <div class="reply-dot"></div>
                   </div>
-                  <p class="text-gray-700">{{ reply.message }}</p>
                   
-                  <!-- Réactions aux réponses -->
-                  <div class="flex items-center gap-2 mt-2">
-                    <button 
-                      v-for="reaction in reactions" 
-                      :key="reaction.emoji"
-                      @click="addReaction(reply.id, reaction.emoji)"
-                      class="flex items-center gap-1 px-1.5 py-0.5 rounded-lg hover:bg-gray-100 transition text-xs"
-                      :class="{'bg-gray-100': hasUserReacted(reply.id, reaction.emoji)}"
-                    >
-                      <span>{{ reaction.emoji }}</span>
-                      <span class="text-xs text-gray-600">{{ getReactionCount(reply.id, reaction.emoji) }}</span>
-                    </button>
+                  <!-- Contenu de la réponse -->
+                  <div class="reply-content">
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="font-medium text-gray-900 text-sm">
+                        {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
+                      </span>
+                      <span class="text-xs text-gray-500">{{ formatDate(reply.created_at) }}</span>
+                      <span v-if="reply.anonymous_id" class="text-xs text-gray-400">#{{ reply.anonymous_id.substring(0, 6) }}</span>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed">{{ reply.message }}</p>
+                    
+                    <!-- Réactions pour les réponses -->
+                    <div class="flex items-center gap-2 mt-3">
+                      <button 
+                        v-for="reaction in reactions" 
+                        :key="reaction.emoji"
+                        @click="addReaction(reply.id, reaction.emoji)"
+                        class="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-gray-100 transition text-xs"
+                        :class="{'bg-gray-100': hasUserReacted(reply.id, reaction.emoji)}"
+                      >
+                        <span class="text-sm">{{ reaction.emoji }}</span>
+                        <span class="text-xs text-gray-600">{{ getReactionCount(reply.id, reaction.emoji) }}</span>
+                      </button>
+                      
+                      <!-- Bouton pour répondre à une réponse -->
+                      <button 
+                        @click="toggleReplyToReply(reply.id)"
+                        class="text-xs text-primary-600 hover:text-primary-700 transition px-2 py-1 rounded hover:bg-primary-50"
+                      >
+                        {{ isReplyToReplyOpen(reply.id) ? 'Cancel' : 'Reply' }}
+                      </button>
+                    </div>
+                    
+                    <!-- Formulaire de réponse à une réponse -->
+                    <div v-if="isReplyToReplyOpen(reply.id)" class="mt-3">
+                      <div class="flex gap-2">
+                        <input 
+                          v-model="replyToReplyText[reply.id]" 
+                          class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          placeholder="Reply to this comment..."
+                        />
+                        <button 
+                          @click="submitReplyToReply(reply.id, post.id)"
+                          :disabled="!replyToReplyText[reply.id]"
+                          class="bg-primary-600 text-white px-3 py-2 rounded-lg hover:bg-primary-700 transition disabled:opacity-50 text-sm"
+                        >
+                          Send
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -329,12 +391,14 @@ const loading = ref(false);
 const loadingPosts = ref(true);
 const posts = ref<Post[]>([]);
 const replyText = reactive<Record<string, string>>({});
+const replyToReplyText = reactive<Record<string, string>>({});
 const openReplyForms = ref<string[]>([]);
+const openReplyToReplyForms = ref<string[]>([]);
 const postReplies = ref<Record<string, any[]>>({});
 const postReactions = ref<Record<string, any[]>>({});
 
-// Variables pour le slider d'emoji sur mobile
-const moodSliderValue = ref(2); // Valeur par défaut (neutre)
+// Variables pour le carousel d'emoji sur mobile
+const emojiCarousel = ref<HTMLElement | null>(null);
 const currentMoodEmoji = ref(moods[2].emoji);
 const currentMoodLabel = ref(moods[2].label);
 
@@ -342,12 +406,38 @@ function getMoodEmoji(mood: string): string {
   return moods.find(m => m.value === mood)?.emoji || '😐';
 }
 
-// Fonction pour mettre à jour le mood sélectionné depuis le slider
-function updateSelectedMoodFromSlider() {
-  const index = parseInt(moodSliderValue.value);
+// Fonction pour sélectionner un mood depuis le carousel
+function selectMoodFromCarousel(index: number) {
   selectedMood.value = moods[index].value;
   currentMoodEmoji.value = moods[index].emoji;
   currentMoodLabel.value = moods[index].label;
+  
+  // Centrer l'emoji sélectionné dans le carousel
+  if (emojiCarousel.value) {
+    const emojiElement = emojiCarousel.value.children[index] as HTMLElement;
+    if (emojiElement) {
+      emojiElement.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'nearest', 
+        inline: 'center' 
+      });
+    }
+  }
+}
+
+// Fonction pour mettre à jour le mood sélectionné depuis le scroll du carousel
+function updateSelectedMoodFromCarousel() {
+  if (!emojiCarousel.value) return;
+  
+  const scrollLeft = emojiCarousel.value.scrollLeft;
+  const itemWidth = 96; // w-20 + gap-4 = 80px + 16px
+  const centerIndex = Math.round(scrollLeft / itemWidth);
+  
+  if (centerIndex >= 0 && centerIndex < moods.length) {
+    selectedMood.value = moods[centerIndex].value;
+    currentMoodEmoji.value = moods[centerIndex].emoji;
+    currentMoodLabel.value = moods[centerIndex].label;
+  }
 }
 
 function getTagLabel(tagId: string): string {
@@ -456,6 +546,19 @@ function isReplyFormOpen(postId) {
   return openReplyForms.value.includes(postId);
 }
 
+function toggleReplyToReply(replyId) {
+  const index = openReplyToReplyForms.value.indexOf(replyId);
+  if (index === -1) {
+    openReplyToReplyForms.value.push(replyId);
+  } else {
+    openReplyToReplyForms.value.splice(index, 1);
+  }
+}
+
+function isReplyToReplyOpen(replyId) {
+  return openReplyToReplyForms.value.includes(replyId);
+}
+
 function getReplies(postId) {
   return postReplies.value[postId] || [];
 }
@@ -500,6 +603,38 @@ async function submitReply(postId) {
   } catch (error) {
     console.error('Error submitting reply - table may not exist yet:', error);
     alert('Fonctionnalité de réponse temporairement indisponible. Veuillez appliquer la migration dans Supabase.');
+  }
+}
+
+async function submitReplyToReply(replyId, postId) {
+  if (!currentProfile.value || !replyToReplyText[replyId]) return;
+  
+  try {
+    const { data, error } = await supabase
+      .from('post_replies')
+      .insert({
+        user_id: currentProfile.value.id,
+        post_id: postId,
+        parent_reply_id: replyId,
+        message: replyToReplyText[replyId],
+        is_anonymous: true
+      })
+      .select()
+      .single();
+      
+    if (error) throw error;
+    
+    // Ajouter la réponse à l'état local
+    if (!postReplies.value[postId]) {
+      postReplies.value[postId] = [];
+    }
+    postReplies.value[postId].push(data);
+    
+    replyToReplyText[replyId] = '';
+    toggleReplyToReply(replyId);
+  } catch (error) {
+    console.error('Error submitting reply to reply:', error);
+    alert('Erreur lors de l\'envoi de la réponse.');
   }
 }
 

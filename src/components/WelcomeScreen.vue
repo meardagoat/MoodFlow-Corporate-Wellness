@@ -1,7 +1,8 @@
 <template>
   <div 
     v-if="show" 
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-cream-50 via-primary-50 to-lavender-50 overflow-hidden safe-top safe-bottom"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-cream-50 via-primary-50 to-lavender-50 overflow-hidden"
+    style="padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);"
   >
     <!-- Cercles organiques d'arrière-plan -->
     <div class="absolute inset-0">
