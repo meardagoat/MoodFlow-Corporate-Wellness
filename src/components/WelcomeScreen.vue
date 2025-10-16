@@ -76,7 +76,7 @@
       <!-- Bouton d'action -->
       <div class="animate-fade-in" style="animation-delay: 1.3s">
         <button 
-          @click="$emit('continue')"
+          @click="$emit('close')"
           class="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-semibold text-lg border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105 shadow-glow"
         >
           Get Started
@@ -109,7 +109,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  continue: [];
+  close: [];
 }>();
 
 const features = ref([
