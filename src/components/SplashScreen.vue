@@ -82,9 +82,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   show: boolean;
-}>();
+  duration?: number;
+}>(), {
+  duration: 3000
+});
 
 const progress = ref(0);
 const loadingText = ref('Initializing...');
@@ -113,6 +116,7 @@ onUnmounted(() => {
 
 function startLoading() {
   let currentStep = 0;
+  const stepDuration = props.duration / loadingMessages.length;
   
   progressInterval = setInterval(() => {
     if (currentStep < loadingMessages.length) {
@@ -122,7 +126,7 @@ function startLoading() {
     } else {
       clearInterval(progressInterval);
     }
-  }, 800);
+  }, stepDuration);
 }
 </script>
 

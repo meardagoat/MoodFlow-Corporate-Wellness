@@ -69,6 +69,7 @@ function showGoodbyeScreen() {
   <!-- Splash Screen au lancement -->
   <SplashScreen 
     v-if="showSplash" 
+    :show="showSplash"
     :duration="3000"
     @close="closeSplash"
   />
