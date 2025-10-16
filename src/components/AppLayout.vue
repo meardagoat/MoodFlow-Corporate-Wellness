@@ -1,7 +1,7 @@
 <template>
-  <div class="min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-white shadow sticky top-0 z-40">
+  <div class="min-h-screen flex flex-col bg-gradient-bg-light">
+    <!-- Header avec safe area -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-soft sticky top-0 z-40 safe-top">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center gap-8">
@@ -134,8 +134,8 @@
       </div>
     </header>
 
-    <!-- Main content -->
-    <main class="flex-1">
+    <!-- Main content avec safe area en bas -->
+    <main class="flex-1 safe-bottom">
       <slot />
     </main>
   </div>

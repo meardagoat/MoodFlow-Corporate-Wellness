@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen gradient-bg-light">
-    <div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto px-4 py-6 sm:py-8">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 sm:gap-0">
       <h1 class="text-3xl font-bold text-neutral-800">MoodFlow</h1>
       <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">

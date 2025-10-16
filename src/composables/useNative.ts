@@ -22,6 +22,13 @@ export function useNative() {
 
   async function initializeNativePlugins() {
     try {
+      // Ajouter une classe pour la plateforme
+      if (platform.value === 'ios') {
+        document.documentElement.classList.add('ios');
+      } else if (platform.value === 'android') {
+        document.documentElement.classList.add('android');
+      }
+
       // Cacher le splash screen après l'initialisation
       await SplashScreen.hide();
 
@@ -29,8 +36,10 @@ export function useNative() {
       if (platform.value === 'ios' || platform.value === 'android') {
         await StatusBar.setStyle({ style: Style.Light });
         if (platform.value === 'android') {
-          await StatusBar.setBackgroundColor({ color: '#4F46E5' });
+          await StatusBar.setBackgroundColor({ color: '#ff9d70' });
         }
+        // Afficher la status bar (importante pour safe area)
+        await StatusBar.show();
       }
 
       // Configurer le clavier

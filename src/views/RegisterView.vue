@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="min-h-screen flex items-center justify-center px-4 py-8 relative overflow-hidden"
+    class="min-h-screen flex items-center justify-center px-4 py-8 safe-top safe-bottom relative overflow-hidden"
     ref="vantaContainer"
   >
     <div class="max-w-md w-full relative z-10">

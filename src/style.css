@@ -9,13 +9,24 @@
     @apply box-border;
   }
 
+  /* Fix pour iOS safe area - SANS double padding */
+  html {
+    /* Pas de padding sur html pour éviter le double effet */
+    padding: 0;
+  }
+
   body {
     @apply m-0 min-h-screen bg-neutral-50 text-neutral-900 antialiased;
     font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    /* Empêcher le body de déborder */
+    position: relative;
   }
 
   #app {
     @apply min-h-screen;
+    /* S'assurer que l'app utilise tout l'espace */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
   }
 
   /* Smooth scrolling */
@@ -246,14 +257,54 @@ body.keyboard-open #app {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Capacitor Status Bar adjustments */
-.ios .safe-top {
-  padding-top: max(env(safe-area-inset-top), 20px);
+/* Capacitor Status Bar adjustments - OPTIMISÉ pour iOS */
+.safe-top {
+  /* Fallback minimal pour les anciens navigateurs */
+  padding-top: 20px;
+  /* iOS 11+ avec safe area - mais on réduit l'espace */
+  padding-top: calc(constant(safe-area-inset-top) + 8px); /* iOS 11.0-11.2 */
+  padding-top: calc(env(safe-area-inset-top) + 8px); /* iOS 11.2+ */
 }
 
-/* Android-specific adjustments */
-.android body {
+.safe-bottom {
+  /* Fallback minimal pour home indicator */
+  padding-bottom: 20px;
+  /* iOS 11+ avec safe area */
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 8px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+}
+
+.safe-left {
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-right {
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Header sticky avec safe area OPTIMISÉ pour iOS */
+header.safe-top {
+  /* Dynamic Island = ~59px, Encoche standard = ~44px - mais on réduit */
+  padding-top: 20px !important;
+  padding-top: calc(constant(safe-area-inset-top) + 8px) !important;
+  padding-top: calc(env(safe-area-inset-top) + 8px) !important;
+}
+
+/* iOS body sans padding supplémentaire */
+.ios body {
+  padding: 0;
+  margin: 0;
+}
+
+/* Android pas de padding supplémentaire */
+.android .safe-top {
   padding-top: 0;
+}
+
+.android .safe-bottom {
+  padding-bottom: 0;
 }
 
 /* Prevent pull-to-refresh on mobile */

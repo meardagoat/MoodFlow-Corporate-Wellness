@@ -1,7 +1,7 @@
 <template>
   <div 
     v-if="show" 
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-lavender-100 via-sky-50 to-cream-100 overflow-hidden"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-lavender-100 via-sky-50 to-cream-100 overflow-hidden safe-top safe-bottom"
   >
     <!-- Cercles organiques apaisants -->
     <div class="absolute inset-0">
