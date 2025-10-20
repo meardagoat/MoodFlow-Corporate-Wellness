@@ -20,7 +20,7 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     /* Empêcher le body de déborder */
     position: relative;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+    background: linear-gradient(135deg, #fff7ed 0%, #fef9c3 50%, #fae8ff 100%);
   }
 
   #app {
@@ -111,21 +111,21 @@
            placeholder-white/70;
   }
 
-  /* Backgrounds avec gradients */
+  /* Backgrounds avec gradients Headspace */
   .gradient-bg {
-    @apply bg-gradient-to-br from-primary-50 via-accent-50 to-primary-100;
+    @apply bg-gradient-to-br from-orange-50 via-yellow-50 to-purple-50;
   }
 
   .gradient-bg-light {
-    @apply bg-gradient-to-br from-primary-100 via-accent-100 to-primary-200;
+    @apply bg-gradient-to-br from-orange-100 via-cream-100 to-purple-100;
   }
 
   .gradient-bg-calm {
-    @apply bg-gradient-to-br from-sky-50 via-primary-50 to-accent-50;
+    @apply bg-gradient-to-br from-cream-50 via-orange-50 to-purple-50;
   }
 
   .gradient-bg-dark {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background: linear-gradient(135deg, #f97316 0%, #c084fc 50%, #a855f7 100%);
   }
 
   /* Animations pour les moods */

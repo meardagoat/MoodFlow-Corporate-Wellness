@@ -1,52 +1,47 @@
-# 🎨 MoodFlow Design System Premium
+# 🎨 MoodFlow Design System - Headspace Inspired
 
 ## Vue d'ensemble
 
-Design inspiré des meilleures apps de santé mentale (Headspace, Calm, Jour) avec une identité visuelle unique et professionnelle.
+Design directement inspiré de Headspace avec leurs couleurs signature orange/violet et leur approche zen et chaleureuse.
 
-## 🌈 Palette de couleurs
+## 🌈 Palette de couleurs Headspace
 
-### Couleur principale - Peach/Coral (Signature)
+### Couleur principale - Orange Headspace (Signature)
 ```css
-primary-400: #ff9d70  /* Couleur signature - Pêche vif */
-primary-500: #ff7e46  /* Orange pêche intense */
-primary-600: #f96332  /* Orange coral */
+primary-400: #fb923c  /* Orange Headspace doux */
+primary-500: #f97316  /* Orange Headspace principal */
+primary-600: #ea580c  /* Orange Headspace intense */
 ```
-**Usage** : Boutons primaires, accents, éléments interactifs principaux
+**Usage** : Boutons primaires, accents principaux, éléments interactifs - La couleur signature de Headspace
 
-### Cream/Beige (Neutralité chaleureuse)
+### Violet Headspace (Accents)
 ```css
-cream-100: #fffcf0   /* Arrière-plans doux */
-cream-400: #ffe8a3   /* Accents chaleureux */
-cream-500: #ffd978   /* Mood neutre */
+accent-400: #c084fc  /* Violet Headspace doux */
+accent-500: #a855f7  /* Violet Headspace principal */
+accent-600: #9333ea  /* Violet Headspace intense */
 ```
-**Usage** : Arrière-plans, zones neutres, mood neutre
+**Usage** : Boutons secondaires, accents élégants, statistiques, éléments premium
 
-### Sky/Calm (Apaisant)
+### Jaune/Cream Headspace (Chaleur)
 ```css
-sky-400: #38bdf8     /* Bleu ciel vif */
-sky-500: #0ea5e9     /* Bleu océan */
+cream-100: #fef9c3   /* Jaune très doux */
+cream-300: #fde047   /* Jaune Headspace */
+cream-400: #facc15   /* Jaune vif */
 ```
-**Usage** : Boutons secondaires, zones de relaxation, éléments calmes
+**Usage** : Arrière-plans chaleureux, moods positifs, éléments d'accentuation
 
-### Lavender (Élégance)
+### Vert (Nature et bien-être)
 ```css
-lavender-400: #c084fc  /* Lavande vif */
-lavender-500: #a855f7  /* Violet lavande */
+success-400: #4ade80  /* Vert doux */
+success-500: #22c55e  /* Vert vif */
 ```
-**Usage** : Accents élégants, statistiques, éléments premium
-
-### Sage (Nature et bien-être)
-```css
-sage-400: #8aba8a    /* Vert sauge medium */
-sage-500: #6a9d6a    /* Vert sauge - Mood heureux */
-```
-**Usage** : Moods positifs, éléments nature, succès
+**Usage** : Moods très positifs, succès, éléments nature
 
 ### Neutral (Gris chauds)
 ```css
-neutral-600: #57534e  /* Gris foncé */
-neutral-800: #292524  /* Texte principal */
+neutral-600: #525252  /* Gris moyen */
+neutral-800: #262626  /* Texte principal */
+neutral-900: #171717  /* Texte foncé */
 ```
 **Usage** : Textes, bordures subtiles
 
@@ -194,17 +189,17 @@ font-display: Cal Sans, Inter (pour titres)
 - Animation: Breathe-slow + twinkle pour étoiles
 - Style: Plus apaisant avec lavande dominant
 
-## 🎨 Moods Colors
+## 🎨 Moods Colors Headspace
 
 ```css
-very_happy: #6a9d6a   /* Vert sauge joyeux */
-happy: #8aba8a        /* Vert clair */
-neutral: #ffd978      /* Beige neutre */
-sad: #ff9d70          /* Pêche mélancolique */
-very_sad: #ff7e46     /* Coral triste */
+very_happy: #22c55e   /* Vert Headspace joyeux */
+happy: #facc15        /* Jaune Headspace */
+neutral: #fb923c      /* Orange doux */
+sad: #c084fc          /* Violet doux */
+very_sad: #a855f7     /* Violet intense */
 ```
 
-**Philosophie** : Palette cohérente sans couleurs agressives (pas de rouge vif, vert criard)
+**Philosophie** : Palette Headspace chaleureuse et apaisante, utilisant leurs couleurs signature orange/violet
 
 ## 🔍 Ombres (Shadows)
 
@@ -332,16 +327,14 @@ hover:scale-[1.02] /* Très subtil */
 
 ## 📚 Inspiration
 
-- **Headspace** : Palette pêche/orange, animations de respiration
-- **Calm** : Bleu apais ant, formes organiques, simplicité
-- **Jour** : Glassmorphism, typographie clean, espacements généreux
-- **Apple Health** : Minimalisme, couleurs douces, statistiques claires
+- **Headspace** : Palette orange/violet, animations de respiration, design zen et chaleureux
+- **100% basé sur Headspace** : Couleurs, ambiance, style
 
 ---
 
-**Version** : 2.0.0 Premium  
-**Date** : 16 Octobre 2025  
-**Design** : MoodFlow Design Team
+**Version** : 3.0.0 Headspace Edition  
+**Date** : 20 Octobre 2025  
+**Design** : Inspiré à 100% de Headspace
 
-✨ **L'app a maintenant un look ultra-professionnel et unique !** ✨
+✨ **L'app utilise maintenant les couleurs et le style de Headspace !** ✨
 
