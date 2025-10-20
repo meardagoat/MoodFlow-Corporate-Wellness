@@ -82,26 +82,26 @@
           </div>
           
           <!-- Dynamic content based on selection -->
-          <div class="max-w-5xl mx-auto px-4 md:px-0">
-            <div class="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-16 shadow-2xl border border-white/60">
-              <div class="text-center mb-6 md:mb-8">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-3 md:mb-4">
+          <div class="w-full">
+            <div class="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-20 shadow-2xl border border-white/60">
+              <div class="text-center mb-8 md:mb-12">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-neutral-900 mb-4 md:mb-6">
                   {{ moods[selectedMoodIndex].title }}
                 </h3>
-                <p class="text-neutral-600 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                <p class="text-neutral-600 text-base sm:text-lg md:text-xl lg:text-2xl mx-auto leading-relaxed max-w-5xl">
                   {{ moods[selectedMoodIndex].description }}
                 </p>
               </div>
               
               <!-- Animated stats bar -->
-              <div class="relative h-3 md:h-4 bg-neutral-100 rounded-full overflow-hidden mb-3 md:mb-4">
+              <div class="relative h-3 md:h-4 bg-neutral-100 rounded-full overflow-hidden mb-3 md:mb-4 max-w-4xl mx-auto">
                 <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
                      :class="moods[selectedMoodIndex].gradient"
                      :style="`width: ${moods[selectedMoodIndex].percentage}%`">
                 </div>
               </div>
               
-              <div class="flex flex-col sm:flex-row justify-between gap-2 text-sm md:text-base text-neutral-600 font-medium">
+              <div class="flex flex-col sm:flex-row justify-between gap-2 text-sm md:text-base text-neutral-600 font-medium max-w-4xl mx-auto">
                 <span>{{ moods[selectedMoodIndex].percentage }}% de vos collègues</span>
                 <span>se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}</span>
               </div>
