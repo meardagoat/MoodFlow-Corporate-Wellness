@@ -179,14 +179,14 @@ colors: {
 }
 ```
 
-## 📚 Documentation
+## Documentation
 
 - [MOBILE_SETUP.md](MOBILE_SETUP.md) - Guide complet mobile
 - [VANTA_SETUP.md](VANTA_SETUP.md) - Configuration Vanta.js
 - [CHANGELOG_VANTA.md](CHANGELOG_VANTA.md) - Changements Vanta
 - [CHANGELOG_MOBILE.md](CHANGELOG_MOBILE.md) - Changements Mobile
 
-## 🏗️ Structure du projet
+## Structure du projet
 
 ```
 MoodFlow-Corporate-Wellness/
@@ -223,7 +223,7 @@ MoodFlow-Corporate-Wellness/
 └── vite.config.ts        # Config Vite
 ```
 
-## 🐛 Dépannage
+## Dépannage
 
 ### Problème : Vanta.js ne s'affiche pas
 - Vérifier que Three.js est bien chargé dans `index.html`
@@ -239,7 +239,7 @@ MoodFlow-Corporate-Wellness/
 - S'assurer que les migrations sont appliquées
 - Vérifier les RLS policies dans Supabase
 
-## 🤝 Contribution
+## Contribution
 
 Les contributions sont les bienvenues ! N'hésitez pas à ouvrir des issues ou pull requests.
 
@@ -247,16 +247,9 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir des issues ou p
 
 MIT License - Voir le fichier LICENSE pour plus de détails.
 
-## 🙏 Remerciements
-
-- [Vanta.js](https://www.vantajs.com/) pour les magnifiques effets 3D
-- [Supabase](https://supabase.com/) pour le backend
-- [Capacitor](https://capacitorjs.com/) pour le mobile
-- [Tailwind CSS](https://tailwindcss.com/) pour le design
-
 ---
 
-**Version** : 1.0.0  
-**Dernière mise à jour** : 16 Octobre 2025  
+**Version** : 1.2.0  
+**Dernière mise à jour** : 20 Octobre 2025  
 
-Codé avec Flow par Abdoul, Mathieu, Amaury, Jerobel et Mehmet
+Codé par Abdoul, Mathieu, Amaury, Jerobel et Mehmet
