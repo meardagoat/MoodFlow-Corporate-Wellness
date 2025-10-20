@@ -92,7 +92,7 @@
             <!-- Animated stats bar -->
             <div class="relative h-3 bg-neutral-100 rounded-full overflow-hidden mb-4">
               <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
-                   :class="mood.gradient"
+                   :class="moods[selectedMoodIndex].gradient"
                    :style="`width: ${moods[selectedMoodIndex].percentage}%`">
               </div>
             </div>
