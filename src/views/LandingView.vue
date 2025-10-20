@@ -73,27 +73,37 @@
     </section>
 
     <!-- Features Section -->
-    <section ref="featuresSection" class="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative">
+    <section ref="featuresSection" class="py-16 md:py-24 lg:py-32 relative">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 lg:mb-20 space-y-3 md:space-y-4">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 px-4">
+        <div class="text-center mb-12 md:mb-16 lg:mb-20 space-y-3 md:space-y-4 px-4 md:px-6">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900">
             Simple. Anonyme. Efficace.
           </h2>
-          <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto font-light px-4">
+          <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto font-light">
             Tout ce qu'il faut pour cultiver le bien-être au quotidien
           </p>
         </div>
 
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-          <div v-for="(feature, index) in features" :key="index" 
-               class="group relative bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-white/60 hover:bg-white/80 transition-all duration-500 hover:scale-105 hover:shadow-xl"
-               :class="{ 'opacity-0 translate-y-10': !isVisible }"
-               :style="isVisible ? `animation: slideUp 0.6s ease-out ${index * 0.1}s forwards` : ''">
-            <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-              {{ feature.icon }}
+        <!-- Carousel horizontal -->
+        <div class="relative px-4 md:px-6">
+          <div class="overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+            <div class="flex gap-6 pb-8">
+              <div v-for="(feature, index) in features" :key="index" 
+                   class="snap-center flex-none w-80 sm:w-96 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
+                   :class="getFeatureGradient(index)"
+                   :style="isVisible ? `animation: slideUp 0.6s ease-out ${index * 0.1}s forwards` : ''">
+                <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  {{ feature.icon }}
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">{{ feature.title }}</h3>
+                <p class="text-white/90 leading-relaxed">{{ feature.description }}</p>
+              </div>
             </div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-4">{{ feature.title }}</h3>
-            <p class="text-neutral-600 leading-relaxed">{{ feature.description }}</p>
+          </div>
+          
+          <!-- Scroll hint -->
+          <div class="text-center mt-6">
+            <p class="text-sm text-neutral-500">← Faites défiler pour voir plus →</p>
           </div>
         </div>
       </div>
@@ -412,6 +422,18 @@ const goToDemo = () => {
 
 const scrollToFeatures = () => {
   featuresSection.value?.scrollIntoView({ behavior: 'smooth' });
+};
+
+const getFeatureGradient = (index: number) => {
+  const gradients = [
+    'bg-gradient-to-br from-orange-500 to-orange-600',
+    'bg-gradient-to-br from-purple-500 to-purple-600',
+    'bg-gradient-to-br from-orange-400 to-purple-500',
+    'bg-gradient-to-br from-yellow-400 to-orange-500',
+    'bg-gradient-to-br from-purple-400 to-pink-500',
+    'bg-gradient-to-br from-orange-500 to-yellow-500'
+  ];
+  return gradients[index % gradients.length];
 };
 
 // Auto-scroll testimonials
