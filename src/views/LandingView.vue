@@ -177,6 +177,66 @@
       </div>
     </section>
 
+    <!-- Stats Section - Style Headspace -->
+    <section class="relative py-32 px-6 overflow-hidden">
+      <!-- Sky background -->
+      <div class="absolute inset-0 bg-gradient-to-b from-sky-400 via-sky-300 to-orange-200"></div>
+      
+      <!-- Floating avatars -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-orange-400 opacity-80 animate-float"></div>
+        <div class="absolute top-40 right-20 w-24 h-24 rounded-full bg-purple-400 opacity-70 animate-float-slow"></div>
+        <div class="absolute bottom-32 left-1/4 w-28 h-28 rounded-full bg-yellow-400 opacity-75 animate-float animation-delay-1000"></div>
+        <div class="absolute bottom-40 right-1/3 w-20 h-20 rounded-full bg-pink-400 opacity-80 animate-float-slow"></div>
+      </div>
+      
+      <div class="relative z-10 max-w-6xl mx-auto text-center">
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-center mb-3">
+              <div class="text-4xl">⭐</div>
+            </div>
+            <p class="text-3xl font-bold text-neutral-900 mb-1">4.8</p>
+            <p class="text-sm text-neutral-600">Note App Store</p>
+          </div>
+          
+          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-center mb-3">
+              <div class="text-4xl">👥</div>
+            </div>
+            <p class="text-3xl font-bold text-neutral-900 mb-1">10K+</p>
+            <p class="text-sm text-neutral-600">Entreprises</p>
+          </div>
+          
+          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-center mb-3">
+              <div class="text-4xl">😊</div>
+            </div>
+            <p class="text-3xl font-bold text-neutral-900 mb-1">2M+</p>
+            <p class="text-sm text-neutral-600">Humeurs partagées</p>
+          </div>
+          
+          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-center mb-3">
+              <div class="text-4xl">🏆</div>
+            </div>
+            <p class="text-3xl font-bold text-neutral-900 mb-1">98%</p>
+            <p class="text-sm text-neutral-600">Satisfaction</p>
+          </div>
+        </div>
+        
+        <h2 class="text-5xl md:text-6xl font-bold text-white mb-8 drop-shadow-lg">
+          Rejoignez les milliers qui utilisent MoodFlow chaque jour
+        </h2>
+        
+        <button @click="goToRegister" 
+                class="px-12 py-5 bg-white text-orange-600 rounded-full text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl">
+          Essayer gratuitement
+        </button>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-400 to-purple-500"></div>
