@@ -1,65 +1,66 @@
-# MoodFlow - Corporate Wellness App 🧘‍♀️
+# MoodFlow - Corporate Wellness App
 
-Une application moderne de bien-être au travail construite avec Vue 3, TypeScript et Supabase.  
-**Disponible en Web & Mobile (iOS/Android)** via Capacitor ! 📱
+Une app de bien-être au travail. Vue 3 + TypeScript + Supabase.
+Disponible en Web et Mobile (iOS/Android).
 
 ![MoodFlow Logo](src/assets/mood_flow_logo.png)
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
-### 🎭 Partage d'humeur
-- Sélecteur d'humeur interactif (5 niveaux)
+### Partage d'humeur
+- Sélecteur d'humeur (5 niveaux)
 - Posts anonymes ou identifiés
-- Tags pour catégoriser (Workload, Team, Work-Life, etc.)
-- **Filtre par mood** pour voir les humeurs spécifiques
-- **Filtre "New Posts"** : Posts de moins de 5 minutes
-- Réactions et réponses (threads)
+- Tags pour catégoriser
+- Filtre par mood
+- Filtre posts récents
+- Réactions et réponses
 
-### 💬 Chat anonyme
-- Conversations privées entre collègues
+### Chat anonyme
+- Conversations privées
 - Messages en temps réel
 - Anonymat garanti
 
-### 📈 Tableaux de bord
-- Statistiques pour les managers
+### Dashboard
+- Stats pour les managers
 - Visualisation des tendances
-- Graphiques interactifs (Chart.js)
+- Graphiques (Chart.js)
 
-### 🔐 Authentification
-- Login/Register sécurisé
-- **Fonds interactifs 3D** avec Vanta.js (effet clouds)
-- Gestion des rôles (Employee/Manager)
-
-### 📱 Mobile Native
-- App iOS et Android avec Capacitor
-- Retour haptique
-- Gestion native du clavier
-- Status bar personnalisée
-- Safe areas pour appareils avec encoche
-
-## 🛠️ Technologies
-
-### Frontend
-- **Vue 3** avec Composition API & `<script setup>`
-- **TypeScript** pour la sûreté du typage
-- **Tailwind CSS** pour le design
-- **Vite** pour le build ultra-rapide
-
-### Backend & Database
-- **Supabase** (PostgreSQL + Auth + Realtime)
-- Row Level Security (RLS)
-- Migrations SQL versionnées
-
-### Effets & Animations
-- **Vanta.js** + Three.js pour les fonds 3D
-- Animations CSS personnalisées
-- Transitions fluides
+### Auth
+- Login/Register
+- OAuth Google et GitHub
+- Fonds 3D avec Vanta.js
+- Rôles (Employee/Manager)
 
 ### Mobile
-- **Capacitor 7.x** pour iOS et Android
-- Plugins : App, Haptics, Keyboard, Status Bar, Splash Screen
+- App iOS et Android (Capacitor)
+- Retour haptique
+- Clavier natif
+- Status bar custom
+- Safe areas pour encoche
 
-## 🚀 Installation
+## Technologies
+
+### Frontend
+- Vue 3 (Composition API)
+- TypeScript
+- Tailwind CSS
+- Vite
+
+### Backend
+- Supabase (PostgreSQL + Auth + Realtime)
+- Row Level Security
+- Migrations SQL
+
+### Design
+- Vanta.js + Three.js (fonds 3D)
+- Animations CSS
+- Transitions
+
+### Mobile
+- Capacitor 7.x (iOS et Android)
+- Plugins natifs
+
+## Installation
 
 ### Prérequis
 - Node.js 18+
@@ -138,7 +139,7 @@ npm run cap:run:ios      # Build + lancer sur iOS
 npm run cap:copy         # Copier web assets vers native
 ```
 
-## 📱 App Mobile
+## App Mobile
 
 ### Android
 - **API Level minimum** : 21 (Android 5.0)
@@ -150,7 +151,7 @@ npm run cap:copy         # Copier web assets vers native
 - **Bundle ID** : `com.moodflow.app`
 - **Nécessite Xcode 14+**
 
-## 🎨 Personnalisation
+## Personnalisation
 
 ### Couleurs Vanta.js (Login/Register)
 
@@ -258,4 +259,4 @@ MIT License - Voir le fichier LICENSE pour plus de détails.
 **Version** : 1.0.0  
 **Dernière mise à jour** : 16 Octobre 2025  
 
-Fait avec ❤️ pour le bien-être au travail
+Codé avec Flow par Abdoul, Mathieu, Amaury, Jerobel et Mehmet

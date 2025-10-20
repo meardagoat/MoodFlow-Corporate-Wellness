@@ -1,10 +1,10 @@
-# 🎨 MoodFlow Design System - Headspace Inspired
+# MoodFlow Design System - Headspace Inspired
 
 ## Vue d'ensemble
 
 Design directement inspiré de Headspace avec leurs couleurs signature orange/violet et leur approche zen et chaleureuse.
 
-## 🌈 Palette de couleurs Headspace
+## Palette de couleurs Headspace
 
 ### Couleur principale - Orange Headspace (Signature)
 ```css
@@ -45,7 +45,7 @@ neutral-900: #171717  /* Texte foncé */
 ```
 **Usage** : Textes, bordures subtiles
 
-## 🎯 Composants
+## Composants
 
 ### Boutons
 
@@ -189,7 +189,7 @@ font-display: Cal Sans, Inter (pour titres)
 - Animation: Breathe-slow + twinkle pour étoiles
 - Style: Plus apaisant avec lavande dominant
 
-## 🎨 Moods Colors Headspace
+## Moods Colors Headspace
 
 ```css
 very_happy: #22c55e   /* Vert Headspace joyeux */
@@ -201,7 +201,7 @@ very_sad: #a855f7     /* Violet intense */
 
 **Philosophie** : Palette Headspace chaleureuse et apaisante, utilisant leurs couleurs signature orange/violet
 
-## 🔍 Ombres (Shadows)
+## Ombres
 
 ### Shadow Soft
 ```css
@@ -215,7 +215,7 @@ shadow-soft-lg: 0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 20px 60px -15px rgba(0,
 ```
 **Usage** : Hover states, éléments élevés
 
-## 🌊 Formes organiques
+## Formes organiques
 
 ### SVG Waves
 Utilisées en bas des splash screens pour transitions douces.
@@ -231,7 +231,7 @@ Utilisées en bas des splash screens pour transitions douces.
 <div class="w-64 h-64 bg-primary-300/20 rounded-full blur-3xl animate-breathe"></div>
 ```
 
-## ✨ Glassmorphism
+## Glassmorphism
 
 ### Standard Glass
 ```css
@@ -246,7 +246,7 @@ Utilisées en bas des splash screens pour transitions douces.
 - Statistiques
 - Éléments de navigation
 
-## 🎬 Transitions
+## Transitions
 
 ### Standard
 ```css
@@ -259,14 +259,14 @@ hover:scale-105 /* Léger agrandissement */
 hover:scale-[1.02] /* Très subtil */
 ```
 
-## 📱 Mobile Adaptations
+## Mobile Adaptations
 
 - Touch targets: minimum 44x44px
 - Rounded corners plus prononcés sur mobile
 - Shadows plus légères
 - Animations plus courtes (2-3s au lieu de 4-6s)
 
-## 🎯 Principes de design
+## Principes de design
 
 1. **Minimalisme élégant** - Chaque élément a sa place
 2. **Animations organiques** - Mouvements naturels, jamais brusques
@@ -277,7 +277,7 @@ hover:scale-[1.02] /* Très subtil */
 7. **Ombres douces** - Jamais de shadows dures
 8. **Rounded corners** - 2xl ou 3xl (16-24px)
 
-## 🚀 Exemples d'utilisation
+## Exemples d'utilisation
 
 ### Page complète
 ```vue
@@ -309,7 +309,7 @@ hover:scale-[1.02] /* Très subtil */
 </div>
 ```
 
-## 🎨 Comparaison Avant/Après
+## Avant/Après
 
 ### Avant
 - Gradients violets/bleus génériques
@@ -325,7 +325,7 @@ hover:scale-[1.02] /* Très subtil */
 - Couleurs apaisantes et cohérentes
 - Animations fluides et naturelles (breathe, float, gentle-scale)
 
-## 📚 Inspiration
+## Inspiration
 
 - **Headspace** : Palette orange/violet, animations de respiration, design zen et chaleureux
 - **100% basé sur Headspace** : Couleurs, ambiance, style
@@ -336,5 +336,5 @@ hover:scale-[1.02] /* Très subtil */
 **Date** : 20 Octobre 2025  
 **Design** : Inspiré à 100% de Headspace
 
-✨ **L'app utilise maintenant les couleurs et le style de Headspace !** ✨
+L'app utilise les couleurs et le style de Headspace.
 
