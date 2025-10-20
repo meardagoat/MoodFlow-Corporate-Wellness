@@ -43,28 +43,55 @@
           </div>
         </div>
 
-        <!-- Animated preview -->
-        <div class="relative max-w-5xl mx-auto mt-12 md:mt-16">
-          <div class="bg-white/40 backdrop-blur-xl rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 border border-white/60 shadow-2xl">
-            <div class="flex gap-2 md:gap-3 mb-4 md:mb-6">
-              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-orange-400"></div>
-              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-400"></div>
-              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-purple-400"></div>
+        <!-- Dashboard Preview - Carousel -->
+        <div class="relative max-w-6xl mx-auto mt-16 md:mt-20">
+          <div class="bg-white rounded-3xl p-6 md:p-10 shadow-2xl">
+            <!-- Browser bar -->
+            <div class="flex items-center gap-2 mb-6 pb-4 border-b border-neutral-200">
+              <div class="w-3 h-3 rounded-full bg-orange-400"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+              <div class="ml-4 flex-1 bg-neutral-100 rounded-full px-4 py-2 text-sm text-neutral-500">
+                moodflow.app/dashboard
+              </div>
             </div>
             
-            <div class="space-y-3 md:space-y-4">
-              <div class="flex gap-2 sm:gap-3 md:gap-4">
-                <div v-for="(mood, i) in ['😊', '😄', '😐', '😔', '😢']" :key="i"
-                     class="flex-1 aspect-square rounded-xl md:rounded-2xl bg-gradient-to-br from-orange-200 to-purple-200 flex items-center justify-center text-xl sm:text-2xl md:text-3xl lg:text-4xl transform hover:scale-110 transition-transform duration-300 cursor-pointer"
-                     :style="`animation: float ${3 + i}s ease-in-out infinite; animation-delay: ${i * 0.2}s`">
-                  {{ mood }}
-                </div>
+            <!-- Mood selector carousel -->
+            <div class="mb-8">
+              <p class="text-sm text-neutral-500 mb-3 font-medium">Comment vous sentez-vous aujourd'hui ?</p>
+              <div class="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide pb-2">
+                <button v-for="(mood, i) in moods" :key="i"
+                        @click="selectedMoodIndex = i"
+                        class="flex-none group relative"
+                        :class="selectedMoodIndex === i ? 'scale-110' : 'opacity-60 hover:opacity-100'">
+                  <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg"
+                       :class="mood.gradient">
+                    <span class="text-2xl md:text-3xl filter grayscale-0 group-hover:scale-110 transition-transform">
+                      {{ mood.emoji }}
+                    </span>
+                  </div>
+                  <div v-if="selectedMoodIndex === i" 
+                       class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-orange-500"></div>
+                </button>
               </div>
-              
-              <div class="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
-                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 animate-pulse-soft"></div>
-                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 animate-pulse-soft animation-delay-1000"></div>
-                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-yellow-100 to-yellow-200 animate-pulse-soft animation-delay-2000"></div>
+            </div>
+            
+            <!-- Stats preview -->
+            <div class="grid grid-cols-3 gap-3 md:gap-4">
+              <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 md:p-6 transition-all duration-500"
+                   :style="`opacity: ${selectedMoodIndex === 0 || selectedMoodIndex === 1 ? 1 : 0.3}`">
+                <div class="text-2xl md:text-3xl font-bold text-orange-600 mb-1">{{ selectedMoodIndex <= 1 ? '78%' : '12%' }}</div>
+                <p class="text-xs md:text-sm text-neutral-600">Positif</p>
+              </div>
+              <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 md:p-6 transition-all duration-500"
+                   :style="`opacity: ${selectedMoodIndex === 2 ? 1 : 0.3}`">
+                <div class="text-2xl md:text-3xl font-bold text-purple-600 mb-1">{{ selectedMoodIndex === 2 ? '15%' : '8%' }}</div>
+                <p class="text-xs md:text-sm text-neutral-600">Neutre</p>
+              </div>
+              <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 md:p-6 transition-all duration-500"
+                   :style="`opacity: ${selectedMoodIndex >= 3 ? 1 : 0.3}`">
+                <div class="text-2xl md:text-3xl font-bold text-orange-600 mb-1">{{ selectedMoodIndex >= 3 ? '7%' : '2%' }}</div>
+                <p class="text-xs md:text-sm text-neutral-600">Négatif</p>
               </div>
             </div>
           </div>
@@ -361,6 +388,15 @@ const isVisible = ref(false);
 const featuresSection = ref<HTMLElement | null>(null);
 const currentTestimonial = ref(0);
 const currentFeature = ref(0);
+const selectedMoodIndex = ref(1);
+
+const moods = [
+  { emoji: '😢', gradient: 'bg-gradient-to-br from-orange-400 to-orange-500' },
+  { emoji: '😔', gradient: 'bg-gradient-to-br from-orange-300 to-purple-400' },
+  { emoji: '😐', gradient: 'bg-gradient-to-br from-purple-300 to-purple-400' },
+  { emoji: '😊', gradient: 'bg-gradient-to-br from-yellow-300 to-orange-400' },
+  { emoji: '😄', gradient: 'bg-gradient-to-br from-orange-400 to-orange-500' }
+];
 
 const features = [
   {
