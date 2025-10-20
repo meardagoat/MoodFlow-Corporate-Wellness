@@ -24,7 +24,7 @@ const authInitialized = ref(false);
 const sessionStats = ref({ posts: 0, messages: 0 });
 
 const isAuthPage = computed(() => {
-  return route.path === '/login' || route.path === '/register';
+  return route.path === '/login' || route.path === '/register' || route.path === '/';
 });
 
 // Initialisation de l'authentification
