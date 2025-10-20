@@ -114,42 +114,40 @@
             <div class="flex transition-transform duration-700 ease-out"
                  :style="`transform: translateX(-${currentTestimonial * 100}%)`">
               <div v-for="(testimonial, index) in testimonials" :key="index" 
-                   class="min-w-full px-2 sm:px-4">
-                <!-- Bubble testimonial -->
-                <div class="max-w-3xl mx-auto relative">
-                  <div class="bubble-card bg-gradient-to-br from-white via-white to-orange-50/30 backdrop-blur-md p-6 sm:p-8 md:p-10 lg:p-12 rounded-[3rem] shadow-2xl border border-white/60 transform hover:scale-[1.02] transition-all duration-500">
-                    <div class="flex justify-center mb-4 md:mb-6 gap-1">
-                      <div v-for="i in 5" :key="i" class="text-xl sm:text-2xl md:text-3xl text-yellow-400 transform hover:scale-125 transition-transform duration-300">★</div>
+                   class="min-w-full px-4 sm:px-6 md:px-8">
+                <!-- Clean card style Headspace -->
+                <div class="max-w-4xl mx-auto">
+                  <div class="bg-white rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.12)] transition-shadow duration-300">
+                    
+                    <div class="flex justify-center mb-6 md:mb-8 gap-1.5">
+                      <div v-for="i in 5" :key="i" class="text-2xl md:text-3xl text-orange-500">★</div>
                     </div>
                     
-                    <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-800 italic mb-6 md:mb-8 leading-relaxed text-center px-2">
-                      "{{ testimonial.text }}"
+                    <p class="text-xl sm:text-2xl md:text-3xl text-neutral-800 mb-8 md:mb-10 leading-relaxed text-center font-light">
+                      {{ testimonial.text }}
                     </p>
                     
-                    <div class="flex items-center justify-center gap-3 md:gap-4">
-                      <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-purple-500 shadow-lg animate-pulse-soft"></div>
+                    <div class="flex items-center justify-center gap-4">
+                      <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-lg">
+                        {{ testimonial.name.charAt(0) }}
+                      </div>
                       <div class="text-left">
-                        <h4 class="font-bold text-neutral-900 text-base md:text-lg">{{ testimonial.name }}</h4>
+                        <h4 class="font-semibold text-neutral-900 text-base md:text-lg">{{ testimonial.name }}</h4>
                         <p class="text-neutral-600 text-sm md:text-base">{{ testimonial.role }}</p>
                       </div>
                     </div>
                   </div>
-                  
-                  <!-- Petites bulles décoratives flottantes -->
-                  <div class="absolute -top-6 -right-6 w-12 h-12 rounded-full bg-gradient-to-br from-orange-300/40 to-purple-300/40 backdrop-blur-sm animate-float-slow shadow-lg"></div>
-                  <div class="absolute -bottom-8 -left-8 w-16 h-16 rounded-full bg-gradient-to-br from-purple-300/40 to-orange-300/40 backdrop-blur-sm animate-float shadow-lg"></div>
-                  <div class="absolute top-1/4 -right-12 w-8 h-8 rounded-full bg-gradient-to-br from-yellow-300/50 to-orange-300/50 backdrop-blur-sm animate-float animation-delay-1000 shadow-md"></div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Carousel dots -->
-          <div class="flex justify-center gap-2 mt-8">
+          <div class="flex justify-center gap-3 mt-10">
             <button v-for="(_, index) in testimonials" :key="index"
                     @click="currentTestimonial = index"
-                    class="w-3 h-3 rounded-full transition-all duration-300"
-                    :class="currentTestimonial === index ? 'bg-orange-500 w-8' : 'bg-neutral-300 hover:bg-neutral-400'">
+                    class="transition-all duration-300"
+                    :class="currentTestimonial === index ? 'w-10 h-2 bg-orange-500 rounded-full' : 'w-2 h-2 bg-neutral-300 hover:bg-neutral-400 rounded-full'">
             </button>
           </div>
         </div>
@@ -466,29 +464,4 @@ onMounted(() => {
   }
 }
 
-/* Bubble card with subtle glow effect */
-.bubble-card {
-  position: relative;
-  box-shadow: 
-    0 20px 60px rgba(251, 146, 60, 0.15),
-    0 10px 30px rgba(168, 85, 247, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.bubble-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 3rem;
-  padding: 2px;
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.3), rgba(168, 85, 247, 0.3));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.bubble-card:hover::before {
-  background: linear-gradient(135deg, rgba(251, 146, 60, 0.5), rgba(168, 85, 247, 0.5));
-}
 </style>
