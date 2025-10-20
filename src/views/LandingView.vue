@@ -44,62 +44,67 @@
         </div>
 
         <!-- Interactive Mood Selector - Dribbble Style -->
-        <div class="relative max-w-6xl mx-auto mt-20 md:mt-24">
-          <!-- Main selector -->
-          <div class="text-center mb-12">
-            <p class="text-lg md:text-xl text-neutral-600 mb-8 font-light">Comment vous sentez-vous ?</p>
+        <div class="relative w-full mt-20 md:mt-24 px-4 md:px-6 lg:px-12">
+          <div class="max-w-7xl mx-auto">
+            <!-- Main selector -->
+            <div class="text-center mb-12">
+              <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent animate-gradient-flow inline-block cursor-default hover:scale-105 transition-transform duration-300">
+                Comment vous sentez-vous ?
+              </h3>
             
-            <!-- Large interactive mood buttons -->
-            <div class="flex justify-center items-center gap-4 md:gap-6 mb-12">
-              <button v-for="(mood, i) in moods" :key="i"
-                      @click="selectedMoodIndex = i"
-                      class="mood-button group relative transition-all duration-500 ease-out"
-                      :class="selectedMoodIndex === i ? 'selected' : ''">
-                <div class="relative w-20 h-20 md:w-32 md:h-32 rounded-[2rem] flex items-center justify-center transition-all duration-500 shadow-xl"
-                     :class="[
-                       mood.gradient,
-                       selectedMoodIndex === i ? 'scale-125 shadow-2xl' : 'scale-90 opacity-40 hover:opacity-70 hover:scale-100'
-                     ]">
-                  <span class="text-4xl md:text-6xl transition-all duration-300 group-hover:scale-110">
-                    {{ mood.emoji }}
-                  </span>
+              <!-- Large interactive mood buttons -->
+              <div class="flex justify-center items-end gap-3 md:gap-6 lg:gap-8 mb-16">
+                <button v-for="(mood, i) in moods" :key="i"
+                        @click="selectedMoodIndex = i"
+                        class="mood-button group relative transition-all duration-500 ease-out flex flex-col items-center">
+                  <div class="relative w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-[2rem] flex items-center justify-center transition-all duration-500 shadow-xl mb-4"
+                       :class="[
+                         mood.gradient,
+                         selectedMoodIndex === i ? 'scale-110 shadow-2xl' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-100'
+                       ]">
+                    <span class="text-5xl md:text-7xl lg:text-8xl transition-all duration-300 group-hover:scale-110">
+                      {{ mood.emoji }}
+                    </span>
+                    
+                    <!-- Ripple effect when selected -->
+                    <div v-if="selectedMoodIndex === i" 
+                         class="absolute inset-0 rounded-[2rem] bg-white/20 animate-ping"></div>
+                  </div>
                   
-                  <!-- Ripple effect when selected -->
-                  <div v-if="selectedMoodIndex === i" 
-                       class="absolute inset-0 rounded-[2rem] bg-white/20 animate-ping"></div>
-                </div>
-                
-                <!-- Label -->
-                <p v-if="selectedMoodIndex === i" 
-                   class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-neutral-700 whitespace-nowrap animate-fade-in">
-                  {{ mood.label }}
-                </p>
-              </button>
+                  <!-- Label always visible -->
+                  <p class="text-sm md:text-base font-semibold whitespace-nowrap transition-all duration-300"
+                     :class="selectedMoodIndex === i ? 'text-neutral-900 scale-110' : 'text-neutral-400'">
+                    {{ mood.label }}
+                  </p>
+                </button>
+              </div>
             </div>
           </div>
           
           <!-- Dynamic content based on selection -->
-          <div class="bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/60">
-            <div class="text-center mb-8">
-              <h3 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3">
-                {{ moods[selectedMoodIndex].title }}
-              </h3>
-              <p class="text-neutral-600 text-lg max-w-2xl mx-auto">
-                {{ moods[selectedMoodIndex].description }}
-              </p>
-            </div>
-            
-            <!-- Animated stats bar -->
-            <div class="relative h-3 bg-neutral-100 rounded-full overflow-hidden mb-4">
-              <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
-                   :class="moods[selectedMoodIndex].gradient"
-                   :style="`width: ${moods[selectedMoodIndex].percentage}%`">
+          <div class="max-w-5xl mx-auto">
+            <div class="bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl border border-white/60">
+              <div class="text-center mb-8">
+                <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4">
+                  {{ moods[selectedMoodIndex].title }}
+                </h3>
+                <p class="text-neutral-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                  {{ moods[selectedMoodIndex].description }}
+                </p>
               </div>
-            </div>
-            
-            <div class="flex justify-between text-sm text-neutral-500">
-              <span>{{ moods[selectedMoodIndex].percentage }}% de vos collègues</span>
-              <span>se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}</span>
+              
+              <!-- Animated stats bar -->
+              <div class="relative h-4 bg-neutral-100 rounded-full overflow-hidden mb-4">
+                <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
+                     :class="moods[selectedMoodIndex].gradient"
+                     :style="`width: ${moods[selectedMoodIndex].percentage}%`">
+                </div>
+              </div>
+              
+              <div class="flex justify-between text-base text-neutral-600 font-medium">
+                <span>{{ moods[selectedMoodIndex].percentage }}% de vos collègues</span>
+                <span>se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}</span>
+              </div>
             </div>
           </div>
         </div>
