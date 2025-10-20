@@ -43,56 +43,63 @@
           </div>
         </div>
 
-        <!-- Dashboard Preview - Carousel -->
-        <div class="relative max-w-6xl mx-auto mt-16 md:mt-20">
-          <div class="bg-white rounded-3xl p-6 md:p-10 shadow-2xl">
-            <!-- Browser bar -->
-            <div class="flex items-center gap-2 mb-6 pb-4 border-b border-neutral-200">
-              <div class="w-3 h-3 rounded-full bg-orange-400"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-              <div class="w-3 h-3 rounded-full bg-purple-400"></div>
-              <div class="ml-4 flex-1 bg-neutral-100 rounded-full px-4 py-2 text-sm text-neutral-500">
-                moodflow.app/dashboard
-              </div>
-            </div>
+        <!-- Interactive Mood Selector - Dribbble Style -->
+        <div class="relative max-w-6xl mx-auto mt-20 md:mt-24">
+          <!-- Main selector -->
+          <div class="text-center mb-12">
+            <p class="text-lg md:text-xl text-neutral-600 mb-8 font-light">Comment vous sentez-vous ?</p>
             
-            <!-- Mood selector carousel -->
-            <div class="mb-8">
-              <p class="text-sm text-neutral-500 mb-3 font-medium">Comment vous sentez-vous aujourd'hui ?</p>
-              <div class="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide pb-2">
-                <button v-for="(mood, i) in moods" :key="i"
-                        @click="selectedMoodIndex = i"
-                        class="flex-none group relative"
-                        :class="selectedMoodIndex === i ? 'scale-110' : 'opacity-60 hover:opacity-100'">
-                  <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-lg"
-                       :class="mood.gradient">
-                    <span class="text-2xl md:text-3xl filter grayscale-0 group-hover:scale-110 transition-transform">
-                      {{ mood.emoji }}
-                    </span>
-                  </div>
+            <!-- Large interactive mood buttons -->
+            <div class="flex justify-center items-center gap-4 md:gap-6 mb-12">
+              <button v-for="(mood, i) in moods" :key="i"
+                      @click="selectedMoodIndex = i"
+                      class="mood-button group relative transition-all duration-500 ease-out"
+                      :class="selectedMoodIndex === i ? 'selected' : ''">
+                <div class="relative w-20 h-20 md:w-32 md:h-32 rounded-[2rem] flex items-center justify-center transition-all duration-500 shadow-xl"
+                     :class="[
+                       mood.gradient,
+                       selectedMoodIndex === i ? 'scale-125 shadow-2xl' : 'scale-90 opacity-40 hover:opacity-70 hover:scale-100'
+                     ]">
+                  <span class="text-4xl md:text-6xl transition-all duration-300 group-hover:scale-110">
+                    {{ mood.emoji }}
+                  </span>
+                  
+                  <!-- Ripple effect when selected -->
                   <div v-if="selectedMoodIndex === i" 
-                       class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-orange-500"></div>
-                </button>
+                       class="absolute inset-0 rounded-[2rem] bg-white/20 animate-ping"></div>
+                </div>
+                
+                <!-- Label -->
+                <p v-if="selectedMoodIndex === i" 
+                   class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-medium text-neutral-700 whitespace-nowrap animate-fade-in">
+                  {{ mood.label }}
+                </p>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Dynamic content based on selection -->
+          <div class="bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/60">
+            <div class="text-center mb-8">
+              <h3 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3">
+                {{ moods[selectedMoodIndex].title }}
+              </h3>
+              <p class="text-neutral-600 text-lg max-w-2xl mx-auto">
+                {{ moods[selectedMoodIndex].description }}
+              </p>
+            </div>
+            
+            <!-- Animated stats bar -->
+            <div class="relative h-3 bg-neutral-100 rounded-full overflow-hidden mb-4">
+              <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
+                   :class="mood.gradient"
+                   :style="`width: ${moods[selectedMoodIndex].percentage}%`">
               </div>
             </div>
             
-            <!-- Stats preview -->
-            <div class="grid grid-cols-3 gap-3 md:gap-4">
-              <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 md:p-6 transition-all duration-500"
-                   :style="`opacity: ${selectedMoodIndex === 0 || selectedMoodIndex === 1 ? 1 : 0.3}`">
-                <div class="text-2xl md:text-3xl font-bold text-orange-600 mb-1">{{ selectedMoodIndex <= 1 ? '78%' : '12%' }}</div>
-                <p class="text-xs md:text-sm text-neutral-600">Positif</p>
-              </div>
-              <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 md:p-6 transition-all duration-500"
-                   :style="`opacity: ${selectedMoodIndex === 2 ? 1 : 0.3}`">
-                <div class="text-2xl md:text-3xl font-bold text-purple-600 mb-1">{{ selectedMoodIndex === 2 ? '15%' : '8%' }}</div>
-                <p class="text-xs md:text-sm text-neutral-600">Neutre</p>
-              </div>
-              <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 md:p-6 transition-all duration-500"
-                   :style="`opacity: ${selectedMoodIndex >= 3 ? 1 : 0.3}`">
-                <div class="text-2xl md:text-3xl font-bold text-orange-600 mb-1">{{ selectedMoodIndex >= 3 ? '7%' : '2%' }}</div>
-                <p class="text-xs md:text-sm text-neutral-600">Négatif</p>
-              </div>
+            <div class="flex justify-between text-sm text-neutral-500">
+              <span>{{ moods[selectedMoodIndex].percentage }}% de vos collègues</span>
+              <span>se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}</span>
             </div>
           </div>
         </div>
@@ -391,11 +398,46 @@ const currentFeature = ref(0);
 const selectedMoodIndex = ref(1);
 
 const moods = [
-  { emoji: '😢', gradient: 'bg-gradient-to-br from-orange-400 to-orange-500' },
-  { emoji: '😔', gradient: 'bg-gradient-to-br from-orange-300 to-purple-400' },
-  { emoji: '😐', gradient: 'bg-gradient-to-br from-purple-300 to-purple-400' },
-  { emoji: '😊', gradient: 'bg-gradient-to-br from-yellow-300 to-orange-400' },
-  { emoji: '😄', gradient: 'bg-gradient-to-br from-orange-400 to-orange-500' }
+  { 
+    emoji: '😄', 
+    label: 'Excellent',
+    gradient: 'bg-gradient-to-br from-green-400 to-green-500',
+    percentage: 45,
+    title: 'Votre équipe est au top',
+    description: 'Un climat positif favorise la productivité et l\'innovation. Continuez à cultiver cette dynamique.'
+  },
+  { 
+    emoji: '😊', 
+    label: 'Bien',
+    gradient: 'bg-gradient-to-br from-yellow-300 to-orange-400',
+    percentage: 32,
+    title: 'L\'ambiance est bonne',
+    description: 'Vos collaborateurs se sentent globalement bien. Quelques ajustements peuvent encore améliorer le quotidien.'
+  },
+  { 
+    emoji: '😐', 
+    label: 'Neutre',
+    gradient: 'bg-gradient-to-br from-purple-300 to-purple-400',
+    percentage: 15,
+    title: 'Une attention nécessaire',
+    description: 'Certains signaux neutres méritent d\'être explorés. C\'est le moment d\'écouter vos équipes.'
+  },
+  { 
+    emoji: '😔', 
+    label: 'Difficile',
+    gradient: 'bg-gradient-to-br from-orange-400 to-orange-500',
+    percentage: 6,
+    title: 'Agir rapidement',
+    description: 'Des collaborateurs expriment des difficultés. Un accompagnement bienveillant est recommandé.'
+  },
+  { 
+    emoji: '😢', 
+    label: 'Très difficile',
+    gradient: 'bg-gradient-to-br from-red-400 to-orange-500',
+    percentage: 2,
+    title: 'Intervention urgente',
+    description: 'Ces signaux nécessitent une action immédiate. Contactez vos équipes RH ou de soutien psychologique.'
+  }
 ];
 
 const features = [
