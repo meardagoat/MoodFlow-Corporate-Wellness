@@ -116,14 +116,14 @@
               <div v-for="(testimonial, index) in testimonials" :key="index" 
                    class="min-w-full px-4 sm:px-6 md:px-8">
                 <!-- Clean card style Headspace -->
-                <div class="max-w-4xl mx-auto">
-                  <div class="bg-white rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.12)] transition-shadow duration-300">
+                <div class="max-w-4xl mx-auto h-full flex items-center">
+                  <div class="w-full bg-white rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.12)] transition-shadow duration-300 min-h-[400px] md:min-h-[450px] flex flex-col justify-center">
                     
                     <div class="flex justify-center mb-6 md:mb-8 gap-1.5">
                       <div v-for="i in 5" :key="i" class="text-2xl md:text-3xl text-orange-500">★</div>
                     </div>
                     
-                    <p class="text-xl sm:text-2xl md:text-3xl text-neutral-800 mb-8 md:mb-10 leading-relaxed text-center font-light">
+                    <p class="text-xl sm:text-2xl md:text-3xl text-neutral-800 mb-8 md:mb-10 leading-relaxed text-center font-light flex-grow flex items-center justify-center">
                       {{ testimonial.text }}
                     </p>
                     
