@@ -13,7 +13,7 @@
         <div class="space-y-8 mb-16">
           <!-- Logo/Nom de l'app -->
           <div class="mb-6 md:mb-8">
-            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-orange-500 to-purple-600 bg-clip-text text-transparent mb-4 px-4">
+            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent mb-4 px-4 animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-500">
               MoodFlow
             </h1>
           </div>
@@ -264,7 +264,7 @@
       <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-start gap-12">
           <div class="text-center md:text-left">
-            <h3 class="text-3xl font-bold mb-3 bg-gradient-to-r from-orange-400 to-purple-400 bg-clip-text text-transparent">
+            <h3 class="text-3xl font-bold mb-3 bg-gradient-to-r from-orange-400 via-purple-400 to-orange-400 bg-clip-text text-transparent animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-300 inline-block">
               MoodFlow
             </h3>
             <p class="text-neutral-400 max-w-sm">Le bien-être au travail, simplifié</p>
@@ -529,6 +529,23 @@ onMounted(() => {
 .animate-gradient-text {
   background-size: 200% 200%;
   animation: gradient-text 4s ease-in-out infinite;
+}
+
+.animate-gradient-flow {
+  background-size: 300% 300%;
+  animation: gradientFlow 3s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes float {
