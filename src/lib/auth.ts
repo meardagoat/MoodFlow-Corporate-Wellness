@@ -1,107 +1,56 @@
-import { ref, computed } from 'vue';
-import { supabase } from './supabase';
-import type { User } from '@supabase/supabase-js';
-import type { Database } from './database.types';
+// filepath: src/lib/auth.ts
+import { computed } from 'vue'
+import { supabase } from './supabaseClient'
+import { currentProfile } from './store'
 
-type Profile = Database['public']['Tables']['profiles']['Row'];
-
-export const currentUser = ref<User | null>(null);
-export const currentProfile = ref<Profile | null>(null);
-export const isLoading = ref(true);
-
-export const isAuthenticated = computed(() => !!currentUser.value);
-export const isManager = computed(() => currentProfile.value?.role === 'manager');
-
-export async function initAuth() {
-  isLoading.value = true;
-
-  const { data: { session } } = await supabase.auth.getSession();
-
-  if (session?.user) {
-    currentUser.value = session.user;
-    await loadProfile(session.user.id);
-  }
-
-  supabase.auth.onAuthStateChange((_event, session) => {
-    (async () => {
-      currentUser.value = session?.user ?? null;
-      if (session?.user) {
-        await loadProfile(session.user.id);
-      } else {
-        currentProfile.value = null;
-      }
-    })();
-  });
-
-  isLoading.value = false;
+/**
+ * Vérifie si creatorRole peut créer targetRole
+ */
+export function canCreateRole(creatorRole?: string, targetRole?: string): boolean {
+  if (!creatorRole || !targetRole) return false
+  if (creatorRole === 'system_admin') return true
+  if (creatorRole === 'manager' && targetRole === 'employee') return true
+  return false
 }
 
-async function loadProfile(userId: string) {
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', userId)
-    .maybeSingle();
-
-  if (!error && data) {
-    currentProfile.value = data;
-  }
-}
-
-export async function signUp(email: string, password: string, role: string, service: string) {
-  const { data, error } = await supabase.auth.signUp({
+/**
+ * Inscription publique : create uniquement employee
+ */
+export async function signUpPublic(email: string, password: string, service?: string) {
+  return await supabase.auth.signUp({
     email,
     password,
     options: {
       data: {
-        role,
+        role: 'employee',
         service,
       },
     },
-  });
-
-  return { data, error };
+  })
 }
 
-export async function signIn(email: string, password: string) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-
-  return { data, error };
-}
-
-export async function signOut() {
-  // Afficher l'écran d'au revoir avant la déconnexion
-  if ((window as any).showGoodbyeScreen) {
-    (window as any).showGoodbyeScreen();
-    
-    // Attendre un peu pour que l'utilisateur voit l'écran
-    await new Promise(resolve => setTimeout(resolve, 2000));
-  }
-  
-  const { error } = await supabase.auth.signOut();
-  currentUser.value = null;
-  currentProfile.value = null;
-  return { error };
-}
-
-export async function updateProfile(updates: Partial<Profile>) {
-  if (!currentUser.value) return { error: new Error('Not authenticated') };
-
-  const result = await supabase
-    .from('profiles')
-    .update(updates as any)
-    .eq('id', currentUser.value.id)
-    .select()
-    .single();
-
-  const { data, error } = result as any;
-
-  if (!error && data) {
-    currentProfile.value = data;
+/**
+ * Création sécurisée d'un utilisateur.
+ * Appelle l'Edge Function 'create-user' (doit être protégée côté serveur).
+ * Ne pas appeler directement pour des actions sensibles sans vérification côté serveur.
+ */
+export async function createUser(email: string, password: string, role: string, service?: string) {
+  if (!currentProfile?.value) {
+    throw new Error('Non authentifié')
   }
 
-  return { data, error };
+  if (!canCreateRole(currentProfile.value.role, role)) {
+    throw new Error('Permissions insuffisantes pour créer ce type de compte')
+  }
+
+  const { data, error } = await supabase.functions.invoke('create-user', {
+    body: { email, password, role, service },
+  })
+
+  return { data, error }
 }
+
+/**
+ * helper reactive pour l'UI
+ */
+export const isSystemAdmin = computed(() => currentProfile?.value?.role === 'system_admin')
