@@ -115,11 +115,11 @@
                  :style="`transform: translateX(-${currentTestimonial * 100}%)`">
               <div v-for="(testimonial, index) in testimonials" :key="index" 
                    class="min-w-full px-2 sm:px-4">
-                <!-- Cloud shape testimonial -->
+                <!-- Bubble testimonial -->
                 <div class="max-w-3xl mx-auto relative">
-                  <div class="cloud-shape bg-white/90 backdrop-blur-md p-6 sm:p-8 md:p-10 lg:p-12 shadow-2xl transform hover:scale-105 transition-all duration-500">
-                    <div class="flex justify-center mb-4 md:mb-6">
-                      <div v-for="i in 5" :key="i" class="text-xl sm:text-2xl md:text-3xl text-yellow-400 animate-pulse-soft" :style="`animation-delay: ${i * 0.1}s`">★</div>
+                  <div class="bubble-card bg-gradient-to-br from-white via-white to-orange-50/30 backdrop-blur-md p-6 sm:p-8 md:p-10 lg:p-12 rounded-[3rem] shadow-2xl border border-white/60 transform hover:scale-[1.02] transition-all duration-500">
+                    <div class="flex justify-center mb-4 md:mb-6 gap-1">
+                      <div v-for="i in 5" :key="i" class="text-xl sm:text-2xl md:text-3xl text-yellow-400 transform hover:scale-125 transition-transform duration-300">★</div>
                     </div>
                     
                     <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-800 italic mb-6 md:mb-8 leading-relaxed text-center px-2">
@@ -127,7 +127,7 @@
                     </p>
                     
                     <div class="flex items-center justify-center gap-3 md:gap-4">
-                      <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-purple-500 shadow-lg"></div>
+                      <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-purple-500 shadow-lg animate-pulse-soft"></div>
                       <div class="text-left">
                         <h4 class="font-bold text-neutral-900 text-base md:text-lg">{{ testimonial.name }}</h4>
                         <p class="text-neutral-600 text-sm md:text-base">{{ testimonial.role }}</p>
@@ -135,9 +135,10 @@
                     </div>
                   </div>
                   
-                  <!-- Nuages décoratifs flottants -->
-                  <div class="absolute -top-4 -right-4 w-16 h-16 bg-white/40 rounded-full blur-xl animate-float-slow"></div>
-                  <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-purple-200/30 rounded-full blur-xl animate-float"></div>
+                  <!-- Petites bulles décoratives flottantes -->
+                  <div class="absolute -top-6 -right-6 w-12 h-12 rounded-full bg-gradient-to-br from-orange-300/40 to-purple-300/40 backdrop-blur-sm animate-float-slow shadow-lg"></div>
+                  <div class="absolute -bottom-8 -left-8 w-16 h-16 rounded-full bg-gradient-to-br from-purple-300/40 to-orange-300/40 backdrop-blur-sm animate-float shadow-lg"></div>
+                  <div class="absolute top-1/4 -right-12 w-8 h-8 rounded-full bg-gradient-to-br from-yellow-300/50 to-orange-300/50 backdrop-blur-sm animate-float animation-delay-1000 shadow-md"></div>
                 </div>
               </div>
             </div>
@@ -465,25 +466,29 @@ onMounted(() => {
   }
 }
 
-/* Cloud shape for testimonials */
-.cloud-shape {
-  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+/* Bubble card with subtle glow effect */
+.bubble-card {
   position: relative;
-  animation: morphCloud 10s ease-in-out infinite;
+  box-shadow: 
+    0 20px 60px rgba(251, 146, 60, 0.15),
+    0 10px 30px rgba(168, 85, 247, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-@keyframes morphCloud {
-  0%, 100% {
-    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
-  }
-  25% {
-    border-radius: 40% 60% 50% 50% / 60% 30% 70% 40%;
-  }
-  50% {
-    border-radius: 70% 30% 40% 60% / 40% 50% 60% 50%;
-  }
-  75% {
-    border-radius: 50% 50% 60% 40% / 70% 40% 60% 30%;
-  }
+.bubble-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 3rem;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.3), rgba(168, 85, 247, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.bubble-card:hover::before {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.5), rgba(168, 85, 247, 0.5));
 }
 </style>
