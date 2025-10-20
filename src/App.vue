@@ -24,7 +24,8 @@ const authInitialized = ref(false);
 const sessionStats = ref({ posts: 0, messages: 0 });
 
 const isAuthPage = computed(() => {
-  return route.path === '/login' || route.path === '/register' || route.path === '/';
+  const publicPages = ['/', '/login', '/register', '/about', '/contact', '/privacy'];
+  return publicPages.includes(route.path);
 });
 
 // Initialisation de l'authentification
@@ -32,15 +33,13 @@ onMounted(async () => {
   await initAuth();
   authInitialized.value = true;
   
-  // Fermer le splash screen après initialisation
-  setTimeout(() => {
-    showSplash.value = false;
-    
-    // Afficher l'écran de bienvenue si l'utilisateur est connecté
-    if (currentUser.value && currentProfile.value) {
-      showWelcome.value = true;
-    }
-  }, 2000);
+  // Pas de splash screen, juste charger directement
+  showSplash.value = false;
+  
+  // Afficher l'écran de bienvenue si l'utilisateur est connecté
+  if (currentUser.value && currentProfile.value) {
+    showWelcome.value = true;
+  }
 });
 
 // Fonctions pour gérer les splash screens

@@ -11,12 +11,19 @@
 
       <div class="relative z-10 max-w-7xl mx-auto text-center">
         <div class="space-y-8 mb-16">
-          <h1 class="text-6xl md:text-8xl font-extrabold leading-tight">
+          <!-- Logo/Nom de l'app -->
+          <div class="mb-8">
+            <h1 class="text-8xl md:text-9xl font-black bg-gradient-to-r from-orange-500 to-purple-600 bg-clip-text text-transparent mb-4">
+              MoodFlow
+            </h1>
+          </div>
+          
+          <h2 class="text-5xl md:text-7xl font-extrabold leading-tight">
             <span class="block text-neutral-900 mb-2">Prendre soin de</span>
             <span class="block bg-gradient-to-r from-orange-500 via-orange-400 to-purple-500 bg-clip-text text-transparent animate-gradient">
               vos équipes
             </span>
-          </h1>
+          </h2>
           
           <p class="text-xl md:text-2xl text-neutral-600 max-w-2xl mx-auto leading-relaxed font-light">
             MoodFlow transforme le bien-être en entreprise avec une approche simple, anonyme et bienveillante
@@ -187,21 +194,28 @@
     <!-- Footer -->
     <footer class="py-16 px-6 bg-neutral-900 text-white">
       <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
           <div class="text-center md:text-left">
-            <h3 class="text-2xl font-bold mb-2">MoodFlow</h3>
-            <p class="text-neutral-400">Le bien-être au travail, simplifié</p>
+            <h3 class="text-3xl font-bold mb-3 bg-gradient-to-r from-orange-400 to-purple-400 bg-clip-text text-transparent">
+              MoodFlow
+            </h3>
+            <p class="text-neutral-400 max-w-sm">Le bien-être au travail, simplifié</p>
           </div>
           
-          <div class="flex gap-8">
-            <a href="#" class="text-neutral-400 hover:text-white transition-colors">À propos</a>
-            <a href="#" class="text-neutral-400 hover:text-white transition-colors">Contact</a>
-            <a href="#" class="text-neutral-400 hover:text-white transition-colors">Confidentialité</a>
+          <div class="flex gap-16">
+            <div>
+              <h4 class="font-semibold mb-4">Liens</h4>
+              <div class="space-y-2">
+                <router-link to="/about" class="block text-neutral-400 hover:text-orange-400 transition-colors">À propos</router-link>
+                <router-link to="/contact" class="block text-neutral-400 hover:text-orange-400 transition-colors">Contact</router-link>
+                <router-link to="/privacy" class="block text-neutral-400 hover:text-orange-400 transition-colors">Confidentialité</router-link>
+              </div>
+            </div>
           </div>
         </div>
         
         <div class="mt-12 pt-8 border-t border-neutral-800 text-center text-neutral-500">
-          <p>&copy; 2025 MoodFlow. Tous droits réservés.</p>
+          <p>&copy; 2025 MoodFlow. Fait avec ❤️ par Abdoul, Mathieu, Amaury, Jerobel et Mehmet</p>
         </div>
       </div>
     </footer>
