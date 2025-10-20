@@ -72,6 +72,28 @@ export async function signIn(email: string, password: string) {
   return { data, error };
 }
 
+export async function signInWithGoogle() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/feed`,
+    },
+  });
+
+  return { data, error };
+}
+
+export async function signInWithGithub() {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+    options: {
+      redirectTo: `${window.location.origin}/feed`,
+    },
+  });
+
+  return { data, error };
+}
+
 export async function signOut() {
   // Afficher l'écran d'au revoir avant la déconnexion
   if ((window as any).showGoodbyeScreen) {
