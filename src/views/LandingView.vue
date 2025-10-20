@@ -151,8 +151,10 @@
     <!-- Companies Carousel -->
     <section class="py-24 px-6 bg-white/40 backdrop-blur-sm">
       <div class="max-w-7xl mx-auto">
-        <h3 class="text-center text-neutral-600 text-lg mb-12 font-light">
-          Ils font confiance à MoodFlow
+        <h3 class="text-center mb-16">
+          <span class="inline-block text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-text hover:scale-105 transition-transform duration-300 cursor-default">
+            Ils font confiance à MoodFlow
+          </span>
         </h3>
         
         <div class="relative overflow-hidden">
@@ -214,8 +216,16 @@
           </div>
         </div>
         
-        <div class="mt-12 pt-8 border-t border-neutral-800 text-center text-neutral-500">
-          <p>&copy; 2025 MoodFlow. Fait avec ❤️ par Abdoul, Mathieu, Amaury, Jerobel et Mehmet</p>
+        <div class="mt-12 pt-8 border-t border-neutral-800 text-center text-neutral-400">
+          <p class="mb-2">&copy; 2025 MoodFlow</p>
+          <p class="text-sm">
+            Codé avec ❤️ et du Flow par 
+            <span class="text-orange-400 font-semibold">A</span>bdoul, 
+            <span class="text-purple-400 font-semibold">M</span>athieu, 
+            <span class="text-yellow-400 font-semibold">A</span>maury, 
+            <span class="text-orange-400 font-semibold">J</span>erobel et 
+            <span class="text-purple-400 font-semibold">M</span>ehmet
+          </p>
         </div>
       </div>
     </footer>
@@ -386,6 +396,18 @@ onMounted(() => {
   }
 }
 
+@keyframes gradient-text {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -420,6 +442,11 @@ onMounted(() => {
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient 3s ease infinite;
+}
+
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradient-text 4s ease-in-out infinite;
 }
 
 @keyframes float {
