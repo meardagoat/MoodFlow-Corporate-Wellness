@@ -24,7 +24,7 @@ const authInitialized = ref(false);
 const sessionStats = ref({ posts: 0, messages: 0 });
 
 const isAuthPage = computed(() => {
-  const publicPages = ['/', '/login', '/register', '/about', '/contact', '/privacy'];
+  const publicPages = ['/', '/login', '/register', '/about', '/contact', '/privacy', '/pricing', '/demo'];
   return publicPages.includes(route.path);
 });
 

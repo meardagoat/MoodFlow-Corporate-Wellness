@@ -230,9 +230,9 @@
           Rejoignez les milliers qui utilisent MoodFlow chaque jour
         </h2>
         
-        <button @click="goToRegister" 
+        <button @click="goToPricing" 
                 class="px-12 py-5 bg-white text-orange-600 rounded-full text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl">
-          Essayer gratuitement
+          Voir les tarifs
         </button>
       </div>
     </section>
@@ -250,11 +250,11 @@
           Prêt à transformer votre entreprise ?
         </h2>
         <p class="text-lg sm:text-xl md:text-2xl font-light opacity-90">
-          Commencez gratuitement aujourd'hui. Aucune carte bancaire requise.
+          Découvrez MoodFlow en action avec une démo personnalisée
         </p>
-        <button @click="goToRegister" 
+        <button @click="goToDemo" 
                 class="px-8 sm:px-10 md:px-12 py-4 md:py-5 bg-white text-orange-600 rounded-full text-lg md:text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-orange-900/50">
-          Démarrer maintenant
+          Demander une démo
         </button>
       </div>
     </section>
@@ -270,9 +270,17 @@
             <p class="text-neutral-400 max-w-sm">Le bien-être au travail, simplifié</p>
           </div>
           
-          <div class="flex gap-16">
+          <div class="flex flex-col sm:flex-row gap-12 sm:gap-16">
             <div>
-              <h4 class="font-semibold mb-4">Liens</h4>
+              <h4 class="font-semibold mb-4">Produit</h4>
+              <div class="space-y-2">
+                <router-link to="/pricing" class="block text-neutral-400 hover:text-orange-400 transition-colors">Tarifs</router-link>
+                <router-link to="/demo" class="block text-neutral-400 hover:text-orange-400 transition-colors">Demander une démo</router-link>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-4">Entreprise</h4>
               <div class="space-y-2">
                 <router-link to="/about" class="block text-neutral-400 hover:text-orange-400 transition-colors">À propos</router-link>
                 <router-link to="/contact" class="block text-neutral-400 hover:text-orange-400 transition-colors">Contact</router-link>
@@ -392,6 +400,14 @@ const companyLogos = [
 
 const goToRegister = () => {
   router.push('/register');
+};
+
+const goToPricing = () => {
+  router.push('/pricing');
+};
+
+const goToDemo = () => {
+  router.push('/demo');
 };
 
 const scrollToFeatures = () => {
