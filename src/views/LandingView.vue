@@ -12,20 +12,20 @@
       <div class="relative z-10 max-w-7xl mx-auto text-center">
         <div class="space-y-8 mb-16">
           <!-- Logo/Nom de l'app -->
-          <div class="mb-8">
-            <h1 class="text-8xl md:text-9xl font-black bg-gradient-to-r from-orange-500 to-purple-600 bg-clip-text text-transparent mb-4">
+          <div class="mb-6 md:mb-8">
+            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-orange-500 to-purple-600 bg-clip-text text-transparent mb-4 px-4">
               MoodFlow
             </h1>
           </div>
           
-          <h2 class="text-5xl md:text-7xl font-extrabold leading-tight">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight px-4">
             <span class="block text-neutral-900 mb-2">Prendre soin de</span>
             <span class="block bg-gradient-to-r from-orange-500 via-orange-400 to-purple-500 bg-clip-text text-transparent animate-gradient">
               vos équipes
             </span>
           </h2>
           
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-2xl mx-auto leading-relaxed font-light">
+          <p class="text-lg sm:text-xl md:text-2xl text-neutral-600 max-w-2xl mx-auto leading-relaxed font-light px-4">
             MoodFlow transforme le bien-être en entreprise avec une approche simple, anonyme et bienveillante
           </p>
 
@@ -44,27 +44,27 @@
         </div>
 
         <!-- Animated preview -->
-        <div class="relative max-w-5xl mx-auto">
-          <div class="bg-white/40 backdrop-blur-xl rounded-3xl p-8 border border-white/60 shadow-2xl">
-            <div class="flex gap-3 mb-6">
-              <div class="w-3 h-3 rounded-full bg-orange-400"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-              <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+        <div class="relative max-w-5xl mx-auto mt-12 md:mt-16">
+          <div class="bg-white/40 backdrop-blur-xl rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 border border-white/60 shadow-2xl">
+            <div class="flex gap-2 md:gap-3 mb-4 md:mb-6">
+              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-orange-400"></div>
+              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-purple-400"></div>
             </div>
             
-            <div class="space-y-4">
-              <div class="flex gap-4">
+            <div class="space-y-3 md:space-y-4">
+              <div class="flex gap-2 sm:gap-3 md:gap-4">
                 <div v-for="(mood, i) in ['😊', '😄', '😐', '😔', '😢']" :key="i"
-                     class="flex-1 aspect-square rounded-2xl bg-gradient-to-br from-orange-200 to-purple-200 flex items-center justify-center text-4xl transform hover:scale-110 transition-transform duration-300 cursor-pointer"
+                     class="flex-1 aspect-square rounded-xl md:rounded-2xl bg-gradient-to-br from-orange-200 to-purple-200 flex items-center justify-center text-xl sm:text-2xl md:text-3xl lg:text-4xl transform hover:scale-110 transition-transform duration-300 cursor-pointer"
                      :style="`animation: float ${3 + i}s ease-in-out infinite; animation-delay: ${i * 0.2}s`">
                   {{ mood }}
                 </div>
               </div>
               
-              <div class="grid grid-cols-3 gap-4">
-                <div class="h-24 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 animate-pulse-soft"></div>
-                <div class="h-24 rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 animate-pulse-soft animation-delay-1000"></div>
-                <div class="h-24 rounded-xl bg-gradient-to-br from-yellow-100 to-yellow-200 animate-pulse-soft animation-delay-2000"></div>
+              <div class="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 animate-pulse-soft"></div>
+                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 animate-pulse-soft animation-delay-1000"></div>
+                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-yellow-100 to-yellow-200 animate-pulse-soft animation-delay-2000"></div>
               </div>
             </div>
           </div>
@@ -73,18 +73,18 @@
     </section>
 
     <!-- Features Section -->
-    <section ref="featuresSection" class="py-32 px-6 relative">
+    <section ref="featuresSection" class="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-20 space-y-4">
-          <h2 class="text-5xl md:text-6xl font-bold text-neutral-900">
+        <div class="text-center mb-12 md:mb-16 lg:mb-20 space-y-3 md:space-y-4">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 px-4">
             Simple. Anonyme. Efficace.
           </h2>
-          <p class="text-xl text-neutral-600 max-w-2xl mx-auto font-light">
+          <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto font-light px-4">
             Tout ce qu'il faut pour cultiver le bien-être au quotidien
           </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
           <div v-for="(feature, index) in features" :key="index" 
                class="group relative bg-white/60 backdrop-blur-sm rounded-3xl p-8 border border-white/60 hover:bg-white/80 transition-all duration-500 hover:scale-105 hover:shadow-xl"
                :class="{ 'opacity-0 translate-y-10': !isVisible }"
@@ -100,13 +100,13 @@
     </section>
 
     <!-- Testimonials Carousel -->
-    <section class="py-32 px-6 bg-gradient-to-br from-purple-50/50 to-orange-50/50 relative overflow-hidden">
+    <section class="py-16 md:py-24 lg:py-32 px-4 md:px-6 bg-gradient-to-br from-purple-50/50 to-orange-50/50 relative overflow-hidden">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-5xl md:text-6xl font-bold text-neutral-900 mb-4">
+        <div class="text-center mb-12 md:mb-16">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-3 md:mb-4 px-4">
             Ce qu'ils en pensent
           </h2>
-          <p class="text-xl text-neutral-600">Des milliers d'entreprises nous font confiance</p>
+          <p class="text-lg md:text-xl text-neutral-600 px-4">Des milliers d'entreprises nous font confiance</p>
         </div>
 
         <div class="relative">
@@ -114,21 +114,21 @@
             <div class="flex transition-transform duration-700 ease-out"
                  :style="`transform: translateX(-${currentTestimonial * 100}%)`">
               <div v-for="(testimonial, index) in testimonials" :key="index" 
-                   class="min-w-full px-4">
-                <div class="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl p-12 border border-white/60 shadow-xl">
-                  <div class="flex justify-center mb-6">
-                    <div v-for="i in 5" :key="i" class="text-3xl text-yellow-400">★</div>
+                   class="min-w-full px-2 sm:px-4">
+                <div class="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 border border-white/60 shadow-xl">
+                  <div class="flex justify-center mb-4 md:mb-6">
+                    <div v-for="i in 5" :key="i" class="text-xl sm:text-2xl md:text-3xl text-yellow-400">★</div>
                   </div>
                   
-                  <p class="text-2xl text-neutral-800 italic mb-8 leading-relaxed text-center">
+                  <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-800 italic mb-6 md:mb-8 leading-relaxed text-center px-2">
                     "{{ testimonial.text }}"
                   </p>
                   
-                  <div class="flex items-center justify-center gap-4">
-                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-purple-500"></div>
+                  <div class="flex items-center justify-center gap-3 md:gap-4">
+                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-400 to-purple-500"></div>
                     <div class="text-left">
-                      <h4 class="font-bold text-neutral-900 text-lg">{{ testimonial.name }}</h4>
-                      <p class="text-neutral-600">{{ testimonial.role }}</p>
+                      <h4 class="font-bold text-neutral-900 text-base md:text-lg">{{ testimonial.name }}</h4>
+                      <p class="text-neutral-600 text-sm md:text-base">{{ testimonial.role }}</p>
                     </div>
                   </div>
                 </div>
@@ -149,10 +149,10 @@
     </section>
 
     <!-- Companies Carousel -->
-    <section class="py-24 px-6 bg-white/40 backdrop-blur-sm">
+    <section class="py-16 md:py-20 lg:py-24 px-4 md:px-6 bg-white/40 backdrop-blur-sm">
       <div class="max-w-7xl mx-auto">
-        <h3 class="text-center mb-16">
-          <span class="inline-block text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-text hover:scale-105 transition-transform duration-300 cursor-default">
+        <h3 class="text-center mb-12 md:mb-16 px-4">
+          <span class="inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-text hover:scale-105 transition-transform duration-300 cursor-default">
             Ils font confiance à MoodFlow
           </span>
         </h3>
@@ -172,22 +172,22 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-32 px-6 relative overflow-hidden">
+    <section class="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-400 to-purple-500"></div>
       <div class="absolute inset-0">
         <div class="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-blob"></div>
         <div class="absolute bottom-20 right-20 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
       </div>
       
-      <div class="relative z-10 max-w-4xl mx-auto text-center text-white space-y-8">
-        <h2 class="text-5xl md:text-7xl font-bold leading-tight">
+      <div class="relative z-10 max-w-4xl mx-auto text-center text-white space-y-6 md:space-y-8 px-4">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
           Prêt à transformer votre entreprise ?
         </h2>
-        <p class="text-xl md:text-2xl font-light opacity-90">
+        <p class="text-lg sm:text-xl md:text-2xl font-light opacity-90">
           Commencez gratuitement aujourd'hui. Aucune carte bancaire requise.
         </p>
         <button @click="goToRegister" 
-                class="px-12 py-5 bg-white text-orange-600 rounded-full text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-orange-900/50">
+                class="px-8 sm:px-10 md:px-12 py-4 md:py-5 bg-white text-orange-600 rounded-full text-lg md:text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-orange-900/50">
           Démarrer maintenant
         </button>
       </div>
