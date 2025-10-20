@@ -72,38 +72,74 @@
       </div>
     </section>
 
-    <!-- Features Section -->
-    <section ref="featuresSection" class="py-16 md:py-24 lg:py-32 relative">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12 md:mb-16 lg:mb-20 space-y-3 md:space-y-4 px-4 md:px-6">
+    <!-- Features Section - Style Headspace Tabs -->
+    <section ref="featuresSection" class="py-16 md:py-24 lg:py-32 relative bg-white">
+      <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900">
-            Simple. Anonyme. Efficace.
+            L'app bien-être pour chaque moment
           </h2>
-          <p class="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto font-light">
-            Tout ce qu'il faut pour cultiver le bien-être au quotidien
-          </p>
         </div>
 
-        <!-- Carousel horizontal -->
-        <div class="relative px-4 md:px-6">
-          <div class="overflow-x-auto scrollbar-hide snap-x snap-mandatory">
-            <div class="flex gap-6 pb-8">
+        <!-- Tabs -->
+        <div class="overflow-x-auto scrollbar-hide mb-12">
+          <div class="flex gap-2 justify-center min-w-max mx-auto pb-4">
+            <button v-for="(feature, index) in features" :key="index"
+                    @click="currentFeature = index"
+                    class="px-6 py-3 rounded-full font-semibold transition-all duration-300 whitespace-nowrap"
+                    :class="currentFeature === index 
+                      ? 'bg-neutral-900 text-white shadow-lg' 
+                      : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'">
+              {{ feature.title }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Slides -->
+        <div class="relative">
+          <div class="overflow-hidden">
+            <div class="flex transition-transform duration-500 ease-out"
+                 :style="`transform: translateX(-${currentFeature * 100}%)`">
               <div v-for="(feature, index) in features" :key="index" 
-                   class="snap-center flex-none w-80 sm:w-96 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
-                   :class="getFeatureGradient(index)"
-                   :style="isVisible ? `animation: slideUp 0.6s ease-out ${index * 0.1}s forwards` : ''">
-                <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                  {{ feature.icon }}
+                   class="min-w-full">
+                <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                  <!-- Image/Mockup -->
+                  <div class="order-2 md:order-1">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl"
+                         :class="getFeatureGradient(index)">
+                      <div class="aspect-[4/5] flex items-center justify-center p-12">
+                        <div class="text-9xl">{{ feature.icon }}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="order-1 md:order-2 text-center md:text-left">
+                    <h3 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+                      {{ feature.title }}
+                    </h3>
+                    <p class="text-xl text-neutral-600 leading-relaxed mb-8">
+                      {{ feature.description }}
+                    </p>
+                    <button @click="goToRegister"
+                            class="px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+                      Découvrir
+                    </button>
+                  </div>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-4">{{ feature.title }}</h3>
-                <p class="text-white/90 leading-relaxed">{{ feature.description }}</p>
               </div>
             </div>
           </div>
           
-          <!-- Scroll hint -->
-          <div class="text-center mt-6">
-            <p class="text-sm text-neutral-500">← Faites défiler pour voir plus →</p>
+          <!-- Indicators -->
+          <div class="flex justify-center gap-3 mt-12">
+            <button v-for="(_, index) in features" :key="index"
+                    @click="currentFeature = index"
+                    class="transition-all duration-300"
+                    :class="currentFeature === index 
+                      ? 'w-10 h-2 bg-orange-500 rounded-full' 
+                      : 'w-2 h-2 bg-neutral-300 hover:bg-neutral-400 rounded-full'">
+            </button>
           </div>
         </div>
       </div>
@@ -324,6 +360,7 @@ const router = useRouter();
 const isVisible = ref(false);
 const featuresSection = ref<HTMLElement | null>(null);
 const currentTestimonial = ref(0);
+const currentFeature = ref(0);
 
 const features = [
   {
