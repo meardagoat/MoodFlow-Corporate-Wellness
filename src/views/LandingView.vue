@@ -43,28 +43,29 @@
           </div>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="relative max-w-5xl mx-auto mt-16 md:mt-20">
-          <div class="grid sm:grid-cols-3 gap-6">
-            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-              <div class="text-5xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent mb-2">
-                98%
-              </div>
-              <p class="text-neutral-600 font-medium">Engagement quotidien</p>
+        <!-- Animated preview -->
+        <div class="relative max-w-5xl mx-auto mt-12 md:mt-16">
+          <div class="bg-white/40 backdrop-blur-xl rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 border border-white/60 shadow-2xl">
+            <div class="flex gap-2 md:gap-3 mb-4 md:mb-6">
+              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-orange-400"></div>
+              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-purple-400"></div>
             </div>
             
-            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 sm:mt-8">
-              <div class="text-5xl font-bold bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent mb-2">
-                2min
+            <div class="space-y-3 md:space-y-4">
+              <div class="flex gap-2 sm:gap-3 md:gap-4">
+                <div v-for="(mood, i) in ['😊', '😄', '😐', '😔', '😢']" :key="i"
+                     class="flex-1 aspect-square rounded-xl md:rounded-2xl bg-gradient-to-br from-orange-200 to-purple-200 flex items-center justify-center text-xl sm:text-2xl md:text-3xl lg:text-4xl transform hover:scale-110 transition-transform duration-300 cursor-pointer"
+                     :style="`animation: float ${3 + i}s ease-in-out infinite; animation-delay: ${i * 0.2}s`">
+                  {{ mood }}
+                </div>
               </div>
-              <p class="text-neutral-600 font-medium">Temps moyen d'utilisation</p>
-            </div>
-            
-            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-              <div class="text-5xl font-bold bg-gradient-to-r from-orange-400 to-purple-500 bg-clip-text text-transparent mb-2">
-                +40%
+              
+              <div class="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 animate-pulse-soft"></div>
+                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-purple-100 to-purple-200 animate-pulse-soft animation-delay-1000"></div>
+                <div class="h-16 sm:h-20 md:h-24 rounded-lg md:rounded-xl bg-gradient-to-br from-yellow-100 to-yellow-200 animate-pulse-soft animation-delay-2000"></div>
               </div>
-              <p class="text-neutral-600 font-medium">Bien-être ressenti</p>
             </div>
           </div>
         </div>
