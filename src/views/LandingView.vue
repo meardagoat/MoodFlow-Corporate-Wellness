@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center px-6">
+    <section class="relative min-h-screen flex items-center justify-center px-4 md:px-6">
       <!-- Animated organic blobs -->
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-32 -left-20 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl animate-blob"></div>
@@ -53,27 +53,27 @@
               </h3>
             
               <!-- Large interactive mood buttons -->
-              <div class="flex justify-center items-end gap-3 md:gap-6 lg:gap-8 mb-16">
+              <div class="flex justify-center items-end gap-2 sm:gap-3 md:gap-6 lg:gap-8 mb-12 md:mb-16 overflow-x-auto scrollbar-hide pb-4">
                 <button v-for="(mood, i) in moods" :key="i"
                         @click="selectedMoodIndex = i"
-                        class="mood-button group relative transition-all duration-500 ease-out flex flex-col items-center">
-                  <div class="relative w-24 h-24 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-[2rem] flex items-center justify-center transition-all duration-500 shadow-xl mb-4"
+                        class="mood-button group relative transition-all duration-500 ease-out flex flex-col items-center flex-shrink-0">
+                  <div class="relative w-16 h-16 sm:w-20 sm:h-20 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-xl md:rounded-[2rem] flex items-center justify-center transition-all duration-500 shadow-xl mb-2 md:mb-4"
                        :class="[
                          mood.gradient,
                          selectedMoodIndex === i ? 'scale-110 shadow-2xl' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-100'
                        ]">
-                    <span class="text-5xl md:text-7xl lg:text-8xl transition-all duration-300 group-hover:scale-110">
+                    <span class="text-3xl sm:text-4xl md:text-7xl lg:text-8xl transition-all duration-300 group-hover:scale-110">
                       {{ mood.emoji }}
                     </span>
                     
                     <!-- Ripple effect when selected -->
                     <div v-if="selectedMoodIndex === i" 
-                         class="absolute inset-0 rounded-[2rem] bg-white/20 animate-ping"></div>
+                         class="absolute inset-0 rounded-xl md:rounded-[2rem] bg-white/20 animate-ping"></div>
                   </div>
                   
                   <!-- Label always visible -->
-                  <p class="text-sm md:text-base font-semibold whitespace-nowrap transition-all duration-300"
-                     :class="selectedMoodIndex === i ? 'text-neutral-900 scale-110' : 'text-neutral-400'">
+                  <p class="text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all duration-300"
+                     :class="selectedMoodIndex === i ? 'text-neutral-900 scale-105 md:scale-110' : 'text-neutral-400'">
                     {{ mood.label }}
                   </p>
                 </button>
@@ -82,26 +82,26 @@
           </div>
           
           <!-- Dynamic content based on selection -->
-          <div class="max-w-5xl mx-auto">
-            <div class="bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl border border-white/60">
-              <div class="text-center mb-8">
-                <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4">
+          <div class="max-w-5xl mx-auto px-4 md:px-0">
+            <div class="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-16 shadow-2xl border border-white/60">
+              <div class="text-center mb-6 md:mb-8">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-3 md:mb-4">
                   {{ moods[selectedMoodIndex].title }}
                 </h3>
-                <p class="text-neutral-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                <p class="text-neutral-600 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
                   {{ moods[selectedMoodIndex].description }}
                 </p>
               </div>
               
               <!-- Animated stats bar -->
-              <div class="relative h-4 bg-neutral-100 rounded-full overflow-hidden mb-4">
+              <div class="relative h-3 md:h-4 bg-neutral-100 rounded-full overflow-hidden mb-3 md:mb-4">
                 <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
                      :class="moods[selectedMoodIndex].gradient"
                      :style="`width: ${moods[selectedMoodIndex].percentage}%`">
                 </div>
               </div>
               
-              <div class="flex justify-between text-base text-neutral-600 font-medium">
+              <div class="flex flex-col sm:flex-row justify-between gap-2 text-sm md:text-base text-neutral-600 font-medium">
                 <span>{{ moods[selectedMoodIndex].percentage }}% de vos collègues</span>
                 <span>se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}</span>
               </div>
