@@ -28,11 +28,21 @@
 
     <!-- Contenu principal -->
     <div class="text-center relative z-10 max-w-lg mx-auto px-6">
-      <!-- Logo avec effet de glow -->
+      <!-- Logo animé avec effet de glow -->
       <div class="mb-6 sm:mb-8">
         <div class="inline-block relative">
-          <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-glow animate-glow">
-            <img src="/src/assets/mood_flow_logo.png" alt="MoodFlow" class="w-14 h-14 sm:w-16 sm:h-16 object-contain" />
+          <div class="w-32 h-32 sm:w-40 sm:h-40 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-glow animate-glow overflow-hidden">
+            <video 
+              autoplay 
+              muted 
+              playsinline
+              loop
+              class="w-full h-full object-contain"
+            >
+              <source src="/src/assets/MoodFlow_final_logo.mp4" type="video/mp4">
+              <!-- Fallback sur image statique si la vidéo ne charge pas -->
+              <img src="/src/assets/MoodFlow_final_logo.png" alt="MoodFlow" class="w-full h-full object-contain" />
+            </video>
           </div>
           <!-- Effet de shimmer -->
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-2xl animate-shimmer"></div>

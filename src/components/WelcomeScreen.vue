@@ -32,7 +32,7 @@
       <div class="mb-6 sm:mb-8 animate-scale-in">
         <div class="inline-block relative">
           <div class="w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-glow-lg animate-glow">
-            <img src="/src/assets/mood_flow_logo.png" alt="MoodFlow" class="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
+            <img src="/src/assets/MoodFlow_final_logo.png" alt="MoodFlow" class="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
           </div>
           <!-- Effet de particules autour du logo -->
           <div class="absolute inset-0">

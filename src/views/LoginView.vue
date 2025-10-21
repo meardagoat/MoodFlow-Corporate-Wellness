@@ -9,7 +9,7 @@
         <div class="text-center mb-8">
           <div class="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
             <img 
-              src="../assets/mood_flow_logo.png" 
+              src="../assets/MoodFlow_final_logo.png" 
               alt="MoodFlow Logo" 
               class="w-full h-full object-contain drop-shadow-lg"
             />
