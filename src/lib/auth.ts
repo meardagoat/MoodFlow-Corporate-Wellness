@@ -53,7 +53,33 @@ async function loadProfile(userId: string) {
 // Fonction pour forcer le rechargement du profil
 export async function refreshProfile() {
   if (currentUser.value) {
+    console.log('Refreshing profile for user:', currentUser.value.id);
     await loadProfile(currentUser.value.id);
+  }
+}
+
+// Fonction de debug pour vérifier directement dans la DB
+export async function debugProfile() {
+  if (!currentUser.value) {
+    console.log('No current user');
+    return;
+  }
+  
+  console.log('Current user:', currentUser.value);
+  console.log('Current profile before refresh:', currentProfile.value);
+  
+  // Requête directe pour debug
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', currentUser.value.id)
+    .maybeSingle();
+    
+  console.log('Direct DB query result:', { data, error });
+  
+  if (data) {
+    currentProfile.value = data;
+    console.log('Profile updated:', data);
   }
 }
 
