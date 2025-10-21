@@ -1,124 +1,207 @@
 <template>
-  <div class="min-h-screen gradient-bg-calm safe-top safe-bottom">
-    <div class="max-w-7xl mx-auto px-4 py-6 sm:py-8">
-      <div class="mb-6 sm:mb-8">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Manager Dashboard</h1>
-        <p class="text-sm sm:text-base text-gray-600">Team wellness analytics and insights</p>
+  <div class="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <!-- Header premium -->
+      <div class="mb-8">
+        <div class="flex items-center gap-4 mb-3">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+            <span class="text-3xl">📊</span>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+              Wellness Analytics
+            </h1>
+            <p class="text-gray-600">Team wellness insights and trends</p>
+          </div>
+        </div>
       </div>
 
-      <div v-if="!isManager" class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8">
-        <p class="text-yellow-800">You need manager permissions to view this dashboard.</p>
+      <div v-if="!isManager" class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 p-8 text-center">
+        <div class="text-6xl mb-4">🔒</div>
+        <p class="text-gray-700 text-lg font-medium">Manager permissions required to view this dashboard</p>
       </div>
 
       <template v-else>
+        <!-- Cards de statistiques modernes -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div class="bg-white rounded-xl shadow p-6">
+          <!-- Total Participants -->
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6 hover:shadow-xl transition-all group">
             <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-medium text-gray-600">Total Participants</h3>
-              <div class="text-2xl">👥</div>
+              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Team</h3>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span class="text-2xl">👥</span>
+              </div>
             </div>
-            <p class="text-3xl font-bold text-gray-900">{{ stats.totalParticipants }}</p>
-            <p class="text-sm text-gray-500 mt-2">Across all departments</p>
+            <p class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent mb-2">
+              {{ stats.totalParticipants }}
+            </p>
+            <p class="text-sm text-gray-600">Active participants</p>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6">
+          <!-- Total Posts -->
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6 hover:shadow-xl transition-all group">
             <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-medium text-gray-600">Total Posts</h3>
-              <div class="text-2xl">💬</div>
+              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Activity</h3>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span class="text-2xl">💬</span>
+              </div>
             </div>
-            <p class="text-3xl font-bold text-gray-900">{{ stats.totalPosts }}</p>
-            <p class="text-sm text-gray-500 mt-2">Last 30 days</p>
+            <p class="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent mb-2">
+              {{ stats.totalPosts }}
+            </p>
+            <p class="text-sm text-gray-600">Posts last 30 days</p>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6">
+          <!-- Average Mood -->
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6 hover:shadow-xl transition-all group">
             <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-medium text-gray-600">Average Mood</h3>
-              <div class="text-2xl">{{ getAverageMoodEmoji() }}</div>
+              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Team Mood</h3>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <span class="text-2xl">{{ getAverageMoodEmoji() }}</span>
+              </div>
             </div>
-            <p class="text-3xl font-bold text-gray-900">{{ stats.averageMood.toFixed(1) }}/5</p>
-            <div class="flex items-center text-sm mt-2">
-              <span :class="[stats.weeklyChange >= 0 ? 'text-green-600' : 'text-red-600']">
+            <p class="text-4xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent mb-2">
+              {{ stats.averageMood.toFixed(1) }}/5
+            </p>
+            <div class="flex items-center text-sm">
+              <span :class="[
+                'font-semibold',
+                stats.weeklyChange >= 0 ? 'text-green-600' : 'text-red-600'
+              ]">
                 {{ stats.weeklyChange >= 0 ? '↑' : '↓' }} {{ Math.abs(stats.weeklyChange).toFixed(1) }}%
               </span>
-              <span class="text-gray-500 ml-2">vs last week</span>
+              <span class="text-gray-600 ml-2">vs last week</span>
             </div>
           </div>
         </div>
         
+        <!-- Secondary stats -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div class="bg-white rounded-xl shadow p-6">
+          <!-- Participation Rate -->
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6">
             <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-medium text-gray-600">Participation Rate</h3>
-              <div class="text-2xl">📊</div>
+              <h3 class="text-lg font-bold text-gray-900">Participation Rate</h3>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+                <span class="text-2xl">📈</span>
+              </div>
             </div>
-            <p class="text-3xl font-bold text-gray-900">{{ stats.participationRate.toFixed(0) }}%</p>
-            <p class="text-sm text-gray-500 mt-2">Active participants this week</p>
+            <div class="mb-4">
+              <p class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
+                {{ stats.participationRate.toFixed(0) }}%
+              </p>
+              <p class="text-sm text-gray-600 mt-1">Active this week</p>
+            </div>
+            <!-- Progress bar -->
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div 
+                class="h-full bg-gradient-to-r from-violet-500 to-purple-500 rounded-full transition-all duration-500"
+                :style="{ width: stats.participationRate + '%' }"
+              ></div>
+            </div>
           </div>
           
-          <div class="bg-white rounded-xl shadow p-6">
+          <!-- Top Tags -->
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6">
             <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-medium text-gray-600">Mood Tags</h3>
-              <div class="text-2xl">🏷️</div>
+              <h3 class="text-lg font-bold text-gray-900">Top Topics</h3>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
+                <span class="text-2xl">🏷️</span>
+              </div>
             </div>
-            <div class="flex flex-wrap gap-2 mt-2">
-              <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Workload</span>
-              <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Team Spirit</span>
-              <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">Work-Life</span>
-              <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium">Management</span>
-              <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-xs font-medium">Environment</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-4 py-2 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 rounded-full text-sm font-semibold">
+                💼 Workload
+              </span>
+              <span class="px-4 py-2 bg-gradient-to-r from-green-100 to-green-200 text-green-800 rounded-full text-sm font-semibold">
+                👥 Team
+              </span>
+              <span class="px-4 py-2 bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800 rounded-full text-sm font-semibold">
+                ⚖️ Balance
+              </span>
+              <span class="px-4 py-2 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 rounded-full text-sm font-semibold">
+                👔 Leadership
+              </span>
+              <span class="px-4 py-2 bg-gradient-to-r from-pink-100 to-pink-200 text-pink-800 rounded-full text-sm font-semibold">
+                🏢 Environment
+              </span>
             </div>
           </div>
         </div>
 
+        <!-- Charts section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <div class="bg-white rounded-xl shadow p-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-6">Mood Distribution</h2>
+          <!-- Mood Distribution -->
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+                <span class="text-xl">📊</span>
+              </div>
+              <h2 class="text-xl font-bold text-gray-900">Mood Distribution</h2>
+            </div>
             <canvas ref="moodChartCanvas"></canvas>
           </div>
 
-          <div class="bg-white rounded-xl shadow p-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-6">Mood Trend (7 Days)</h2>
+          <!-- Trend Chart -->
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+                <span class="text-xl">📈</span>
+              </div>
+              <h2 class="text-xl font-bold text-gray-900">7-Day Trend</h2>
+            </div>
             <canvas ref="trendChartCanvas"></canvas>
           </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow overflow-hidden">
-          <div class="p-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-6">Department Analytics</h2>
+        <!-- Department Analytics Table -->
+        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 overflow-hidden">
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+                <span class="text-xl">🏢</span>
+              </div>
+              <h2 class="text-xl font-bold text-gray-900">Department Breakdown</h2>
+            </div>
             <div class="overflow-x-auto">
               <table class="w-full">
                 <thead>
-                  <tr class="border-b border-gray-200">
-                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Department</th>
-                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Participants</th>
-                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Average Mood</th>
-                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                  <tr class="border-b-2 border-purple-100">
+                    <th class="text-left py-4 px-4 font-bold text-gray-700">Department</th>
+                    <th class="text-left py-4 px-4 font-bold text-gray-700">Team Size</th>
+                    <th class="text-left py-4 px-4 font-bold text-gray-700">Avg Mood</th>
+                    <th class="text-left py-4 px-4 font-bold text-gray-700">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
                     v-for="service in services"
                     :key="service.id"
-                    class="border-b border-gray-100 hover:bg-gray-50 transition"
+                    class="border-b border-purple-50 hover:bg-purple-50/30 transition"
                   >
-                    <td class="py-4 px-4 font-medium text-gray-900">{{ service.name }}</td>
-                    <td class="py-4 px-4 text-gray-700">{{ service.participant_count }}</td>
+                    <td class="py-4 px-4 font-semibold text-gray-900">{{ service.name }}</td>
+                    <td class="py-4 px-4 text-gray-700">
+                      <span class="px-3 py-1 bg-purple-100/50 rounded-lg font-medium">
+                        {{ service.participant_count }} people
+                      </span>
+                    </td>
                     <td class="py-4 px-4">
-                      <div class="flex items-center gap-2">
-                        <span class="text-2xl">{{ getServiceMoodEmoji(service.mood_average) }}</span>
-                        <span class="text-gray-700">{{ service.mood_average.toFixed(1) }}/5</span>
+                      <div class="flex items-center gap-3">
+                        <span class="text-3xl">{{ getServiceMoodEmoji(service.mood_average) }}</span>
+                        <span class="text-lg font-bold text-gray-900">{{ service.mood_average.toFixed(1) }}/5</span>
                       </div>
                     </td>
                     <td class="py-4 px-4">
                       <span
                         :class="[
-                          'inline-flex items-center px-3 py-1 rounded-full text-xs font-medium',
-                          service.mood_average >= 4 ? 'bg-green-100 text-green-800' :
-                          service.mood_average >= 3 ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-red-100 text-red-800'
+                          'inline-flex items-center px-4 py-2 rounded-2xl text-sm font-semibold shadow-sm',
+                          service.mood_average >= 4 
+                            ? 'bg-gradient-to-r from-green-100 to-green-200 text-green-800' :
+                          service.mood_average >= 3 
+                            ? 'bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800' :
+                          'bg-gradient-to-r from-red-100 to-red-200 text-red-800'
                         ]"
                       >
-                        {{ service.mood_average >= 4 ? 'Good' : service.mood_average >= 3 ? 'Fair' : 'Needs Attention' }}
+                        {{ service.mood_average >= 4 ? '✨ Excellent' : service.mood_average >= 3 ? '👍 Good' : '⚠️ Needs Support' }}
                       </span>
                     </td>
                   </tr>
@@ -133,7 +216,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, nextTick } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import { Chart, registerables } from 'chart.js';
 import { supabase } from '../lib/supabase';
 import { isManager } from '../lib/auth';
@@ -199,7 +282,6 @@ async function loadData() {
   stats.value.totalPosts = postsCount || 0;
   stats.value.totalParticipants = participantsData?.length || 0;
 
-  // Calculer le taux de participation (utilisateurs actifs cette semaine)
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
   
@@ -210,12 +292,10 @@ async function loadData() {
     .order('user_id');
 
   if (activeUsers && participantsData) {
-    // Compter les utilisateurs uniques
     const uniqueActiveUsers = new Set(activeUsers.map(user => user.user_id)).size;
     stats.value.participationRate = (uniqueActiveUsers / participantsData.length) * 100;
   }
 
-  // Calculer la variation hebdomadaire de l'humeur moyenne
   const twoWeeksAgo = new Date();
   twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
   
@@ -243,7 +323,6 @@ async function loadData() {
     });
     stats.value.averageMood = moodScores.reduce((a, b) => a + b, 0) / moodScores.length;
     
-    // Calculer la variation hebdomadaire
     if (lastWeekMoods && previousWeekMoods && previousWeekMoods.length > 0) {
       const lastWeekScores = lastWeekMoods.map((p: any) => {
         switch (p.mood) {
@@ -276,17 +355,13 @@ async function loadData() {
     }
   }
 
-  // Attendre que les canvas soient rendus avant de créer les graphiques
   await nextTick();
   await createMoodChart(moodsData || []);
   await createTrendChart();
 }
 
 async function createMoodChart(moodsData: any[]) {
-  if (!moodChartCanvas.value) {
-    console.warn('Mood chart canvas not found');
-    return;
-  }
+  if (!moodChartCanvas.value) return;
 
   const moodCounts = {
     very_happy: 0,
@@ -321,6 +396,7 @@ async function createMoodChart(moodsData: any[]) {
           '#f97316',
           '#ef4444',
         ],
+        borderWidth: 0,
       }],
     },
     options: {
@@ -329,6 +405,13 @@ async function createMoodChart(moodsData: any[]) {
       plugins: {
         legend: {
           position: 'bottom',
+          labels: {
+            padding: 15,
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
         },
       },
     },
@@ -336,10 +419,7 @@ async function createMoodChart(moodsData: any[]) {
 }
 
 async function createTrendChart() {
-  if (!trendChartCanvas.value) {
-    console.warn('Trend chart canvas not found');
-    return;
-  }
+  if (!trendChartCanvas.value) return;
 
   const days = 7;
   const labels = [];
@@ -385,10 +465,16 @@ async function createTrendChart() {
       datasets: [{
         label: 'Average Mood',
         data,
-        borderColor: '#0ea5e9',
-        backgroundColor: 'rgba(14, 165, 233, 0.1)',
+        borderColor: '#8b5cf6',
+        backgroundColor: 'rgba(139, 92, 246, 0.1)',
         tension: 0.4,
         fill: true,
+        borderWidth: 3,
+        pointBackgroundColor: '#8b5cf6',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 7,
       }],
     },
     options: {
@@ -400,8 +486,24 @@ async function createTrendChart() {
           max: 5,
           ticks: {
             stepSize: 1,
+            font: {
+              weight: '600'
+            }
           },
+          grid: {
+            color: 'rgba(139, 92, 246, 0.1)'
+          }
         },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            font: {
+              weight: '600'
+            }
+          }
+        }
       },
       plugins: {
         legend: {
@@ -415,7 +517,6 @@ async function createTrendChart() {
 onMounted(async () => {
   if (isManager.value) {
     await supabase.rpc('update_service_analytics');
-    // Attendre que le DOM soit complètement rendu
     await nextTick();
     await loadData();
   }
