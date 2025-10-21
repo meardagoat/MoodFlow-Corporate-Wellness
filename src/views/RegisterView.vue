@@ -34,11 +34,11 @@
           <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Join MoodFlow!</h2>
           <p class="text-gray-600">Create your wellness account</p>
           
-          <!-- Message de Mehmet -->
+          <!-- Message de Mehmet - Système de rôles -->
           <div class="mt-4 p-4 bg-gradient-to-r from-orange-50 to-purple-50 rounded-xl border border-orange-200">
             <p class="text-sm text-gray-700">
-              <span class="font-semibold text-orange-600">Bienvenue !</span> 
-              Rejoignez notre communauté de bien-être en entreprise. Votre anonymat est préservé et vos données sont sécurisées.
+              <span class="font-semibold text-orange-600">Inscription Employé</span> 
+              Vous vous inscrivez en tant qu'employé. Votre manager ou l'administrateur système pourra modifier votre rôle si nécessaire via le panneau d'administration.
             </p>
           </div>
         </div>
@@ -127,27 +127,9 @@
             </div>
           </div>
 
-          <!-- Role -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-3">Your Role</label>
-            <div class="grid grid-cols-2 gap-3">
-              <label 
-                v-for="roleOption in roles" 
-                :key="roleOption.value"
-                class="cursor-pointer"
-              >
-                <input
-                  v-model="role"
-                  type="radio"
-                  :value="roleOption.value"
-                  class="sr-only peer"
-                />
-                <div class="p-4 border-2 border-gray-200 rounded-xl text-center peer-checked:border-purple-500 peer-checked:bg-purple-50 transition-all hover:border-purple-300">
-                  <div class="text-2xl mb-2">{{ roleOption.icon }}</div>
-                  <p class="font-medium text-gray-900 text-sm">{{ roleOption.label }}</p>
-                </div>
-              </label>
-            </div>
+          <!-- Role fixé à employee -->
+          <div class="hidden">
+            <input v-model="role" type="hidden" value="employee" />
           </div>
 
           <!-- Error message -->
@@ -248,10 +230,7 @@ const role = ref('employee');
 const loading = ref(false);
 const error = ref('');
 
-const roles = [
-  { value: 'employee', label: 'Employee', icon: '👤' },
-  { value: 'manager', label: 'Manager', icon: '👔' }
-];
+// Role fixé à employee - seul le super admin peut assigner d'autres rôles
 
 // Effet Vanta.js Birds sur le panel droit
 const vantaContainer = ref<HTMLElement | null>(null);
