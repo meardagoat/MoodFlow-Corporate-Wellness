@@ -72,33 +72,22 @@
             />
           </div>
 
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-3">
-              Votre rôle
-            </label>
-            <div class="grid grid-cols-2 gap-3">
-              <label class="cursor-pointer">
-                <input
-                  v-model="role"
-                  type="radio"
-                  value="employee"
-                  class="sr-only peer"
-                />
-                <div class="p-4 border-2 border-gray-300 rounded-lg text-center peer-checked:border-primary-600 peer-checked:bg-primary-50 transition">
-                  <p class="font-medium">Employé</p>
+          <!-- Note: L'inscription publique est limitée aux employés -->
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-sm font-medium text-blue-800">
+                  Inscription publique
+                </h3>
+                <div class="mt-2 text-sm text-blue-700">
+                  <p>Vous vous inscrivez en tant qu'<strong>employé</strong>. Les rôles de manager et administrateur sont attribués par les administrateurs de votre organisation.</p>
                 </div>
-              </label>
-              <label class="cursor-pointer">
-                <input
-                  v-model="role"
-                  type="radio"
-                  value="manager"
-                  class="sr-only peer"
-                />
-                <div class="p-4 border-2 border-gray-300 rounded-lg text-center peer-checked:border-primary-600 peer-checked:bg-primary-50 transition">
-                  <p class="font-medium">Manager</p>
-                </div>
-              </label>
+              </div>
             </div>
           </div>
 
@@ -180,7 +169,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { signUp, signInWithGoogle, signInWithGithub } from '../lib/auth';
+import { signUpPublic, signInWithGoogle, signInWithGithub } from '../lib/auth';
 import { useVantaEffect } from '../composables/useVantaEffect';
 
 const router = useRouter();
@@ -189,6 +178,7 @@ const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 const service = ref('');
+// L'inscription publique est toujours en tant qu'employé
 const role = ref('employee');
 const loading = ref(false);
 const error = ref('');
@@ -227,7 +217,7 @@ async function handleSubmit() {
   loading.value = true;
   error.value = '';
 
-  const { error: signUpError } = await signUp(email.value, password.value, role.value, service.value);
+  const { error: signUpError } = await signUpPublic(email.value, password.value, service.value);
 
   if (signUpError) {
     error.value = signUpError.message;
