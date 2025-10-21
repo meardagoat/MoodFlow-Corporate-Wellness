@@ -176,6 +176,112 @@
         </form>
       </div>
 
+      <!-- Modification Requests Section -->
+      <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-8 mb-8">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center shadow-lg">
+            <span class="text-2xl">📝</span>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900">Demandes de Modification</h2>
+            <p class="text-gray-600">Traitez les demandes de changement d'informations</p>
+          </div>
+        </div>
+
+        <!-- Stats des demandes -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">⏳</span>
+              <div>
+                <p class="text-sm text-yellow-700">En attente</p>
+                <p class="text-2xl font-bold text-yellow-800">{{ pendingRequests.length }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">✅</span>
+              <div>
+                <p class="text-sm text-green-700">Approuvées</p>
+                <p class="text-2xl font-bold text-green-800">{{ approvedRequests.length }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">❌</span>
+              <div>
+                <p class="text-sm text-red-700">Rejetées</p>
+                <p class="text-2xl font-bold text-red-800">{{ rejectedRequests.length }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Liste des demandes en attente -->
+        <div v-if="pendingRequests.length > 0" class="space-y-4">
+          <h3 class="text-lg font-semibold text-gray-900">Demandes en attente</h3>
+          <div v-for="request in pendingRequests" :key="request.id" class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="px-3 py-1 bg-yellow-200 text-yellow-800 rounded-full text-sm font-medium">
+                    {{ getRequestTypeLabel(request.request_type) }}
+                  </span>
+                  <span class="text-sm text-gray-600">{{ formatDate(request.created_at) }}</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p class="text-sm text-gray-600">Valeur actuelle:</p>
+                    <p class="font-medium text-gray-900">{{ request.current_value }}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-600">Nouvelle valeur demandée:</p>
+                    <p class="font-medium text-gray-900">{{ request.requested_value }}</p>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <p class="text-sm text-gray-600">Raison:</p>
+                  <p class="text-gray-900">{{ request.reason }}</p>
+                </div>
+                <div class="mt-3">
+                  <p class="text-sm text-gray-600">Demandeur:</p>
+                  <p class="font-medium text-gray-900">{{ request.user_email || 'Email non disponible' }}</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="flex gap-3">
+              <button
+                @click="processRequest(request.id, 'approved')"
+                class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-medium"
+              >
+                ✅ Approuver
+              </button>
+              <button
+                @click="processRequest(request.id, 'rejected')"
+                class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium"
+              >
+                ❌ Rejeter
+              </button>
+              <button
+                @click="showRequestDetails(request)"
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-medium"
+              >
+                👁️ Détails
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="text-center py-8">
+          <span class="text-4xl mb-4 block">🎉</span>
+          <p class="text-gray-600">Aucune demande en attente</p>
+        </div>
+      </div>
+
       <!-- Users Management Table Premium -->
       <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 overflow-hidden">
         <div class="p-6 border-b border-white/20">
@@ -251,6 +357,7 @@ import { createUser } from '../lib/auth';
 import { isSystemAdmin } from '../lib/auth';
 
 const users = ref<any[]>([]);
+const modificationRequests = ref<any[]>([]);
 const stats = ref({
   totalUsers: 0,
   superAdmins: 0,
@@ -268,6 +375,17 @@ const newUser = ref({
 const creating = ref(false);
 const createError = ref('');
 const createSuccess = ref(false);
+
+// Computed pour les demandes
+const pendingRequests = computed(() => 
+  modificationRequests.value.filter(req => req.status === 'pending')
+);
+const approvedRequests = computed(() => 
+  modificationRequests.value.filter(req => req.status === 'approved')
+);
+const rejectedRequests = computed(() => 
+  modificationRequests.value.filter(req => req.status === 'rejected')
+);
 
 // Load users and stats
 async function loadUsers() {
@@ -290,6 +408,29 @@ async function loadUsers() {
     };
   } catch (error) {
     console.error('Error loading users:', error);
+  }
+}
+
+// Load modification requests
+async function loadModificationRequests() {
+  try {
+    const { data, error } = await supabase
+      .from('modification_requests')
+      .select(`
+        *,
+        profiles!modification_requests_user_id_fkey(email)
+      `)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    // Ajouter l'email de l'utilisateur à chaque demande
+    modificationRequests.value = (data || []).map(request => ({
+      ...request,
+      user_email: request.profiles?.email || 'Email non disponible'
+    }));
+  } catch (error) {
+    console.error('Error loading modification requests:', error);
   }
 }
 
@@ -358,8 +499,45 @@ function editUser(user: any) {
   console.log('Edit user:', user);
 }
 
+// Process modification request
+async function processRequest(requestId: string, status: 'approved' | 'rejected') {
+  try {
+    const { error } = await supabase.rpc('process_modification_request', {
+      request_id: requestId,
+      new_status: status,
+      admin_notes: null
+    });
+
+    if (error) throw error;
+
+    // Recharger les demandes
+    await loadModificationRequests();
+    
+    alert(`Demande ${status === 'approved' ? 'approuvée' : 'rejetée'} avec succès !`);
+  } catch (error) {
+    console.error('Error processing request:', error);
+    alert('Erreur lors du traitement de la demande');
+  }
+}
+
+// Show request details
+function showRequestDetails(request: any) {
+  alert(`Détails de la demande:\n\nType: ${getRequestTypeLabel(request.request_type)}\nValeur actuelle: ${request.current_value}\nNouvelle valeur: ${request.requested_value}\nRaison: ${request.reason}\nDemandeur: ${request.user_email}`);
+}
+
+// Get request type label
+function getRequestTypeLabel(type: string) {
+  switch (type) {
+    case 'email_change': return 'Changement d\'email';
+    case 'service_change': return 'Changement de département';
+    case 'display_name_change': return 'Changement de nom';
+    default: return type;
+  }
+}
+
 onMounted(() => {
   loadUsers();
+  loadModificationRequests();
 });
 </script>
 

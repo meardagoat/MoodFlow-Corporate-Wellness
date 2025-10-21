@@ -148,13 +148,22 @@
             </div>
 
 
-            <button
-              type="submit"
-              :disabled="updating"
-              class="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {{ updating ? 'Updating...' : 'Update Profile' }}
-            </button>
+            <div class="flex gap-3">
+              <button
+                type="submit"
+                :disabled="updating"
+                class="flex-1 bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {{ updating ? 'Updating...' : 'Update Profile' }}
+              </button>
+              <button
+                type="button"
+                @click="showModificationRequest = true"
+                class="px-4 py-3 bg-yellow-500 text-white rounded-lg font-medium hover:bg-yellow-600 transition"
+              >
+                📝 Demande
+              </button>
+            </div>
           </form>
         </div>
 
@@ -388,10 +397,17 @@
             {{ deleting ? 'Deleting...' : 'Delete Account' }}
           </button>
         </div>
+        </div>
       </div>
     </div>
+
+    <!-- Modification Request Modal -->
+    <ModificationRequestModal
+      :is-open="showModificationRequest"
+      @close="showModificationRequest = false"
+      @success="handleRequestSuccess"
+    />
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
@@ -399,8 +415,10 @@ import { ref, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '../lib/supabase';
 import { currentUser, currentProfile, signOut, updateProfile, isSystemAdmin, isManager } from '../lib/auth';
+import ModificationRequestModal from '../components/ModificationRequestModal.vue';
 
 const activeTab = ref('account');
+const showModificationRequest = ref(false);
 
 const router = useRouter();
 
@@ -550,5 +568,10 @@ async function deleteAccount() {
 async function handleSignOut() {
   await signOut();
   router.push('/login');
+}
+
+function handleRequestSuccess() {
+  // Optionnel: recharger les données du profil
+  console.log('Modification request submitted successfully');
 }
 </script>
