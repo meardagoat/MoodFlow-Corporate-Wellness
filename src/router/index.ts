@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { isAuthenticated, isLoading, initAuth } from '../lib/auth';
+import { isAuthenticated, isLoading, initAuth, isSystemAdmin } from '../lib/auth';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -70,6 +70,12 @@ const router = createRouter({
       name: 'demo',
       component: () => import('../views/DemoView.vue'),
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/AdminPanel.vue'),
+      meta: { requiresAuth: true, requiresSystemAdmin: true },
+    },
   ],
 });
 
@@ -87,11 +93,14 @@ router.beforeEach(async (to, _from, next) => {
 
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const requiresGuest = to.matched.some(record => record.meta.requiresGuest);
+  const requiresSystemAdmin = to.matched.some(record => record.meta.requiresSystemAdmin);
 
   if (requiresAuth && !isAuthenticated.value) {
     next('/login');
   } else if (requiresGuest && isAuthenticated.value) {
     next('/feed');
+  } else if (requiresSystemAdmin && !isSystemAdmin.value) {
+    next('/profile'); // Rediriger vers le profil si pas system_admin
   } else {
     next();
   }
