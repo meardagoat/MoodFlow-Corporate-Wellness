@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="min-h-screen flex items-center justify-center px-4 py-8 safe-top safe-bottom relative overflow-hidden"
+    class="min-h-screen flex items-center justify-center px-4 py-8 safe-top safe-bottom relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"
     ref="vantaContainer"
   >
     <div class="max-w-md w-full relative z-10">
@@ -132,7 +132,7 @@ const showPassword = ref(false);
 const loading = ref(false);
 const error = ref('');
 
-// Effet Vanta.js Clouds
+// Effet Vanta.js Birds (optimisé pour les performances)
 const vantaContainer = ref<HTMLElement | null>(null);
 useVantaEffect(vantaContainer);
 

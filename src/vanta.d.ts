@@ -5,6 +5,30 @@ interface VantaEffect {
   setOptions(options: any): void;
 }
 
+interface VantaBirdsOptions {
+  el: HTMLElement;
+  THREE?: any;
+  mouseControls?: boolean;
+  touchControls?: boolean;
+  gyroControls?: boolean;
+  minHeight?: number;
+  minWidth?: number;
+  scale?: number;
+  scaleMobile?: number;
+  backgroundColor?: number;
+  color1?: number;
+  color2?: number;
+  colorMode?: string;
+  birdSize?: number;
+  wingSpan?: number;
+  speedLimit?: number;
+  separation?: number;
+  alignment?: number;
+  cohesion?: number;
+  quantity?: number;
+  backgroundAlpha?: number;
+}
+
 interface VantaCloudsOptions {
   el: HTMLElement;
   THREE?: any;
@@ -24,6 +48,7 @@ interface VantaCloudsOptions {
 
 interface Window {
   VANTA: {
+    BIRDS(options: VantaBirdsOptions): VantaEffect;
     CLOUDS(options: VantaCloudsOptions): VantaEffect;
   };
   THREE: any;
