@@ -414,23 +414,18 @@ async function loadUsers() {
 // Load modification requests
 async function loadModificationRequests() {
   try {
-    const { data, error } = await supabase
-      .from('modification_requests')
-      .select(`
-        *,
-        profiles!modification_requests_user_id_fkey(email)
-      `)
+    // Charger les demandes avec les emails via la vue
+    const { data: requests, error: requestsError } = await supabase
+      .from('modification_requests_with_email')
+      .select('*')
       .order('created_at', { ascending: false });
 
-    if (error) throw error;
+    if (requestsError) throw requestsError;
 
-    // Ajouter l'email de l'utilisateur à chaque demande
-    modificationRequests.value = (data || []).map(request => ({
-      ...request,
-      user_email: request.profiles?.email || 'Email non disponible'
-    }));
+    modificationRequests.value = requests || [];
   } catch (error) {
     console.error('Error loading modification requests:', error);
+    modificationRequests.value = [];
   }
 }
 
