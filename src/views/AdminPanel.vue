@@ -2,98 +2,98 @@
   <div class="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-purple-50">
     <!-- Header Super Admin -->
     <div class="sticky top-0 z-30 backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2 sm:gap-4">
             <!-- Logo Super Admin -->
-            <div class="w-16 h-16 rounded-3xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-200">
-              <span class="text-3xl">👑</span>
+            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-200">
+              <span class="text-2xl sm:text-3xl">👑</span>
             </div>
             <div>
-              <h1 class="text-3xl font-black bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient-flow">
-                Super Admin Panel
+              <h1 class="text-xl sm:text-3xl font-black bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient-flow">
+                Super Admin
               </h1>
-              <p class="text-sm text-gray-600 mt-0.5">Gestion complète de l'organisation</p>
+              <p class="text-xs sm:text-sm text-gray-600 mt-0.5 hidden sm:block">Gestion complète de l'organisation</p>
             </div>
-          </div>
-          
+      </div>
+
           <!-- Status Badge -->
-          <div class="flex items-center gap-3">
-            <div class="px-4 py-2 bg-red-100/50 rounded-2xl border border-red-200">
-              <span class="text-sm font-semibold text-red-700">System Administrator</span>
+          <div class="flex items-center gap-2 sm:gap-3">
+            <div class="hidden sm:block px-3 sm:px-4 py-1.5 sm:py-2 bg-red-100/50 rounded-xl sm:rounded-2xl border border-red-200">
+              <span class="text-xs sm:text-sm font-semibold text-red-700">System Admin</span>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <div class="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
       <!-- Stats Cards Premium -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
         <!-- Total Users -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-6 hover:shadow-2xl transition-all group">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Users</h3>
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-2xl">👥</span>
+        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
+            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Total</h3>
+            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <span class="text-lg sm:text-2xl">👥</span>
             </div>
           </div>
-          <p class="text-3xl font-bold text-gray-900 mb-1">{{ stats.totalUsers }}</p>
-          <p class="text-xs text-gray-500">Active members</p>
+          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.totalUsers }}</p>
+          <p class="text-xs text-gray-500 hidden sm:block">Active members</p>
         </div>
 
         <!-- Super Admins -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-6 hover:shadow-2xl transition-all group">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Super Admins</h3>
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-2xl">👑</span>
+        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
+            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Admins</h3>
+            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <span class="text-lg sm:text-2xl">👑</span>
             </div>
           </div>
-          <p class="text-3xl font-bold text-gray-900 mb-1">{{ stats.superAdmins }}</p>
-          <p class="text-xs text-gray-500">System administrators</p>
+          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.superAdmins }}</p>
+          <p class="text-xs text-gray-500 hidden sm:block">System administrators</p>
         </div>
 
         <!-- Managers -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-orange-100/50 p-6 hover:shadow-2xl transition-all group">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Managers</h3>
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-2xl">👔</span>
+        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-orange-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
+            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Managers</h3>
+            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <span class="text-lg sm:text-2xl">👔</span>
             </div>
           </div>
-          <p class="text-3xl font-bold text-gray-900 mb-1">{{ stats.managers }}</p>
-          <p class="text-xs text-gray-500">Team leaders</p>
+          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.managers }}</p>
+          <p class="text-xs text-gray-500 hidden sm:block">Team leaders</p>
         </div>
 
         <!-- Employees -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-purple-100/50 p-6 hover:shadow-2xl transition-all group">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Employees</h3>
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-2xl">👤</span>
+        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-purple-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
+            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Employees</h3>
+            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <span class="text-lg sm:text-2xl">👤</span>
             </div>
           </div>
-          <p class="text-3xl font-bold text-gray-900 mb-1">{{ stats.employees }}</p>
-          <p class="text-xs text-gray-500">Team members</p>
+          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.employees }}</p>
+          <p class="text-xs text-gray-500 hidden sm:block">Team members</p>
         </div>
       </div>
 
       <!-- Create User Section Premium -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-8 mb-8">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg">
-            <span class="text-2xl">➕</span>
+      <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-4 sm:p-8 mb-6 sm:mb-8">
+        <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg">
+            <span class="text-xl sm:text-2xl">➕</span>
           </div>
           <div>
-            <h2 class="text-2xl font-bold text-gray-900">Créer un nouvel utilisateur</h2>
-            <p class="text-gray-600">Ajoutez des membres à votre organisation</p>
+            <h2 class="text-lg sm:text-2xl font-bold text-gray-900">Créer un utilisateur</h2>
+            <p class="text-xs sm:text-base text-gray-600 hidden sm:block">Ajoutez des membres à votre organisation</p>
           </div>
         </div>
         
-        <form @submit.prevent="createUserHandler" class="space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form @submit.prevent="createUserHandler" class="space-y-4 sm:space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label for="newEmail" class="block text-sm font-medium text-gray-700 mb-2">
                 Email
@@ -169,7 +169,7 @@
           >
             <span class="relative z-10 flex items-center justify-center gap-2">
               <span v-if="creating" class="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
-              {{ creating ? 'Création...' : 'Créer l\'utilisateur' }}
+            {{ creating ? 'Création...' : 'Créer l\'utilisateur' }}
             </span>
             <div class="absolute inset-0 bg-gradient-to-r from-red-600 to-orange-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
@@ -177,52 +177,52 @@
       </div>
 
       <!-- Modification Requests Section -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-8 mb-8">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center shadow-lg">
-            <span class="text-2xl">📝</span>
+      <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-4 sm:p-8 mb-6 sm:mb-8">
+        <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center shadow-lg">
+            <span class="text-xl sm:text-2xl">📝</span>
           </div>
           <div>
-            <h2 class="text-2xl font-bold text-gray-900">Demandes de Modification</h2>
-            <p class="text-gray-600">Traitez les demandes de changement d'informations</p>
+            <h2 class="text-lg sm:text-2xl font-bold text-gray-900">Demandes</h2>
+            <p class="text-xs sm:text-base text-gray-600 hidden sm:block">Traitez les demandes de changement d'informations</p>
           </div>
         </div>
 
         <!-- Stats des demandes -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">⏳</span>
-              <div>
-                <p class="text-sm text-yellow-700">En attente</p>
-                <p class="text-2xl font-bold text-yellow-800">{{ pendingRequests.length }}</p>
+        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg sm:rounded-xl p-2 sm:p-4">
+            <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-3">
+              <span class="text-lg sm:text-2xl">⏳</span>
+              <div class="text-center sm:text-left">
+                <p class="text-xs sm:text-sm text-yellow-700">Attente</p>
+                <p class="text-xl sm:text-2xl font-bold text-yellow-800">{{ pendingRequests.length }}</p>
               </div>
             </div>
           </div>
-          <div class="bg-green-50 border border-green-200 rounded-xl p-4">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">✅</span>
-              <div>
-                <p class="text-sm text-green-700">Approuvées</p>
-                <p class="text-2xl font-bold text-green-800">{{ approvedRequests.length }}</p>
+          <div class="bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-2 sm:p-4">
+            <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-3">
+              <span class="text-lg sm:text-2xl">✅</span>
+              <div class="text-center sm:text-left">
+                <p class="text-xs sm:text-sm text-green-700">Validées</p>
+                <p class="text-xl sm:text-2xl font-bold text-green-800">{{ approvedRequests.length }}</p>
               </div>
             </div>
           </div>
-          <div class="bg-red-50 border border-red-200 rounded-xl p-4">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">❌</span>
-              <div>
-                <p class="text-sm text-red-700">Rejetées</p>
-                <p class="text-2xl font-bold text-red-800">{{ rejectedRequests.length }}</p>
+          <div class="bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-2 sm:p-4">
+            <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-3">
+              <span class="text-lg sm:text-2xl">❌</span>
+              <div class="text-center sm:text-left">
+                <p class="text-xs sm:text-sm text-red-700">Rejetées</p>
+                <p class="text-xl sm:text-2xl font-bold text-red-800">{{ rejectedRequests.length }}</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Liste des demandes en attente -->
-        <div v-if="pendingRequests.length > 0" class="space-y-4">
-          <h3 class="text-lg font-semibold text-gray-900">Demandes en attente</h3>
-          <div v-for="request in pendingRequests" :key="request.id" class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+        <div v-if="pendingRequests.length > 0" class="space-y-3 sm:space-y-4">
+          <h3 class="text-base sm:text-lg font-semibold text-gray-900">Demandes en attente</h3>
+          <div v-for="request in pendingRequests" :key="request.id" class="bg-yellow-50 border border-yellow-200 rounded-lg sm:rounded-xl p-3 sm:p-6">
             <div class="flex items-start justify-between mb-4">
               <div class="flex-1">
                 <div class="flex items-center gap-3 mb-2">
@@ -253,24 +253,24 @@
             </div>
             
             <!-- Actions -->
-            <div class="flex gap-3">
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <button
                 @click="processRequest(request.id, 'approved')"
-                class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-medium"
+                class="flex-1 px-3 sm:px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-medium text-sm sm:text-base"
               >
-                ✅ Approuver
+                ✅ <span class="hidden sm:inline">Approuver</span>
               </button>
               <button
                 @click="processRequest(request.id, 'rejected')"
-                class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium"
+                class="flex-1 px-3 sm:px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium text-sm sm:text-base"
               >
-                ❌ Rejeter
+                ❌ <span class="hidden sm:inline">Rejeter</span>
               </button>
               <button
                 @click="showRequestDetails(request)"
-                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-medium"
+                class="flex-1 px-3 sm:px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-medium text-sm sm:text-base"
               >
-                👁️ Détails
+                👁️ <span class="hidden sm:inline">Détails</span>
               </button>
             </div>
           </div>
@@ -283,20 +283,21 @@
       </div>
 
       <!-- Users Management Table Premium -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 overflow-hidden">
-        <div class="p-6 border-b border-white/20">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-              <span class="text-2xl">👥</span>
+      <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 overflow-hidden">
+        <div class="p-4 sm:p-6 border-b border-white/20">
+          <div class="flex items-center gap-3 sm:gap-4">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
+              <span class="text-xl sm:text-2xl">👥</span>
             </div>
             <div>
-              <h2 class="text-2xl font-bold text-gray-900">Gestion des Utilisateurs</h2>
-              <p class="text-gray-600">Gérez les rôles et permissions</p>
+              <h2 class="text-lg sm:text-2xl font-bold text-gray-900">Utilisateurs</h2>
+              <p class="text-xs sm:text-base text-gray-600 hidden sm:block">Gérez les rôles et permissions</p>
             </div>
           </div>
         </div>
         
-        <div class="overflow-x-auto">
+        <!-- Desktop Table -->
+        <div class="hidden md:block overflow-x-auto">
           <table class="w-full">
             <thead class="bg-gray-50/80">
               <tr>
@@ -344,6 +345,48 @@
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <!-- Mobile Cards -->
+        <div class="md:hidden p-4 space-y-3">
+          <div v-for="user in users" :key="user.id" class="bg-white rounded-xl p-4 shadow border border-gray-200">
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                  <span class="text-sm font-bold text-gray-600">{{ user.email?.charAt(0)?.toUpperCase() || 'U' }}</span>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-gray-900">{{ user.email || 'No email' }}</div>
+                  <div class="text-xs text-gray-500">{{ user.display_name || 'No name' }}</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2 mb-3">
+              <div>
+                <p class="text-xs text-gray-500">Département</p>
+                <span class="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
+                  {{ user.service || 'No service' }}
+                </span>
+              </div>
+              <div>
+                <p class="text-xs text-gray-500">Rôle</p>
+                <span :class="getRoleBadgeClass(user.role)">
+                  {{ getRoleLabel(user.role) }}
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center pt-2 border-t border-gray-200">
+              <span class="text-xs text-gray-500">{{ user.created_at ? formatDate(user.created_at) : 'No date' }}</span>
+              <button
+                @click="editUser(user)"
+                class="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-medium hover:bg-red-600 transition"
+              >
+                Modifier
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
