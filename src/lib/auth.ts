@@ -46,6 +46,14 @@ async function loadProfile(userId: string) {
 
   if (!error && data) {
     currentProfile.value = data;
+    console.log('Profile loaded:', data); // Debug
+  }
+}
+
+// Fonction pour forcer le rechargement du profil
+export async function refreshProfile() {
+  if (currentUser.value) {
+    await loadProfile(currentUser.value.id);
   }
 }
 
