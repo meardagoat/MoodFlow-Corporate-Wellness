@@ -12,7 +12,7 @@ export interface Database {
       profiles: {
         Row: {
           id: string
-          role: 'employee' | 'manager'
+          role: 'employee' | 'manager' | 'system_admin'
           service: string
           anonymous_id: string
           display_name: string | null
@@ -22,7 +22,7 @@ export interface Database {
         }
         Insert: {
           id: string
-          role?: 'employee' | 'manager'
+          role?: 'employee' | 'manager' | 'system_admin'
           service: string
           anonymous_id?: string
           display_name?: string | null
@@ -32,7 +32,7 @@ export interface Database {
         }
         Update: {
           id?: string
-          role?: 'employee' | 'manager'
+          role?: 'employee' | 'manager' | 'system_admin'
           service?: string
           anonymous_id?: string
           display_name?: string | null
