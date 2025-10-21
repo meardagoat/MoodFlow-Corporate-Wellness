@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50">
+  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
     <!-- Header moderne avec glassmorphism -->
     <div class="sticky top-0 z-30 backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-sm">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
         <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Your Wellness Feed
             </h1>
             <p class="text-sm text-gray-600 mt-0.5">Share and connect with your team</p>
@@ -16,7 +16,7 @@
             <select
               v-model="filterMood"
               @change="loadPosts"
-              class="px-4 py-2.5 bg-white/80 backdrop-blur border border-purple-100 rounded-2xl text-sm font-medium text-gray-700 hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-purple-400"
+              class="px-4 py-2.5 bg-white/80 backdrop-blur border border-orange-100 rounded-2xl text-sm font-medium text-gray-700 hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-orange-400"
             >
               <option value="">All moods</option>
               <option v-for="mood in moods" :key="mood.value" :value="mood.value">
@@ -29,8 +29,8 @@
               :class="[
                 'px-4 py-2.5 rounded-2xl text-sm font-medium transition-all',
                 showOnlyRecent
-                  ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-purple-200'
-                  : 'bg-white/80 backdrop-blur border border-purple-100 text-gray-700 hover:bg-white'
+                  ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-200'
+                  : 'bg-white/80 backdrop-blur border border-orange-100 text-gray-700 hover:bg-white'
               ]"
             >
               ✨ New
@@ -42,10 +42,10 @@
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
       <!-- Card de création de mood - Design moderne -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-purple-100/50 overflow-hidden">
+      <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-orange-100/50 overflow-hidden">
         <div class="p-6 sm:p-8">
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
               <span class="text-2xl">💭</span>
             </div>
             <div>

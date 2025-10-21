@@ -48,6 +48,43 @@
     @apply bg-neutral-300 rounded-full;
   }
 
+  /* Animations pour les gradients */
+  @keyframes gradient-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .animate-gradient-flow {
+    background-size: 200% 200%;
+    animation: gradient-flow 3s ease infinite;
+  }
+
+  /* Animation shake pour les erreurs */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  /* Glow effect pour les logos */
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(251, 146, 60, 0.3);
+  }
+
+  /* Shimmer effect */
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-neutral-400;
   }

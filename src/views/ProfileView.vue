@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen gradient-bg-calm safe-top safe-bottom">
+  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 safe-top safe-bottom">
     <div class="max-w-4xl mx-auto px-4 py-6 sm:py-8">
       <div class="mb-8">
-        <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Profile Settings</h1>
+        <h1 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-2">Profile Settings</h1>
         <p class="text-gray-600">Manage your account and privacy preferences</p>
       </div>
 
@@ -13,7 +13,7 @@
             @click="activeTab = 'account'"
             :class="[
               'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'account' ? 'border-primary-600 text-primary-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              activeTab === 'account' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
             ]"
           >
             Account
@@ -22,7 +22,7 @@
             @click="activeTab = 'privacy'"
             :class="[
               'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'privacy' ? 'border-primary-600 text-primary-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              activeTab === 'privacy' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
             ]"
           >
             Privacy
@@ -31,7 +31,7 @@
             @click="activeTab = 'gdpr'"
             :class="[
               'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'gdpr' ? 'border-primary-600 text-primary-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              activeTab === 'gdpr' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
             ]"
           >
             GDPR
