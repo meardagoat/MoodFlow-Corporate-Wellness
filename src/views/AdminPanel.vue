@@ -57,7 +57,7 @@
       <div class="bg-white rounded-xl shadow p-6 mb-8">
         <h2 class="text-xl font-semibold text-gray-900 mb-6">Créer un nouvel utilisateur</h2>
         
-        <form @submit.prevent="createUser" class="space-y-6">
+        <form @submit.prevent="createUserHandler" class="space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="newEmail" class="block text-sm font-medium text-gray-700 mb-2">
