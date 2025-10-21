@@ -16,11 +16,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import { currentProfile } from '@/lib/store'
 import { isSystemAdmin } from '@/lib/auth'
-
-const isSystemAdmin = isSystemAdmin
 </script>
 
 <style scoped>
