@@ -1,20 +1,37 @@
 <template>
-  <div class="min-h-screen flex bg-gray-900">
+  <div class="min-h-screen flex flex-col lg:flex-row bg-gray-900">
     <!-- Left Panel - Formulaire -->
-    <div class="flex-1 flex items-center justify-center p-8 bg-white">
+    <div class="flex-1 flex items-center justify-center p-4 sm:p-8 bg-white">
       <div class="w-full max-w-md">
         <!-- Header -->
         <div class="text-center mb-8">
-          <!-- Logo -->
-          <div class="flex items-center justify-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
-              <span class="text-white font-bold text-lg">M</span>
+          <!-- Logo interactif -->
+          <div class="mb-6">
+            <div class="inline-block relative group">
+              <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-glow animate-glow overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                <video 
+                  autoplay 
+                  muted 
+                  playsinline
+                  loop
+                  class="w-full h-full object-contain"
+                >
+                  <source src="../assets/MoodFlow_final_logo.mp4" type="video/mp4">
+                  <img src="../assets/MoodFlow_final_logo.png" alt="MoodFlow" class="w-full h-full object-contain" />
+                </video>
+              </div>
+              <!-- Effet de shimmer -->
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl animate-shimmer"></div>
             </div>
-            <span class="text-2xl font-bold text-gray-900">MoodFlow</span>
           </div>
           
+          <!-- Titre avec gradient animé -->
+          <h1 class="text-3xl sm:text-4xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent mb-3 px-4 animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-500">
+            MoodFlow
+          </h1>
+          
           <!-- Welcome message -->
-          <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome Back!</h1>
+          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Welcome Back!</h2>
           <p class="text-gray-600">We are happy to see you again</p>
         </div>
 
@@ -105,9 +122,10 @@
           <button
             type="submit"
             :disabled="loading"
-            class="w-full py-3 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            class="group relative w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            {{ loading ? 'Signing in...' : 'Login' }}
+            <span class="relative z-10">{{ loading ? 'Signing in...' : 'Login' }}</span>
+            <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
         </form>
 
@@ -149,7 +167,7 @@
     </div>
 
     <!-- Right Panel - Background décoratif -->
-    <div class="flex-1 relative overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-blue-600">
+    <div class="flex-1 relative overflow-hidden bg-gradient-to-br from-orange-400 via-purple-500 to-orange-400 hidden lg:block">
       <!-- Formes fluides animées -->
       <div class="absolute inset-0">
         <!-- Forme 1 -->
