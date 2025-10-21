@@ -13,33 +13,18 @@
 
           <!-- Navigation items -->
           <button
-            @click="activeTab = 'feed'"
-            :class="[
-              'w-full flex items-center gap-4 px-4 py-3 rounded-full text-lg font-medium transition',
-              activeTab === 'feed' ? 'bg-orange-50 text-orange-600' : 'hover:bg-gray-100 text-gray-700'
-            ]"
+            class="w-full flex items-center gap-4 px-4 py-3 rounded-full text-lg font-medium bg-orange-50 text-orange-600"
           >
             <span class="text-2xl">🏠</span>
             <span>Feed</span>
           </button>
 
-          <button
-            @click="activeTab = 'trending'"
-            :class="[
-              'w-full flex items-center gap-4 px-4 py-3 rounded-full text-lg font-medium transition',
-              activeTab === 'trending' ? 'bg-orange-50 text-orange-600' : 'hover:bg-gray-100 text-gray-700'
-            ]"
-          >
-            <span class="text-2xl">🔥</span>
-            <span>Trending</span>
-          </button>
-
-          <!-- Post button -->
+          <!-- Post button avec effet interactif -->
           <button
             @click="showPostModal = true"
-            class="w-full mt-4 py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white font-bold rounded-full hover:shadow-lg transition"
+            class="w-full mt-4 py-3 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-full hover:shadow-2xl hover:shadow-orange-200 transition-all duration-300 hover:scale-105 active:scale-95 animate-gradient-flow"
           >
-            Share Mood
+            ✨ Share Mood
           </button>
         </div>
 
@@ -65,38 +50,40 @@
             <h2 class="text-xl font-bold text-gray-900">Wellness Feed</h2>
           </div>
           
-          <!-- Tabs -->
-          <div class="flex border-b border-gray-200">
+          <!-- Mood Filter Tabs -->
+          <div class="flex border-b border-gray-200 overflow-x-auto scrollbar-hide">
             <button
-              @click="filterType = 'all'"
+              @click="filterMood = ''; loadPosts()"
               :class="[
-                'flex-1 px-4 py-3 text-sm font-semibold transition relative',
-                filterType === 'all' ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
+                'flex-shrink-0 px-4 py-3 text-sm font-semibold transition relative',
+                filterMood === '' ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
               ]"
             >
-              For You
-              <div v-if="filterType === 'all'" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full"></div>
+              All Moods
+              <div v-if="filterMood === ''" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-gradient-flow bg-[length:200%_auto]"></div>
             </button>
             <button
-              @click="filterType = 'following'"
+              v-for="mood in moods.slice(0, 3)"
+              :key="mood.value"
+              @click="filterMood = mood.value; loadPosts()"
               :class="[
-                'flex-1 px-4 py-3 text-sm font-semibold transition relative',
-                filterType === 'following' ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
+                'flex-shrink-0 px-4 py-3 text-sm font-semibold transition relative',
+                filterMood === mood.value ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
               ]"
             >
-              Following
-              <div v-if="filterType === 'following'" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full"></div>
+              {{ mood.emoji }} {{ mood.label }}
+              <div v-if="filterMood === mood.value" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-gradient-flow bg-[length:200%_auto]"></div>
             </button>
           </div>
         </div>
 
-        <!-- Post creation (mobile & desktop) -->
+        <!-- Post creation (mobile) -->
         <div class="border-b border-gray-200 p-4 lg:hidden">
           <button
             @click="showPostModal = true"
-            class="w-full py-3 bg-gradient-to-r from-orange-500 to-purple-500 text-white font-bold rounded-full"
+            class="w-full py-3 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-full hover:shadow-lg transition-all animate-gradient-flow"
           >
-            Share Your Mood
+            ✨ Share Your Mood
           </button>
         </div>
 
@@ -178,28 +165,12 @@
                       hasUserReacted(post.id, '❤️') ? 'text-red-500' : ''
                     ]"
                   >
-                    <div class="p-2 rounded-full group-hover:bg-red-50 transition">
-                      <svg :class="['w-4 h-4 transition', hasUserReacted(post.id, '❤️') ? 'fill-red-500 text-red-500' : 'text-gray-500 group-hover:text-red-500']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 rounded-full group-hover:bg-red-50 transition-all group-hover:scale-110">
+                      <svg :class="['w-4 h-4 transition-all', hasUserReacted(post.id, '❤️') ? 'fill-red-500 text-red-500 scale-110' : 'text-gray-500 group-hover:text-red-500']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                       </svg>
                     </div>
-                    <span :class="['text-xs transition', hasUserReacted(post.id, '❤️') ? 'text-red-500 font-medium' : 'text-gray-500 group-hover:text-red-500']">{{ getReactionCount(post.id, '❤️') }}</span>
-                  </button>
-
-                  <button class="flex items-center gap-2 group">
-                    <div class="p-2 rounded-full group-hover:bg-green-50 transition">
-                      <svg class="w-4 h-4 text-gray-500 group-hover:text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
-                      </svg>
-                    </div>
-                  </button>
-
-                  <button class="flex items-center gap-2 group">
-                    <div class="p-2 rounded-full group-hover:bg-purple-50 transition">
-                      <svg class="w-4 h-4 text-gray-500 group-hover:text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
-                      </svg>
-                    </div>
+                    <span :class="['text-xs transition-all', hasUserReacted(post.id, '❤️') ? 'text-red-500 font-bold' : 'text-gray-500 group-hover:text-red-500']">{{ getReactionCount(post.id, '❤️') }}</span>
                   </button>
                 </div>
 
@@ -436,8 +407,6 @@ const moodTags = [
   { id: 'recognition', label: '🌟 Recognition' },
 ];
 
-const activeTab = ref('feed');
-const filterType = ref('all');
 const filterMood = ref('');
 const selectedMood = ref('');
 const selectedTags = ref<string[]>([]);
@@ -766,3 +735,14 @@ onMounted(() => {
   };
 });
 </script>
+
+<style scoped>
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
