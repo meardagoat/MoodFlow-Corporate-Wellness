@@ -147,27 +147,6 @@
               Profile updated successfully!
             </div>
 
-            <!-- Debug Section -->
-            <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <h3 class="text-sm font-semibold text-yellow-800 mb-2">Debug Info</h3>
-              <p class="text-xs text-yellow-700 mb-2">Current Role: {{ currentProfile?.role || 'Loading...' }}</p>
-              <p class="text-xs text-yellow-700 mb-2">Is System Admin: {{ isSystemAdmin }}</p>
-              <p class="text-xs text-yellow-700 mb-2">User ID: {{ currentUser?.id || 'No user' }}</p>
-              <div class="flex gap-2 mt-2">
-                <button
-                  @click="refreshProfile"
-                  class="px-3 py-1 bg-yellow-200 text-yellow-800 rounded text-xs hover:bg-yellow-300 transition"
-                >
-                  Refresh Profile
-                </button>
-                <button
-                  @click="debugProfile"
-                  class="px-3 py-1 bg-red-200 text-red-800 rounded text-xs hover:bg-red-300 transition"
-                >
-                  Debug Profile
-                </button>
-              </div>
-            </div>
 
             <button
               type="submit"
@@ -419,7 +398,7 @@
 import { ref, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '../lib/supabase';
-import { currentUser, currentProfile, signOut, updateProfile, isSystemAdmin, isManager, refreshProfile, debugProfile } from '../lib/auth';
+import { currentUser, currentProfile, signOut, updateProfile, isSystemAdmin, isManager } from '../lib/auth';
 
 const activeTab = ref('account');
 

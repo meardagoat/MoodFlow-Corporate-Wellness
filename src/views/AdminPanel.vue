@@ -206,17 +206,17 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center mr-3">
-                      <span class="text-sm font-bold text-gray-600">{{ user.email.charAt(0).toUpperCase() }}</span>
+                      <span class="text-sm font-bold text-gray-600">{{ user.email?.charAt(0)?.toUpperCase() || 'U' }}</span>
                     </div>
                     <div>
-                      <div class="text-sm font-medium text-gray-900">{{ user.email }}</div>
+                      <div class="text-sm font-medium text-gray-900">{{ user.email || 'No email' }}</div>
                       <div class="text-sm text-gray-500">{{ user.display_name || 'No display name' }}</div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <span class="px-3 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
-                    {{ user.service }}
+                    {{ user.service || 'No service' }}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -225,7 +225,7 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ formatDate(user.created_at) }}
+                  {{ user.created_at ? formatDate(user.created_at) : 'No date' }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button

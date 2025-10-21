@@ -46,42 +46,9 @@ async function loadProfile(userId: string) {
 
   if (!error && data) {
     currentProfile.value = data;
-    console.log('Profile loaded:', data); // Debug
   }
 }
 
-// Fonction pour forcer le rechargement du profil
-export async function refreshProfile() {
-  if (currentUser.value) {
-    console.log('Refreshing profile for user:', currentUser.value.id);
-    await loadProfile(currentUser.value.id);
-  }
-}
-
-// Fonction de debug pour vérifier directement dans la DB
-export async function debugProfile() {
-  if (!currentUser.value) {
-    console.log('No current user');
-    return;
-  }
-  
-  console.log('Current user:', currentUser.value);
-  console.log('Current profile before refresh:', currentProfile.value);
-  
-  // Requête directe pour debug
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', currentUser.value.id)
-    .maybeSingle();
-    
-  console.log('Direct DB query result:', { data, error });
-  
-  if (data) {
-    currentProfile.value = data;
-    console.log('Profile updated:', data);
-  }
-}
 
 // Fonction pour vérifier les permissions de création de rôles
 export function canCreateRole(creatorRole: string, targetRole: string): boolean {
