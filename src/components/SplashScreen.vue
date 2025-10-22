@@ -9,8 +9,19 @@
     :transition="{ duration: 0.8, ease: 'easeInOut' }"
     :style="{ paddingTop: 'var(--sat, 0)', paddingBottom: 'var(--sab, 0)' }"
   >
-    <!-- Background -->
-    <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-purple-50" />
+    <!-- Background Video -->
+    <video 
+      autoplay 
+      muted 
+      playsinline
+      loop
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source :src="backgroundVideo" type="video/mp4">
+    </video>
+    
+    <!-- Overlay pour assurer la lisibilité -->
+    <div class="absolute inset-0 bg-black/20" />
 
     <!-- Organic animated blobs -->
     <div class="absolute inset-0 pointer-events-none">
@@ -114,6 +125,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { Motion } from '@motionone/vue' // ✅ Import correct
 import logoVideo from '../assets/MoodFlow_final_logo.mp4'
 import logoImage from '../assets/MoodFlow_final_logo.png'
+import backgroundVideo from '../assets/Splashscreen_fond.mp4'
 
 interface Props {
   onComplete?: () => void
