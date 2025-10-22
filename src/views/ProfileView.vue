@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen gradient-bg-calm safe-top safe-bottom">
+  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 safe-top safe-bottom">
     <div class="max-w-4xl mx-auto px-4 py-6 sm:py-8">
       <div class="mb-8">
-        <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Profile Settings</h1>
+        <h1 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-2">Profile Settings</h1>
         <p class="text-gray-600">Manage your account and privacy preferences</p>
       </div>
 
@@ -13,7 +13,7 @@
             @click="activeTab = 'account'"
             :class="[
               'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'account' ? 'border-primary-600 text-primary-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              activeTab === 'account' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
             ]"
           >
             Account
@@ -22,7 +22,7 @@
             @click="activeTab = 'privacy'"
             :class="[
               'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'privacy' ? 'border-primary-600 text-primary-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              activeTab === 'privacy' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
             ]"
           >
             Privacy
@@ -31,7 +31,7 @@
             @click="activeTab = 'gdpr'"
             :class="[
               'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'gdpr' ? 'border-primary-600 text-primary-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              activeTab === 'gdpr' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
             ]"
           >
             GDPR
@@ -147,13 +147,23 @@
               Profile updated successfully!
             </div>
 
-            <button
-              type="submit"
-              :disabled="updating"
-              class="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {{ updating ? 'Updating...' : 'Update Profile' }}
-            </button>
+
+            <div class="flex gap-3">
+              <button
+                type="submit"
+                :disabled="updating"
+                class="flex-1 bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {{ updating ? 'Updating...' : 'Update Profile' }}
+              </button>
+              <button
+                type="button"
+                @click="showModificationRequest = true"
+                class="px-4 py-3 bg-yellow-500 text-white rounded-lg font-medium hover:bg-yellow-600 transition"
+              >
+                📝 Demande
+              </button>
+            </div>
           </form>
         </div>
 
@@ -387,10 +397,17 @@
             {{ deleting ? 'Deleting...' : 'Delete Account' }}
           </button>
         </div>
+        </div>
       </div>
     </div>
+
+    <!-- Modification Request Modal -->
+    <ModificationRequestModal
+      :is-open="showModificationRequest"
+      @close="showModificationRequest = false"
+      @success="handleRequestSuccess"
+    />
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
@@ -398,8 +415,10 @@ import { ref, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { supabase } from '../lib/supabase';
 import { currentUser, currentProfile, signOut, updateProfile, isSystemAdmin, isManager } from '../lib/auth';
+import ModificationRequestModal from '../components/ModificationRequestModal.vue';
 
 const activeTab = ref('account');
+const showModificationRequest = ref(false);
 
 const router = useRouter();
 
@@ -549,5 +568,10 @@ async function deleteAccount() {
 async function handleSignOut() {
   await signOut();
   router.push('/login');
+}
+
+function handleRequestSuccess() {
+  // Optionnel: recharger les données du profil
+  console.log('Modification request submitted successfully');
 }
 </script>
