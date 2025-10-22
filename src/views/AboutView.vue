@@ -8,50 +8,87 @@
       </router-link>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+    <!-- Hero Section - Enhanced Headspace Style -->
+    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
+      <!-- Background decorative elements -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
+      </div>
+      
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-20">
+          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               À propos de MoodFlow
             </span>
           </h1>
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
             Notre mission est de fournir à chaque entreprise un accès à un support continu pour le bien-être mental de ses équipes.
           </p>
+          
+          <!-- Mission indicators -->
+          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <span class="text-lg font-medium">Bien-être mental</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span class="text-lg font-medium">Support continu</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="text-lg font-medium">Équipes saines</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Who we are -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
+    <!-- Who we are - Enhanced -->
+    <section class="py-24 md:py-40 px-4 md:px-6 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 md:gap-20 items-center">
           <div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <h2 class="text-5xl md:text-6xl font-bold mb-8">
               <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
                 Qui nous sommes
               </span>
             </h2>
-            <p class="text-lg text-neutral-600 leading-relaxed mb-8">
+            <p class="text-xl text-neutral-600 leading-relaxed mb-8">
               Considérez MoodFlow comme votre guide de confiance pour un meilleur bien-être en entreprise. 
               Nous sommes là pour vous, quand vous en avez besoin, où que vous soyez, vous aidant à traverser 
               les moments difficiles et à trouver la joie dans chaque journée de travail.
             </p>
-            <p class="text-lg text-neutral-600 leading-relaxed">
+            <p class="text-xl text-neutral-600 leading-relaxed mb-8">
               Notre équipe d'experts va des cliniciens en santé mentale aux développeurs primés, 
               travaillant ensemble pour aider des milliers d'entreprises dans le monde à être plus saines et productives.
             </p>
+            
+            <!-- Key stats -->
+            <div class="grid grid-cols-2 gap-6 mt-12">
+              <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl">
+                <div class="text-3xl font-bold text-orange-600 mb-2">1000+</div>
+                <div class="text-neutral-600">Entreprises</div>
+              </div>
+              <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl">
+                <div class="text-3xl font-bold text-purple-600 mb-2">50K+</div>
+                <div class="text-neutral-600">Employés</div>
+              </div>
+            </div>
           </div>
+          
           <div class="relative">
-            <div class="bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl p-8 h-96 flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-32 h-32 bg-gradient-to-br from-orange-500 to-purple-600 rounded-full flex items-center justify-center text-white text-6xl font-bold mx-auto mb-6">
+            <div class="group relative bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl p-12 h-96 flex items-center justify-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div class="absolute inset-0 bg-gradient-to-br from-orange-200/50 to-purple-200/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="relative z-10 text-center">
+                <div class="w-40 h-40 bg-gradient-to-br from-orange-500 to-purple-600 rounded-full flex items-center justify-center text-white text-7xl font-bold mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-xl">
                   💙
                 </div>
-                <h3 class="text-2xl font-bold text-neutral-900 mb-2">Notre Mission</h3>
-                <p class="text-neutral-600">Transformer le bien-être en entreprise</p>
+                <h3 class="text-3xl font-bold text-neutral-900 mb-3">Notre Mission</h3>
+                <p class="text-xl text-neutral-600">Transformer le bien-être en entreprise</p>
               </div>
             </div>
           </div>
