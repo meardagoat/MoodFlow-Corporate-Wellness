@@ -245,17 +245,17 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                     
                     <!-- Expert Info Overlay -->
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <h3 class="font-bold text-xl mb-2 group-hover:text-orange-300 transition-colors">
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                      <h3 class="font-bold text-lg mb-1 group-hover:text-orange-300 transition-colors">
                         {{ expert.name }}
                       </h3>
-                      <p class="text-white/90 text-sm mb-4 leading-relaxed">
+                      <p class="text-white/90 text-xs mb-2 leading-relaxed">
                         {{ expert.role }}
                       </p>
                       
-                      <!-- Testimonial Quote -->
-                      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20">
-                        <p class="text-white text-xs italic leading-relaxed">
+                      <!-- Testimonial Quote - Fixed height for consistency -->
+                      <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 border border-white/20 h-16 flex items-center">
+                        <p class="text-white text-xs italic leading-tight line-clamp-3">
                           "{{ expert.testimonial }}"
                         </p>
                       </div>
@@ -831,6 +831,13 @@ onMounted(() => {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 </style>
