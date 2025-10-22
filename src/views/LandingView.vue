@@ -14,38 +14,20 @@
           <!-- Logo interactif en grand -->
           <div class="mb-8 md:mb-12 flex justify-center">
             <div class="relative group">
-              <!-- Effet de glow animé -->
-              <div class="absolute inset-0 bg-gradient-to-r from-orange-400 via-purple-400 to-orange-400 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 animate-pulse"></div>
+              <!-- Logo vidéo interactif - clean et simple -->
+              <video 
+                autoplay 
+                muted 
+                playsinline
+                loop
+                class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-contain drop-shadow-2xl group-hover:scale-105 transition-all duration-500"
+              >
+                <source :src="logoVideo" type="video/mp4">
+                <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
+              </video>
               
-              <!-- Container du logo avec glassmorphism -->
-              <div class="relative bg-white/20 backdrop-blur-xl rounded-full p-8 md:p-12 border border-white/30 shadow-2xl group-hover:scale-110 transition-all duration-500">
-                <!-- Logo vidéo interactif -->
-                <video 
-                  autoplay 
-                  muted 
-                  playsinline
-                  loop
-                  class="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 object-contain"
-                >
-                  <source :src="logoVideo" type="video/mp4">
-                  <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
-                </video>
-                
-                <!-- Particules flottantes autour du logo -->
-                <div class="absolute inset-0 pointer-events-none">
-                  <div 
-                    v-for="i in 8" 
-                    :key="i"
-                    class="absolute w-2 h-2 bg-white/60 rounded-full animate-float"
-                    :style="{
-                      left: (50 + 40 * Math.cos((i * 45) * Math.PI / 180)) + '%',
-                      top: (50 + 40 * Math.sin((i * 45) * Math.PI / 180)) + '%',
-                      animationDelay: (i * 0.3) + 's',
-                      animationDuration: (3 + Math.random() * 2) + 's'
-                    }"
-                  ></div>
-                </div>
-              </div>
+              <!-- Effet de glow subtil en arrière-plan -->
+              <div class="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-purple-400/20 to-orange-400/20 rounded-full blur-2xl -z-10 group-hover:blur-3xl transition-all duration-500"></div>
             </div>
           </div>
 
