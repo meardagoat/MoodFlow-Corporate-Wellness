@@ -324,6 +324,15 @@
                 <div class="text-xs font-semibold">{{ mood.label }}</div>
               </button>
             </div>
+            <!-- Supportive message when selecting the most negative mood -->
+            <div v-if="selectedMood === 'very_sad'" class="mt-3 p-4 bg-red-50 border border-red-200 rounded-xl">
+              <p class="text-sm font-semibold text-red-800">On est là pour vous 💛</p>
+              <p class="text-xs text-red-700 mt-1">
+                Si vous vous sentez submergé(e), n'hésitez pas à en parler à une personne de confiance
+                ou à un professionnel. En cas d'urgence, contactez immédiatement les services d'urgence
+                de votre pays.
+              </p>
+            </div>
           </div>
 
           <!-- Tags -->
