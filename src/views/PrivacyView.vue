@@ -1,437 +1,347 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
-    <!-- Animated background elements -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-32 -left-20 w-96 h-96 bg-orange-400/10 rounded-full blur-3xl animate-blob"></div>
-      <div class="absolute top-20 right-10 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-      <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
-      <div class="absolute top-1/2 right-1/4 w-64 h-64 bg-pink-400/10 rounded-full blur-3xl animate-blob animation-delay-1000"></div>
-      <div class="absolute bottom-20 left-1/4 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-blob animation-delay-3000"></div>
-      <div class="absolute top-1/3 left-1/2 w-56 h-56 bg-green-400/10 rounded-full blur-3xl animate-blob animation-delay-5000"></div>
-    </div>
-
-    <div class="relative z-10 py-20 px-6">
-      <div class="max-w-5xl mx-auto">
-        <!-- Header with interactive logo -->
+  <div class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
+      <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <div class="mb-8 flex justify-center">
-            <div class="relative group">
-              <video 
-                autoplay 
-                muted 
-                playsinline
-                loop
-                class="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-2xl group-hover:scale-110 transition-all duration-500"
-              >
-                <source :src="logoVideo" type="video/mp4">
-                <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
-              </video>
-              <div class="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-purple-400/20 to-orange-400/20 rounded-full blur-2xl -z-10 group-hover:blur-3xl transition-all duration-500"></div>
-            </div>
-          </div>
-          
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-500">
-            Confidentialité
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-neutral-900 mb-6">
+            Politique de confidentialité
           </h1>
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
-            Votre vie privée est notre priorité. 
-            <span class="text-orange-600 font-semibold">Transparence totale.</span>
+          <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+            Votre vie privée est notre priorité. Découvrez comment nous protégeons vos données.
           </p>
         </div>
+      </div>
+    </section>
 
-        <!-- Trust Badge -->
+    <!-- Privacy Badge -->
+    <section class="py-20 md:py-32 px-4 md:px-6">
+      <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-4 bg-white/80 backdrop-blur-xl rounded-2xl px-8 py-4 shadow-lg border border-white/60">
-            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl">
-              🔒
+          <div class="inline-flex items-center gap-4 bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl px-8 py-4 mb-8">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-2xl">
+              ✓
             </div>
             <div class="text-left">
-              <h3 class="font-bold text-neutral-900">Certifié RGPD</h3>
-              <p class="text-sm text-neutral-600">Conforme aux réglementations européennes</p>
+              <h3 class="font-bold text-green-800 text-lg">Certifié RGPD</h3>
+              <p class="text-green-700 text-sm">Conformité européenne garantie</p>
             </div>
           </div>
-        </div>
-
-        <!-- Interactive Content Sections -->
-        <div class="space-y-8 mb-20">
-          <!-- Our Commitment -->
-          <div class="group bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-            <div class="flex items-start gap-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-purple-100 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">
-                💙
-              </div>
-              <div class="flex-1">
-                <h2 class="text-3xl font-bold text-neutral-900 mb-4 group-hover:text-orange-600 transition-colors">
-                  Notre engagement
-                </h2>
-                <p class="text-lg text-neutral-700 leading-relaxed">
-                  Chez MoodFlow, on prend la confidentialité très au sérieux. C'est pas juste une obligation légale 
-                  pour nous, c'est au cœur de ce qu'on fait. On croit que la confiance se construit par la transparence, 
-                  c'est pourquoi on vous explique tout clairement.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Data Collection -->
-          <div class="group bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-            <div class="flex items-start gap-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">
-                📊
-              </div>
-              <div class="flex-1">
-                <h2 class="text-3xl font-bold text-neutral-900 mb-6 group-hover:text-orange-600 transition-colors">
-                  Données collectées
-                </h2>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                  <div class="space-y-4">
-                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-4 border border-orange-200">
-                      <h3 class="font-bold text-orange-800 mb-2 flex items-center gap-2">
-                        <span class="text-orange-600">👤</span>
-                        Informations de compte
-                      </h3>
-                      <ul class="text-orange-700 space-y-1 text-sm">
-                        <li>• Email (uniquement pour la connexion)</li>
-                        <li>• Département/Service</li>
-                        <li>• Rôle (employé ou manager)</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div class="space-y-4">
-                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-4 border border-purple-200">
-                      <h3 class="font-bold text-purple-800 mb-2 flex items-center gap-2">
-                        <span class="text-purple-600">📈</span>
-                        Données d'usage
-                      </h3>
-                      <ul class="text-purple-700 space-y-1 text-sm">
-                        <li>• Humeurs partagées (anonymisées)</li>
-                        <li>• Messages dans l'app (chiffrés)</li>
-                        <li>• Statistiques d'utilisation</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Data Protection -->
-          <div class="group bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-            <div class="flex items-start gap-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">
-                🛡️
-              </div>
-              <div class="flex-1">
-                <h2 class="text-3xl font-bold text-neutral-900 mb-6 group-hover:text-orange-600 transition-colors">
-                  Comment on protège vos données
-                </h2>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                  <div v-for="(protection, index) in protections" :key="index" 
-                       class="group/item bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-orange-300 transition-all duration-300 hover:-translate-y-1">
-                    <div class="flex items-start gap-4">
-                      <div class="w-12 h-12 bg-gradient-to-br from-orange-100 to-purple-100 rounded-xl flex items-center justify-center text-2xl group-hover/item:scale-110 transition-transform duration-300">
-                        {{ protection.icon }}
-                      </div>
-                      <div class="flex-1">
-                        <h3 class="font-bold text-neutral-900 mb-2 group-hover/item:text-orange-600 transition-colors">
-                          {{ protection.title }}
-                        </h3>
-                        <p class="text-neutral-700 text-sm group-hover/item:text-neutral-800 transition-colors">
-                          {{ protection.description }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- User Rights -->
-          <div class="group bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-            <div class="flex items-start gap-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-yellow-100 to-orange-100 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">
-                ⚖️
-              </div>
-              <div class="flex-1">
-                <h2 class="text-3xl font-bold text-neutral-900 mb-4 group-hover:text-orange-600 transition-colors">
-                  Vos droits
-                </h2>
-                <p class="text-lg text-neutral-700 leading-relaxed mb-6">
-                  Conformément au RGPD, vous avez le droit de :
-                </p>
-                
-                <div class="grid md:grid-cols-2 gap-4">
-                  <div v-for="(right, index) in userRights" :key="index" 
-                       class="flex items-center gap-3 p-4 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl border border-yellow-200 hover:border-orange-300 transition-all duration-300">
-                    <div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                      {{ index + 1 }}
-                    </div>
-                    <span class="text-neutral-800 font-medium">{{ right }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Data Sharing -->
-          <div class="group bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-            <div class="flex items-start gap-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-red-100 to-pink-100 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">
-                🚫
-              </div>
-              <div class="flex-1">
-                <h2 class="text-3xl font-bold text-neutral-900 mb-4 group-hover:text-orange-600 transition-colors">
-                  Partage des données
-                </h2>
-                <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-6 border border-red-200">
-                  <p class="text-lg text-red-800 leading-relaxed">
-                    <span class="font-bold text-red-900">On ne vend jamais vos données. Jamais.</span> 
-                    Les seules personnes qui y ont accès sont les managers de votre entreprise 
-                    (et seulement sous forme de statistiques agrégées et anonymisées). 
-                    Vos messages et humeurs individuels restent privés.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contact -->
-          <div class="group bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-            <div class="flex items-start gap-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-300">
-                💬
-              </div>
-              <div class="flex-1">
-                <h2 class="text-3xl font-bold text-neutral-900 mb-4 group-hover:text-orange-600 transition-colors">
-                  Questions ?
-                </h2>
-                <p class="text-lg text-neutral-700 leading-relaxed mb-6">
-                  Si vous avez des questions sur notre politique de confidentialité ou vos données, 
-                  contactez-nous à :
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                  <a href="mailto:privacy@moodflow.app" 
-                     class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
-                    <span>📧</span>
-                    privacy@moodflow.app
-                  </a>
-                  <router-link to="/contact" 
-                               class="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm text-neutral-800 rounded-2xl font-semibold border border-neutral-200 hover:bg-white hover:scale-105 transition-all duration-300">
-                    <span>💬</span>
-                    Formulaire de contact
-                  </router-link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Interactive FAQ -->
-        <div class="max-w-4xl mx-auto mb-20">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 text-center mb-12 bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent">
-            Questions fréquentes
+          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
+            Notre engagement envers votre vie privée
           </h2>
-          
-          <div class="space-y-4">
-            <div v-for="(faq, index) in faqs" :key="index" 
-                 class="group bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/60 hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <button @click="toggleFAQ(index)"
-                      class="w-full p-6 text-left flex items-center justify-between hover:bg-gradient-to-r hover:from-orange-50 hover:to-purple-50 transition-all duration-300">
-                <h3 class="font-bold text-neutral-900 text-lg group-hover:text-orange-600 transition-colors">
-                  {{ faq.question }}
-                </h3>
-                <div class="w-8 h-8 bg-gradient-to-br from-orange-100 to-purple-100 rounded-full flex items-center justify-center transition-transform duration-300"
-                     :class="openFAQs.includes(index) ? 'rotate-180' : ''">
-                  <span class="text-orange-600 font-bold">▼</span>
-                </div>
-              </button>
-              
-              <div class="overflow-hidden transition-all duration-500"
-                   :class="openFAQs.includes(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'">
-                <div class="px-6 pb-6">
-                  <p class="text-neutral-700 leading-relaxed">{{ faq.answer }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CTA Section -->
-        <div class="text-center bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600 rounded-3xl p-12 md:p-16 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-          <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse"></div>
-          <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-pulse animation-delay-1000"></div>
-          
-          <div class="relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-              Votre confiance, notre priorité
-            </h2>
-            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Découvrez MoodFlow en toute confiance, avec la garantie que vos données sont protégées
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <router-link to="/demo" 
-                           class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl">
-                Demander une démo
-              </router-link>
-              <router-link to="/contact" 
-                           class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-2xl font-bold hover:bg-white/30 transition-all duration-300 border border-white/30">
-                Nous contacter
-              </router-link>
-            </div>
-          </div>
-        </div>
-
-        <!-- Back button -->
-        <div class="text-center pt-16">
-          <router-link to="/" 
-                       class="inline-flex items-center gap-3 px-8 py-4 bg-white/80 backdrop-blur-xl text-neutral-800 rounded-2xl font-semibold border border-white/60 hover:bg-white/90 hover:scale-105 transition-all duration-300 shadow-lg">
-            <span>←</span>
-            Retour à l'accueil
-          </router-link>
-        </div>
-
-        <!-- Last updated -->
-        <div class="mt-12 text-center text-neutral-500 text-sm">
-          <p>Dernière mise à jour : {{ lastUpdated }}</p>
+          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+            Chez MoodFlow, nous croyons que la confidentialité est un droit fondamental. 
+            Nous nous engageons à protéger vos données avec les plus hauts standards de sécurité.
+          </p>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Data Protection Cards -->
+    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
+            Comment nous protégeons vos données
+          </h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
+              🔒
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Chiffrement de bout en bout</h3>
+            <p class="text-neutral-600">Toutes vos données sont chiffrées avec AES-256, le standard militaire de sécurité.</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
+              🇪🇺
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Hébergement européen</h3>
+            <p class="text-neutral-600">Vos données restent en Europe, conformément au RGPD et aux réglementations françaises.</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
+              👥
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Anonymat garanti</h3>
+            <p class="text-neutral-600">Vos réponses sont anonymisées et ne peuvent jamais être liées à votre identité.</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
+              🛡️
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Audits réguliers</h3>
+            <p class="text-neutral-600">Nos systèmes sont audités régulièrement par des experts en cybersécurité indépendants.</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
+              📋
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Conformité RGPD</h3>
+            <p class="text-neutral-600">Nous respectons intégralement le Règlement Général sur la Protection des Données.</p>
+          </div>
+          
+          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
+              🚫
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-4">Aucune revente</h3>
+            <p class="text-neutral-600">Nous ne vendons jamais vos données à des tiers. Jamais.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy FAQ -->
+    <section class="py-20 md:py-32 px-4 md:px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
+            Questions sur la confidentialité
+          </h2>
+          <p class="text-xl text-neutral-600">
+            Les réponses aux questions les plus fréquentes sur la protection de vos données
+          </p>
+        </div>
+        
+        <div class="space-y-6">
+          <div v-for="(faq, index) in privacyFaqs" :key="index" 
+               class="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-lg">
+            <button @click="toggleFaq(index)"
+                    class="w-full p-6 text-left flex justify-between items-center hover:bg-neutral-50 transition-colors">
+              <h3 class="font-semibold text-neutral-900">{{ faq.question }}</h3>
+              <div class="w-6 h-6 flex items-center justify-center">
+                <span class="text-neutral-500 transform transition-transform duration-300"
+                      :class="openFaqs.includes(index) ? 'rotate-180' : ''">▼</span>
+              </div>
+            </button>
+            <div v-if="openFaqs.includes(index)" 
+                 class="px-6 pb-6 text-neutral-600 leading-relaxed">
+              {{ faq.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Your Rights -->
+    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
+            Vos droits
+          </h2>
+          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+            En tant qu'utilisateur de MoodFlow, vous disposez de droits spécifiques sur vos données
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div v-for="(right, index) in userRights" :key="index" 
+               class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                {{ index + 1 }}
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-neutral-900 mb-3">{{ right.title }}</h3>
+                <p class="text-neutral-600 leading-relaxed">{{ right.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Usage -->
+    <section class="py-20 md:py-32 px-4 md:px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
+            Utilisation de vos données
+          </h2>
+          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+            Transparence totale sur l'utilisation de vos données personnelles
+          </p>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Données que nous collectons</h3>
+            <div class="space-y-4">
+              <div v-for="dataType in dataTypes" :key="dataType.type" 
+                   class="flex items-center gap-4 p-4 bg-neutral-50 rounded-xl">
+                <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  {{ dataType.icon }}
+                </div>
+                <div>
+                  <h4 class="font-semibold text-neutral-900">{{ dataType.type }}</h4>
+                  <p class="text-sm text-neutral-600">{{ dataType.purpose }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl p-8">
+            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Pourquoi nous les collectons</h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
+                <p class="text-neutral-700">Améliorer votre expérience utilisateur</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
+                <p class="text-neutral-700">Fournir un support technique efficace</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
+                <p class="text-neutral-700">Assurer la sécurité de la plateforme</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
+                <p class="text-neutral-700">Respecter nos obligations légales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Privacy -->
+    <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+          Questions sur la confidentialité ?
+        </h2>
+        <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+          Notre équipe est là pour répondre à toutes vos questions sur la protection de vos données
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="mailto:privacy@moodflow.com" 
+             class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl">
+            Contacter notre DPO
+          </a>
+          <router-link to="/contact" 
+                       class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-2xl font-bold hover:bg-white/30 transition-all duration-300 border border-white/30">
+            Nous contacter
+          </router-link>
+        </div>
+      </div>
+    </section>
+
+    <!-- Last Updated -->
+    <section class="py-12 px-4 md:px-6 bg-neutral-100">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-neutral-600">
+          Dernière mise à jour : {{ lastUpdated }}
+        </p>
+        <p class="text-sm text-neutral-500 mt-2">
+          Cette politique de confidentialité peut être mise à jour. Nous vous informerons de tout changement significatif.
+        </p>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import logoVideo from '../assets/MoodFlow_final_logo.mp4';
-import logoImage from '../assets/MoodFlow_final_logo.png';
 
-const openFAQs = ref<number[]>([]);
-const lastUpdated = '20 janvier 2025';
+const openFaqs = ref<number[]>([]);
+const lastUpdated = '15 janvier 2025';
 
-const protections = [
+const privacyFaqs = [
   {
-    icon: '🔐',
-    title: 'Chiffrement de bout en bout',
-    description: 'Toutes les communications sont chiffrées. Même nous, on ne peut pas lire vos messages.'
+    question: 'MoodFlow est-il conforme au RGPD ?',
+    answer: 'Oui, MoodFlow est entièrement conforme au Règlement Général sur la Protection des Données (RGPD). Nous avons mis en place toutes les mesures techniques et organisationnelles nécessaires pour protéger vos données personnelles.'
   },
   {
-    icon: '🎭',
-    title: 'Anonymisation',
-    description: 'Les humeurs et posts sont liés à un ID anonyme, pas à votre identité réelle.'
+    question: 'Mes réponses sont-elles vraiment anonymes ?',
+    answer: 'Absolument. Vos réponses sont cryptées et anonymisées dès leur saisie. Même notre équipe technique ne peut pas les relier à votre identité. Seuls des statistiques agrégées sont utilisées pour les rapports.'
   },
   {
-    icon: '🇪🇺',
-    title: 'Hébergement européen',
-    description: 'Vos données restent en Europe, conformes au RGPD.'
+    question: 'Où sont stockées mes données ?',
+    answer: 'Toutes vos données sont stockées sur des serveurs sécurisés situés en Europe, conformément aux réglementations européennes et françaises. Nous ne transférons aucune donnée en dehors de l\'Union Européenne.'
   },
   {
-    icon: '🛡️',
-    title: 'Accès limité',
-    description: 'Seules les personnes autorisées peuvent accéder aux données (et uniquement les leurs).'
+    question: 'Puis-je supprimer mes données ?',
+    answer: 'Oui, vous avez le droit de demander la suppression de vos données personnelles à tout moment. Vous pouvez le faire depuis votre profil ou en nous contactant directement. La suppression sera effective dans les 30 jours.'
+  },
+  {
+    question: 'MoodFlow vend-il mes données ?',
+    answer: 'Non, jamais. Nous ne vendons, ne louons, ni ne partageons vos données personnelles avec des tiers à des fins commerciales. Vos données restent strictement confidentielles.'
+  },
+  {
+    question: 'Comment puis-je exercer mes droits ?',
+    answer: 'Vous pouvez exercer vos droits (accès, rectification, suppression, portabilité) en nous contactant à privacy@moodflow.com ou via votre espace personnel. Nous répondons à toutes les demandes dans les 30 jours.'
   }
 ];
 
 const userRights = [
-  'Accéder à vos données personnelles',
-  'Rectifier vos informations',
-  'Supprimer votre compte et toutes vos données',
-  'Exporter vos données',
-  'Vous opposer au traitement de vos données',
-  'Limiter le traitement de vos données'
-];
-
-const faqs = [
   {
-    question: "MoodFlow peut-il lire mes messages ?",
-    answer: "Non, absolument pas. Tous vos messages sont chiffrés de bout en bout. Même nos développeurs ne peuvent pas les lire. Seuls vous et vos collègues autorisés y avez accès."
+    title: 'Droit d\'accès',
+    description: 'Vous pouvez demander à tout moment quelles données personnelles nous détenons sur vous et comment nous les utilisons.'
   },
   {
-    question: "Mes humeurs sont-elles vraiment anonymes ?",
-    answer: "Oui, totalement. Vos humeurs sont liées à un ID anonyme généré aléatoirement. Même les managers ne peuvent pas savoir qui a partagé quoi. Seules les statistiques globales sont visibles."
+    title: 'Droit de rectification',
+    description: 'Vous pouvez corriger ou mettre à jour vos données personnelles si elles sont inexactes ou incomplètes.'
   },
   {
-    question: "Où sont stockées mes données ?",
-    answer: "Toutes vos données sont hébergées en Europe (France et Allemagne) sur des serveurs certifiés ISO 27001. On respecte strictement le RGPD et on ne transfère jamais vos données hors d'Europe."
+    title: 'Droit à l\'effacement',
+    description: 'Vous pouvez demander la suppression de vos données personnelles dans certaines circonstances prévues par la loi.'
   },
   {
-    question: "Puis-je supprimer toutes mes données ?",
-    answer: "Oui, à tout moment. Vous pouvez supprimer votre compte depuis les paramètres, et toutes vos données (messages, humeurs, informations personnelles) seront définitivement effacées sous 30 jours maximum."
+    title: 'Droit à la portabilité',
+    description: 'Vous pouvez recevoir vos données dans un format structuré et lisible par machine pour les transférer à un autre service.'
   },
   {
-    question: "MoodFlow vend-il mes données ?",
-    answer: "Jamais. On ne vend, ne loue, ne partage jamais vos données avec des tiers. C'est un principe fondamental chez nous. Vos données restent les vôtres, point final."
+    title: 'Droit d\'opposition',
+    description: 'Vous pouvez vous opposer au traitement de vos données personnelles pour des raisons liées à votre situation particulière.'
   },
   {
-    question: "Comment puis-je exercer mes droits RGPD ?",
-    answer: "C'est simple : envoyez un email à privacy@moodflow.app avec votre demande. On vous répond sous 30 jours maximum et on vous aide à exercer vos droits (accès, rectification, suppression, etc.)."
+    title: 'Droit de limitation',
+    description: 'Vous pouvez demander la limitation du traitement de vos données dans certaines circonstances.'
   }
 ];
 
-const toggleFAQ = (index: number) => {
-  const faqIndex = openFAQs.value.indexOf(index);
-  if (faqIndex > -1) {
-    openFAQs.value.splice(faqIndex, 1);
+const dataTypes = [
+  {
+    type: 'Informations de compte',
+    icon: '👤',
+    purpose: 'Nom, email, entreprise pour créer votre compte'
+  },
+  {
+    type: 'Réponses anonymes',
+    icon: '💭',
+    purpose: 'Vos réponses aux questions de bien-être (anonymisées)'
+  },
+  {
+    type: 'Données d\'utilisation',
+    icon: '📊',
+    purpose: 'Comment vous utilisez la plateforme pour l\'améliorer'
+  },
+  {
+    type: 'Données techniques',
+    icon: '🔧',
+    purpose: 'Adresse IP, type de navigateur pour la sécurité'
+  }
+];
+
+const toggleFaq = (index: number) => {
+  if (openFaqs.value.includes(index)) {
+    openFaqs.value = openFaqs.value.filter(i => i !== index);
   } else {
-    openFAQs.value.push(index);
+    openFaqs.value.push(index);
   }
 };
 </script>
 
 <style scoped>
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-@keyframes gradient-flow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1s;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-3000 {
-  animation-delay: 3s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-.animation-delay-5000 {
-  animation-delay: 5s;
-}
-
-.animate-gradient-flow {
-  background-size: 300% 300%;
-  animation: gradient-flow 3s ease infinite;
-}
+/* Custom styles if needed */
 </style>

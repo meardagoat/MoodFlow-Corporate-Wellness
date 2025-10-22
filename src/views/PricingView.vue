@@ -1,371 +1,341 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
-    <!-- Animated background elements -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-20 -left-20 w-96 h-96 bg-orange-400/10 rounded-full blur-3xl animate-blob"></div>
-      <div class="absolute top-40 right-10 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-      <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
-    </div>
-
-    <div class="relative z-10 py-20 px-6">
-      <div class="max-w-7xl mx-auto">
-        <!-- Header with interactive logo -->
+  <div class="min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
+      <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <div class="mb-8 flex justify-center">
-            <div class="relative group">
-              <video 
-                autoplay 
-                muted 
-                playsinline
-                loop
-                class="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-2xl group-hover:scale-110 transition-all duration-500"
-              >
-                <source :src="logoVideo" type="video/mp4">
-                <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
-              </video>
-              <div class="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-purple-400/20 to-orange-400/20 rounded-full blur-2xl -z-10 group-hover:blur-3xl transition-all duration-500"></div>
-            </div>
-          </div>
-          
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-500">
-            Tarifs transparents
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-neutral-900 mb-6">
+            Tarifs MoodFlow
           </h1>
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-            Choisissez l'offre qui correspond à votre entreprise. 
-            <span class="text-orange-600 font-semibold">Aucun piège caché.</span>
+          <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+            Des tarifs transparents et flexibles pour toutes les tailles d'entreprise. 
+            Commencez gratuitement, évoluez selon vos besoins.
           </p>
         </div>
+      </div>
+    </section>
 
-        <!-- Interactive Pricing Cards -->
-        <div class="grid md:grid-cols-3 gap-8 mb-20">
-          <!-- Starter Card -->
-          <div class="group relative">
-            <div class="bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="relative z-10">
-                <div class="mb-6">
-                  <div class="flex items-center gap-3 mb-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl">
-                      🌱
-                    </div>
-                    <div>
-                      <h3 class="text-2xl font-bold text-neutral-900">Starter</h3>
-                      <p class="text-neutral-600">Pour les petites équipes</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="mb-8">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-5xl font-black text-green-600">Gratuit</span>
-                    <span class="text-neutral-500 text-lg">à vie</span>
-                  </div>
-                </div>
-                
-                <ul class="space-y-4 mb-8">
-                  <li v-for="(feature, index) in starterFeatures" :key="index" 
-                      class="flex items-start gap-3 group/item">
-                    <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5 group-hover/item:bg-green-200 transition-colors">
-                      <span class="text-green-600 text-sm">✓</span>
-                    </div>
-                    <span class="text-neutral-700 group-hover/item:text-neutral-900 transition-colors">{{ feature }}</span>
-                  </li>
-                </ul>
-                
-                <button @click="goToRegister" 
-                        class="w-full px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-green-500/25">
-                  Commencer gratuitement
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pro Card (Featured) -->
-          <div class="group relative md:-mt-8">
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
-              ⭐ Populaire
-            </div>
-            
-            <div class="bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600 rounded-3xl p-8 shadow-2xl transform scale-105 hover:scale-110 transition-all duration-500 relative overflow-hidden">
-              <!-- Animated background pattern -->
-              <div class="absolute inset-0 opacity-10">
-                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 to-transparent"></div>
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse"></div>
-                <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-pulse animation-delay-1000"></div>
-              </div>
-              
-              <div class="relative z-10">
-                <div class="mb-6">
-                  <div class="flex items-center gap-3 mb-3">
-                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white text-2xl">
-                      🚀
-                    </div>
-                    <div>
-                      <h3 class="text-2xl font-bold text-white">Pro</h3>
-                      <p class="text-white/80">Pour les entreprises en croissance</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="mb-8">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-5xl font-black text-white">49€</span>
-                    <span class="text-white/80 text-lg">/mois</span>
-                  </div>
-                  <p class="text-white/70 text-sm mt-2">Facturé mensuellement</p>
-                </div>
-                
-                <ul class="space-y-4 mb-8">
-                  <li v-for="(feature, index) in proFeatures" :key="index" 
-                      class="flex items-start gap-3 group/item">
-                    <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mt-0.5 group-hover/item:bg-white/30 transition-colors">
-                      <span class="text-white text-sm">✓</span>
-                    </div>
-                    <span class="text-white group-hover/item:text-white/90 transition-colors">{{ feature }}</span>
-                  </li>
-                </ul>
-                
-                <button @click="goToRegister" 
-                        class="w-full px-6 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-white/25">
-                  Démarrer l'essai gratuit
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Enterprise Card -->
-          <div class="group relative">
-            <div class="bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="relative z-10">
-                <div class="mb-6">
-                  <div class="flex items-center gap-3 mb-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl">
-                      🏢
-                    </div>
-                    <div>
-                      <h3 class="text-2xl font-bold text-neutral-900">Enterprise</h3>
-                      <p class="text-neutral-600">Pour les grandes organisations</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="mb-8">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-5xl font-black text-purple-600">Sur mesure</span>
-                  </div>
-                  <p class="text-neutral-500 text-sm mt-2">Tarif personnalisé</p>
-                </div>
-                
-                <ul class="space-y-4 mb-8">
-                  <li v-for="(feature, index) in enterpriseFeatures" :key="index" 
-                      class="flex items-start gap-3 group/item">
-                    <div class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-0.5 group-hover/item:bg-purple-200 transition-colors">
-                      <span class="text-purple-600 text-sm">✓</span>
-                    </div>
-                    <span class="text-neutral-700 group-hover/item:text-neutral-900 transition-colors">{{ feature }}</span>
-                  </li>
-                </ul>
-                
-                <router-link to="/contact" 
-                             class="block w-full px-6 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-center">
-                  Nous contacter
-                </router-link>
-              </div>
-            </div>
+    <!-- Pricing Toggle -->
+    <section class="py-8 px-4 md:px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex justify-center mb-8">
+          <div class="bg-neutral-100 rounded-2xl p-2 flex">
+            <button @click="billingCycle = 'monthly'" 
+                    :class="billingCycle === 'monthly' ? 'bg-white text-orange-600 shadow-lg' : 'text-neutral-600'"
+                    class="px-6 py-3 rounded-xl font-semibold transition-all duration-300">
+              Mensuel
+            </button>
+            <button @click="billingCycle = 'yearly'" 
+                    :class="billingCycle === 'yearly' ? 'bg-white text-orange-600 shadow-lg' : 'text-neutral-600'"
+                    class="px-6 py-3 rounded-xl font-semibold transition-all duration-300">
+              Annuel
+              <span class="ml-2 text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded-full">-20%</span>
+            </button>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Interactive FAQ Section -->
-        <div class="max-w-4xl mx-auto mb-20">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 text-center mb-12 bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent">
-            Questions fréquentes
-          </h2>
-          
-          <div class="space-y-4">
-            <div v-for="(faq, index) in faqs" :key="index" 
-                 class="group bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-white/60 hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <button @click="toggleFAQ(index)"
-                      class="w-full p-6 text-left flex items-center justify-between hover:bg-gradient-to-r hover:from-orange-50 hover:to-purple-50 transition-all duration-300">
-                <h3 class="font-bold text-neutral-900 text-lg group-hover:text-orange-600 transition-colors">
-                  {{ faq.question }}
-                </h3>
-                <div class="w-8 h-8 bg-gradient-to-br from-orange-100 to-purple-100 rounded-full flex items-center justify-center transition-transform duration-300"
-                     :class="openFAQs.includes(index) ? 'rotate-180' : ''">
-                  <span class="text-orange-600 font-bold">▼</span>
-                </div>
-              </button>
-              
-              <div class="overflow-hidden transition-all duration-500"
-                   :class="openFAQs.includes(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'">
-                <div class="px-6 pb-6">
-                  <p class="text-neutral-700 leading-relaxed">{{ faq.answer }}</p>
-                </div>
+    <!-- Pricing Cards -->
+    <section class="py-20 md:py-32 px-4 md:px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-3 gap-8">
+          <!-- Starter Plan -->
+          <div class="bg-white rounded-3xl p-8 border border-neutral-200 hover:shadow-xl transition-all duration-300 relative">
+            <div class="text-center mb-8">
+              <h3 class="text-2xl font-bold text-neutral-900 mb-2">Starter</h3>
+              <p class="text-neutral-600 mb-6">Parfait pour les petites équipes</p>
+              <div class="mb-6">
+                <span class="text-5xl font-bold text-neutral-900">{{ billingCycle === 'yearly' ? '€8' : '€10' }}</span>
+                <span class="text-neutral-600">/employé/mois</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CTA Section -->
-        <div class="text-center bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600 rounded-3xl p-12 md:p-16 relative overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
-          <div class="relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-              Prêt à transformer votre entreprise ?
-            </h2>
-            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Rejoignez des milliers d'entreprises qui font confiance à MoodFlow
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <button @click="goToRegister" 
-                      class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl">
+              <button class="w-full px-6 py-3 bg-neutral-100 text-neutral-700 rounded-xl font-semibold hover:bg-neutral-200 transition-all duration-300">
                 Commencer gratuitement
               </button>
-              <router-link to="/demo" 
-                           class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-2xl font-bold hover:bg-white/30 transition-all duration-300 border border-white/30">
-                Demander une démo
-              </router-link>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Jusqu'à 50 employés</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Expression libre anonyme</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Dashboard de base</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Support email</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Rapports mensuels</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Plan -->
+          <div class="bg-white rounded-3xl p-8 border-2 border-orange-500 hover:shadow-xl transition-all duration-300 relative">
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span class="bg-gradient-to-r from-orange-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-bold">
+                Populaire
+              </span>
+            </div>
+            
+            <div class="text-center mb-8">
+              <h3 class="text-2xl font-bold text-neutral-900 mb-2">Professional</h3>
+              <p class="text-neutral-600 mb-6">Pour les entreprises en croissance</p>
+              <div class="mb-6">
+                <span class="text-5xl font-bold text-neutral-900">{{ billingCycle === 'yearly' ? '€16' : '€20' }}</span>
+                <span class="text-neutral-600">/employé/mois</span>
+              </div>
+              <button class="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+                Essayer 30 jours gratuits
+              </button>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Jusqu'à 500 employés</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Tout Starter +</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Insights en temps réel</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Actions ciblées</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Support prioritaire</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Rapports hebdomadaires</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Intégrations API</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enterprise Plan -->
+          <div class="bg-white rounded-3xl p-8 border border-neutral-200 hover:shadow-xl transition-all duration-300 relative">
+            <div class="text-center mb-8">
+              <h3 class="text-2xl font-bold text-neutral-900 mb-2">Enterprise</h3>
+              <p class="text-neutral-600 mb-6">Pour les grandes organisations</p>
+              <div class="mb-6">
+                <span class="text-5xl font-bold text-neutral-900">Sur mesure</span>
+              </div>
+              <button class="w-full px-6 py-3 bg-neutral-100 text-neutral-700 rounded-xl font-semibold hover:bg-neutral-200 transition-all duration-300">
+                Nous contacter
+              </button>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Employés illimités</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Tout Professional +</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Déploiement sur site</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Support dédié 24/7</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Formation personnalisée</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">SLA garantie</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-white text-xs">✓</div>
+                <span class="text-neutral-700">Conformité avancée</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Back button -->
-        <div class="text-center pt-16">
-          <router-link to="/" 
-                       class="inline-flex items-center gap-3 px-8 py-4 bg-white/80 backdrop-blur-xl text-neutral-800 rounded-2xl font-semibold border border-white/60 hover:bg-white/90 hover:scale-105 transition-all duration-300 shadow-lg">
-            <span>←</span>
-            Retour à l'accueil
+    <!-- Features Comparison -->
+    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
+            Comparaison des fonctionnalités
+          </h2>
+          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+            Découvrez toutes les fonctionnalités incluses dans chaque plan
+          </p>
+        </div>
+        
+        <div class="bg-white rounded-3xl overflow-hidden shadow-xl">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-neutral-50">
+                <tr>
+                  <th class="text-left p-6 font-semibold text-neutral-900">Fonctionnalités</th>
+                  <th class="text-center p-6 font-semibold text-neutral-900">Starter</th>
+                  <th class="text-center p-6 font-semibold text-orange-600">Professional</th>
+                  <th class="text-center p-6 font-semibold text-neutral-900">Enterprise</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-neutral-200">
+                <tr v-for="feature in features" :key="feature.name" class="hover:bg-neutral-50">
+                  <td class="p-6 font-medium text-neutral-900">{{ feature.name }}</td>
+                  <td class="p-6 text-center">
+                    <span v-if="feature.starter" class="text-green-600 font-bold">✓</span>
+                    <span v-else class="text-neutral-400">-</span>
+                  </td>
+                  <td class="p-6 text-center">
+                    <span v-if="feature.professional" class="text-green-600 font-bold">✓</span>
+                    <span v-else class="text-neutral-400">-</span>
+                  </td>
+                  <td class="p-6 text-center">
+                    <span v-if="feature.enterprise" class="text-green-600 font-bold">✓</span>
+                    <span v-else class="text-neutral-400">-</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 md:py-32 px-4 md:px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
+            Questions fréquentes
+          </h2>
+        </div>
+        
+        <div class="space-y-6">
+          <div v-for="(faq, index) in faqs" :key="index" 
+               class="bg-white rounded-2xl border border-neutral-200 overflow-hidden">
+            <button @click="toggleFaq(index)"
+                    class="w-full p-6 text-left flex justify-between items-center hover:bg-neutral-50 transition-colors">
+              <h3 class="font-semibold text-neutral-900">{{ faq.question }}</h3>
+              <div class="w-6 h-6 flex items-center justify-center">
+                <span class="text-neutral-500 transform transition-transform duration-300"
+                      :class="openFaqs.includes(index) ? 'rotate-180' : ''">▼</span>
+              </div>
+            </button>
+            <div v-if="openFaqs.includes(index)" 
+                 class="px-6 pb-6 text-neutral-600 leading-relaxed">
+              {{ faq.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+          Prêt à commencer ?
+        </h2>
+        <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
+          Rejoignez des milliers d'entreprises qui ont déjà transformé leur bien-être au travail
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <router-link to="/demo" 
+                       class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl">
+            Essayer gratuitement
+          </router-link>
+          <router-link to="/contact" 
+                       class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-2xl font-bold hover:bg-white/30 transition-all duration-300 border border-white/30">
+            Nous contacter
           </router-link>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import logoVideo from '../assets/MoodFlow_final_logo.mp4';
-import logoImage from '../assets/MoodFlow_final_logo.png';
 
-const router = useRouter();
-const openFAQs = ref<number[]>([]);
+const billingCycle = ref('monthly');
+const openFaqs = ref<number[]>([]);
 
-const starterFeatures = [
-  'Jusqu\'à 50 employés',
-  'Suivi des humeurs quotidien',
-  'Dashboard basique',
-  'Chat anonyme',
-  'Support par email',
-  'Données sécurisées'
-];
-
-const proFeatures = [
-  'Jusqu\'à 500 employés',
-  'Analytics avancées',
-  'Export de données',
-  'Support prioritaire',
-  'Intégrations (Slack, Teams)',
-  'Formations personnalisées',
-  'API complète',
-  'Hébergement dédié'
-];
-
-const enterpriseFeatures = [
-  'Employés illimités',
-  'API complète + webhooks',
-  'SSO / SAML',
-  'Support dédié 24/7',
-  'Hébergement privé possible',
-  'Formations sur site',
-  'SLA personnalisé',
-  'Intégrations sur mesure'
+const features = [
+  { name: 'Expression libre anonyme', starter: true, professional: true, enterprise: true },
+  { name: 'Dashboard de base', starter: true, professional: true, enterprise: true },
+  { name: 'Rapports mensuels', starter: true, professional: true, enterprise: true },
+  { name: 'Support email', starter: true, professional: true, enterprise: true },
+  { name: 'Insights en temps réel', starter: false, professional: true, enterprise: true },
+  { name: 'Actions ciblées', starter: false, professional: true, enterprise: true },
+  { name: 'Support prioritaire', starter: false, professional: true, enterprise: true },
+  { name: 'Rapports hebdomadaires', starter: false, professional: true, enterprise: true },
+  { name: 'Intégrations API', starter: false, professional: true, enterprise: true },
+  { name: 'Déploiement sur site', starter: false, professional: false, enterprise: true },
+  { name: 'Support dédié 24/7', starter: false, professional: false, enterprise: true },
+  { name: 'Formation personnalisée', starter: false, professional: false, enterprise: true },
+  { name: 'SLA garantie', starter: false, professional: false, enterprise: true },
+  { name: 'Conformité avancée', starter: false, professional: false, enterprise: true }
 ];
 
 const faqs = [
   {
-    question: "Puis-je essayer MoodFlow gratuitement ?",
-    answer: "Oui ! L'offre Starter est gratuite à vie pour jusqu'à 50 employés. Pas besoin de carte bancaire, pas d'engagement. Vous pouvez commencer immédiatement et upgrader quand vous voulez."
+    question: 'Puis-je changer de plan à tout moment ?',
+    answer: 'Oui, vous pouvez upgrader ou downgrader votre plan à tout moment. Les changements prennent effet immédiatement et nous ajustons la facturation en conséquence.'
   },
   {
-    question: "Comment fonctionne la facturation ?",
-    answer: "On facture mensuellement ou annuellement selon votre choix. Vous pouvez annuler à tout moment, sans frais cachés. Les changements d'offre prennent effet immédiatement."
+    question: 'Y a-t-il des frais de configuration ?',
+    answer: 'Non, il n\'y a aucun frais de configuration. Vous payez uniquement le montant mensuel ou annuel selon votre plan choisi.'
   },
   {
-    question: "Les données sont-elles sécurisées ?",
-    answer: "Absolument. Toutes les données sont chiffrées de bout en bout et hébergées en Europe conformément au RGPD. Vos collaborateurs restent anonymes, même nous ne pouvons pas identifier qui a écrit quoi."
+    question: 'Que se passe-t-il si je dépasse le nombre d\'employés de mon plan ?',
+    answer: 'Nous vous contacterons pour discuter de l\'upgrade de votre plan. En attendant, vous pouvez continuer à utiliser MoodFlow sans interruption.'
   },
   {
-    question: "Peut-on changer d'offre facilement ?",
-    answer: "Oui, vous pouvez upgrader ou downgrader à tout moment depuis votre dashboard. Les changements prennent effet immédiatement et on ajuste la facturation automatiquement."
+    question: 'Mes données sont-elles sécurisées ?',
+    answer: 'Absolument. Nous utilisons un chiffrement de bout en bout, hébergeons nos serveurs en Europe et sommes conformes au RGPD. Vos données ne sont jamais partagées avec des tiers.'
   },
   {
-    question: "Quel support proposez-vous ?",
-    answer: "Starter : support par email. Pro : support prioritaire par email et chat. Enterprise : support dédié 24/7 avec un account manager personnel."
+    question: 'Puis-je annuler à tout moment ?',
+    answer: 'Oui, vous pouvez annuler votre abonnement à tout moment depuis votre tableau de bord. Aucun frais d\'annulation ne s\'applique.'
   },
   {
-    question: "MoodFlow s'intègre-t-il avec nos outils ?",
-    answer: "Oui ! On s'intègre avec Slack, Microsoft Teams, et on a une API complète. Pour Enterprise, on peut créer des intégrations sur mesure selon vos besoins."
+    question: 'Offrez-vous des remises pour les organisations à but non lucratif ?',
+    answer: 'Oui, nous offrons des tarifs préférentiels pour les organisations à but non lucratif et les établissements d\'enseignement. Contactez-nous pour plus d\'informations.'
   }
 ];
 
-const toggleFAQ = (index: number) => {
-  const faqIndex = openFAQs.value.indexOf(index);
-  if (faqIndex > -1) {
-    openFAQs.value.splice(faqIndex, 1);
+const toggleFaq = (index: number) => {
+  if (openFaqs.value.includes(index)) {
+    openFaqs.value = openFaqs.value.filter(i => i !== index);
   } else {
-    openFAQs.value.push(index);
+    openFaqs.value.push(index);
   }
-};
-
-const goToRegister = () => {
-  router.push('/register');
 };
 </script>
 
 <style scoped>
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-@keyframes gradient-flow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1s;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-.animate-gradient-flow {
-  background-size: 300% 300%;
-  animation: gradient-flow 3s ease infinite;
-}
+/* Custom styles if needed */
 </style>
