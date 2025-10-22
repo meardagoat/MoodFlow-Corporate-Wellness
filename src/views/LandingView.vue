@@ -212,57 +212,69 @@
       </div>
     </section>
 
-    <!-- Testimonials Carousel -->
+    <!-- Expert Users Carousel - Headspace Style -->
     <section class="py-20 md:py-28 lg:py-36 px-4 md:px-6 bg-gradient-to-br from-purple-50/50 to-orange-50/50 relative overflow-hidden">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-12 md:mb-16">
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-3 md:mb-4 px-4">
-            Ce qu'ils en pensent
+            Conçu par des experts, livré avec soin
           </h2>
-          <p class="text-lg md:text-xl text-neutral-600 px-4">Des milliers d'entreprises nous font confiance</p>
+          <p class="text-lg md:text-xl text-neutral-600 px-4 max-w-3xl mx-auto">
+            De l'expression libre aux insights en temps réel, notre équipe d'experts en bien-être au travail 
+            travaille ensemble pour vous apporter des solutions éprouvées.
+          </p>
         </div>
 
+        <!-- Auto-scrolling Expert Carousel -->
         <div class="relative">
           <div class="overflow-hidden">
-            <div class="flex transition-transform duration-700 ease-out"
-                 :style="`transform: translateX(-${currentTestimonial * 100}%)`">
-              <div v-for="(testimonial, index) in testimonials" :key="index" 
-                   class="min-w-full px-4 sm:px-6 md:px-8">
-                <!-- Clean card style Headspace -->
-                <div class="max-w-4xl mx-auto h-full flex items-center">
-                  <div class="w-full bg-white rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.12)] transition-shadow duration-300 min-h-[400px] md:min-h-[450px] flex flex-col justify-center">
-                    
-                    <div class="flex justify-center mb-6 md:mb-8 gap-1.5">
-                      <div v-for="i in 5" :key="i" class="text-2xl md:text-3xl text-orange-500">★</div>
-                    </div>
-                    
-                    <p class="text-xl sm:text-2xl md:text-3xl text-neutral-800 mb-8 md:mb-10 leading-relaxed text-center font-light flex-grow flex items-center justify-center">
-                      {{ testimonial.text }}
+            <div class="flex transition-transform duration-1000 ease-linear"
+                 :style="`transform: translateX(-${expertScrollPosition}px)`"
+                 ref="expertCarousel">
+              <!-- Duplicate experts for seamless loop -->
+              <div v-for="(expert, index) in [...experts, ...experts]" :key="`expert-${index}`" 
+                   class="flex-shrink-0 mx-4">
+                <div class="group relative w-80 h-96 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                  <!-- Expert Image/Video -->
+                  <div class="relative w-full h-64 overflow-hidden rounded-t-3xl">
+                    <img :src="expert.image" 
+                         :alt="expert.name"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <!-- Overlay gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  </div>
+                  
+                  <!-- Expert Info -->
+                  <div class="p-6">
+                    <h3 class="font-bold text-neutral-900 text-xl mb-2 group-hover:text-orange-600 transition-colors">
+                      {{ expert.name }}
+                    </h3>
+                    <p class="text-neutral-600 text-sm mb-4 leading-relaxed">
+                      {{ expert.role }}
                     </p>
                     
-                    <div class="flex items-center justify-center gap-4">
-                      <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-lg">
-                        {{ testimonial.name.charAt(0) }}
-                      </div>
-                      <div class="text-left">
-                        <h4 class="font-semibold text-neutral-900 text-base md:text-lg">{{ testimonial.name }}</h4>
-                        <p class="text-neutral-600 text-sm md:text-base">{{ testimonial.role }}</p>
-                      </div>
+                    <!-- Testimonial Quote -->
+                    <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-2xl p-4 border border-orange-100">
+                      <p class="text-neutral-700 text-sm italic leading-relaxed">
+                        "{{ expert.testimonial }}"
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Carousel dots -->
-          <div class="flex justify-center gap-3 mt-10">
-            <button v-for="(_, index) in testimonials" :key="index"
-                    @click="currentTestimonial = index"
-                    class="transition-all duration-300"
-                    :class="currentTestimonial === index ? 'w-10 h-2 bg-orange-500 rounded-full' : 'w-2 h-2 bg-neutral-300 hover:bg-neutral-400 rounded-full'">
-            </button>
-          </div>
+          
+          <!-- Pause/Play Button -->
+          <button @click="toggleExpertCarousel" 
+                  class="absolute top-1/2 right-8 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group">
+            <svg v-if="expertCarouselPaused" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg v-else width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
+              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
@@ -433,12 +445,25 @@ import anonymatVideo from '../assets/feature-cards/anonymat-garanti.mp4';
 import simpleVideo from '../assets/feature-cards/simple-utilisation.mp4';
 import deploiementVideo from '../assets/feature-cards/deploiement-rapide.mp4';
 
+// Import des images d'experts/utilisateurs
+import alexandreImage from '../assets/card_avis_personne/Alexandre.png';
+import marieImage from '../assets/card_avis_personne/Marie.png';
+import sophieImage from '../assets/card_avis_personne/Sophie.png';
+import thomasImage from '../assets/card_avis_personne/Thomas.png';
+
 const router = useRouter();
 const isVisible = ref(false);
 const featuresSection = ref<HTMLElement | null>(null);
 const currentTestimonial = ref(0);
 const currentFeature = ref(0);
 const selectedMoodIndex = ref(1);
+
+// Expert carousel variables
+const expertCarousel = ref<HTMLElement | null>(null);
+const expertScrollPosition = ref(0);
+const expertCarouselPaused = ref(false);
+const expertScrollSpeed = 1; // pixels per frame
+let expertScrollInterval: number;
 
 const moods = [
   { 
@@ -522,6 +547,33 @@ const features = [
   }
 ];
 
+const experts = [
+  {
+    name: 'Sophie Durand',
+    role: 'DRH chez Doctolib',
+    image: sophieImage,
+    testimonial: 'Depuis qu\'on utilise MoodFlow, on a vraiment vu la différence. Les gens osent enfin dire ce qu\'ils ressentent. C\'est devenu un réflexe quotidien.'
+  },
+  {
+    name: 'Thomas Rivière',
+    role: 'CEO chez Alan',
+    image: thomasImage,
+    testimonial: 'Le retour sur investissement est impressionnant. En 3 mois, on a réduit le turnover de 35% et l\'engagement a explosé.'
+  },
+  {
+    name: 'Marie Leclerc',
+    role: 'Manager chez Blablacar',
+    image: marieImage,
+    testimonial: 'L\'interface est tellement simple que tout le monde l\'utilise. Même les plus réticents à la tech. C\'est rare de voir ça.'
+  },
+  {
+    name: 'Alexandre Chen',
+    role: 'Head of People chez Qonto',
+    image: alexandreImage,
+    testimonial: 'MoodFlow nous a permis d\'anticiper des problèmes qu\'on n\'aurait jamais vus autrement. Un vrai game changer.'
+  }
+];
+
 const testimonials = [
   {
     name: 'Sophie Durand',
@@ -588,6 +640,33 @@ const scrollToFeatures = () => {
   featuresSection.value?.scrollIntoView({ behavior: 'smooth' });
 };
 
+// Expert carousel functions
+const startExpertCarousel = () => {
+  expertScrollInterval = window.setInterval(() => {
+    if (!expertCarouselPaused.value) {
+      expertScrollPosition.value += expertScrollSpeed;
+      
+      // Reset position when we've scrolled through one set of experts
+      const cardWidth = 320 + 32; // card width + margin
+      const totalWidth = cardWidth * experts.length;
+      
+      if (expertScrollPosition.value >= totalWidth) {
+        expertScrollPosition.value = 0;
+      }
+    }
+  }, 16); // ~60fps
+};
+
+const stopExpertCarousel = () => {
+  if (expertScrollInterval) {
+    clearInterval(expertScrollInterval);
+  }
+};
+
+const toggleExpertCarousel = () => {
+  expertCarouselPaused.value = !expertCarouselPaused.value;
+};
+
 const getFeatureGradient = (index: number) => {
   const gradients = [
     'bg-gradient-to-br from-orange-500 to-orange-600',
@@ -624,11 +703,15 @@ onMounted(() => {
     currentTestimonial.value = (currentTestimonial.value + 1) % testimonials.length;
   }, 5000);
 
+  // Start expert carousel
+  startExpertCarousel();
+
   onUnmounted(() => {
     observer.disconnect();
     if (testimonialInterval) {
       clearInterval(testimonialInterval);
     }
+    stopExpertCarousel();
   });
 });
 </script>
