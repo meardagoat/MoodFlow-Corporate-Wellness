@@ -1,21 +1,37 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 safe-top safe-bottom">
     <div class="max-w-6xl mx-auto px-4 py-6 sm:py-8">
-      <div class="mb-6 sm:mb-8">
-        <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-2">Anonymous Chat</h1>
-        <p class="text-sm sm:text-base text-gray-600">Connect with colleagues anonymously</p>
+      <div class="mb-8 sm:mb-12">
+        <h1 class="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-4">Anonymous Chat</h1>
+        <p class="text-lg sm:text-xl text-gray-600 max-w-2xl">Connect with colleagues anonymously and share your thoughts in a safe space</p>
+        
+        <!-- Chat benefits -->
+        <div class="flex flex-wrap items-center gap-6 mt-6">
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span class="text-sm font-medium text-gray-600">100% Anonymous</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <span class="text-sm font-medium text-gray-600">Safe Space</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+            <span class="text-sm font-medium text-gray-600">Real-time</span>
+          </div>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="md:col-span-1">
-          <div class="bg-white rounded-xl shadow overflow-hidden">
-              <div class="p-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white flex justify-between items-center">
-              <h2 class="font-semibold">Conversations</h2>
+          <div class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 overflow-hidden">
+              <div class="p-6 bg-gradient-to-r from-orange-500 to-purple-600 text-white flex justify-between items-center">
+              <h2 class="text-xl font-bold">Conversations</h2>
               <button
                 @click="showNewChatModal = true"
-                class="md:hidden bg-white bg-opacity-20 p-1 rounded-full hover:bg-opacity-30 transition"
+                class="md:hidden bg-white/20 p-2 rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110"
               >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
               </button>
@@ -26,37 +42,40 @@
             </div>
 
             <div v-else-if="conversations.length === 0" class="p-8 text-center">
-              <p class="text-gray-500 text-sm mb-4">No conversations yet</p>
+              <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <span class="text-2xl">💬</span>
+              </div>
+              <p class="text-gray-500 text-base mb-6">No conversations yet</p>
               <button
                 @click="showNewChatModal = true"
-                class="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm hover:bg-primary-700 transition"
+                class="px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Start Chat
               </button>
             </div>
 
-            <div v-else class="divide-y divide-gray-100">
+            <div v-else class="divide-y divide-gray-100/50">
               <button
                 v-for="conv in conversations"
                 :key="conv.id"
                 @click="selectConversation(conv.id)"
                 :class="[
-                  'w-full p-4 text-left hover:bg-gray-50 transition',
-                  selectedConversationId === conv.id ? 'bg-primary-50' : ''
+                  'w-full p-5 text-left hover:bg-gradient-to-r hover:from-orange-50 hover:to-purple-50 transition-all duration-300 hover:scale-[1.02]',
+                  selectedConversationId === conv.id ? 'bg-gradient-to-r from-orange-50 to-purple-50 border-r-4 border-orange-500' : ''
                 ]"
               >
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white font-semibold relative">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold relative shadow-lg">
                     A
                     <span 
                       v-if="conv.unread_count && conv.unread_count > 0" 
-                      class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                      class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold shadow-lg">
                       {{ conv.unread_count > 9 ? '9+' : conv.unread_count }}
                     </span>
                   </div>
                   <div class="flex-1 min-w-0">
                     <div class="flex justify-between items-center">
-                      <p class="font-medium text-gray-900 truncate">Anonymous User</p>
+                      <p class="font-semibold text-gray-900 truncate">Anonymous User</p>
                       <p class="text-xs text-gray-500">
                         {{ formatDate(conv.last_message_at) }}
                       </p>
@@ -69,25 +88,28 @@
               </button>
             </div>
 
-            <div class="p-4 border-t border-gray-100">
+            <div class="p-6 border-t border-gray-100/50">
               <button
                 @click="showNewChatModal = true"
-                class="w-full px-4 py-2 bg-primary-600 text-white rounded-lg text-sm hover:bg-primary-700 transition"
+                class="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                + New Chat
+                💬 New Chat
               </button>
             </div>
           </div>
         </div>
 
         <div class="lg:col-span-2">
-          <div v-if="!selectedConversationId" class="bg-white rounded-xl shadow h-[600px] flex items-center justify-center">
+          <div v-if="!selectedConversationId" class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 h-[600px] flex items-center justify-center">
             <div class="text-center text-gray-500">
-              <div class="text-6xl mb-4">💬</div>
-              <p>Select a conversation to start chatting</p>
+              <div class="w-24 h-24 bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                <span class="text-4xl">💬</span>
+              </div>
+              <p class="text-xl font-semibold mb-3">Select a conversation to start chatting</p>
+              <p class="text-base mb-6">Or start a new conversation to connect with colleagues</p>
               <button
                 @click="showNewChatModal = true"
-                class="mt-4 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition md:hidden"
+                class="bg-gradient-to-r from-orange-500 to-purple-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 md:hidden"
               >
                 Start New Chat
               </button>
