@@ -63,48 +63,67 @@
           </div>
         </div>
 
-        <!-- Interactive Mood Selector - Headspace Style -->
-        <div class="relative w-full mt-12 md:mt-16 px-4 md:px-6">
-          <div class="max-w-5xl mx-auto">
+        <!-- Interactive Mood Selector - Enhanced Headspace Style -->
+        <div class="relative w-full mt-16 md:mt-20 px-4 md:px-6">
+          <div class="max-w-6xl mx-auto">
             <!-- Main selector -->
-            <div class="text-center mb-12">
-              <h3 class="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+            <div class="text-center mb-16">
+              <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
                 Comment vous sentez-vous ?
               </h3>
-              <p class="text-lg text-neutral-600 mb-8">Sélectionnez votre humeur actuelle</p>
+              <p class="text-xl md:text-2xl text-neutral-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Sélectionnez votre humeur actuelle pour découvrir des insights personnalisés
+              </p>
             
-              <!-- Headspace-style mood cards -->
-              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
+              <!-- Enhanced Headspace-style mood cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 max-w-5xl mx-auto">
                 <button v-for="(mood, i) in moods" :key="i"
                         @click="selectedMoodIndex = i"
-                        class="group relative flex flex-col items-center p-4 md:p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+                        class="group relative flex flex-col items-center p-6 md:p-8 rounded-3xl transition-all duration-500 hover:scale-105 hover:-translate-y-2"
                         :class="selectedMoodIndex === i 
-                          ? 'bg-white/90 backdrop-blur-sm shadow-xl border-2 border-orange-200' 
-                          : 'bg-white/60 backdrop-blur-sm hover:bg-white/80 shadow-lg hover:shadow-xl border border-white/40'">
+                          ? 'bg-white/95 backdrop-blur-md shadow-2xl border-2 border-orange-300 scale-105' 
+                          : 'bg-white/70 backdrop-blur-sm hover:bg-white/85 shadow-xl hover:shadow-2xl border border-white/50'">
                   
-                  <!-- Emoji container -->
-                  <div class="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mb-3 transition-all duration-300"
+                  <!-- Enhanced emoji container -->
+                  <div class="relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-3xl flex items-center justify-center mb-4 transition-all duration-500 shadow-lg"
                        :class="[
                          mood.gradient,
-                         selectedMoodIndex === i ? 'scale-110 shadow-lg' : 'group-hover:scale-105'
+                         selectedMoodIndex === i ? 'scale-110 shadow-2xl' : 'group-hover:scale-105'
                        ]">
-                    <span class="text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-110">
+                    <span class="text-4xl md:text-5xl lg:text-6xl transition-transform duration-500 group-hover:scale-110">
                       {{ mood.emoji }}
                     </span>
+                    
+                    <!-- Glow effect for selected -->
+                    <div v-if="selectedMoodIndex === i" 
+                         class="absolute inset-0 rounded-3xl blur-xl opacity-50"
+                         :class="mood.gradient"></div>
                   </div>
                   
-                  <!-- Label -->
-                  <p class="text-sm md:text-base font-semibold text-center leading-tight"
-                     :class="selectedMoodIndex === i ? 'text-neutral-900' : 'text-neutral-600 group-hover:text-neutral-800'">
+                  <!-- Enhanced label -->
+                  <p class="text-base md:text-lg lg:text-xl font-bold text-center leading-tight mb-2"
+                     :class="selectedMoodIndex === i ? 'text-neutral-900' : 'text-neutral-700 group-hover:text-neutral-900'">
                     {{ mood.label }}
                   </p>
                   
-                  <!-- Selection indicator -->
+                  <!-- Mood description -->
+                  <p class="text-xs md:text-sm text-neutral-500 text-center leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {{ mood.shortDescription || 'Cliquez pour en savoir plus' }}
+                  </p>
+                  
+                  <!-- Enhanced selection indicator -->
                   <div v-if="selectedMoodIndex === i" 
-                       class="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full flex items-center justify-center">
-                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                       class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                     </svg>
+                  </div>
+                  
+                  <!-- Floating particles for selected state -->
+                  <div v-if="selectedMoodIndex === i" class="absolute inset-0 pointer-events-none">
+                    <div class="absolute top-2 left-2 w-2 h-2 bg-orange-400 rounded-full animate-ping opacity-60"></div>
+                    <div class="absolute bottom-3 right-3 w-1.5 h-1.5 bg-purple-400 rounded-full animate-ping opacity-60" style="animation-delay: 0.5s"></div>
+                    <div class="absolute top-1/2 right-1 w-1 h-1 bg-orange-300 rounded-full animate-ping opacity-40" style="animation-delay: 1s"></div>
                   </div>
                 </button>
               </div>
@@ -543,6 +562,7 @@ const moods = [
   { 
     emoji: '😄', 
     label: 'Excellent',
+    shortDescription: 'Équipe motivée et productive',
     gradient: 'bg-gradient-to-br from-green-400 to-green-500',
     percentage: 45,
     title: 'Votre équipe est au top',
@@ -551,6 +571,7 @@ const moods = [
   { 
     emoji: '😊', 
     label: 'Bien',
+    shortDescription: 'Ambiance positive au travail',
     gradient: 'bg-gradient-to-br from-yellow-300 to-orange-400',
     percentage: 32,
     title: 'L\'ambiance est bonne',
@@ -559,6 +580,7 @@ const moods = [
   { 
     emoji: '😐', 
     label: 'Neutre',
+    shortDescription: 'Signaux à surveiller',
     gradient: 'bg-gradient-to-br from-purple-300 to-purple-400',
     percentage: 15,
     title: 'Une attention nécessaire',
@@ -567,6 +589,7 @@ const moods = [
   { 
     emoji: '😔', 
     label: 'Difficile',
+    shortDescription: 'Action immédiate requise',
     gradient: 'bg-gradient-to-br from-orange-400 to-orange-500',
     percentage: 6,
     title: 'Agir rapidement',
@@ -575,6 +598,7 @@ const moods = [
   { 
     emoji: '😢', 
     label: 'Très difficile',
+    shortDescription: 'Intervention urgente',
     gradient: 'bg-gradient-to-br from-red-400 to-orange-500',
     percentage: 2,
     title: 'Intervention urgente',
