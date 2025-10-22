@@ -8,70 +8,126 @@
       </router-link>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+    <!-- Hero Section - Enhanced Headspace Style -->
+    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
+      <!-- Background decorative elements -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
+      </div>
+      
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-20">
+          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Contactez-nous
             </span>
           </h1>
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
-            Notre équipe est là pour vous accompagner. N'hésitez pas à nous contacter pour toute question.
+          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
+            Notre équipe d'experts est là pour vous accompagner dans votre transformation digitale du bien-être en entreprise.
           </p>
+          
+          <!-- Trust indicators -->
+          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="text-lg font-medium">Réponse sous 24h</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span class="text-lg font-medium">Support dédié</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span class="text-lg font-medium">Accompagnement personnalisé</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Methods -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+    <!-- Contact Methods - Enhanced Headspace Style -->
+    <section class="py-24 md:py-40 px-4 md:px-6 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+          <h2 class="text-5xl md:text-6xl font-bold mb-8">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Comment nous joindre
             </span>
           </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
-            Plusieurs façons de nous contacter selon vos besoins
+          <p class="text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+            Choisissez la méthode qui vous convient le mieux. Notre équipe est là pour vous accompagner.
           </p>
         </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              📧
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <!-- Email Card -->
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10">
+              <div class="w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                📧
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4 text-center">Email</h3>
+              <p class="text-neutral-600 mb-6 text-center leading-relaxed">
+                Pour toutes vos questions générales, demandes de devis ou informations sur nos services.
+              </p>
+              <div class="text-center">
+                <a href="mailto:hello@moodflow.com" 
+                   class="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 text-white font-semibold rounded-2xl hover:bg-orange-600 transition-all duration-300 hover:scale-105 shadow-lg">
+                  <span>hello@moodflow.com</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Email</h3>
-            <p class="text-neutral-600 mb-4">Pour toutes vos questions générales</p>
-            <a href="mailto:hello@moodflow.com" 
-               class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
-              hello@moodflow.com
-            </a>
           </div>
           
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              💬
+          <!-- Chat Card -->
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10">
+              <div class="w-24 h-24 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                💬
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4 text-center">Chat en direct</h3>
+              <p class="text-neutral-600 mb-6 text-center leading-relaxed">
+                Support instantané 24/7. Obtenez des réponses immédiates à vos questions les plus urgentes.
+              </p>
+              <div class="text-center">
+                <button class="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 text-white font-semibold rounded-2xl hover:bg-purple-600 transition-all duration-300 hover:scale-105 shadow-lg">
+                  <span>Ouvrir le chat</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Chat en direct</h3>
-            <p class="text-neutral-600 mb-4">Support instantané 24/7</p>
-            <button class="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
-              Ouvrir le chat
-            </button>
           </div>
           
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-purple-500 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              📞
+          <!-- Phone Card -->
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100 md:col-span-2 lg:col-span-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10">
+              <div class="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                📞
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4 text-center">Téléphone</h3>
+              <p class="text-neutral-600 mb-6 text-center leading-relaxed">
+                Pour les questions urgentes ou les discussions complexes nécessitant une approche personnalisée.
+              </p>
+              <div class="text-center">
+                <a href="tel:+33123456789" 
+                   class="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white font-semibold rounded-2xl hover:bg-green-600 transition-all duration-300 hover:scale-105 shadow-lg">
+                  <span>+33 1 23 45 67 89</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Téléphone</h3>
-            <p class="text-neutral-600 mb-4">Pour les questions urgentes</p>
-            <a href="tel:+33123456789" 
-               class="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
-              +33 1 23 45 67 89
-            </a>
           </div>
         </div>
       </div>
