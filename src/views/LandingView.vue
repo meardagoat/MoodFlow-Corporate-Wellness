@@ -254,8 +254,8 @@
                       </p>
                       
                       <!-- Testimonial Quote -->
-                      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                        <p class="text-white text-sm italic leading-relaxed">
+                      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20">
+                        <p class="text-white text-xs italic leading-relaxed">
                           "{{ expert.testimonial }}"
                         </p>
                       </div>
