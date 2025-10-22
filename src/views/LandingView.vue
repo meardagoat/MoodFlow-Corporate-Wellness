@@ -11,6 +11,44 @@
 
       <div class="relative z-10 max-w-7xl mx-auto text-center">
         <div class="space-y-8 mb-16">
+          <!-- Logo interactif en grand -->
+          <div class="mb-8 md:mb-12 flex justify-center">
+            <div class="relative group">
+              <!-- Effet de glow animé -->
+              <div class="absolute inset-0 bg-gradient-to-r from-orange-400 via-purple-400 to-orange-400 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 animate-pulse"></div>
+              
+              <!-- Container du logo avec glassmorphism -->
+              <div class="relative bg-white/20 backdrop-blur-xl rounded-full p-8 md:p-12 border border-white/30 shadow-2xl group-hover:scale-110 transition-all duration-500">
+                <!-- Logo vidéo interactif -->
+                <video 
+                  autoplay 
+                  muted 
+                  playsinline
+                  loop
+                  class="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 object-contain"
+                >
+                  <source :src="logoVideo" type="video/mp4">
+                  <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
+                </video>
+                
+                <!-- Particules flottantes autour du logo -->
+                <div class="absolute inset-0 pointer-events-none">
+                  <div 
+                    v-for="i in 8" 
+                    :key="i"
+                    class="absolute w-2 h-2 bg-white/60 rounded-full animate-float"
+                    :style="{
+                      left: (50 + 40 * Math.cos((i * 45) * Math.PI / 180)) + '%',
+                      top: (50 + 40 * Math.sin((i * 45) * Math.PI / 180)) + '%',
+                      animationDelay: (i * 0.3) + 's',
+                      animationDuration: (3 + Math.random() * 2) + 's'
+                    }"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Logo/Nom de l'app -->
           <div class="mb-6 md:mb-8">
             <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent mb-4 px-4 animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-500">
@@ -394,6 +432,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
+import logoVideo from '../assets/MoodFlow_final_logo.mp4';
+import logoImage from '../assets/MoodFlow_final_logo.png';
 
 const router = useRouter();
 const isVisible = ref(false);
@@ -692,11 +732,17 @@ onMounted(() => {
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(1);
+    opacity: 0.6;
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-20px) scale(1.1);
+    opacity: 1;
   }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 
 </style>
