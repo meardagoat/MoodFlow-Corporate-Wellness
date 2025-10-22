@@ -233,10 +233,10 @@
                  ref="expertCarousel">
               <!-- Duplicate experts for seamless loop -->
               <div v-for="(expert, index) in [...experts, ...experts]" :key="`expert-${index}`" 
-                   class="flex-shrink-0 mx-3">
-                <div class="group relative w-72 h-96 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                   class="flex-shrink-0 mx-2">
+                <div class="group relative w-64 h-80 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                   <!-- Expert Image -->
-                  <div class="relative w-full h-56 overflow-hidden rounded-t-3xl">
+                  <div class="relative w-full h-44 overflow-hidden rounded-t-3xl">
                     <img :src="expert.image" 
                          :alt="expert.name"
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -245,16 +245,16 @@
                   </div>
                   
                   <!-- Expert Info -->
-                  <div class="p-5">
-                    <h3 class="font-bold text-neutral-900 text-lg mb-2 group-hover:text-orange-600 transition-colors">
+                  <div class="p-4">
+                    <h3 class="font-bold text-neutral-900 text-base mb-1 group-hover:text-orange-600 transition-colors">
                       {{ expert.name }}
                     </h3>
-                    <p class="text-neutral-600 text-sm mb-3 leading-relaxed">
+                    <p class="text-neutral-600 text-xs mb-2 leading-relaxed">
                       {{ expert.role }}
                     </p>
                     
                     <!-- Testimonial Quote -->
-                    <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-2xl p-3 border border-orange-100">
+                    <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-xl p-2 border border-orange-100">
                       <p class="text-neutral-700 text-xs italic leading-relaxed">
                         "{{ expert.testimonial }}"
                       </p>
@@ -647,7 +647,7 @@ const startExpertCarousel = () => {
       expertScrollPosition.value += expertScrollSpeed;
       
       // Reset position when we've scrolled through one set of experts
-      const cardWidth = 288 + 24; // card width (w-72) + margin (mx-3)
+      const cardWidth = 256 + 16; // card width (w-64) + margin (mx-2)
       const totalWidth = cardWidth * experts.length;
       
       if (expertScrollPosition.value >= totalWidth) {
