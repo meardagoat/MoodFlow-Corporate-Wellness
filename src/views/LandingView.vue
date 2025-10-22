@@ -429,12 +429,12 @@ import logoVideo from '../assets/MoodFlow_final_logo.mp4';
 import logoImage from '../assets/MoodFlow_final_logo.png';
 
 // Import des cards vidéo
-import expressionLibreVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Expression libre.mp4';
-import insightsVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Insights en temps réel.mp4';
-import actionsVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Actions ciblées.mp4';
-import anonymatVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Anonymat garanti.mp4';
-import simpleVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Simple d\'utilisation.mp4';
-import deploiementVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Déploiement rapide.mp4';
+import expressionLibreVideo from '../assets/feature-cards/expression-libre.mp4';
+import insightsVideo from '../assets/feature-cards/insights-temps-reel.mp4';
+import actionsVideo from '../assets/feature-cards/actions-ciblees.mp4';
+import anonymatVideo from '../assets/feature-cards/anonymat-garanti.mp4';
+import simpleVideo from '../assets/feature-cards/simple-utilisation.mp4';
+import deploiementVideo from '../assets/feature-cards/deploiement-rapide.mp4';
 
 const router = useRouter();
 const isVisible = ref(false);
