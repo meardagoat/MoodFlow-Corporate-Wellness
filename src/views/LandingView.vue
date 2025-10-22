@@ -234,9 +234,9 @@
               <!-- Duplicate experts for seamless loop -->
               <div v-for="(expert, index) in [...experts, ...experts]" :key="`expert-${index}`" 
                    class="flex-shrink-0 mx-2">
-                <div class="group relative w-64 h-80 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                <div class="group relative w-64 h-96 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                   <!-- Expert Image -->
-                  <div class="relative w-full h-44 overflow-hidden rounded-t-3xl">
+                  <div class="relative w-full h-36 overflow-hidden rounded-t-3xl">
                     <img :src="expert.image" 
                          :alt="expert.name"
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -245,16 +245,18 @@
                   </div>
                   
                   <!-- Expert Info -->
-                  <div class="p-4">
-                    <h3 class="font-bold text-neutral-900 text-base mb-1 group-hover:text-orange-600 transition-colors">
-                      {{ expert.name }}
-                    </h3>
-                    <p class="text-neutral-600 text-xs mb-2 leading-relaxed">
-                      {{ expert.role }}
-                    </p>
+                  <div class="p-4 flex flex-col h-full">
+                    <div class="mb-3">
+                      <h3 class="font-bold text-neutral-900 text-base mb-1 group-hover:text-orange-600 transition-colors">
+                        {{ expert.name }}
+                      </h3>
+                      <p class="text-neutral-600 text-xs mb-3 leading-relaxed">
+                        {{ expert.role }}
+                      </p>
+                    </div>
                     
                     <!-- Testimonial Quote -->
-                    <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-xl p-2 border border-orange-100">
+                    <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-xl p-3 border border-orange-100 flex-1 flex items-center">
                       <p class="text-neutral-700 text-xs italic leading-relaxed">
                         "{{ expert.testimonial }}"
                       </p>
@@ -267,11 +269,11 @@
           
           <!-- Pause/Play Button -->
           <button @click="toggleExpertCarousel" 
-                  class="absolute top-1/2 right-8 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group">
-            <svg v-if="expertCarouselPaused" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
+                  class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group z-10">
+            <svg v-if="expertCarouselPaused" width="14" height="14" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
               <path d="M8 5v14l11-7z"/>
             </svg>
-            <svg v-else width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
+            <svg v-else width="14" height="14" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
               <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
             </svg>
           </button>
