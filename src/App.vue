@@ -14,7 +14,7 @@ const router = useRouter();
 const { isNative, platform } = useNative();
 
 // États des splash screens
-const showSplash = ref(true);
+const showSplash = ref(false);
 const showGoodbye = ref(false);
 const authInitialized = ref(false);
 
@@ -30,9 +30,6 @@ const isAuthPage = computed(() => {
 onMounted(async () => {
   await initAuth();
   authInitialized.value = true;
-  
-  // Afficher le splash screen au démarrage
-  showSplash.value = true;
 });
 
 // Fonctions pour gérer les splash screens
@@ -50,8 +47,14 @@ function showGoodbyeScreen() {
   showGoodbye.value = true;
 }
 
-// Exposer la fonction globalement pour l'utiliser lors de la déconnexion
+// Fonction pour afficher le splash screen après login/register
+function showWelcomeSplash() {
+  showSplash.value = true;
+}
+
+// Exposer les fonctions globalement
 (window as any).showGoodbyeScreen = showGoodbyeScreen;
+(window as any).showWelcomeSplash = showWelcomeSplash;
 </script>
 
 <template>

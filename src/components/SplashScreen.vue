@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <!-- Title avec police interactive -->
+      <!-- Message de bienvenue -->
       <Motion
         tag="h1"
         class="mb-4 font-black cursor-default hover:scale-105 transition-transform duration-500"
@@ -100,7 +100,21 @@
         :transition="{ delay: 0.2, duration: 0.8, ease: 'easeInOut' }"
       >
         <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-          {{ appName }}
+          Bienvenue !
+        </span>
+      </Motion>
+
+      <!-- Message de chargement -->
+      <Motion
+        tag="p"
+        class="mb-6 font-semibold"
+        :style="{ fontSize: 'clamp(1rem, 3vw, 1.5rem)' }"
+        :initial="{ opacity: 0, y: 20 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ delay: 0.4, duration: 0.8, ease: 'easeOut' }"
+      >
+        <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+          Connexion en cours...
         </span>
       </Motion>
 

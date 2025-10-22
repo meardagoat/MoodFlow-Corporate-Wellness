@@ -246,7 +246,12 @@ async function handleSubmit() {
     error.value = signUpError.message;
     loading.value = false;
   } else {
-    router.push('/feed');
+    // Déclencher le splash screen de bienvenue
+    (window as any).showWelcomeSplash?.();
+    // Rediriger vers le feed après le splash screen
+    setTimeout(() => {
+      router.push('/feed');
+    }, 5000); // 5 secondes pour le splash screen
   }
 }
 
@@ -259,6 +264,13 @@ async function handleGoogleSignIn() {
   if (signInError) {
     error.value = signInError.message;
     loading.value = false;
+  } else {
+    // Déclencher le splash screen de bienvenue
+    (window as any).showWelcomeSplash?.();
+    // Rediriger vers le feed après le splash screen
+    setTimeout(() => {
+      router.push('/feed');
+    }, 5000); // 5 secondes pour le splash screen
   }
 }
 
@@ -271,6 +283,13 @@ async function handleGithubSignIn() {
   if (signInError) {
     error.value = signInError.message;
     loading.value = false;
+  } else {
+    // Déclencher le splash screen de bienvenue
+    (window as any).showWelcomeSplash?.();
+    // Rediriger vers le feed après le splash screen
+    setTimeout(() => {
+      router.push('/feed');
+    }, 5000); // 5 secondes pour le splash screen
   }
 }
 </script>
