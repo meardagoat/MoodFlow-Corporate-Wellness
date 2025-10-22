@@ -5,6 +5,19 @@
       <div class="w-full max-w-md">
         <!-- Header -->
         <div class="text-center mb-8">
+          <!-- Home button -->
+          <div class="flex justify-start mb-4">
+            <router-link
+              to="/"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-medium transition-all duration-300 hover:scale-105"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+              </svg>
+              <span>Accueil</span>
+            </router-link>
+          </div>
+          
           <!-- Logo interactif -->
           <div class="mb-6">
             <div class="inline-block relative group">

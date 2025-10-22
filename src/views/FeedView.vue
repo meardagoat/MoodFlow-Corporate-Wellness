@@ -1,5 +1,30 @@
 <template>
   <div class="min-h-screen bg-white">
+    <!-- Mobile Navigation -->
+    <div class="lg:hidden bg-white/90 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
+      <div class="flex items-center justify-between p-4">
+        <h1 class="text-xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+          MoodFlow
+        </h1>
+        <div class="flex items-center gap-3">
+          <router-link
+            to="/chat"
+            class="p-2 text-gray-600 hover:text-orange-600 transition-colors"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+          </router-link>
+          <router-link
+            to="/profile"
+            class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-purple-400 flex items-center justify-center text-white font-bold text-sm"
+          >
+            {{ currentProfile?.email?.charAt(0).toUpperCase() }}
+          </router-link>
+        </div>
+      </div>
+    </div>
+    
     <div class="max-w-7xl mx-auto flex">
       <!-- Enhanced Sidebar - Headspace Style -->
       <aside class="hidden lg:flex flex-col w-64 xl:w-72 px-6 py-6 bg-white/80 backdrop-blur-xl border-r border-gray-200/50 sticky top-0 h-screen">
