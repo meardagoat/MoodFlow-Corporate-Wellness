@@ -1,169 +1,159 @@
 <template>
-  <div 
-    v-if="show" 
+  <Motion
+    v-if="visible"
+    tag="div"
     class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
-    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);"
+    :initial="{ opacity: 0, scale: 0.9 }"
+    :animate="{ opacity: 1, scale: 1 }"
+    :exit="{ opacity: 0, scale: 0.9 }"
+    :transition="{ duration: 0.8, ease: 'easeInOut' }"
+    :style="{ paddingTop: 'var(--sat, 0)', paddingBottom: 'var(--sab, 0)' }"
   >
-    <!-- Particules flottantes animées -->
-    <div class="absolute inset-0">
-      <div 
-        v-for="i in 20" 
-        :key="i"
-        class="absolute w-2 h-2 bg-white/20 rounded-full animate-float"
-        :style="{
-          left: Math.random() * 100 + '%',
-          top: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 3 + 's',
-          animationDuration: (3 + Math.random() * 4) + 's'
-        }"
-      ></div>
-    </div>
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-purple-50" />
 
-    <!-- Ondes concentriques -->
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="w-96 h-96 border border-white/10 rounded-full animate-pulse-soft"></div>
-      <div class="absolute w-80 h-80 border border-white/20 rounded-full animate-pulse-soft" style="animation-delay: 0.5s"></div>
-      <div class="absolute w-64 h-64 border border-white/30 rounded-full animate-pulse-soft" style="animation-delay: 1s"></div>
-    </div>
-
-    <!-- Contenu principal -->
-    <div class="text-center relative z-10 max-w-lg mx-auto px-6">
-      <!-- Logo animé avec effet de glow -->
-      <div class="mb-6 sm:mb-8">
-        <div class="inline-block relative">
-          <div class="w-32 h-32 sm:w-40 sm:h-40 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-glow animate-glow overflow-hidden">
-            <video 
-              autoplay 
-              muted 
-              playsinline
-              loop
-              class="w-full h-full object-contain"
-            >
-              <source src="/src/assets/MoodFlow_final_logo.mp4" type="video/mp4">
-              <!-- Fallback sur image statique si la vidéo ne charge pas -->
-              <img src="/src/assets/MoodFlow_final_logo.png" alt="MoodFlow" class="w-full h-full object-contain" />
-            </video>
-          </div>
-          <!-- Effet de shimmer -->
-          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-2xl animate-shimmer"></div>
-        </div>
-      </div>
-
-      <!-- Titre avec animation -->
-      <h1 class="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4 animate-fade-in" style="animation-delay: 0.5s">
-        MoodFlow
-      </h1>
-      
-      <p class="text-white/80 text-base sm:text-lg mb-6 sm:mb-8 animate-fade-in" style="animation-delay: 0.7s">
-        Corporate Wellness Platform
-      </p>
-
-      <!-- Barre de progression moderne -->
-      <div class="w-full max-w-xs mx-auto">
-        <div class="h-1 bg-white/20 rounded-full overflow-hidden">
-          <div 
-            class="h-full bg-gradient-to-r from-white/60 to-white/90 rounded-full transition-all duration-300 ease-out"
-            :style="{ width: progress + '%' }"
-          ></div>
-        </div>
-        <p class="text-white/60 text-sm mt-2 animate-pulse-soft">
-          {{ loadingText }}
-        </p>
-      </div>
-    </div>
-
-    <!-- Effet de particules en arrière-plan -->
+    <!-- Organic animated blobs -->
     <div class="absolute inset-0 pointer-events-none">
-      <div 
-        v-for="i in 15" 
-        :key="'bg-' + i"
-        class="absolute w-1 h-1 bg-white/10 rounded-full animate-float-slow"
-        :style="{
-          left: Math.random() * 100 + '%',
-          top: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 5 + 's',
-          animationDuration: (5 + Math.random() * 3) + 's'
-        }"
-      ></div>
+      <Motion
+        tag="div"
+        class="absolute top-32 -left-20 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl"
+        :animate="{ x: [0, 30, 0], y: [0, -50, 0], scale: [1, 1.1, 1] }"
+        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut' }"
+      />
+      <Motion
+        tag="div"
+        class="absolute top-20 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl"
+        :animate="{ x: [0, -20, 0], y: [0, 20, 0], scale: [1, 0.9, 1] }"
+        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }"
+      />
+      <Motion
+        tag="div"
+        class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl"
+        :animate="{ x: [0, 20, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }"
+        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 4 }"
+      />
     </div>
-  </div>
+
+    <!-- Logo and progress -->
+    <Motion
+      tag="div"
+      class="relative z-10 max-w-lg mx-auto text-center"
+      :initial="{ opacity: 0, scale: 0.9 }"
+      :animate="{ opacity: 1, scale: 1 }"
+      :transition="{ duration: 0.6, ease: 'easeOut' }"
+    >
+      <!-- Icon -->
+      <div class="inline-flex items-center justify-center mb-8 relative">
+        <Motion
+          tag="div"
+          class="absolute blur-[60px] rounded-full"
+          :style="{
+            inset: '-24px',
+            background:
+              'linear-gradient(135deg, rgba(249,115,22,0.3), rgba(168,85,247,0.3))',
+          }"
+          :animate="{ opacity: [0.4, 0.6, 0.4] }"
+          :transition="{ duration: 3, repeat: Infinity, ease: 'easeInOut' }"
+        />
+
+        <div
+          class="relative rounded-full"
+          :style="{
+            background: 'rgba(255,255,255,0.6)',
+            backdropFilter: 'blur(20px)',
+            padding: '24px',
+            border: '1px solid rgba(255,255,255,0.8)',
+            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1)',
+          }"
+        >
+          <svg
+            class="w-16 h-16 md:w-20 md:h-20"
+            viewBox="0 0 100 100"
+            fill="none"
+          >
+            <circle cx="50" cy="40" r="20" fill="#f97316" opacity="0.9" />
+            <path
+              d="M25 75 Q50 65, 75 75 Q75 85, 50 90 Q25 85, 25 75"
+              fill="#f97316"
+              opacity="0.9"
+            />
+            <path
+              d="M35 50 Q50 55, 65 50"
+              stroke="#a855f7"
+              stroke-width="3"
+              stroke-linecap="round"
+              fill="none"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <Motion
+        tag="h1"
+        class="mb-4 text-slate-800 font-bold"
+        :style="{ fontSize: 'clamp(2rem, 5vw, 3rem)' }"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :transition="{ delay: 0.2, duration: 0.8, ease: 'easeInOut' }"
+      >
+        {{ appName }}
+      </Motion>
+
+      <!-- Progress bar -->
+      <div
+        class="w-40 h-2 mx-auto mt-6 rounded-full overflow-hidden bg-white/60 backdrop-blur-md border border-white/80"
+      >
+        <Motion
+          tag="div"
+          class="h-full bg-gradient-to-r from-orange-500 to-purple-500"
+          :initial="{ width: '0%' }"
+          :animate="{ width: progress + '%' }"
+          :transition="{ duration: 0.3 }"
+        />
+      </div>
+    </Motion>
+  </Motion>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
+import { Motion } from '@motionone/vue' // ✅ Import correct
 
-const props = withDefaults(defineProps<{
-  show: boolean;
-  duration?: number;
-}>(), {
-  duration: 3000
-});
+interface Props {
+  onComplete?: () => void
+  duration?: number
+  appName?: string
+}
 
-const progress = ref(0);
-const loadingText = ref('Initializing...');
+const props = withDefaults(defineProps<Props>(), {
+  duration: 3000,
+  appName: 'MoodFlow',
+})
 
-const loadingMessages = [
-  'Initializing...',
-  'Loading components...',
-  'Preparing interface...',
-  'Almost ready...',
-  'Welcome to MoodFlow!'
-];
-
-let progressInterval: NodeJS.Timeout;
+const visible = ref(true)
+const progress = ref(0)
+let timer: ReturnType<typeof setTimeout> | null = null
+let interval: ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
-  if (props.show) {
-    startLoading();
-  }
-});
+  const startTime = Date.now()
+  const total = props.duration
+
+  interval = setInterval(() => {
+    const elapsed = Date.now() - startTime
+    progress.value = Math.min((elapsed / total) * 100, 100)
+  }, 50)
+
+  timer = setTimeout(() => {
+    visible.value = false
+    clearInterval(interval!)
+    setTimeout(() => props.onComplete?.(), 500)
+  }, props.duration)
+})
 
 onUnmounted(() => {
-  if (progressInterval) {
-    clearInterval(progressInterval);
-  }
-});
-
-function startLoading() {
-  let currentStep = 0;
-  const stepDuration = props.duration / loadingMessages.length;
-  
-  progressInterval = setInterval(() => {
-    if (currentStep < loadingMessages.length) {
-      progress.value = ((currentStep + 1) / loadingMessages.length) * 100;
-      loadingText.value = loadingMessages[currentStep];
-      currentStep++;
-    } else {
-      clearInterval(progressInterval);
-    }
-  }, stepDuration);
-}
+  if (timer) clearTimeout(timer)
+  if (interval) clearInterval(interval)
+})
 </script>
-
-<style scoped>
-/* Animations personnalisées */
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-@keyframes glow {
-  0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
-  100% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
-}
-
-@keyframes fade-in {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-</style>

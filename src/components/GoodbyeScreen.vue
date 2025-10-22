@@ -1,170 +1,210 @@
 <template>
-  <div 
-    v-if="show" 
+  <Motion
+    v-if="visible"
+    tag="div"
     class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
-    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);"
+    :initial="{ opacity: 0 }"
+    :animate="{ opacity: 1 }"
+    :exit="{ opacity: 0 }"
+    :transition="{ duration: 0.6, ease: 'easeInOut' }"
+    :style="{ paddingTop: 'var(--sat, 0)', paddingBottom: 'var(--sab, 0)' }"
   >
-    <!-- Particules d'au revoir -->
-    <div class="absolute inset-0">
-      <div 
-        v-for="i in 30" 
-        :key="i"
-        class="absolute w-2 h-2 bg-white/40 rounded-full animate-float"
-        :style="{
-          left: Math.random() * 100 + '%',
-          top: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 5 + 's',
-          animationDuration: (5 + Math.random() * 3) + 's'
-        }"
-      ></div>
-    </div>
+    <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-purple-50" />
 
-    <!-- Formes organiques apaisantes -->
-    <div class="absolute inset-0">
-      <div class="absolute top-1/4 left-1/4 w-40 h-40 bg-white/10 rounded-full animate-float-slow"></div>
-      <div class="absolute bottom-1/3 right-1/4 w-32 h-32 bg-white/15 rounded-full animate-float" style="animation-delay: 1.5s"></div>
-      <div class="absolute top-1/2 right-1/3 w-28 h-28 bg-white/20 rounded-full animate-float-slow" style="animation-delay: 3s"></div>
-    </div>
-
-    <!-- Contenu principal -->
-    <div class="text-center relative z-10 max-w-2xl mx-auto px-4 sm:px-6">
-      <!-- Animation d'au revoir -->
-      <div class="mb-6 sm:mb-8 animate-scale-in">
-        <div class="inline-block relative">
-          <div class="w-28 h-28 sm:w-36 sm:h-36 mx-auto bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-glow-lg animate-glow">
-            <div class="text-5xl sm:text-6xl">✨</div>
-          </div>
-          <!-- Effet de particules autour du logo -->
-          <div class="absolute inset-0">
-            <div 
-              v-for="i in 12" 
-              :key="i"
-              class="absolute w-2 h-2 bg-white/50 rounded-full animate-pulse-soft"
-              :style="{
-                left: (50 + 35 * Math.cos((i * 30) * Math.PI / 180)) + '%',
-                top: (50 + 35 * Math.sin((i * 30) * Math.PI / 180)) + '%',
-                animationDelay: (i * 0.15) + 's'
-              }"
-            ></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Titre avec animation -->
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 animate-slide-down" style="animation-delay: 0.3s">
-        Thank You!
-      </h1>
-      
-      <p class="text-white/90 text-base sm:text-lg md:text-xl mb-8 sm:mb-12 animate-fade-in" style="animation-delay: 0.5s">
-        Your wellness journey continues beyond this session
-      </p>
-
-      <!-- Messages d'encouragement -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
-        <div 
-          v-for="(message, index) in messages" 
-          :key="index"
-          class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/20 animate-slide-up"
-          :style="{ animationDelay: (0.7 + index * 0.2) + 's' }"
-        >
-          <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">{{ message.icon }}</div>
-          <h3 class="text-white font-semibold text-base sm:text-lg mb-2">{{ message.title }}</h3>
-          <p class="text-white/80 text-xs sm:text-sm">{{ message.description }}</p>
-        </div>
-      </div>
-
-      <!-- Bouton de fermeture -->
-      <div class="animate-fade-in" style="animation-delay: 1.3s">
-        <button 
-          @click="$emit('close')"
-          class="bg-white/20 backdrop-blur-sm text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105 shadow-glow w-full sm:w-auto"
-        >
-          Continue Your Journey
-        </button>
-      </div>
-    </div>
-
-    <!-- Effet de particules en arrière-plan -->
     <div class="absolute inset-0 pointer-events-none">
-      <div 
-        v-for="i in 25" 
-        :key="'bg-' + i"
-        class="absolute w-1 h-1 bg-white/30 rounded-full animate-float-slow"
-        :style="{
-          left: Math.random() * 100 + '%',
-          top: Math.random() * 100 + '%',
-          animationDelay: Math.random() * 8 + 's',
-          animationDuration: (8 + Math.random() * 4) + 's'
-        }"
-      ></div>
+      <Motion
+        tag="div"
+        class="absolute top-32 -left-20 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl"
+        :animate="{ x: [0, 30, 0], y: [0, -50, 0], scale: [1, 1.1, 1] }"
+        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut' }"
+      />
+      <Motion
+        tag="div"
+        class="absolute top-20 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl"
+        :animate="{ x: [0, -20, 0], y: [0, 20, 0], scale: [1, 0.9, 1] }"
+        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }"
+      />
+      <Motion
+        tag="div"
+        class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl"
+        :animate="{ x: [0, 20, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }"
+        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 4 }"
+      />
     </div>
-  </div>
+
+    <Motion
+      tag="div"
+      class="relative z-10 max-w-xl mx-auto px-6 text-center"
+      :initial="{ scale: 0.9, opacity: 0 }"
+      :animate="{ scale: 1, opacity: 1 }"
+      :transition="{ duration: 0.6, ease: 'easeOut' }"
+    >
+      <div class="inline-flex items-center justify-center mb-8 relative">
+        <Motion
+          tag="div"
+          class="absolute blur-[60px] rounded-full"
+          :style="{ inset: '-24px', background: 'linear-gradient(135deg, rgba(249,115,22,0.3), rgba(168,85,247,0.3))' }"
+          :animate="{ opacity: [0.4, 0.6, 0.4] }"
+          :transition="{ duration: 3, repeat: Infinity, ease: 'easeInOut' }"
+        />
+        <div
+          class="relative rounded-full"
+          :style="{
+            background: 'rgba(255,255,255,0.6)',
+            backdropFilter: 'blur(20px)',
+            padding: '24px',
+            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1)',
+            border: '1px solid rgba(255,255,255,0.8)'
+          }"
+        >
+          <svg class="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="40" stroke="#f97316" stroke-width="2" opacity="0.4" />
+            <path d="M35 35 L45 25 M65 35 L55 25" stroke="#a855f7" stroke-width="3" stroke-linecap="round" />
+            <circle cx="37" cy="45" r="4" fill="#f97316" />
+            <circle cx="63" cy="45" r="4" fill="#f97316" />
+            <path d="M35 65 Q50 75, 65 65" stroke="#a855f7" stroke-width="3" stroke-linecap="round" fill="none" />
+          </svg>
+        </div>
+      </div>
+
+      <Motion
+        tag="h1"
+        class="mb-4"
+        :style="{ fontSize: 'clamp(2.5rem,5vw,3.75rem)', fontWeight: 700, letterSpacing: '-0.025em' }"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :transition="{ delay: 0.2, duration: 0.8, ease: 'easeInOut' }"
+      >
+        <Motion
+          tag="span"
+          class="bg-clip-text text-transparent"
+          :style="{
+            backgroundImage: 'linear-gradient(to right,#f97316,#a855f7,#f97316)',
+            backgroundSize: '200% 200%'
+          }"
+          :animate="{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }"
+          :transition="{ duration: 3, repeat: Infinity, ease: 'easeInOut' }"
+        >
+          See You Soon
+        </Motion>
+      </Motion>
+
+      <Motion
+        tag="p"
+        class="mb-3"
+        :style="{ fontSize: 'clamp(1.25rem,3vw,1.5rem)', fontWeight: 300, lineHeight: '1.75' }"
+        :initial="{ opacity: 0, y: 30 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ delay: 0.3, duration: 0.8, ease: 'easeOut' }"
+      >
+        <span class="text-slate-700">Take care of </span>
+        <Motion
+          tag="span"
+          :style="{ fontWeight: 600 }"
+          :animate="{ color: ['#fb923c','#f97316','#ea580c','#fb923c'] }"
+          :transition="{ duration: 6, repeat: Infinity, ease: 'easeInOut' }"
+        >
+          yourself
+        </Motion>
+      </Motion>
+
+      <Motion
+        tag="p"
+        class="mb-8"
+        :style="{ fontSize: 'clamp(1rem,2vw,1.125rem)', color: '#64748b' }"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :transition="{ delay: 0.5, duration: 0.8, ease: 'easeInOut' }"
+      >
+        Remember, every step counts towards better wellness
+      </Motion>
+
+      <Motion
+        tag="div"
+        class="w-16 h-1 rounded-full overflow-hidden mx-auto mb-12"
+        :style="{ background: 'rgba(255,255,255,0.3)' }"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :transition="{ delay: 0.6, duration: 0.8, ease: 'easeInOut' }"
+      >
+        <Motion
+          tag="div"
+          class="h-full"
+          :style="{ background: 'linear-gradient(to right,#f97316,#a855f7)' }"
+          :animate="{ x: ['-100%', '100%'] }"
+          :transition="{ duration: 2, repeat: Infinity, ease: 'easeInOut' }"
+        />
+      </Motion>
+
+      <Motion
+        tag="div"
+        class="grid grid-cols-3 gap-4 max-w-md mx-auto"
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        :transition="{ delay: 0.7, duration: 0.8, ease: 'easeInOut' }"
+      >
+        <div
+          v-for="(stat, index) in statsData"
+          :key="index"
+          class="rounded-xl"
+          :style="{
+            background: 'rgba(255,255,255,0.6)',
+            backdropFilter: 'blur(8px)',
+            padding: '16px',
+            border: '1px solid rgba(255,255,255,0.8)'
+          }"
+        >
+          <div class="mb-1" :style="{ fontSize: '1.5rem', fontWeight: 700, color: '#1e293b' }">
+            {{ stat.value }}
+          </div>
+          <div :style="{ fontSize: '0.75rem', color: '#64748b' }">{{ stat.label }}</div>
+        </div>
+      </Motion>
+    </Motion>
+  </Motion>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { Motion } from '@motionone/vue'  // ✅ bon import
 
-const props = defineProps<{
-  show: boolean;
-}>();
+interface Stats {
+  days: number
+  moods: number
+  streak: number
+}
 
-const emit = defineEmits<{
-  close: [];
-}>();
+interface Props {
+  onComplete?: () => void
+  duration?: number
+  userName?: string
+  appName?: string
+  stats?: Stats
+}
 
-const messages = ref([
-  {
-    icon: '🌟',
-    title: 'Keep Growing',
-    description: 'Your wellness journey is a continuous process of growth and self-discovery'
-  },
-  {
-    icon: '💪',
-    title: 'Stay Strong',
-    description: 'Remember that every step forward, no matter how small, is progress'
-  }
-]);
+const props = withDefaults(defineProps<Props>(), {
+  duration: 3000,
+  appName: 'MoodFlow',
+  stats: () => ({ days: 0, moods: 0, streak: 0 })
+})
+
+const visible = ref(true)
+let timer: ReturnType<typeof setTimeout> | null = null
+
+const statsData = computed(() => [
+  { value: props.stats.days, label: 'Days Active' },
+  { value: props.stats.moods, label: 'Moods Tracked' },
+  { value: props.stats.streak, label: 'Day Streak' }
+])
+
+onMounted(() => {
+  timer = setTimeout(() => {
+    visible.value = false
+    setTimeout(() => props.onComplete?.(), 600)
+  }, props.duration)
+})
+
+onUnmounted(() => {
+  if (timer) clearTimeout(timer)
+})
 </script>
-
-<style scoped>
-/* Animations personnalisées */
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
-}
-
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(90deg); }
-}
-
-@keyframes pulse-soft {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-@keyframes glow {
-  0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
-  100% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
-}
-
-@keyframes slide-down {
-  0% { opacity: 0; transform: translateY(-50px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slide-up {
-  0% { opacity: 0; transform: translateY(50px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fade-in {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scale-in {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
-}
-</style>
