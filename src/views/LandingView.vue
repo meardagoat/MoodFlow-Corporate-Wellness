@@ -9,7 +9,7 @@
         <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       </div>
 
-      <div class="relative z-10 max-w-7xl mx-auto text-center">
+      <div class="relative z-10 max-w-7xl mx-auto text-center pt-16 md:pt-24">
         <div class="space-y-8 mb-16">
           <!-- Logo interactif en grand -->
           <div class="mb-8 md:mb-12 flex justify-center">
@@ -162,12 +162,23 @@
               <div v-for="(feature, index) in features" :key="index" 
                    class="min-w-full">
                 <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                  <!-- Image/Mockup -->
+                  <!-- Video Card -->
                   <div class="order-2 md:order-1">
-                    <div class="rounded-3xl overflow-hidden shadow-2xl"
-                         :class="getFeatureGradient(index)">
-                      <div class="aspect-[4/5] flex items-center justify-center p-12">
-                        <div class="text-9xl">{{ feature.icon }}</div>
+                    <div class="rounded-3xl overflow-hidden shadow-2xl bg-white">
+                      <div class="aspect-[4/5] flex items-center justify-center">
+                        <video 
+                          autoplay 
+                          muted 
+                          playsinline
+                          loop
+                          class="w-full h-full object-cover"
+                        >
+                          <source :src="feature.video" type="video/mp4">
+                          <!-- Fallback avec l'icône si la vidéo ne charge pas -->
+                          <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-purple-100">
+                            <div class="text-9xl">{{ feature.icon }}</div>
+                          </div>
+                        </video>
                       </div>
                     </div>
                   </div>
@@ -417,6 +428,14 @@ import { useRouter } from 'vue-router';
 import logoVideo from '../assets/MoodFlow_final_logo.mp4';
 import logoImage from '../assets/MoodFlow_final_logo.png';
 
+// Import des cards vidéo
+import expressionLibreVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Expression libre.mp4';
+import insightsVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Insights en temps réel.mp4';
+import actionsVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Actions ciblées.mp4';
+import anonymatVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Anonymat garanti.mp4';
+import simpleVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Simple d\'utilisation.mp4';
+import deploiementVideo from '../assets/Cards pour L\'app bien-être pour chaque moment/Déploiement rapide.mp4';
+
 const router = useRouter();
 const isVisible = ref(false);
 const featuresSection = ref<HTMLElement | null>(null);
@@ -470,31 +489,37 @@ const moods = [
 const features = [
   {
     icon: '💬',
+    video: expressionLibreVideo,
     title: 'Expression libre',
     description: 'Vos équipes partagent leur ressenti quotidien en toute confidentialité, sans jugement.'
   },
   {
     icon: '📊',
+    video: insightsVideo,
     title: 'Insights en temps réel',
     description: 'Comprenez instantanément le climat de votre organisation avec des données claires.'
   },
   {
     icon: '🎯',
+    video: actionsVideo,
     title: 'Actions ciblées',
     description: 'Identifiez rapidement les signaux faibles et agissez avant que ça devienne critique.'
   },
   {
     icon: '🔒',
+    video: anonymatVideo,
     title: 'Anonymat garanti',
     description: 'Architecture pensée pour protéger l\'identité de vos collaborateurs. Toujours.'
   },
   {
     icon: '✨',
+    video: simpleVideo,
     title: 'Simple d\'utilisation',
     description: 'Pas besoin de formation. Intuitif dès le premier jour, sur mobile et desktop.'
   },
   {
     icon: '🚀',
+    video: deploiementVideo,
     title: 'Déploiement rapide',
     description: 'Opérationnel en quelques minutes. Vos équipes peuvent commencer immédiatement.'
   }
