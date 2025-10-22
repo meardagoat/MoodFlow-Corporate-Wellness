@@ -165,13 +165,14 @@
                   <!-- Video Card -->
                   <div class="order-2 md:order-1">
                     <div class="rounded-3xl overflow-hidden shadow-2xl bg-white">
-                      <div class="aspect-[4/5] flex items-center justify-center">
+                      <div class="aspect-[4/5] flex items-center justify-center p-4">
                         <video 
                           autoplay 
                           muted 
                           playsinline
                           loop
-                          class="w-full h-full object-cover"
+                          class="w-full h-full object-contain"
+                          preload="metadata"
                         >
                           <source :src="feature.video" type="video/mp4">
                           <!-- Fallback avec l'icône si la vidéo ne charge pas -->
