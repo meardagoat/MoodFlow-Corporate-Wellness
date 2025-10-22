@@ -63,35 +63,49 @@
           </div>
         </div>
 
-        <!-- Interactive Mood Selector - Compact Version -->
+        <!-- Interactive Mood Selector - Headspace Style -->
         <div class="relative w-full mt-12 md:mt-16 px-4 md:px-6">
-          <div class="max-w-4xl mx-auto">
+          <div class="max-w-5xl mx-auto">
             <!-- Main selector -->
-            <div class="text-center mb-8">
-              <h3 class="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
                 Comment vous sentez-vous ?
               </h3>
+              <p class="text-lg text-neutral-600 mb-8">Sélectionnez votre humeur actuelle</p>
             
-              <!-- Compact mood buttons -->
-              <div class="flex justify-center items-center gap-3 md:gap-4 mb-8">
+              <!-- Headspace-style mood cards -->
+              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto">
                 <button v-for="(mood, i) in moods" :key="i"
                         @click="selectedMoodIndex = i"
-                        class="mood-button group relative flex flex-col items-center flex-shrink-0">
-                  <div class="relative w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center shadow-lg mb-1"
+                        class="group relative flex flex-col items-center p-4 md:p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+                        :class="selectedMoodIndex === i 
+                          ? 'bg-white/90 backdrop-blur-sm shadow-xl border-2 border-orange-200' 
+                          : 'bg-white/60 backdrop-blur-sm hover:bg-white/80 shadow-lg hover:shadow-xl border border-white/40'">
+                  
+                  <!-- Emoji container -->
+                  <div class="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mb-3 transition-all duration-300"
                        :class="[
                          mood.gradient,
-                         selectedMoodIndex === i ? 'scale-105 shadow-xl' : 'opacity-70 hover:opacity-90'
+                         selectedMoodIndex === i ? 'scale-110 shadow-lg' : 'group-hover:scale-105'
                        ]">
-                    <span class="text-3xl md:text-4xl">
+                    <span class="text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-110">
                       {{ mood.emoji }}
                     </span>
                   </div>
                   
                   <!-- Label -->
-                  <p class="text-xs font-medium whitespace-nowrap"
-                     :class="selectedMoodIndex === i ? 'text-neutral-900' : 'text-neutral-500'">
+                  <p class="text-sm md:text-base font-semibold text-center leading-tight"
+                     :class="selectedMoodIndex === i ? 'text-neutral-900' : 'text-neutral-600 group-hover:text-neutral-800'">
                     {{ mood.label }}
                   </p>
+                  
+                  <!-- Selection indicator -->
+                  <div v-if="selectedMoodIndex === i" 
+                       class="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
                 </button>
               </div>
             </div>
@@ -136,16 +150,18 @@
           </h2>
         </div>
 
-        <!-- Tabs -->
-        <div class="overflow-x-auto scrollbar-hide mb-12">
-          <div class="flex gap-2 justify-center min-w-max mx-auto pb-4">
+        <!-- Headspace-style Tabs -->
+        <div class="overflow-x-auto scrollbar-hide mb-16">
+          <div class="flex gap-3 justify-center min-w-max mx-auto pb-4">
             <button v-for="(feature, index) in features" :key="index"
                     @click="currentFeature = index"
-                    class="px-6 py-3 rounded-full font-semibold transition-all duration-300 whitespace-nowrap"
+                    class="group relative px-6 py-4 rounded-2xl font-semibold transition-all duration-300 whitespace-nowrap border-2"
                     :class="currentFeature === index 
-                      ? 'bg-neutral-900 text-white shadow-lg' 
-                      : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'">
-              {{ feature.title }}
+                      ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-xl border-transparent' 
+                      : 'bg-white/80 backdrop-blur-sm text-neutral-700 hover:bg-white/90 border-neutral-200 hover:border-orange-200 hover:shadow-lg'">
+              <span class="relative z-10">{{ feature.title }}</span>
+              <div v-if="currentFeature === index" 
+                   class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>
@@ -157,41 +173,83 @@
                  :style="`transform: translateX(-${currentFeature * 100}%)`">
               <div v-for="(feature, index) in features" :key="index" 
                    class="min-w-full">
-                <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                  <!-- Video Card -->
+                <div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+                  <!-- Headspace-style Video Card -->
                   <div class="order-2 md:order-1">
-                    <div class="rounded-3xl overflow-hidden shadow-2xl bg-white">
-                      <div class="aspect-[1/1] flex items-center justify-center p-4">
-                        <video 
-                          autoplay 
-                          muted 
-                          playsinline
-                          loop
-                          class="w-full h-full object-cover rounded-2xl"
-                          preload="metadata"
-                        >
-                          <source :src="feature.video" type="video/mp4">
-                          <!-- Fallback avec l'icône si la vidéo ne charge pas -->
-                          <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-purple-100">
-                            <div class="text-9xl">{{ feature.icon }}</div>
+                    <div class="group relative">
+                      <!-- Card container with glassmorphism -->
+                      <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white/90 backdrop-blur-sm border border-white/20 group-hover:shadow-3xl transition-all duration-500">
+                        <!-- Video container -->
+                        <div class="aspect-[4/5] flex items-center justify-center p-6 relative overflow-hidden">
+                          <video 
+                            autoplay 
+                            muted 
+                            playsinline
+                            loop
+                            class="w-full h-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-105"
+                            preload="metadata"
+                          >
+                            <source :src="feature.video" type="video/mp4">
+                            <!-- Fallback avec l'icône si la vidéo ne charge pas -->
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-purple-100 rounded-2xl">
+                              <div class="text-8xl opacity-80">{{ feature.icon }}</div>
+                            </div>
+                          </video>
+                          
+                          <!-- Overlay gradient -->
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+                        </div>
+                        
+                        <!-- Card footer -->
+                        <div class="p-6 bg-gradient-to-r from-orange-50/50 to-purple-50/50">
+                          <div class="flex items-center justify-center">
+                            <div class="w-3 h-3 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-pulse"></div>
+                            <span class="ml-2 text-sm font-medium text-neutral-600">En cours de lecture</span>
                           </div>
-                        </video>
+                        </div>
                       </div>
+                      
+                      <!-- Floating elements -->
+                      <div class="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-orange-400 to-purple-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+                      <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-purple-400 to-orange-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
                     </div>
                   </div>
 
-                  <!-- Content -->
+                  <!-- Headspace-style Content -->
                   <div class="order-1 md:order-2 text-center md:text-left">
-                    <h3 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
-                      {{ feature.title }}
-                    </h3>
-                    <p class="text-xl text-neutral-600 leading-relaxed mb-8">
-                      {{ feature.description }}
-                    </p>
-                    <button @click="goToRegister"
-                            class="px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
-                      Découvrir
-                    </button>
+                    <div class="max-w-lg mx-auto md:mx-0">
+                      <!-- Feature badge -->
+                      <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-100 to-purple-100 rounded-full mb-6">
+                        <div class="w-2 h-2 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-pulse"></div>
+                        <span class="text-sm font-semibold text-neutral-700">{{ feature.category || 'Fonctionnalité' }}</span>
+                      </div>
+                      
+                      <!-- Title with gradient -->
+                      <h3 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+                          {{ feature.title }}
+                        </span>
+                      </h3>
+                      
+                      <!-- Description -->
+                      <p class="text-xl text-neutral-600 leading-relaxed mb-8">
+                        {{ feature.description }}
+                      </p>
+                      
+                      <!-- CTA Button with Headspace style -->
+                      <div class="flex flex-col sm:flex-row gap-4">
+                        <button @click="goToRegister"
+                                class="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden">
+                          <span class="relative z-10">Découvrir</span>
+                          <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                        
+                        <button @click="scrollToFeatures"
+                                class="px-8 py-4 bg-white/80 backdrop-blur-sm text-neutral-700 rounded-2xl font-semibold border border-neutral-200 hover:bg-white/90 hover:border-orange-200 transition-all duration-300">
+                          En savoir plus
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -514,37 +572,43 @@ const features = [
     icon: '💬',
     video: expressionLibreVideo,
     title: 'Expression libre',
-    description: 'Vos équipes partagent leur ressenti quotidien en toute confidentialité, sans jugement.'
+    description: 'Vos équipes partagent leur ressenti quotidien en toute confidentialité, sans jugement.',
+    category: 'Communication'
   },
   {
     icon: '📊',
     video: insightsVideo,
     title: 'Insights en temps réel',
-    description: 'Comprenez instantanément le climat de votre organisation avec des données claires.'
+    description: 'Comprenez instantanément le climat de votre organisation avec des données claires.',
+    category: 'Analytics'
   },
   {
     icon: '🎯',
     video: actionsVideo,
     title: 'Actions ciblées',
-    description: 'Identifiez rapidement les signaux faibles et agissez avant que ça devienne critique.'
+    description: 'Identifiez rapidement les signaux faibles et agissez avant que ça devienne critique.',
+    category: 'Action'
   },
   {
     icon: '🔒',
     video: anonymatVideo,
     title: 'Anonymat garanti',
-    description: 'Architecture pensée pour protéger l\'identité de vos collaborateurs. Toujours.'
+    description: 'Architecture pensée pour protéger l\'identité de vos collaborateurs. Toujours.',
+    category: 'Sécurité'
   },
   {
     icon: '✨',
     video: simpleVideo,
     title: 'Simple d\'utilisation',
-    description: 'Pas besoin de formation. Intuitif dès le premier jour, sur mobile et desktop.'
+    description: 'Pas besoin de formation. Intuitif dès le premier jour, sur mobile et desktop.',
+    category: 'UX/UI'
   },
   {
     icon: '🚀',
     video: deploiementVideo,
     title: 'Déploiement rapide',
-    description: 'Opérationnel en quelques minutes. Vos équipes peuvent commencer immédiatement.'
+    description: 'Opérationnel en quelques minutes. Vos équipes peuvent commencer immédiatement.',
+    category: 'Déploiement'
   }
 ];
 
