@@ -1,21 +1,25 @@
 {
   "name": "MoodFlow - Corporate Wellness",
   "short_name": "MoodFlow",
-  "description": "Corporate wellness app for team mood tracking and anonymous chat",
+  "description": "Transformez le bien-être en entreprise avec une approche simple, anonyme et bienveillante",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ff9d70",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "business", "health"],
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

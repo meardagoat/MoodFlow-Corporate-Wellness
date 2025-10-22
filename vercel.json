@@ -2,6 +2,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "name": "MoodFlow Corporate Wellness",
+  "description": "Transformez le bien-être en entreprise avec une approche simple, anonyme et bienveillante",
+  "logo": "/src/assets/MoodFlow_final_logo.png",
   "rewrites": [
     {
       "source": "/(.*)",

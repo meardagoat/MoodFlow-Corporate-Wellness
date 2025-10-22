@@ -48,36 +48,39 @@
           :transition="{ duration: 3, repeat: Infinity, ease: 'easeInOut' }"
         />
         <div
-          class="relative rounded-full"
+          class="relative rounded-full overflow-hidden"
           :style="{
             background: 'rgba(255,255,255,0.6)',
             backdropFilter: 'blur(20px)',
-            padding: '24px',
+            padding: '16px',
             boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1)',
             border: '1px solid rgba(255,255,255,0.8)'
           }"
         >
-          <svg class="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 100 100" fill="none">
-            <circle cx="50" cy="50" r="40" stroke="#f97316" stroke-width="2" opacity="0.4" />
-            <path d="M35 35 L45 25 M65 35 L55 25" stroke="#a855f7" stroke-width="3" stroke-linecap="round" />
-            <circle cx="37" cy="45" r="4" fill="#f97316" />
-            <circle cx="63" cy="45" r="4" fill="#f97316" />
-            <path d="M35 65 Q50 75, 65 65" stroke="#a855f7" stroke-width="3" stroke-linecap="round" fill="none" />
-          </svg>
+          <video 
+            autoplay 
+            muted 
+            playsinline
+            loop
+            class="w-16 h-16 md:w-20 md:h-20 object-contain"
+          >
+            <source :src="logoVideo" type="video/mp4">
+            <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
+          </video>
         </div>
       </div>
 
       <Motion
         tag="h1"
-        class="mb-4"
-        :style="{ fontSize: 'clamp(2.5rem,5vw,3.75rem)', fontWeight: 700, letterSpacing: '-0.025em' }"
-        :initial="{ opacity: 0 }"
-        :animate="{ opacity: 1 }"
+        class="mb-4 font-black cursor-default hover:scale-105 transition-transform duration-500"
+        :style="{ fontSize: 'clamp(2.5rem,5vw,3.75rem)', letterSpacing: '-0.025em' }"
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :animate="{ opacity: 1, scale: 1 }"
         :transition="{ delay: 0.2, duration: 0.8, ease: 'easeInOut' }"
       >
         <Motion
           tag="span"
-          class="bg-clip-text text-transparent"
+          class="bg-clip-text text-transparent animate-gradient-flow"
           :style="{
             backgroundImage: 'linear-gradient(to right,#f97316,#a855f7,#f97316)',
             backgroundSize: '200% 200%'
@@ -167,6 +170,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Motion } from '@motionone/vue'  // ✅ bon import
+import logoVideo from '../assets/MoodFlow_final_logo.mp4'
+import logoImage from '../assets/MoodFlow_final_logo.png'
 
 interface Stats {
   days: number
@@ -208,3 +213,22 @@ onUnmounted(() => {
   if (timer) clearTimeout(timer)
 })
 </script>
+
+<style scoped>
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease infinite;
+}
+</style>

@@ -57,47 +57,40 @@
         />
 
         <div
-          class="relative rounded-full"
+          class="relative rounded-full overflow-hidden"
           :style="{
             background: 'rgba(255,255,255,0.6)',
             backdropFilter: 'blur(20px)',
-            padding: '24px',
+            padding: '16px',
             border: '1px solid rgba(255,255,255,0.8)',
             boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1)',
           }"
         >
-          <svg
-            class="w-16 h-16 md:w-20 md:h-20"
-            viewBox="0 0 100 100"
-            fill="none"
+          <video 
+            autoplay 
+            muted 
+            playsinline
+            loop
+            class="w-16 h-16 md:w-20 md:h-20 object-contain"
           >
-            <circle cx="50" cy="40" r="20" fill="#f97316" opacity="0.9" />
-            <path
-              d="M25 75 Q50 65, 75 75 Q75 85, 50 90 Q25 85, 25 75"
-              fill="#f97316"
-              opacity="0.9"
-            />
-            <path
-              d="M35 50 Q50 55, 65 50"
-              stroke="#a855f7"
-              stroke-width="3"
-              stroke-linecap="round"
-              fill="none"
-            />
-          </svg>
+            <source :src="logoVideo" type="video/mp4">
+            <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
+          </video>
         </div>
       </div>
 
-      <!-- Title -->
+      <!-- Title avec police interactive -->
       <Motion
         tag="h1"
-        class="mb-4 text-slate-800 font-bold"
-        :style="{ fontSize: 'clamp(2rem, 5vw, 3rem)' }"
-        :initial="{ opacity: 0 }"
-        :animate="{ opacity: 1 }"
+        class="mb-4 font-black cursor-default hover:scale-105 transition-transform duration-500"
+        :style="{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }"
+        :initial="{ opacity: 0, scale: 0.9 }"
+        :animate="{ opacity: 1, scale: 1 }"
         :transition="{ delay: 0.2, duration: 0.8, ease: 'easeInOut' }"
       >
-        {{ appName }}
+        <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+          {{ appName }}
+        </span>
       </Motion>
 
       <!-- Progress bar -->
@@ -119,6 +112,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Motion } from '@motionone/vue' // ✅ Import correct
+import logoVideo from '../assets/MoodFlow_final_logo.mp4'
+import logoImage from '../assets/MoodFlow_final_logo.png'
 
 interface Props {
   onComplete?: () => void
@@ -157,3 +152,22 @@ onUnmounted(() => {
   if (interval) clearInterval(interval)
 })
 </script>
+
+<style scoped>
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease infinite;
+}
+</style>
