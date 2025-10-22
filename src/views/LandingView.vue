@@ -281,10 +281,10 @@
     </section>
 
     <!-- Companies Carousel -->
-    <section class="py-20 md:py-24 lg:py-28 px-4 md:px-6 bg-white/40 backdrop-blur-sm">
+    <section class="py-20 md:py-24 lg:py-28 px-4 md:px-6 bg-white">
       <div class="max-w-7xl mx-auto">
         <h3 class="text-center mb-12 md:mb-16 px-4">
-          <span class="inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-text hover:scale-105 transition-transform duration-300 cursor-default">
+          <span class="inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-text hover:scale-105 transition-transform duration-300 cursor-default bg-white px-8 py-4 rounded-2xl shadow-lg">
             Ils font confiance à MoodFlow
           </span>
         </h3>
