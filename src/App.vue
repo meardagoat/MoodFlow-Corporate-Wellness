@@ -3,7 +3,6 @@ import { computed, ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import AppLayout from './components/AppLayout.vue';
 import SplashScreen from './components/SplashScreen.vue';
-import WelcomeScreen from './components/WelcomeScreen.vue';
 import GoodbyeScreen from './components/GoodbyeScreen.vue';
 import { currentUser, currentProfile, initAuth } from './lib/auth';
 import { useNative } from './composables/useNative';
@@ -16,7 +15,6 @@ const { isNative, platform } = useNative();
 
 // États des splash screens
 const showSplash = ref(true);
-const showWelcome = ref(false);
 const showGoodbye = ref(false);
 const authInitialized = ref(false);
 
@@ -33,13 +31,8 @@ onMounted(async () => {
   await initAuth();
   authInitialized.value = true;
   
-  // Pas de splash screen, juste charger directement
-  showSplash.value = false;
-  
-  // Afficher l'écran de bienvenue si l'utilisateur est connecté
-  if (currentUser.value && currentProfile.value) {
-    showWelcome.value = true;
-  }
+  // Afficher le splash screen au démarrage
+  showSplash.value = true;
 });
 
 // Fonctions pour gérer les splash screens
@@ -47,9 +40,6 @@ function closeSplash() {
   showSplash.value = false;
 }
 
-function closeWelcome() {
-  showWelcome.value = false;
-}
 
 function closeGoodbye() {
   showGoodbye.value = false;
@@ -68,18 +58,10 @@ function showGoodbyeScreen() {
   <!-- Splash Screen au lancement -->
   <SplashScreen 
     v-if="showSplash" 
-    :show="showSplash"
-    :duration="3000"
-    @close="closeSplash"
+    :duration="5000"
+    @complete="closeSplash"
   />
 
-  <!-- Écran de bienvenue -->
-  <WelcomeScreen 
-    v-if="showWelcome" 
-    :show="showWelcome"
-    :stats="sessionStats"
-    @close="closeWelcome"
-  />
 
   <!-- Écran d'au revoir -->
   <GoodbyeScreen 
