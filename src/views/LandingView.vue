@@ -63,37 +63,33 @@
           </div>
         </div>
 
-        <!-- Interactive Mood Selector - Dribbble Style -->
-        <div class="relative w-full mt-20 md:mt-24 px-4 md:px-6 lg:px-12">
-          <div class="max-w-7xl mx-auto">
+        <!-- Interactive Mood Selector - Compact Version -->
+        <div class="relative w-full mt-12 md:mt-16 px-4 md:px-6">
+          <div class="max-w-4xl mx-auto">
             <!-- Main selector -->
-            <div class="text-center mb-12">
-              <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent animate-gradient-flow inline-block cursor-default hover:scale-105 transition-transform duration-300">
+            <div class="text-center mb-8">
+              <h3 class="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent">
                 Comment vous sentez-vous ?
               </h3>
             
-              <!-- Large interactive mood buttons -->
-              <div class="flex justify-center items-end gap-2 sm:gap-3 md:gap-6 lg:gap-8 mb-12 md:mb-16 overflow-x-auto scrollbar-hide pb-4">
+              <!-- Compact mood buttons -->
+              <div class="flex justify-center items-center gap-3 md:gap-4 mb-8">
                 <button v-for="(mood, i) in moods" :key="i"
                         @click="selectedMoodIndex = i"
-                        class="mood-button group relative transition-all duration-500 ease-out flex flex-col items-center flex-shrink-0">
-                  <div class="relative w-16 h-16 sm:w-20 sm:h-20 md:w-36 md:h-36 lg:w-40 lg:h-40 rounded-xl md:rounded-[2rem] flex items-center justify-center transition-all duration-500 shadow-xl mb-2 md:mb-4"
+                        class="mood-button group relative flex flex-col items-center flex-shrink-0">
+                  <div class="relative w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center shadow-lg mb-1"
                        :class="[
                          mood.gradient,
-                         selectedMoodIndex === i ? 'scale-110 shadow-2xl' : 'scale-90 opacity-50 hover:opacity-80 hover:scale-100'
+                         selectedMoodIndex === i ? 'scale-105 shadow-xl' : 'opacity-70 hover:opacity-90'
                        ]">
-                    <span class="text-3xl sm:text-4xl md:text-7xl lg:text-8xl transition-all duration-300 group-hover:scale-110">
+                    <span class="text-2xl md:text-3xl">
                       {{ mood.emoji }}
                     </span>
-                    
-                    <!-- Ripple effect when selected -->
-                    <div v-if="selectedMoodIndex === i" 
-                         class="absolute inset-0 rounded-xl md:rounded-[2rem] bg-white/20 animate-ping"></div>
                   </div>
                   
-                  <!-- Label always visible -->
-                  <p class="text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap transition-all duration-300"
-                     :class="selectedMoodIndex === i ? 'text-neutral-900 scale-105 md:scale-110' : 'text-neutral-400'">
+                  <!-- Label -->
+                  <p class="text-xs font-medium whitespace-nowrap"
+                     :class="selectedMoodIndex === i ? 'text-neutral-900' : 'text-neutral-500'">
                     {{ mood.label }}
                   </p>
                 </button>
@@ -165,7 +161,7 @@
                   <!-- Video Card -->
                   <div class="order-2 md:order-1">
                     <div class="rounded-3xl overflow-hidden shadow-2xl bg-white">
-                      <div class="aspect-[4/5] flex items-center justify-center p-4">
+                      <div class="aspect-[3/4] flex items-center justify-center p-6">
                         <video 
                           autoplay 
                           muted 
