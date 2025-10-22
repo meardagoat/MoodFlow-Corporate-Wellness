@@ -1,14 +1,14 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 py-8">
+  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <!-- Header premium -->
       <div class="mb-8">
         <div class="flex items-center gap-4 mb-3">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
             <span class="text-3xl">📊</span>
           </div>
           <div>
-            <h1 class="text-3xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Wellness Analytics
             </h1>
             <p class="text-gray-600">Team wellness insights and trends</p>
@@ -25,7 +25,7 @@
         <!-- Cards de statistiques modernes -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <!-- Total Participants -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6 hover:shadow-xl transition-all group">
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6 hover:shadow-xl transition-all group">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Team</h3>
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -39,7 +39,7 @@
           </div>
 
           <!-- Total Posts -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6 hover:shadow-xl transition-all group">
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6 hover:shadow-xl transition-all group">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Activity</h3>
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -53,7 +53,7 @@
           </div>
 
           <!-- Average Mood -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6 hover:shadow-xl transition-all group">
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6 hover:shadow-xl transition-all group">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Team Mood</h3>
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -78,7 +78,7 @@
         <!-- Secondary stats -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <!-- Participation Rate -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6">
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-lg font-bold text-gray-900">Participation Rate</h3>
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
@@ -101,7 +101,7 @@
           </div>
           
           <!-- Top Tags -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-6">
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-lg font-bold text-gray-900">Top Topics</h3>
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
@@ -131,7 +131,7 @@
         <!-- Charts section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <!-- Mood Distribution -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-8">
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-8">
             <div class="flex items-center gap-3 mb-6">
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
                 <span class="text-xl">📊</span>
@@ -142,7 +142,7 @@
           </div>
 
           <!-- Trend Chart -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 p-8">
+          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-8">
             <div class="flex items-center gap-3 mb-6">
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
                 <span class="text-xl">📈</span>
@@ -154,7 +154,7 @@
         </div>
 
         <!-- Department Analytics Table -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/50 overflow-hidden">
+        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 overflow-hidden">
           <div class="p-8">
             <div class="flex items-center gap-3 mb-6">
               <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">

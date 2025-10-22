@@ -49,6 +49,7 @@ async function loadProfile(userId: string) {
   }
 }
 
+
 // Fonction pour vérifier les permissions de création de rôles
 export function canCreateRole(creatorRole: string, targetRole: string): boolean {
   if (creatorRole === 'system_admin') {

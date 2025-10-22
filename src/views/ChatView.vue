@@ -1,15 +1,15 @@
 <template>
-  <div class="min-h-screen gradient-bg-calm safe-top safe-bottom">
+  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 safe-top safe-bottom">
     <div class="max-w-6xl mx-auto px-4 py-6 sm:py-8">
       <div class="mb-6 sm:mb-8">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Anonymous Chat</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-2">Anonymous Chat</h1>
         <p class="text-sm sm:text-base text-gray-600">Connect with colleagues anonymously</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="md:col-span-1">
           <div class="bg-white rounded-xl shadow overflow-hidden">
-            <div class="p-4 bg-primary-600 text-white flex justify-between items-center">
+              <div class="p-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white flex justify-between items-center">
               <h2 class="font-semibold">Conversations</h2>
               <button
                 @click="showNewChatModal = true"

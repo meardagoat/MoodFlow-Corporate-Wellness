@@ -1,374 +1,375 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50">
-    <!-- Header moderne avec glassmorphism -->
-    <div class="sticky top-0 z-30 backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-sm">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
-        <div class="flex items-center justify-between">
-          <div>
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-              Your Wellness Feed
+  <div class="min-h-screen bg-white">
+    <div class="max-w-7xl mx-auto flex">
+      <!-- Sidebar gauche - Navigation -->
+      <aside class="hidden lg:flex flex-col w-64 xl:w-72 px-4 py-4 border-r border-gray-200 sticky top-0 h-screen">
+        <div class="flex-1 space-y-2">
+          <!-- Logo -->
+          <div class="px-4 py-3 mb-4">
+            <h1 class="text-2xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
+              MoodFlow
             </h1>
-            <p class="text-sm text-gray-600 mt-0.5">Share and connect with your team</p>
+          </div>
+
+          <!-- Navigation items -->
+          <button
+            class="w-full flex items-center gap-4 px-4 py-3 rounded-full text-lg font-medium bg-orange-50 text-orange-600"
+          >
+            <span class="text-2xl">🏠</span>
+            <span>Feed</span>
+          </button>
+
+          <!-- Post button avec effet interactif -->
+          <button
+            @click="showPostModal = true"
+            class="w-full mt-4 py-3 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-full hover:shadow-2xl hover:shadow-orange-200 transition-all duration-300 hover:scale-105 active:scale-95 animate-gradient-flow"
+          >
+            ✨ Share Mood
+          </button>
+        </div>
+
+        <!-- User profile -->
+        <div class="p-3 rounded-full hover:bg-gray-100 transition cursor-pointer">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-purple-400 flex items-center justify-center">
+              <span class="text-white font-bold">{{ currentProfile?.email?.charAt(0).toUpperCase() }}</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-bold text-gray-900 truncate">{{ currentProfile?.display_name || 'You' }}</p>
+              <p class="text-xs text-gray-500 truncate">{{ currentProfile?.service }}</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Fil central - Posts -->
+      <main class="flex-1 max-w-2xl border-r border-gray-200">
+        <!-- Header sticky -->
+        <div class="sticky top-0 z-20 bg-white/90 backdrop-blur-xl border-b border-gray-200">
+          <div class="px-4 py-3">
+            <h2 class="text-xl font-bold text-gray-900">Wellness Feed</h2>
           </div>
           
-          <!-- Filtres modernes -->
-          <div class="flex items-center gap-3">
-            <select
-              v-model="filterMood"
-              @change="loadPosts"
-              class="px-4 py-2.5 bg-white/80 backdrop-blur border border-purple-100 rounded-2xl text-sm font-medium text-gray-700 hover:bg-white transition-all focus:outline-none focus:ring-2 focus:ring-purple-400"
-            >
-              <option value="">All moods</option>
-              <option v-for="mood in moods" :key="mood.value" :value="mood.value">
-                {{ mood.emoji }} {{ mood.label }}
-              </option>
-            </select>
-            
+          <!-- Mood Filter Tabs -->
+          <div class="flex border-b border-gray-200 overflow-x-auto scrollbar-hide">
             <button
-              @click="loadRecentPosts"
+              @click="filterMood = ''; loadPosts()"
               :class="[
-                'px-4 py-2.5 rounded-2xl text-sm font-medium transition-all',
-                showOnlyRecent
-                  ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-purple-200'
-                  : 'bg-white/80 backdrop-blur border border-purple-100 text-gray-700 hover:bg-white'
+                'flex-shrink-0 px-4 py-3 text-sm font-semibold transition relative',
+                filterMood === '' ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
               ]"
             >
-              ✨ New
+              All Moods
+              <div v-if="filterMood === ''" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-gradient-flow bg-[length:200%_auto]"></div>
             </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
-      <!-- Card de création de mood - Design moderne -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl shadow-purple-100/50 overflow-hidden">
-        <div class="p-6 sm:p-8">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
-              <span class="text-2xl">💭</span>
-            </div>
-            <div>
-              <h2 class="text-xl font-bold text-gray-900">How are you feeling?</h2>
-              <p class="text-sm text-gray-600">Share your mood with the team</p>
-            </div>
-          </div>
-
-          <form @submit.prevent="createPost" class="space-y-6">
-            <!-- Sélecteur de mood moderne - Desktop -->
-            <div class="hidden sm:grid grid-cols-5 gap-3">
-              <button
-                v-for="mood in moods"
-                :key="mood.value"
-                type="button"
-                @click="selectedMood = mood.value"
-                :class="[
-                  'relative group p-5 rounded-2xl transition-all duration-300',
-                  selectedMood === mood.value
-                    ? 'bg-gradient-to-br from-violet-500 to-purple-500 text-white shadow-xl shadow-purple-200 scale-105'
-                    : 'bg-white/80 hover:bg-white border border-gray-100 hover:border-purple-200 hover:shadow-lg'
-                ]"
-              >
-                <div class="text-4xl mb-2 transform group-hover:scale-110 transition-transform">
-                  {{ mood.emoji }}
-                </div>
-                <div :class="[
-                  'text-sm font-semibold',
-                  selectedMood === mood.value ? 'text-white' : 'text-gray-700'
-                ]">
-                  {{ mood.label }}
-                </div>
-                <div
-                  v-if="selectedMood === mood.value"
-                  class="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-lg"
-                >
-                  <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-              </button>
-            </div>
-
-            <!-- Sélecteur de mood mobile - Carousel amélioré -->
-            <div class="sm:hidden">
-              <div class="text-center mb-6">
-                <div class="text-7xl mb-3 animate-bounce-soft">{{ currentMoodEmoji }}</div>
-                <div class="text-lg font-bold text-gray-900">{{ currentMoodLabel }}</div>
-              </div>
-              
-              <div class="relative">
-                <div 
-                  class="flex overflow-x-auto scrollbar-hide gap-3 px-4 py-2 snap-x snap-mandatory"
-                  ref="emojiCarousel"
-                  @scroll="updateSelectedMoodFromCarousel"
-                >
-                  <div 
-                    v-for="(mood, index) in moods" 
-                    :key="mood.value"
-                    @click="selectMoodFromCarousel(index)"
-                    :class="[
-                      'flex-shrink-0 w-20 h-20 rounded-2xl flex items-center justify-center transition-all snap-center',
-                      selectedMood === mood.value
-                        ? 'bg-gradient-to-br from-violet-500 to-purple-500 shadow-xl scale-110'
-                        : 'bg-white/80 border border-gray-100'
-                    ]"
-                  >
-                    <span class="text-3xl">{{ mood.emoji }}</span>
-                  </div>
-                </div>
-                
-                <div class="flex justify-center mt-4 gap-1.5">
-                  <div 
-                    v-for="(mood, index) in moods" 
-                    :key="index"
-                    :class="[
-                      'h-1.5 rounded-full transition-all',
-                      selectedMood === mood.value ? 'w-8 bg-purple-500' : 'w-1.5 bg-gray-300'
-                    ]"
-                  ></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Tags modernes -->
-            <div v-if="selectedMood" class="space-y-3">
-              <label class="block text-sm font-semibold text-gray-700">
-                What's affecting your mood? (optional)
-              </label>
-              <div class="flex flex-wrap gap-2">
-                <button
-                  v-for="tag in moodTags"
-                  :key="tag.id"
-                  type="button"
-                  @click="toggleTag(tag.id)"
-                  :class="[
-                    'px-4 py-2 rounded-full text-sm font-medium transition-all',
-                    selectedTags.includes(tag.id)
-                      ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg scale-105'
-                      : 'bg-white/80 border border-gray-200 text-gray-700 hover:border-purple-300 hover:shadow-md'
-                  ]"
-                >
-                  {{ tag.label }}
-                </button>
-              </div>
-            </div>
-
-            <!-- Message avec design moderne -->
-            <div>
-              <textarea
-                v-model="message"
-                rows="3"
-                class="w-full px-5 py-4 bg-white/80 backdrop-blur border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all resize-none text-gray-900 placeholder-gray-400"
-                placeholder="Share more about how you're feeling... (optional)"
-              ></textarea>
-            </div>
-
-            <!-- Anonymous toggle moderne -->
-            <div class="flex items-center justify-between p-4 bg-purple-50/50 rounded-2xl">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
-                  <span class="text-xl">🕶️</span>
-                </div>
-                <div>
-                  <div class="font-semibold text-gray-900 text-sm">Post anonymously</div>
-                  <div class="text-xs text-gray-600">Your identity will be hidden</div>
-                </div>
-              </div>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input v-model="isAnonymous" type="checkbox" class="sr-only peer">
-                <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-violet-500 peer-checked:to-purple-500"></div>
-              </label>
-            </div>
-
-            <!-- Bouton d'envoi moderne -->
             <button
-              type="submit"
-              :disabled="!selectedMood || loading"
-              class="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold rounded-2xl shadow-xl shadow-purple-200 hover:shadow-2xl hover:shadow-purple-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              v-for="mood in moods.slice(0, 3)"
+              :key="mood.value"
+              @click="filterMood = mood.value; loadPosts()"
+              :class="[
+                'flex-shrink-0 px-4 py-3 text-sm font-semibold transition relative',
+                filterMood === mood.value ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
+              ]"
             >
-              {{ loading ? '✨ Sharing...' : '🚀 Share Your Mood' }}
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Posts section -->
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-bold text-gray-900">Team Moods</h2>
-          <div v-if="showOnlyRecent" class="flex items-center gap-2 text-sm">
-            <span class="px-4 py-2 bg-gradient-to-r from-violet-500 to-purple-500 text-white rounded-full font-medium shadow-lg">
-              🔥 Last 5 minutes
-            </span>
-            <button 
-              @click="loadPosts" 
-              class="text-purple-600 hover:text-purple-700 font-medium underline"
-            >
-              Show all
+              {{ mood.emoji }} {{ mood.label }}
+              <div v-if="filterMood === mood.value" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-gradient-flow bg-[length:200%_auto]"></div>
             </button>
           </div>
         </div>
 
-        <div v-if="loadingPosts" class="text-center py-12">
-          <div class="inline-block w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
-          <p class="text-gray-600 mt-4">Loading moods...</p>
+        <!-- Post creation (mobile) -->
+        <div class="border-b border-gray-200 p-4 lg:hidden">
+          <button
+            @click="showPostModal = true"
+            class="w-full py-3 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-full hover:shadow-lg transition-all animate-gradient-flow"
+          >
+            ✨ Share Your Mood
+          </button>
         </div>
 
-        <div v-else-if="posts.length === 0" class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 p-12 text-center">
-          <div class="text-6xl mb-4">🌟</div>
-          <p class="text-gray-600 text-lg">No posts yet. Be the first to share!</p>
+        <!-- Loading -->
+        <div v-if="loadingPosts" class="flex justify-center py-12">
+          <div class="w-8 h-8 border-4 border-gray-200 border-t-orange-500 rounded-full animate-spin"></div>
         </div>
 
-        <!-- Post cards avec design premium -->
-        <div
-          v-for="(post, index) in posts"
-          :key="post.id"
-          class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-purple-100/30 hover:shadow-xl hover:shadow-purple-200/40 transition-all duration-300 overflow-hidden group"
-          :style="{ animationDelay: (index * 0.1) + 's' }"
-        >
-          <div class="p-6">
-            <div class="flex items-start gap-4">
-              <!-- Mood emoji avec design premium -->
+        <!-- Posts -->
+        <div v-else>
+          <article
+            v-for="post in posts"
+            :key="post.id"
+            class="border-b border-gray-200 p-4 hover:bg-gray-50/50 transition cursor-pointer"
+          >
+            <div class="flex gap-3">
+              <!-- Avatar -->
               <div class="flex-shrink-0">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                  <span class="text-4xl">{{ getMoodEmoji(post.mood) }}</span>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                  <span class="text-lg">{{ getMoodEmoji(post.mood) }}</span>
                 </div>
               </div>
-              
+
+              <!-- Content -->
               <div class="flex-1 min-w-0">
-                <!-- Header du post -->
-                <div class="flex items-center justify-between mb-3">
-                  <div class="flex items-center gap-2 flex-wrap">
+                <!-- Header -->
+                <div class="flex items-start justify-between mb-1">
+                  <div class="flex items-center gap-1 text-sm">
                     <span class="font-bold text-gray-900">
                       {{ post.is_anonymous ? 'Anonymous' : (post.profiles?.display_name || 'User') }}
                     </span>
-                    <span class="text-gray-400">•</span>
-                    <span class="text-sm text-gray-600">{{ post.service }}</span>
-                    <span class="text-gray-400">•</span>
-                    <span class="text-sm text-gray-500">{{ formatDate(post.created_at) }}</span>
+                    <span class="text-gray-500">·</span>
+                    <span class="text-gray-500">{{ formatDate(post.created_at) }}</span>
                   </div>
                   
-                  <button 
+                  <button
                     v-if="canDeletePost(post)"
-                    @click="confirmDeletePost(post.id)"
-                    class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition"
+                    @click.stop="confirmDeletePost(post.id)"
+                    class="p-1.5 hover:bg-red-50 rounded-full text-gray-400 hover:text-red-500 transition"
                   >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                     </svg>
                   </button>
                 </div>
 
                 <!-- Message -->
-                <p class="text-gray-700 leading-relaxed mb-4">{{ post.message }}</p>
-                
+                <p class="text-gray-900 text-[15px] leading-normal mb-3">{{ post.message }}</p>
+
                 <!-- Tags -->
-                <div v-if="post.tags && post.tags.length > 0" class="flex flex-wrap gap-2 mb-4">
-                  <span 
-                    v-for="tagId in post.tags" 
+                <div v-if="post.tags && post.tags.length > 0" class="flex flex-wrap gap-1.5 mb-3">
+                  <span
+                    v-for="tagId in post.tags"
                     :key="tagId"
-                    class="px-3 py-1 bg-gradient-to-r from-violet-100 to-purple-100 text-purple-700 rounded-full text-xs font-medium"
+                    class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-medium"
                   >
                     {{ getTagLabel(tagId) }}
                   </span>
                 </div>
-                
-                <!-- Réactions modernisées -->
-                <div class="flex items-center gap-2 mb-4">
-                  <button 
-                    v-for="reaction in reactions" 
-                    :key="reaction.emoji"
-                    @click="addReaction(post.id, reaction.emoji)"
+
+                <!-- Actions -->
+                <div class="flex items-center justify-between max-w-md">
+                  <button
+                    @click.stop="toggleReplyForm(post.id)"
+                    class="flex items-center gap-2 group"
+                  >
+                    <div class="p-2 rounded-full group-hover:bg-blue-50 transition">
+                      <svg class="w-4 h-4 text-gray-500 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                      </svg>
+                    </div>
+                    <span class="text-xs text-gray-500 group-hover:text-blue-500">{{ getReplies(post.id).length }}</span>
+                  </button>
+
+                  <button
+                    @click.stop="addReaction(post.id, '❤️')"
                     :class="[
-                      'flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all',
-                      hasUserReacted(post.id, reaction.emoji)
-                        ? 'bg-gradient-to-r from-violet-100 to-purple-100 shadow-md scale-105'
-                        : 'bg-white/80 hover:bg-white hover:shadow-md'
+                      'flex items-center gap-2 group',
+                      hasUserReacted(post.id, '❤️') ? 'text-red-500' : ''
                     ]"
                   >
-                    <span class="text-lg">{{ reaction.emoji }}</span>
-                    <span class="text-sm font-semibold text-gray-700">{{ getReactionCount(post.id, reaction.emoji) }}</span>
+                    <div class="p-2 rounded-full group-hover:bg-red-50 transition-all group-hover:scale-110">
+                      <svg :class="['w-4 h-4 transition-all', hasUserReacted(post.id, '❤️') ? 'fill-red-500 text-red-500 scale-110' : 'text-gray-500 group-hover:text-red-500']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                      </svg>
+                    </div>
+                    <span :class="['text-xs transition-all', hasUserReacted(post.id, '❤️') ? 'text-red-500 font-bold' : 'text-gray-500 group-hover:text-red-500']">{{ getReactionCount(post.id, '❤️') }}</span>
                   </button>
                 </div>
-                
-                <!-- Bouton reply -->
-                <button 
-                  @click="toggleReplyForm(post.id)"
-                  class="text-sm font-medium text-purple-600 hover:text-purple-700 px-3 py-1.5 hover:bg-purple-50 rounded-lg transition"
-                >
-                  {{ isReplyFormOpen(post.id) ? '✕ Cancel' : '💬 Reply' }}
-                </button>
-                
-                <!-- Formulaire de réponse -->
-                <div v-if="isReplyFormOpen(post.id)" class="mt-4">
+
+                <!-- Reply form -->
+                <div v-if="isReplyFormOpen(post.id)" class="mt-3 pt-3 border-t border-gray-200">
                   <div class="flex gap-2">
-                    <input 
-                      v-model="replyText[post.id]" 
-                      class="flex-1 px-4 py-3 bg-white/80 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
-                      placeholder="Write a reply..."
+                    <input
+                      v-model="replyText[post.id]"
+                      @keyup.enter="submitReply(post.id)"
+                      class="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent text-sm"
+                      placeholder="Tweet your reply"
                     />
-                    <button 
+                    <button
                       @click="submitReply(post.id)"
                       :disabled="!replyText[post.id]"
-                      class="px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-medium rounded-2xl hover:shadow-lg disabled:opacity-50 transition-all"
+                      class="px-4 py-2 bg-gradient-to-r from-orange-500 to-purple-500 text-white font-semibold rounded-full disabled:opacity-50 text-sm"
                     >
-                      Send
+                      Reply
                     </button>
                   </div>
                 </div>
-                
+
                 <!-- Replies (threads) -->
-                <div v-if="getReplies(post.id).length > 0" class="mt-4 space-y-3">
-                  <div 
-                    v-for="reply in getReplies(post.id)" 
+                <div v-if="getReplies(post.id).length > 0 && isReplyFormOpen(post.id)" class="mt-3 space-y-3 pl-4 border-l-2 border-gray-200">
+                  <div
+                    v-for="reply in getReplies(post.id)"
                     :key="reply.id"
-                    class="flex gap-3 p-4 bg-purple-50/50 rounded-2xl border border-purple-100/50"
+                    class="flex gap-2"
                   >
-                    <div class="w-1 bg-gradient-to-b from-violet-400 to-purple-400 rounded-full flex-shrink-0"></div>
+                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
+                      <span class="text-xs">👤</span>
+                    </div>
                     <div class="flex-1 min-w-0">
-                      <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center gap-2 text-sm">
-                          <span class="font-semibold text-gray-900">
-                            {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
-                          </span>
-                          <span class="text-gray-400">•</span>
-                          <span class="text-gray-500">{{ formatDate(reply.created_at) }}</span>
-                        </div>
-                        
-                        <button 
-                          v-if="canDeleteReply(reply)"
-                          @click="confirmDeleteReply(reply.id, post.id)"
-                          class="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition"
-                        >
-                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                          </svg>
-                        </button>
+                      <div class="flex items-center gap-1 text-xs mb-1">
+                        <span class="font-bold text-gray-900">
+                          {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
+                        </span>
+                        <span class="text-gray-500">·</span>
+                        <span class="text-gray-500">{{ formatDate(reply.created_at) }}</span>
                       </div>
-                      <p class="text-gray-700 text-sm">{{ reply.message }}</p>
-                      
-                      <!-- Réactions pour les replies -->
-                      <div class="flex items-center gap-2 mt-3">
-                        <button 
-                          v-for="reaction in reactions" 
-                          :key="reaction.emoji"
-                          @click="addReaction(reply.id, reaction.emoji)"
-                          :class="[
-                            'flex items-center gap-1 px-2 py-1 rounded-lg text-xs transition',
-                            hasUserReacted(reply.id, reaction.emoji)
-                              ? 'bg-white shadow'
-                              : 'hover:bg-white/50'
-                          ]"
-                        >
-                          <span>{{ reaction.emoji }}</span>
-                          <span class="font-medium text-gray-600">{{ getReactionCount(reply.id, reaction.emoji) }}</span>
-                        </button>
-                      </div>
+                      <p class="text-sm text-gray-900">{{ reply.message }}</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </article>
+        </div>
+      </main>
+
+      <!-- Sidebar droite - Widgets -->
+      <aside class="hidden xl:block w-80 px-4 py-4">
+        <div class="sticky top-4 space-y-4">
+          <!-- Search -->
+          <div class="relative">
+            <input
+              type="text"
+              placeholder="Search moods"
+              class="w-full pl-10 pr-4 py-3 bg-gray-100 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
+            />
+            <svg class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+
+          <!-- Mood filter -->
+          <div class="bg-gray-50 rounded-2xl p-4">
+            <h3 class="text-lg font-bold text-gray-900 mb-3">Filter by Mood</h3>
+            <div class="space-y-2">
+              <button
+                v-for="mood in moods"
+                :key="mood.value"
+                @click="filterMood = filterMood === mood.value ? '' : mood.value; loadPosts()"
+                :class="[
+                  'w-full flex items-center gap-3 px-3 py-2 rounded-xl transition',
+                  filterMood === mood.value ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg' : 'hover:bg-gray-100'
+                ]"
+              >
+                <span class="text-xl">{{ mood.emoji }}</span>
+                <span class="text-sm font-medium">{{ mood.label }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="bg-gray-50 rounded-2xl p-4">
+            <h3 class="text-lg font-bold text-gray-900 mb-3">Team Pulse</h3>
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Total Posts</span>
+                <span class="font-bold text-gray-900">{{ posts.length }}</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Active Now</span>
+                <span class="font-bold text-green-600">{{ activeUsersCount }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags trending -->
+          <div class="bg-gray-50 rounded-2xl p-4">
+            <h3 class="text-lg font-bold text-gray-900 mb-3">Trending Topics</h3>
+            <div class="space-y-3">
+              <div v-for="(tag, i) in moodTags.slice(0, 5)" :key="tag.id" class="hover:bg-gray-100 -mx-2 px-2 py-2 rounded-xl cursor-pointer transition">
+                <p class="text-xs text-gray-500">{{ i + 1 }} · Trending</p>
+                <p class="text-sm font-bold text-gray-900">{{ tag.label }}</p>
+                <p class="text-xs text-gray-500">{{ tag.mentionCount || 42 }} mentions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Post Modal -->
+    <div v-if="showPostModal" class="fixed inset-0 z-50 flex items-start justify-center bg-black/50 backdrop-blur-sm pt-16 px-4" @click.self="showPostModal = false">
+      <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+          <button @click="showPostModal = false" class="p-2 hover:bg-gray-100 rounded-full transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+          <button
+            @click="createPost"
+            :disabled="!selectedMood || loading"
+            class="px-6 py-2 bg-gradient-to-r from-orange-500 to-purple-500 text-white font-bold rounded-full disabled:opacity-50"
+          >
+            {{ loading ? 'Posting...' : 'Post' }}
+          </button>
+        </div>
+
+        <div class="p-4">
+          <!-- Mood selector -->
+          <div class="mb-4">
+            <label class="text-sm font-semibold text-gray-700 mb-2 block">How are you feeling?</label>
+            <div class="grid grid-cols-5 gap-2">
+              <button
+                v-for="mood in moods"
+                :key="mood.value"
+                type="button"
+                @click="selectedMood = mood.value"
+                :class="[
+                  'p-4 rounded-xl transition text-center',
+                  selectedMood === mood.value
+                    ? 'bg-gradient-to-br from-orange-500 to-purple-500 text-white shadow-lg scale-105'
+                    : 'bg-gray-100 hover:bg-gray-200'
+                ]"
+              >
+                <div class="text-3xl mb-1">{{ mood.emoji }}</div>
+                <div class="text-xs font-semibold">{{ mood.label }}</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div v-if="selectedMood" class="mb-4">
+            <label class="text-sm font-semibold text-gray-700 mb-2 block">What's affecting your mood? (optional)</label>
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="tag in moodTags"
+                :key="tag.id"
+                type="button"
+                @click="toggleTag(tag.id)"
+                :class="[
+                  'px-3 py-1.5 rounded-full text-xs font-medium transition',
+                  selectedTags.includes(tag.id)
+                    ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ]"
+              >
+                {{ tag.label }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="mb-4">
+            <textarea
+              v-model="message"
+              rows="4"
+              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none text-[15px]"
+              placeholder="What's happening? (optional)"
+            ></textarea>
+          </div>
+
+          <!-- Anonymous toggle -->
+          <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🕶️</span>
+              <div>
+                <p class="text-sm font-semibold text-gray-900">Post anonymously</p>
+                <p class="text-xs text-gray-500">Hide your identity</p>
+              </div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input v-model="isAnonymous" type="checkbox" class="sr-only peer">
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-orange-500 peer-checked:to-purple-500"></div>
+            </label>
           </div>
         </div>
       </div>
@@ -406,16 +407,7 @@ const moodTags = [
   { id: 'recognition', label: '🌟 Recognition' },
 ];
 
-const reactions = [
-  { emoji: '👍', name: 'like' },
-  { emoji: '❤️', name: 'love' },
-  { emoji: '😂', name: 'laugh' },
-  { emoji: '😮', name: 'wow' },
-  { emoji: '😢', name: 'sad' }
-];
-
 const filterMood = ref('');
-const showOnlyRecent = ref(false);
 const selectedMood = ref('');
 const selectedTags = ref<string[]>([]);
 const message = ref('');
@@ -424,48 +416,14 @@ const loading = ref(false);
 const loadingPosts = ref(true);
 const posts = ref<Post[]>([]);
 const replyText = reactive<Record<string, string>>({});
-const replyToReplyText = reactive<Record<string, string>>({});
 const openReplyForms = ref<string[]>([]);
-const openReplyToReplyForms = ref<string[]>([]);
 const postReplies = ref<Record<string, any[]>>({});
 const postReactions = ref<Record<string, any[]>>({});
-const emojiCarousel = ref<HTMLElement | null>(null);
-const currentMoodEmoji = ref(moods[2].emoji);
-const currentMoodLabel = ref(moods[2].label);
+const showPostModal = ref(false);
+const activeUsersCount = ref(12); // Valeur fixe pour éviter Math.random()
 
 function getMoodEmoji(mood: string): string {
   return moods.find(m => m.value === mood)?.emoji || '😐';
-}
-
-function selectMoodFromCarousel(index: number) {
-  selectedMood.value = moods[index].value;
-  currentMoodEmoji.value = moods[index].emoji;
-  currentMoodLabel.value = moods[index].label;
-  
-  if (emojiCarousel.value) {
-    const emojiElement = emojiCarousel.value.children[index] as HTMLElement;
-    if (emojiElement) {
-      emojiElement.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'nearest', 
-        inline: 'center' 
-      });
-    }
-  }
-}
-
-function updateSelectedMoodFromCarousel() {
-  if (!emojiCarousel.value) return;
-  
-  const scrollLeft = emojiCarousel.value.scrollLeft;
-  const itemWidth = 96;
-  const centerIndex = Math.round(scrollLeft / itemWidth);
-  
-  if (centerIndex >= 0 && centerIndex < moods.length) {
-    selectedMood.value = moods[centerIndex].value;
-    currentMoodEmoji.value = moods[centerIndex].emoji;
-    currentMoodLabel.value = moods[centerIndex].label;
-  }
 }
 
 function getTagLabel(tagId: string): string {
@@ -481,7 +439,7 @@ function toggleTag(tagId: string) {
   }
 }
 
-function addReaction(contentId, emoji) {
+function addReaction(contentId: string, emoji: string) {
   if (!currentProfile.value) return;
   
   const existingReaction = postReactions.value[contentId]?.find(
@@ -495,7 +453,7 @@ function addReaction(contentId, emoji) {
   }
 }
 
-async function addNewReaction(contentId, emoji) {
+async function addNewReaction(contentId: string, emoji: string) {
   try {
     const { data, error } = await supabase
       .from('post_reactions')
@@ -519,7 +477,7 @@ async function addNewReaction(contentId, emoji) {
   }
 }
 
-async function removeReaction(reactionId, contentId, emoji) {
+async function removeReaction(reactionId: string, contentId: string, emoji: string) {
   try {
     const { error } = await supabase
       .from('post_reactions')
@@ -538,18 +496,18 @@ async function removeReaction(reactionId, contentId, emoji) {
   }
 }
 
-function getReactionCount(contentId, emoji) {
+function getReactionCount(contentId: string, emoji: string): number {
   return postReactions.value[contentId]?.filter(r => r.emoji === emoji).length || 0;
 }
 
-function hasUserReacted(contentId, emoji) {
+function hasUserReacted(contentId: string, emoji: string): boolean {
   if (!currentProfile.value) return false;
   return postReactions.value[contentId]?.some(
     r => r.user_id === currentProfile.value.id && r.emoji === emoji
   ) || false;
 }
 
-function toggleReplyForm(postId) {
+function toggleReplyForm(postId: string) {
   const index = openReplyForms.value.indexOf(postId);
   if (index === -1) {
     openReplyForms.value.push(postId);
@@ -558,41 +516,26 @@ function toggleReplyForm(postId) {
   }
 }
 
-function isReplyFormOpen(postId) {
+function isReplyFormOpen(postId: string): boolean {
   return openReplyForms.value.includes(postId);
 }
 
-function toggleReplyToReply(replyId) {
-  const index = openReplyToReplyForms.value.indexOf(replyId);
-  if (index === -1) {
-    openReplyToReplyForms.value.push(replyId);
-  } else {
-    openReplyToReplyForms.value.splice(index, 1);
-  }
-}
-
-function isReplyToReplyOpen(replyId) {
-  return openReplyToReplyForms.value.includes(replyId);
-}
-
-function getReplies(postId) {
+function getReplies(postId: string) {
   return postReplies.value[postId] || [];
 }
 
-function canDeletePost(post) {
+function canDeletePost(post: Post): boolean {
   if (!currentProfile.value) return false;
   return post.user_id === currentProfile.value.id;
 }
 
-function confirmDeletePost(postId) {
-  showDeleteConfirmation(
-    'Delete Post',
-    'Are you sure you want to delete this post? This action cannot be undone.',
-    () => deletePost(postId)
-  );
+function confirmDeletePost(postId: string) {
+  if (confirm('Delete this post?')) {
+    deletePost(postId);
+  }
 }
 
-async function deletePost(postId) {
+async function deletePost(postId: string) {
   try {
     const { error } = await supabase
       .from('posts')
@@ -611,84 +554,7 @@ async function deletePost(postId) {
   }
 }
 
-function canDeleteReply(reply) {
-  if (!currentProfile.value) return false;
-  return reply.user_id === currentProfile.value.id;
-}
-
-function confirmDeleteReply(replyId, postId) {
-  showDeleteConfirmation(
-    'Delete Reply',
-    'Are you sure you want to delete this reply? This action cannot be undone.',
-    () => deleteReply(replyId, postId)
-  );
-}
-
-async function deleteReply(replyId, postId) {
-  try {
-    const { error } = await supabase
-      .from('post_replies')
-      .delete()
-      .eq('id', replyId)
-      .eq('user_id', currentProfile.value.id);
-      
-    if (error) throw error;
-    
-    if (postReplies.value[postId]) {
-      postReplies.value[postId] = postReplies.value[postId].filter(reply => reply.id !== replyId);
-    }
-    
-    delete postReactions.value[replyId];
-  } catch (error) {
-    console.error('Error deleting reply:', error);
-    alert('Error deleting reply. Please try again.');
-  }
-}
-
-function showDeleteConfirmation(title, message, onConfirm) {
-  const modal = document.createElement('div');
-  modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm';
-  modal.innerHTML = `
-    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 p-8">
-      <div class="flex items-center mb-6">
-        <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mr-4">
-          <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900">${title}</h3>
-      </div>
-      <p class="text-gray-600 mb-8 leading-relaxed">${message}</p>
-      <div class="flex gap-3">
-        <button id="cancel-btn" class="flex-1 px-6 py-3 text-gray-600 hover:text-gray-800 font-medium rounded-2xl hover:bg-gray-100 transition">
-          Cancel
-        </button>
-        <button id="confirm-btn" class="flex-1 px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-medium rounded-2xl hover:shadow-lg transition">
-          Delete
-        </button>
-      </div>
-    </div>
-  `;
-  
-  document.body.appendChild(modal);
-  
-  modal.querySelector('#cancel-btn').onclick = () => {
-    document.body.removeChild(modal);
-  };
-  
-  modal.querySelector('#confirm-btn').onclick = () => {
-    document.body.removeChild(modal);
-    onConfirm();
-  };
-  
-  modal.onclick = (e) => {
-    if (e.target === modal) {
-      document.body.removeChild(modal);
-    }
-  };
-}
-
-async function submitReply(postId) {
+async function submitReply(postId: string) {
   if (!currentProfile.value || !replyText[postId]) return;
   
   try {
@@ -721,7 +587,6 @@ async function submitReply(postId) {
     });
     
     replyText[postId] = '';
-    toggleReplyForm(postId);
   } catch (error) {
     console.error('Error submitting reply:', error);
   }
@@ -733,21 +598,20 @@ function formatDate(dateString: string): string {
   const diffMs = now.getTime() - date.getTime();
   const diffMins = Math.floor(diffMs / 60000);
 
-  if (diffMins < 1) return 'Just now';
-  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffMins < 1) return 'now';
+  if (diffMins < 60) return `${diffMins}m`;
 
   const diffHours = Math.floor(diffMins / 60);
-  if (diffHours < 24) return `${diffHours}h ago`;
+  if (diffHours < 24) return `${diffHours}h`;
 
   const diffDays = Math.floor(diffHours / 24);
-  if (diffDays < 7) return `${diffDays}d ago`;
+  if (diffDays < 7) return `${diffDays}d`;
   
-  return date.toLocaleDateString();
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
 async function loadPosts() {
   loadingPosts.value = true;
-  showOnlyRecent.value = false;
   
   try {
     let query = supabase
@@ -773,47 +637,6 @@ async function loadPosts() {
     await loadRepliesAndReactions();
   } catch (error) {
     console.error('Error loading posts:', error);
-  } finally {
-    loadingPosts.value = false;
-  }
-}
-
-async function loadRecentPosts() {
-  loadingPosts.value = true;
-  showOnlyRecent.value = true;
-  
-  try {
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-    
-    let query = supabase
-      .from('posts')
-      .select(`
-        *,
-        profiles:user_id (
-          display_name
-        )
-      `)
-      .gte('created_at', fiveMinutesAgo)
-      .order('created_at', { ascending: false });
-      
-    if (filterMood.value) {
-      query = query.eq('mood', filterMood.value);
-    }
-    
-    const { data, error } = await query;
-    
-    if (error) throw error;
-    
-    posts.value = data || [];
-    
-    if (posts.value.length === 0) {
-      showOnlyRecent.value = false;
-      await loadPosts();
-    } else {
-      await loadRepliesAndReactions();
-    }
-  } catch (error) {
-    console.error('Error loading recent posts:', error);
   } finally {
     loadingPosts.value = false;
   }
@@ -886,6 +709,7 @@ async function createPost() {
       message.value = '';
       selectedTags.value = [];
       isAnonymous.value = true;
+      showPostModal.value = false;
       await loadPosts();
     } else {
       console.error('Error creating post:', error);
@@ -914,15 +738,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-@keyframes bounce-soft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-bounce-soft {
-  animation: bounce-soft 2s ease-in-out infinite;
-}
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
