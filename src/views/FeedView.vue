@@ -383,6 +383,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Onboarding Guide for New Users -->
+    <OnboardingGuide />
   </div>
 </template>
 
@@ -391,6 +394,7 @@ import { ref, onMounted, reactive } from 'vue';
 import { supabase } from '../lib/supabase';
 import { currentProfile } from '../lib/auth';
 import type { Database } from '../lib/database.types';
+import OnboardingGuide from '../components/OnboardingGuide.vue';
 
 type Post = Database['public']['Tables']['posts']['Row'] & {
   profiles?: {
@@ -740,8 +744,16 @@ onMounted(() => {
     })
     .subscribe();
 
+  // Écouter l'événement pour ouvrir le modal depuis le guide d'onboarding
+  const handleOpenPostModal = () => {
+    showPostModal.value = true;
+  };
+  
+  window.addEventListener('open-post-modal', handleOpenPostModal);
+
   return () => {
     subscription.unsubscribe();
+    window.removeEventListener('open-post-modal', handleOpenPostModal);
   };
 });
 </script>
