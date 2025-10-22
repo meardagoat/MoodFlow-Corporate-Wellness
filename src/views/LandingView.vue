@@ -77,12 +77,12 @@
                 <button v-for="(mood, i) in moods" :key="i"
                         @click="selectedMoodIndex = i"
                         class="mood-button group relative flex flex-col items-center flex-shrink-0">
-                  <div class="relative w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center shadow-lg mb-1"
+                  <div class="relative w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center shadow-lg mb-1"
                        :class="[
                          mood.gradient,
                          selectedMoodIndex === i ? 'scale-105 shadow-xl' : 'opacity-70 hover:opacity-90'
                        ]">
-                    <span class="text-2xl md:text-3xl">
+                    <span class="text-3xl md:text-4xl">
                       {{ mood.emoji }}
                     </span>
                   </div>
@@ -99,25 +99,25 @@
           
           <!-- Dynamic content based on selection -->
           <div class="w-full">
-            <div class="bg-white/80 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 lg:p-20 shadow-2xl border border-white/60">
-              <div class="text-center mb-8 md:mb-12">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-neutral-900 mb-4 md:mb-6">
+            <div class="bg-white/80 backdrop-blur-xl rounded-xl p-4 md:p-6 shadow-lg border border-white/60">
+              <div class="text-center mb-4">
+                <h3 class="text-lg md:text-xl font-bold text-neutral-900 mb-2">
                   {{ moods[selectedMoodIndex].title }}
                 </h3>
-                <p class="text-neutral-600 text-base sm:text-lg md:text-xl lg:text-2xl mx-auto leading-relaxed max-w-5xl">
+                <p class="text-neutral-600 text-sm md:text-base mx-auto leading-relaxed max-w-2xl">
                   {{ moods[selectedMoodIndex].description }}
                 </p>
               </div>
               
               <!-- Animated stats bar -->
-              <div class="relative h-3 md:h-4 bg-neutral-100 rounded-full overflow-hidden mb-3 md:mb-4 max-w-4xl mx-auto">
+              <div class="relative h-2 bg-neutral-100 rounded-full overflow-hidden mb-2 max-w-2xl mx-auto">
                 <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
                      :class="moods[selectedMoodIndex].gradient"
                      :style="`width: ${moods[selectedMoodIndex].percentage}%`">
                 </div>
               </div>
               
-              <div class="flex flex-col sm:flex-row justify-between gap-2 text-sm md:text-base text-neutral-600 font-medium max-w-4xl mx-auto">
+              <div class="flex flex-col sm:flex-row justify-between gap-1 text-xs md:text-sm text-neutral-600 font-medium max-w-2xl mx-auto">
                 <span>{{ moods[selectedMoodIndex].percentage }}% de vos collègues</span>
                 <span>se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}</span>
               </div>
@@ -161,7 +161,7 @@
                   <!-- Video Card -->
                   <div class="order-2 md:order-1">
                     <div class="rounded-3xl overflow-hidden shadow-2xl bg-white">
-                      <div class="aspect-[3/4] flex items-center justify-center p-6">
+                      <div class="aspect-[2/3] flex items-center justify-center p-4">
                         <video 
                           autoplay 
                           muted 
