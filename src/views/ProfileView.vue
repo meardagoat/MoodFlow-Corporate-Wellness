@@ -1,19 +1,35 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 safe-top safe-bottom">
     <div class="max-w-4xl mx-auto px-4 py-6 sm:py-8">
-      <div class="mb-8">
-        <h1 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-2">Profile Settings</h1>
-        <p class="text-gray-600">Manage your account and privacy preferences</p>
+      <div class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-4">Profile Settings</h1>
+        <p class="text-lg text-gray-600 max-w-2xl">Manage your account, privacy preferences, and data settings</p>
+        
+        <!-- Profile benefits -->
+        <div class="flex flex-wrap items-center gap-6 mt-6">
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span class="text-sm font-medium text-gray-600">Secure & Private</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <span class="text-sm font-medium text-gray-600">Full Control</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+            <span class="text-sm font-medium text-gray-600">GDPR Compliant</span>
+          </div>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Sidebar - Mobile Tabs -->
-        <div class="md:hidden flex border-b border-gray-200 mb-6">
+        <!-- Enhanced Sidebar - Mobile Tabs -->
+        <div class="md:hidden flex border-b border-gray-200/50 mb-8 bg-white/80 backdrop-blur-xl rounded-2xl p-2 shadow-lg">
           <button
             @click="activeTab = 'account'"
             :class="[
-              'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'account' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              'flex-1 py-4 text-center rounded-xl font-semibold transition-all duration-300',
+              activeTab === 'account' ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             ]"
           >
             Account
@@ -21,8 +37,8 @@
           <button
             @click="activeTab = 'privacy'"
             :class="[
-              'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'privacy' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              'flex-1 py-4 text-center rounded-xl font-semibold transition-all duration-300',
+              activeTab === 'privacy' ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             ]"
           >
             Privacy
@@ -30,55 +46,55 @@
           <button
             @click="activeTab = 'gdpr'"
             :class="[
-              'flex-1 py-3 text-center border-b-2 transition',
-              activeTab === 'gdpr' ? 'border-orange-600 text-orange-700 font-medium' : 'border-transparent text-gray-500 hover:text-gray-700'
+              'flex-1 py-4 text-center rounded-xl font-semibold transition-all duration-300',
+              activeTab === 'gdpr' ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
             ]"
           >
             GDPR
           </button>
         </div>
         
-        <!-- Sidebar - Desktop -->
+        <!-- Enhanced Sidebar - Desktop -->
         <div class="hidden md:block md:col-span-1">
-          <div class="bg-white rounded-xl shadow overflow-hidden sticky top-8">
-            <div class="p-4 bg-primary-600 text-white">
-              <h2 class="font-semibold">Settings</h2>
+          <div class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 overflow-hidden sticky top-8">
+            <div class="p-6 bg-gradient-to-r from-orange-500 to-purple-600 text-white">
+              <h2 class="text-xl font-bold">Settings</h2>
             </div>
-            <div class="p-2">
+            <div class="p-4 space-y-2">
               <button
                 @click="activeTab = 'account'"
                 :class="[
-                  'w-full text-left px-4 py-2 rounded-lg transition',
-                  activeTab === 'account' ? 'bg-primary-50 text-primary-700' : 'hover:bg-gray-50'
+                  'w-full text-left px-6 py-4 rounded-2xl font-semibold transition-all duration-300',
+                  activeTab === 'account' ? 'bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 shadow-lg' : 'hover:bg-gray-50 hover:text-gray-700'
                 ]"
               >
-                Account
+                👤 Account
               </button>
               <button
                 @click="activeTab = 'privacy'"
                 :class="[
-                  'w-full text-left px-4 py-2 rounded-lg transition',
-                  activeTab === 'privacy' ? 'bg-primary-50 text-primary-700' : 'hover:bg-gray-50'
+                  'w-full text-left px-6 py-4 rounded-2xl font-semibold transition-all duration-300',
+                  activeTab === 'privacy' ? 'bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 shadow-lg' : 'hover:bg-gray-50 hover:text-gray-700'
                 ]"
               >
-                Privacy
+                🔒 Privacy
               </button>
               <button
                 @click="activeTab = 'gdpr'"
                 :class="[
-                  'w-full text-left px-4 py-2 rounded-lg transition',
-                  activeTab === 'gdpr' ? 'bg-primary-50 text-primary-700' : 'hover:bg-gray-50'
+                  'w-full text-left px-6 py-4 rounded-2xl font-semibold transition-all duration-300',
+                  activeTab === 'gdpr' ? 'bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 shadow-lg' : 'hover:bg-gray-50 hover:text-gray-700'
                 ]"
               >
-                GDPR
+                📋 GDPR
               </button>
             </div>
           </div>
         </div>
-        <!-- Content -->
+        <!-- Enhanced Content -->
         <div class="md:col-span-2">
-          <div v-if="activeTab === 'account'" class="bg-white rounded-xl shadow p-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-6">Account Information</h2>
+          <div v-if="activeTab === 'account'" class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 p-8">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-6">Account Information</h2>
 
           <form @submit.prevent="updateProfileInfo" class="space-y-6">
             <div>
