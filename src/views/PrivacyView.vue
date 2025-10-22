@@ -1,11 +1,21 @@
 <template>
   <div class="min-h-screen bg-white">
+    <!-- Home Button -->
+    <div class="fixed top-6 left-6 z-50">
+      <router-link to="/" 
+                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
+        <span class="text-2xl">🏠</span>
+      </router-link>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-neutral-900 mb-6">
-            Politique de confidentialité
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Politique de confidentialité
+            </span>
           </h1>
           <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
             Votre vie privée est notre priorité. Découvrez comment nous protégeons vos données.
@@ -27,8 +37,10 @@
               <p class="text-green-700 text-sm">Conformité européenne garantie</p>
             </div>
           </div>
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Notre engagement envers votre vie privée
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Notre engagement envers votre vie privée
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             Chez MoodFlow, nous croyons que la confidentialité est un droit fondamental. 
@@ -42,8 +54,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Comment nous protégeons vos données
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Comment nous protégeons vos données
+            </span>
           </h2>
         </div>
         
@@ -103,8 +117,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Questions sur la confidentialité
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Questions sur la confidentialité
+            </span>
           </h2>
           <p class="text-xl text-neutral-600">
             Les réponses aux questions les plus fréquentes sur la protection de vos données
@@ -135,8 +151,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Vos droits
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Vos droits
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             En tant qu'utilisateur de MoodFlow, vous disposez de droits spécifiques sur vos données
@@ -164,8 +182,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Utilisation de vos données
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Utilisation de vos données
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             Transparence totale sur l'utilisation de vos données personnelles
@@ -218,7 +238,9 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-          Questions sur la confidentialité ?
+          <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
+            Questions sur la confidentialité ?
+          </span>
         </h2>
         <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
           Notre équipe est là pour répondre à toutes vos questions sur la protection de vos données
@@ -343,5 +365,17 @@ const toggleFaq = (index: number) => {
 </script>
 
 <style scoped>
-/* Custom styles if needed */
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease-in-out infinite;
+}
 </style>

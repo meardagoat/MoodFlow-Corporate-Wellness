@@ -1,11 +1,21 @@
 <template>
   <div class="min-h-screen bg-white">
+    <!-- Home Button -->
+    <div class="fixed top-6 left-6 z-50">
+      <router-link to="/" 
+                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
+        <span class="text-2xl">🏠</span>
+      </router-link>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-neutral-900 mb-6">
-            À propos de MoodFlow
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              À propos de MoodFlow
+            </span>
           </h1>
           <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
             Notre mission est de fournir à chaque entreprise un accès à un support continu pour le bien-être mental de ses équipes.
@@ -19,8 +29,10 @@
       <div class="max-w-6xl mx-auto">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-              Qui nous sommes
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+              <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+                Qui nous sommes
+              </span>
             </h2>
             <p class="text-lg text-neutral-600 leading-relaxed mb-8">
               Considérez MoodFlow comme votre guide de confiance pour un meilleur bien-être en entreprise. 
@@ -63,8 +75,10 @@
             </div>
           </div>
           <div class="order-1 lg:order-2">
-            <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-              Ce que nous faisons
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+              <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+                Ce que nous faisons
+              </span>
             </h2>
             <p class="text-lg text-neutral-600 leading-relaxed mb-8">
               Grâce à des outils d'expression libre et de mindfulness basés sur des preuves, 
@@ -95,8 +109,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Comment nous procédons
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Comment nous procédons
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             Nos quatre valeurs guident nos décisions et notre façon d'opérer au quotidien
@@ -144,7 +160,9 @@
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
           <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-            MoodFlow en chiffres
+            <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
+              MoodFlow en chiffres
+            </span>
           </h2>
         </div>
         
@@ -171,8 +189,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Résultats basés sur des preuves
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Résultats basés sur des preuves
+            </span>
           </h2>
         </div>
         
@@ -204,8 +224,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Notre équipe dirigeante
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Notre équipe dirigeante
+            </span>
           </h2>
         </div>
         
@@ -226,8 +248,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Notre équipe
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Notre équipe
+            </span>
           </h2>
         </div>
         
@@ -248,7 +272,9 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-          Rejoignez l'aventure MoodFlow
+          <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
+            Rejoignez l'aventure MoodFlow
+          </span>
         </h2>
         <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
           Découvrez comment MoodFlow peut transformer votre entreprise et le bien-être de vos équipes
@@ -325,5 +351,17 @@ const team = [
 </script>
 
 <style scoped>
-/* Custom styles if needed */
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease-in-out infinite;
+}
 </style>

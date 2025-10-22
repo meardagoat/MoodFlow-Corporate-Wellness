@@ -1,11 +1,21 @@
 <template>
   <div class="min-h-screen bg-white">
+    <!-- Home Button -->
+    <div class="fixed top-6 left-6 z-50">
+      <router-link to="/" 
+                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
+        <span class="text-2xl">🏠</span>
+      </router-link>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-neutral-900 mb-6">
-            Contactez-nous
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Contactez-nous
+            </span>
           </h1>
           <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
             Notre équipe est là pour vous accompagner. N'hésitez pas à nous contacter pour toute question.
@@ -18,8 +28,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Comment nous joindre
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Comment nous joindre
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             Plusieurs façons de nous contacter selon vos besoins
@@ -69,8 +81,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Notre équipe
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Notre équipe
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             Rencontrez les personnes qui vous accompagneront dans votre transformation
@@ -104,8 +118,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Envoyez-nous un message
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Envoyez-nous un message
+            </span>
           </h2>
           <p class="text-xl text-neutral-600">
             Remplissez le formulaire et nous vous recontacterons sous 24h
@@ -184,8 +200,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Questions fréquentes
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Questions fréquentes
+            </span>
           </h2>
           <p class="text-xl text-neutral-600">
             Trouvez rapidement les réponses à vos questions
@@ -219,8 +237,10 @@
           <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-8">
             ⚡
           </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
-            Réponse garantie sous 24h
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Réponse garantie sous 24h
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 mb-8">
             Notre équipe s'engage à vous répondre dans les 24 heures, 
@@ -338,5 +358,17 @@ const toggleFaq = (index: number) => {
 </script>
 
 <style scoped>
-/* Custom styles if needed */
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease-in-out infinite;
+}
 </style>

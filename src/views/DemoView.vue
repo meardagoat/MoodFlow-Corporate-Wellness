@@ -1,11 +1,21 @@
 <template>
   <div class="min-h-screen bg-white">
+    <!-- Home Button -->
+    <div class="fixed top-6 left-6 z-50">
+      <router-link to="/" 
+                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
+        <span class="text-2xl">🏠</span>
+      </router-link>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-neutral-900 mb-6">
-            Demander une démo
+          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Demander une démo
+            </span>
           </h1>
           <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
             Découvrez MoodFlow en action avec notre équipe. 30 minutes qui changent tout.
@@ -18,8 +28,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Ce que vous obtiendrez
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Ce que vous obtiendrez
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             Une démo personnalisée adaptée à votre entreprise et vos besoins spécifiques
@@ -82,8 +94,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Comment ça se passe
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Comment ça se passe
+            </span>
           </h2>
           <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
             Un processus simple et transparent pour découvrir MoodFlow
@@ -124,8 +138,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Réservez votre démo
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Réservez votre démo
+            </span>
           </h2>
           <p class="text-xl text-neutral-600">
             Remplissez le formulaire et on vous recontacte sous 24h
@@ -211,8 +227,10 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-8">
-            Pourquoi nous faire confiance
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Pourquoi nous faire confiance
+            </span>
           </h2>
         </div>
         
@@ -248,7 +266,9 @@
     <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-          Prêt à voir MoodFlow en action ?
+          <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
+            Prêt à voir MoodFlow en action ?
+          </span>
         </h2>
         <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
           Rejoignez des milliers d'entreprises qui ont déjà transformé leur bien-être au travail
@@ -338,5 +358,17 @@ const scrollToForm = () => {
 </script>
 
 <style scoped>
-/* Custom styles if needed */
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease-in-out infinite;
+}
 </style>
