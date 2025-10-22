@@ -128,7 +128,7 @@
     </section>
 
     <!-- Features Section - Style Headspace Tabs -->
-    <section ref="featuresSection" class="py-16 md:py-24 lg:py-32 relative bg-white">
+    <section ref="featuresSection" class="py-20 md:py-28 lg:py-36 relative bg-white">
       <div class="max-w-7xl mx-auto px-4 md:px-6">
         <div class="text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900">
@@ -161,13 +161,13 @@
                   <!-- Video Card -->
                   <div class="order-2 md:order-1">
                     <div class="rounded-3xl overflow-hidden shadow-2xl bg-white">
-                      <div class="aspect-[1/1] flex items-center justify-center p-2">
+                      <div class="aspect-[1/1] flex items-center justify-center p-4">
                         <video 
                           autoplay 
                           muted 
                           playsinline
                           loop
-                          class="w-full h-full object-contain"
+                          class="w-full h-full object-cover rounded-2xl"
                           preload="metadata"
                         >
                           <source :src="feature.video" type="video/mp4">
@@ -213,7 +213,7 @@
     </section>
 
     <!-- Testimonials Carousel -->
-    <section class="py-16 md:py-24 lg:py-32 px-4 md:px-6 bg-gradient-to-br from-purple-50/50 to-orange-50/50 relative overflow-hidden">
+    <section class="py-20 md:py-28 lg:py-36 px-4 md:px-6 bg-gradient-to-br from-purple-50/50 to-orange-50/50 relative overflow-hidden">
       <div class="max-w-7xl mx-auto">
         <div class="text-center mb-12 md:mb-16">
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-3 md:mb-4 px-4">
@@ -268,7 +268,7 @@
     </section>
 
     <!-- Companies Carousel -->
-    <section class="py-16 md:py-20 lg:py-24 px-4 md:px-6 bg-white/40 backdrop-blur-sm">
+    <section class="py-20 md:py-24 lg:py-28 px-4 md:px-6 bg-white/40 backdrop-blur-sm">
       <div class="max-w-7xl mx-auto">
         <h3 class="text-center mb-12 md:mb-16 px-4">
           <span class="inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-text hover:scale-105 transition-transform duration-300 cursor-default">
@@ -291,7 +291,7 @@
     </section>
 
     <!-- Stats Section - Style Headspace -->
-    <section class="relative py-32 px-6 overflow-hidden">
+    <section class="relative py-36 px-6 overflow-hidden">
       <!-- Sky background -->
       <div class="absolute inset-0 bg-gradient-to-b from-sky-400 via-sky-300 to-orange-200"></div>
       
@@ -351,7 +351,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 md:py-24 lg:py-32 px-4 md:px-6 relative overflow-hidden">
+    <section class="py-20 md:py-28 lg:py-36 px-4 md:px-6 relative overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-400 to-purple-500"></div>
       <div class="absolute inset-0">
         <div class="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-blob"></div>
@@ -373,7 +373,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 px-6 bg-neutral-900 text-white">
+    <footer class="py-20 px-6 bg-neutral-900 text-white">
       <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-start gap-12">
           <div class="text-center md:text-left">
