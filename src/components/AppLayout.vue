@@ -98,6 +98,17 @@
               {{ getInitial() }}
             </router-link>
 
+            <!-- Sign out button -->
+            <button
+              @click="handleSignOut"
+              class="w-10 h-10 rounded-full bg-white text-gray-600 hover:text-red-600 hover:bg-red-50 transition-all duration-300 hover:scale-105 flex items-center justify-center"
+              title="Se déconnecter"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
+            </button>
+
             <button
               @click="mobileMenuOpen = !mobileMenuOpen"
               class="md:hidden p-2 text-gray-600 hover:text-gray-900"

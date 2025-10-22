@@ -1,42 +1,42 @@
 <template>
   <div class="min-h-screen bg-white">
     <div class="max-w-7xl mx-auto flex">
-      <!-- Sidebar gauche - Navigation -->
-      <aside class="hidden lg:flex flex-col w-64 xl:w-72 px-4 py-4 border-r border-gray-200 sticky top-0 h-screen">
-        <div class="flex-1 space-y-2">
-          <!-- Logo -->
-          <div class="px-4 py-3 mb-4">
-            <h1 class="text-2xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent">
+      <!-- Enhanced Sidebar - Headspace Style -->
+      <aside class="hidden lg:flex flex-col w-64 xl:w-72 px-6 py-6 bg-white/80 backdrop-blur-xl border-r border-gray-200/50 sticky top-0 h-screen">
+        <div class="flex-1 space-y-3">
+          <!-- Enhanced Logo -->
+          <div class="px-4 py-4 mb-6">
+            <h1 class="text-3xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               MoodFlow
             </h1>
           </div>
 
-          <!-- Navigation items -->
+          <!-- Enhanced Navigation items -->
           <button
-            class="w-full flex items-center gap-4 px-4 py-3 rounded-full text-lg font-medium bg-orange-50 text-orange-600"
+            class="w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           >
             <span class="text-2xl">🏠</span>
             <span>Feed</span>
           </button>
 
-          <!-- Post button avec effet interactif -->
+          <!-- Enhanced Post button -->
           <button
             @click="showPostModal = true"
-            class="w-full mt-4 py-3 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-full hover:shadow-2xl hover:shadow-orange-200 transition-all duration-300 hover:scale-105 active:scale-95 animate-gradient-flow"
+            class="w-full mt-6 py-4 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-2xl hover:shadow-2xl hover:shadow-orange-200 transition-all duration-300 hover:scale-105 active:scale-95 animate-gradient-flow"
           >
             ✨ Share Mood
           </button>
         </div>
 
-        <!-- User profile -->
-        <div class="p-3 rounded-full hover:bg-gray-100 transition cursor-pointer">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-purple-400 flex items-center justify-center">
-              <span class="text-white font-bold">{{ currentProfile?.email?.charAt(0).toUpperCase() }}</span>
+        <!-- Enhanced User profile -->
+        <div class="p-4 rounded-2xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-purple-50 transition-all duration-300 cursor-pointer hover:shadow-lg">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-purple-400 flex items-center justify-center shadow-lg">
+              <span class="text-white font-bold text-lg">{{ currentProfile?.email?.charAt(0).toUpperCase() }}</span>
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-bold text-gray-900 truncate">{{ currentProfile?.display_name || 'You' }}</p>
-              <p class="text-xs text-gray-500 truncate">{{ currentProfile?.service }}</p>
+              <p class="text-base font-bold text-gray-900 truncate">{{ currentProfile?.display_name || 'You' }}</p>
+              <p class="text-sm text-gray-500 truncate">{{ currentProfile?.service }}</p>
             </div>
           </div>
         </div>
@@ -44,19 +44,22 @@
 
       <!-- Fil central - Posts -->
       <main class="flex-1 max-w-2xl border-r border-gray-200">
-        <!-- Header sticky -->
-        <div class="sticky top-0 z-20 bg-white/90 backdrop-blur-xl border-b border-gray-200">
-          <div class="px-4 py-3">
-            <h2 class="text-xl font-bold text-gray-900">Wellness Feed</h2>
+        <!-- Enhanced Header sticky -->
+        <div class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-sm">
+          <div class="px-6 py-4">
+            <h2 class="text-2xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              Wellness Feed
+            </h2>
+            <p class="text-sm text-gray-500 mt-1">Partagez votre humeur et découvrez celle de votre équipe</p>
           </div>
           
-          <!-- Mood Filter Tabs -->
-          <div class="flex border-b border-gray-200 overflow-x-auto scrollbar-hide">
+          <!-- Enhanced Mood Filter Tabs -->
+          <div class="flex border-b border-gray-200/50 overflow-x-auto scrollbar-hide px-6">
             <button
               @click="filterMood = ''; loadPosts()"
               :class="[
-                'flex-shrink-0 px-4 py-3 text-sm font-semibold transition relative',
-                filterMood === '' ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
+                'flex-shrink-0 px-6 py-4 text-sm font-semibold transition-all duration-300 relative rounded-t-2xl',
+                filterMood === '' ? 'text-orange-600 bg-orange-50' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
               ]"
             >
               All Moods
@@ -67,8 +70,8 @@
               :key="mood.value"
               @click="filterMood = mood.value; loadPosts()"
               :class="[
-                'flex-shrink-0 px-4 py-3 text-sm font-semibold transition relative',
-                filterMood === mood.value ? 'text-gray-900' : 'text-gray-500 hover:bg-gray-50'
+                'flex-shrink-0 px-6 py-4 text-sm font-semibold transition-all duration-300 relative rounded-t-2xl',
+                filterMood === mood.value ? 'text-orange-600 bg-orange-50' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
               ]"
             >
               {{ mood.emoji }} {{ mood.label }}
@@ -77,11 +80,11 @@
           </div>
         </div>
 
-        <!-- Post creation (mobile) -->
-        <div class="border-b border-gray-200 p-4 lg:hidden">
+        <!-- Enhanced Post creation (mobile) -->
+        <div class="border-b border-gray-200/50 p-6 lg:hidden">
           <button
             @click="showPostModal = true"
-            class="w-full py-3 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-full hover:shadow-lg transition-all animate-gradient-flow"
+            class="w-full py-4 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 animate-gradient-flow"
           >
             ✨ Share Your Mood
           </button>
