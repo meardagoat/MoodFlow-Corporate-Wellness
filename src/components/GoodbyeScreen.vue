@@ -106,114 +106,48 @@
 
       <Motion
         tag="p"
-        class="mb-3"
+        class="mb-8"
         :style="{ fontSize: 'clamp(1.25rem,3vw,1.5rem)', fontWeight: 300, lineHeight: '1.75' }"
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ delay: 0.3, duration: 0.8, ease: 'easeOut' }"
       >
-        <span class="text-slate-700">Take care of </span>
+        <span class="text-slate-700">Prenez soin de </span>
         <Motion
           tag="span"
           :style="{ fontWeight: 600 }"
           :animate="{ color: ['#fb923c','#f97316','#ea580c','#fb923c'] }"
           :transition="{ duration: 6, repeat: Infinity, ease: 'easeInOut' }"
         >
-          yourself
+          vous
         </Motion>
       </Motion>
 
-      <Motion
-        tag="p"
-        class="mb-8"
-        :style="{ fontSize: 'clamp(1rem,2vw,1.125rem)', color: '#64748b' }"
-        :initial="{ opacity: 0 }"
-        :animate="{ opacity: 1 }"
-        :transition="{ delay: 0.5, duration: 0.8, ease: 'easeInOut' }"
-      >
-        Remember, every step counts towards better wellness
-      </Motion>
-
-      <Motion
-        tag="div"
-        class="w-16 h-1 rounded-full overflow-hidden mx-auto mb-12"
-        :style="{ background: 'rgba(255,255,255,0.3)' }"
-        :initial="{ opacity: 0 }"
-        :animate="{ opacity: 1 }"
-        :transition="{ delay: 0.6, duration: 0.8, ease: 'easeInOut' }"
-      >
-        <Motion
-          tag="div"
-          class="h-full"
-          :style="{ background: 'linear-gradient(to right,#f97316,#a855f7)' }"
-          :animate="{ x: ['-100%', '100%'] }"
-          :transition="{ duration: 2, repeat: Infinity, ease: 'easeInOut' }"
-        />
-      </Motion>
-
-      <Motion
-        tag="div"
-        class="grid grid-cols-3 gap-4 max-w-md mx-auto"
-        :initial="{ opacity: 0 }"
-        :animate="{ opacity: 1 }"
-        :transition="{ delay: 0.7, duration: 0.8, ease: 'easeInOut' }"
-      >
-        <div
-          v-for="(stat, index) in statsData"
-          :key="index"
-          class="rounded-xl"
-          :style="{
-            background: 'rgba(255,255,255,0.6)',
-            backdropFilter: 'blur(8px)',
-            padding: '16px',
-            border: '1px solid rgba(255,255,255,0.8)'
-          }"
-        >
-          <div class="mb-1" :style="{ fontSize: '1.5rem', fontWeight: 700, color: '#1e293b' }">
-            {{ stat.value }}
-          </div>
-          <div :style="{ fontSize: '0.75rem', color: '#64748b' }">{{ stat.label }}</div>
-        </div>
-      </Motion>
     </Motion>
   </Motion>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { Motion } from '@motionone/vue'  // ✅ bon import
 import logoVideo from '../assets/MoodFlow_final_logo.mp4'
 import logoImage from '../assets/MoodFlow_final_logo.png'
 import backgroundVideo from '../assets/Splashscreen_fond.mp4'
-
-interface Stats {
-  days: number
-  moods: number
-  streak: number
-}
 
 interface Props {
   onComplete?: () => void
   duration?: number
   userName?: string
   appName?: string
-  stats?: Stats
 }
 
 const props = withDefaults(defineProps<Props>(), {
   duration: 3000,
-  appName: 'MoodFlow',
-  stats: () => ({ days: 0, moods: 0, streak: 0 })
+  appName: 'MoodFlow'
 })
 
 const visible = ref(true)
 let timer: ReturnType<typeof setTimeout> | null = null
-
-const statsData = computed(() => [
-  { value: props.stats.days, label: 'Days Active' },
-  { value: props.stats.moods, label: 'Moods Tracked' },
-  { value: props.stats.streak, label: 'Day Streak' }
-])
 
 onMounted(() => {
   timer = setTimeout(() => {

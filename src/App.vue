@@ -18,8 +18,6 @@ const showSplash = ref(false);
 const showGoodbye = ref(false);
 const authInitialized = ref(false);
 
-// Statistiques de session
-const sessionStats = ref({ posts: 0, messages: 0 });
 
 const isAuthPage = computed(() => {
   const publicPages = ['/', '/login', '/register', '/about', '/contact', '/privacy', '/pricing', '/demo'];
@@ -69,9 +67,7 @@ function showWelcomeSplash() {
   <!-- Écran d'au revoir -->
   <GoodbyeScreen 
     v-if="showGoodbye" 
-    :show="showGoodbye"
-    :sessionStats="sessionStats"
-    @close="closeGoodbye"
+    @complete="closeGoodbye"
   />
 
   <!-- Contenu principal -->
