@@ -174,44 +174,59 @@
               <div v-for="(feature, index) in features" :key="index" 
                    class="min-w-full">
                 <div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-                  <!-- Headspace-style Video Card -->
+                  <!-- Video Card with Expert Style (Landscape) -->
                   <div class="order-2 md:order-1">
-                    <div class="group relative">
-                      <!-- Card container with glassmorphism -->
-                      <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-white/90 backdrop-blur-sm border border-white/20 group-hover:shadow-3xl transition-all duration-500">
-                        <!-- Video container -->
-                        <div class="aspect-[4/5] flex items-center justify-center p-6 relative overflow-hidden">
+                    <div class="group relative w-full max-w-2xl mx-auto">
+                      <div class="relative w-full h-80 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                        <!-- Video as background -->
+                        <div class="relative w-full h-full overflow-hidden rounded-3xl">
                           <video 
                             autoplay 
                             muted 
                             playsinline
                             loop
-                            class="w-full h-full object-contain rounded-2xl transition-transform duration-500 group-hover:scale-105"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                             preload="metadata"
                           >
                             <source :src="feature.video" type="video/mp4">
                             <!-- Fallback avec l'icône si la vidéo ne charge pas -->
-                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-purple-100 rounded-2xl">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-purple-100">
                               <div class="text-8xl opacity-80">{{ feature.icon }}</div>
                             </div>
                           </video>
                           
-                          <!-- Overlay gradient -->
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-                        </div>
-                        
-                        <!-- Card footer -->
-                        <div class="p-6 bg-gradient-to-r from-orange-50/50 to-purple-50/50">
-                          <div class="flex items-center justify-center">
-                            <div class="w-3 h-3 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-pulse"></div>
-                            <span class="ml-2 text-sm font-medium text-neutral-600">En cours de lecture</span>
+                          <!-- Dark overlay for text readability -->
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                          
+                          <!-- Content overlay -->
+                          <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                            <!-- Category badge -->
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full mb-4 border border-white/30">
+                              <div class="w-2 h-2 bg-gradient-to-r from-orange-400 to-purple-400 rounded-full animate-pulse"></div>
+                              <span class="text-sm font-semibold text-white">{{ feature.category }}</span>
+                            </div>
+                            
+                            <!-- Title -->
+                            <h3 class="font-bold text-2xl mb-2 group-hover:text-orange-300 transition-colors">
+                              {{ feature.title }}
+                            </h3>
+                            
+                            <!-- Description -->
+                            <p class="text-white/90 text-sm mb-4 leading-relaxed line-clamp-2">
+                              {{ feature.description }}
+                            </p>
+                            
+                            <!-- CTA Button -->
+                            <button @click="goToRegister"
+                                    class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-xl border border-white/30 hover:bg-white/30 transition-all duration-300 group/btn">
+                              <span class="text-white text-sm font-semibold">Découvrir</span>
+                              <svg class="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                              </svg>
+                            </button>
                           </div>
                         </div>
                       </div>
-                      
-                      <!-- Floating elements -->
-                      <div class="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-orange-400 to-purple-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-                      <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-purple-400 to-orange-400 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
                     </div>
                   </div>
 
@@ -895,6 +910,13 @@ onMounted(() => {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .line-clamp-3 {
