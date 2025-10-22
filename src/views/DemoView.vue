@@ -8,18 +8,41 @@
       </router-link>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+    <!-- Hero Section - Enhanced Headspace Style -->
+    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
+      <!-- Background decorative elements -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
+      </div>
+      
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-20">
+          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Demander une démo
             </span>
           </h1>
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
             Découvrez MoodFlow en action avec notre équipe. 30 minutes qui changent tout.
           </p>
+          
+          <!-- Demo benefits -->
+          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <span class="text-lg font-medium">30 minutes gratuites</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span class="text-lg font-medium">Démo personnalisée</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="text-lg font-medium">Sans engagement</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -27,64 +50,82 @@
     <!-- What you'll get -->
     <section class="py-20 md:py-32 px-4 md:px-6">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+        <div class="text-center mb-20">
+          <h2 class="text-5xl md:text-6xl font-bold mb-8">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Ce que vous obtiendrez
             </span>
           </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+          <p class="text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
             Une démo personnalisée adaptée à votre entreprise et vos besoins spécifiques
           </p>
         </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              🎯
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10 text-center">
+              <div class="w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                🎯
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Démo personnalisée</h3>
+              <p class="text-neutral-600 leading-relaxed">Notre équipe vous montre exactement comment MoodFlow peut s'adapter à votre organisation et vos besoins spécifiques.</p>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Démo personnalisée</h3>
-            <p class="text-neutral-600">Notre équipe vous montre exactement comment MoodFlow peut s'adapter à votre organisation et vos besoins spécifiques.</p>
           </div>
           
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              ⚡
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10 text-center">
+              <div class="w-24 h-24 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                ⚡
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Setup en 30 minutes</h3>
+              <p class="text-neutral-600 leading-relaxed">On vous aide à démarrer en moins de 30 minutes, de A à Z. Configuration, formation, premiers pas... tout est inclus.</p>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Setup en 30 minutes</h3>
-            <p class="text-neutral-600">On vous aide à démarrer en moins de 30 minutes, de A à Z. Configuration, formation, premiers pas... tout est inclus.</p>
           </div>
           
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-purple-500 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              💡
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10 text-center">
+              <div class="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                💡
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Questions & Réponses</h3>
+              <p class="text-neutral-600 leading-relaxed">Toutes vos questions techniques, sécurité, intégrations, RGPD... on répond à tout. Aucune question n'est bête.</p>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Questions & Réponses</h3>
-            <p class="text-neutral-600">Toutes vos questions techniques, sécurité, intégrations, RGPD... on répond à tout. Aucune question n'est bête.</p>
           </div>
           
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-orange-500 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              🎁
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10 text-center">
+              <div class="w-24 h-24 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                🎁
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">30 jours d'essai gratuit</h3>
+              <p class="text-neutral-600 leading-relaxed">Testez avec vos équipes pendant 30 jours, sans engagement. Si ça ne vous convient pas, on vous rembourse.</p>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">30 jours d'essai gratuit</h3>
-            <p class="text-neutral-600">Testez avec vos équipes pendant 30 jours, sans engagement. Si ça ne vous convient pas, on vous rembourse.</p>
           </div>
           
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              🤝
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10 text-center">
+              <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                🤝
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Support dédié</h3>
+              <p class="text-neutral-600 leading-relaxed">Un account manager dédié pour vous accompagner dans votre transformation et répondre à tous vos besoins.</p>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Support dédié</h3>
-            <p class="text-neutral-600">Un account manager dédié pour vous accompagner dans votre transformation et répondre à tous vos besoins.</p>
           </div>
           
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              🔒
+          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative z-10 text-center">
+              <div class="w-24 h-24 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                🔒
+              </div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-4">Sécurité garantie</h3>
+              <p class="text-neutral-600 leading-relaxed">Découvrez nos mesures de sécurité et conformité RGPD pour protéger vos données et celles de vos équipes.</p>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Sécurité garantie</h3>
-            <p class="text-neutral-600">Découvrez nos mesures de sécurité et conformité RGPD pour protéger vos données et celles de vos équipes.</p>
           </div>
         </div>
       </div>
