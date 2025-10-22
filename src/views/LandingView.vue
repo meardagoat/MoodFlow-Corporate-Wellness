@@ -234,32 +234,31 @@
               <!-- Duplicate experts for seamless loop -->
               <div v-for="(expert, index) in [...experts, ...experts]" :key="`expert-${index}`" 
                    class="flex-shrink-0 mx-2">
-                <div class="group relative w-64 h-96 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                  <!-- Expert Image -->
-                  <div class="relative w-full h-36 overflow-hidden rounded-t-3xl">
+                <div class="group relative w-64 h-80 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                  <!-- Expert Image with Overlay Text -->
+                  <div class="relative w-full h-full overflow-hidden rounded-3xl">
                     <img :src="expert.image" 
                          :alt="expert.name"
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <!-- Overlay gradient -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                  </div>
-                  
-                  <!-- Expert Info -->
-                  <div class="p-4 flex flex-col h-full">
-                    <div class="mb-3">
-                      <h3 class="font-bold text-neutral-900 text-base mb-1 group-hover:text-orange-600 transition-colors">
+                    
+                    <!-- Dark overlay for text readability -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    
+                    <!-- Expert Info Overlay -->
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                      <h3 class="font-bold text-xl mb-2 group-hover:text-orange-300 transition-colors">
                         {{ expert.name }}
                       </h3>
-                      <p class="text-neutral-600 text-xs mb-3 leading-relaxed">
+                      <p class="text-white/90 text-sm mb-4 leading-relaxed">
                         {{ expert.role }}
                       </p>
-                    </div>
-                    
-                    <!-- Testimonial Quote -->
-                    <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-xl p-3 border border-orange-100 flex-1 flex items-center">
-                      <p class="text-neutral-700 text-xs italic leading-relaxed">
-                        "{{ expert.testimonial }}"
-                      </p>
+                      
+                      <!-- Testimonial Quote -->
+                      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/20">
+                        <p class="text-white text-sm italic leading-relaxed">
+                          "{{ expert.testimonial }}"
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
