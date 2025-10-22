@@ -8,41 +8,64 @@
       </router-link>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
+    <!-- Hero Section - Enhanced Headspace Style -->
+    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
+      <!-- Background decorative elements -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
+      </div>
+      
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-20">
+          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Politique de confidentialité
             </span>
           </h1>
-          <p class="text-xl md:text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
             Votre vie privée est notre priorité. Découvrez comment nous protégeons vos données.
           </p>
+          
+          <!-- Privacy indicators -->
+          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="text-lg font-medium">RGPD conforme</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span class="text-lg font-medium">Chiffrement SSL</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span class="text-lg font-medium">Données sécurisées</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Privacy Badge -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-4 bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl px-8 py-4 mb-8">
-            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-2xl">
+    <!-- Privacy Badge - Enhanced -->
+    <section class="py-24 md:py-40 px-4 md:px-6 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+          <div class="inline-flex items-center gap-6 bg-gradient-to-r from-green-100 to-emerald-100 rounded-3xl px-12 py-6 mb-12 shadow-xl border border-green-200">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-3xl shadow-lg">
               ✓
             </div>
             <div class="text-left">
-              <h3 class="font-bold text-green-800 text-lg">Certifié RGPD</h3>
-              <p class="text-green-700 text-sm">Conformité européenne garantie</p>
+              <h3 class="font-bold text-green-800 text-2xl">Certifié RGPD</h3>
+              <p class="text-green-700 text-lg">Conformité européenne garantie</p>
             </div>
           </div>
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+          <h2 class="text-5xl md:text-6xl font-bold mb-8">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Notre engagement envers votre vie privée
             </span>
           </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+          <p class="text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
             Chez MoodFlow, nous croyons que la confidentialité est un droit fondamental. 
             Nous nous engageons à protéger vos données avec les plus hauts standards de sécurité.
           </p>
@@ -53,15 +76,15 @@
     <!-- Data Protection Cards -->
     <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
+        <div class="text-center mb-20">
+          <h2 class="text-5xl md:text-6xl font-bold mb-8">
             <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
               Comment nous protégeons vos données
             </span>
           </h2>
         </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
             <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
               🔒
