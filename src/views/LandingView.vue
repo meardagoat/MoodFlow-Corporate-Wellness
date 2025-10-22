@@ -161,7 +161,7 @@
                   <!-- Video Card -->
                   <div class="order-2 md:order-1">
                     <div class="rounded-3xl overflow-hidden shadow-2xl bg-white">
-                      <div class="aspect-[2/3] flex items-center justify-center p-4">
+                      <div class="aspect-[1/1] flex items-center justify-center p-2">
                         <video 
                           autoplay 
                           muted 
