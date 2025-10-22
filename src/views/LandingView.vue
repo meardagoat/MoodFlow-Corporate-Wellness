@@ -439,12 +439,12 @@ import logoVideo from '../assets/MoodFlow_final_logo.mp4';
 import logoImage from '../assets/MoodFlow_final_logo.png';
 
 // Import des cards vidéo
-import expressionLibreVideo from '../assets/feature-cards/expression-libre.mp4';
-import insightsVideo from '../assets/feature-cards/insights-temps-reel.mp4';
-import actionsVideo from '../assets/feature-cards/actions-ciblees.mp4';
-import anonymatVideo from '../assets/feature-cards/anonymat-garanti.mp4';
-import simpleVideo from '../assets/feature-cards/simple-utilisation.mp4';
-import deploiementVideo from '../assets/feature-cards/deploiement-rapide.mp4';
+import expressionLibreVideo from '../assets/feature-cards/Expression libre.mp4';
+import insightsVideo from '../assets/feature-cards/Insights en temps réel.mp4';
+import actionsVideo from '../assets/feature-cards/Actions ciblées.mp4';
+import anonymatVideo from '../assets/feature-cards/Anonymat garanti.mp4';
+import simpleVideo from '../assets/feature-cards/Simple d\'utilisation.mp4';
+import deploiementVideo from '../assets/feature-cards/Déploiement rapide.mp4';
 
 // Import des images d'experts/utilisateurs
 import alexandreImage from '../assets/card_avis_personne/Alexandre.png';
