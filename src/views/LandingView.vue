@@ -225,56 +225,36 @@
           </p>
         </div>
 
-        <!-- Auto-scrolling Expert Carousel -->
-        <div class="relative">
-          <div class="overflow-hidden">
-            <div class="flex transition-transform duration-1000 ease-linear"
-                 :style="`transform: translateX(-${expertScrollPosition}px)`"
-                 ref="expertCarousel">
-              <!-- Duplicate experts for seamless loop -->
-              <div v-for="(expert, index) in [...experts, ...experts]" :key="`expert-${index}`" 
-                   class="flex-shrink-0 mx-4">
-                <div class="group relative w-80 h-96 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                  <!-- Expert Image/Video -->
-                  <div class="relative w-full h-64 overflow-hidden rounded-t-3xl">
-                    <img :src="expert.image" 
-                         :alt="expert.name"
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <!-- Overlay gradient -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                  </div>
-                  
-                  <!-- Expert Info -->
-                  <div class="p-6">
-                    <h3 class="font-bold text-neutral-900 text-xl mb-2 group-hover:text-orange-600 transition-colors">
-                      {{ expert.name }}
-                    </h3>
-                    <p class="text-neutral-600 text-sm mb-4 leading-relaxed">
-                      {{ expert.role }}
-                    </p>
-                    
-                    <!-- Testimonial Quote -->
-                    <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-2xl p-4 border border-orange-100">
-                      <p class="text-neutral-700 text-sm italic leading-relaxed">
-                        "{{ expert.testimonial }}"
-                      </p>
-                    </div>
-                  </div>
-                </div>
+        <!-- Expert Cards Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div v-for="(expert, index) in experts" :key="index" 
+               class="group bg-white/80 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+            <!-- Expert Image -->
+            <div class="relative w-full h-48 mb-6 overflow-hidden rounded-2xl">
+              <img :src="expert.image" 
+                   :alt="expert.name"
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+              <!-- Overlay gradient -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+            
+            <!-- Expert Info -->
+            <div class="text-center">
+              <h3 class="font-bold text-neutral-900 text-xl mb-2 group-hover:text-orange-600 transition-colors">
+                {{ expert.name }}
+              </h3>
+              <p class="text-orange-600 font-semibold text-sm mb-4">
+                {{ expert.role }}
+              </p>
+              
+              <!-- Testimonial Quote -->
+              <div class="bg-gradient-to-br from-orange-50 to-purple-50 rounded-2xl p-4 border border-orange-100">
+                <p class="text-neutral-700 text-sm italic leading-relaxed">
+                  "{{ expert.testimonial }}"
+                </p>
               </div>
             </div>
           </div>
-          
-          <!-- Pause/Play Button -->
-          <button @click="toggleExpertCarousel" 
-                  class="absolute top-1/2 right-8 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group">
-            <svg v-if="expertCarouselPaused" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg v-else width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-            </svg>
-          </button>
         </div>
       </div>
     </section>
@@ -458,12 +438,7 @@ const currentTestimonial = ref(0);
 const currentFeature = ref(0);
 const selectedMoodIndex = ref(1);
 
-// Expert carousel variables
-const expertCarousel = ref<HTMLElement | null>(null);
-const expertScrollPosition = ref(0);
-const expertCarouselPaused = ref(false);
-const expertScrollSpeed = 1; // pixels per frame
-let expertScrollInterval: number;
+// Expert carousel variables (simplified)
 
 const moods = [
   { 
@@ -640,32 +615,7 @@ const scrollToFeatures = () => {
   featuresSection.value?.scrollIntoView({ behavior: 'smooth' });
 };
 
-// Expert carousel functions
-const startExpertCarousel = () => {
-  expertScrollInterval = window.setInterval(() => {
-    if (!expertCarouselPaused.value) {
-      expertScrollPosition.value += expertScrollSpeed;
-      
-      // Reset position when we've scrolled through one set of experts
-      const cardWidth = 320 + 32; // card width + margin
-      const totalWidth = cardWidth * experts.length;
-      
-      if (expertScrollPosition.value >= totalWidth) {
-        expertScrollPosition.value = 0;
-      }
-    }
-  }, 16); // ~60fps
-};
-
-const stopExpertCarousel = () => {
-  if (expertScrollInterval) {
-    clearInterval(expertScrollInterval);
-  }
-};
-
-const toggleExpertCarousel = () => {
-  expertCarouselPaused.value = !expertCarouselPaused.value;
-};
+// Expert carousel functions (simplified - no longer needed)
 
 const getFeatureGradient = (index: number) => {
   const gradients = [
@@ -703,15 +653,11 @@ onMounted(() => {
     currentTestimonial.value = (currentTestimonial.value + 1) % testimonials.length;
   }, 5000);
 
-  // Start expert carousel
-  startExpertCarousel();
-
   onUnmounted(() => {
     observer.disconnect();
     if (testimonialInterval) {
       clearInterval(testimonialInterval);
     }
-    stopExpertCarousel();
   });
 });
 </script>
