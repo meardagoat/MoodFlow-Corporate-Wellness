@@ -213,7 +213,7 @@
           </div>
           
           <!-- Modern mood summary -->
-          <div class="w-full mt-24 md:mt-32 lg:mt-40">
+          <div class="w-full mt-24 md:mt-32 lg:mt-40 pb-8 md:pb-12 lg:pb-16">
             <div class="bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-xl border border-white/60 max-w-4xl mx-auto">
               <div class="text-center mb-6">
                 <h3 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3">
