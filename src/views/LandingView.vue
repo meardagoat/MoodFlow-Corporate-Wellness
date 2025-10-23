@@ -140,7 +140,7 @@
               </p>
             
               <!-- Modern mood selector with slider design -->
-              <div class="relative max-w-4xl mx-auto">
+              <div class="relative max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
                 <!-- Background track -->
                 <div class="relative h-2 bg-gradient-to-r from-red-200 via-yellow-200 via-green-200 to-green-300 rounded-full overflow-hidden shadow-inner">
                   <!-- Progress indicator -->
@@ -159,7 +159,7 @@
                     <!-- Mood button -->
                     <div class="relative">
                       <!-- Main button -->
-                      <button class="relative w-16 h-16 md:w-20 md:h-20 rounded-full transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
+                      <button class="relative w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
                               :class="selectedMoodIndex === i 
                                 ? 'scale-125 shadow-2xl' 
                                 : 'scale-100 shadow-lg hover:scale-110 hover:shadow-xl'">
@@ -173,7 +173,7 @@
                         
                         <!-- Emoji -->
                         <div class="relative z-10 flex items-center justify-center h-full">
-                          <span class="text-2xl md:text-3xl transition-transform duration-500 group-hover:scale-110 drop-shadow-sm">
+                          <span class="text-lg sm:text-xl md:text-3xl transition-transform duration-500 group-hover:scale-110 drop-shadow-sm">
                             {{ mood.emoji }}
                           </span>
                         </div>
@@ -188,8 +188,8 @@
                       </button>
                       
                       <!-- Label -->
-                      <div class="absolute top-full mt-3 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                        <span class="text-sm md:text-base font-semibold px-3 py-1 rounded-full transition-all duration-300"
+                      <div class="absolute top-full mt-2 sm:mt-3 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                        <span class="text-xs sm:text-sm md:text-base font-semibold px-2 sm:px-3 py-1 rounded-full transition-all duration-300"
                               :class="selectedMoodIndex === i 
                                 ? 'bg-white/95 backdrop-blur-sm text-neutral-900 shadow-lg' 
                                 : 'text-neutral-600 group-hover:text-neutral-900 group-hover:bg-white/80 group-hover:backdrop-blur-sm group-hover:shadow-md'">
