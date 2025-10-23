@@ -52,8 +52,29 @@
               <!-- Effet de glow dynamique en arrière-plan -->
               <div class="absolute inset-0 bg-gradient-to-r from-orange-400/30 via-purple-400/30 to-orange-400/30 rounded-full blur-2xl -z-10 group-hover:blur-3xl group-hover:scale-110 transition-all duration-700 animate-pulse"></div>
               
-              <!-- Ring effect on hover -->
-              <div class="absolute inset-0 rounded-full border-2 border-orange-300/0 group-hover:border-orange-300/50 transition-all duration-500 -z-5 group-hover:scale-125"></div>
+              <!-- Square frame with light rays effect on hover -->
+              <div class="absolute inset-0 -z-5 opacity-0 group-hover:opacity-100 transition-all duration-700 square-light-frame">
+                <!-- Square border with gradient -->
+                <div class="absolute inset-0 border-4 border-transparent bg-gradient-to-r from-orange-400 via-purple-400 to-orange-400 bg-clip-border rounded-lg group-hover:scale-110 transition-all duration-700"></div>
+                
+                <!-- Light rays emanating from corners -->
+                <div class="absolute top-0 left-0 w-8 h-8 bg-gradient-to-br from-orange-400/80 to-transparent transform -translate-x-2 -translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-purple-400/80 to-transparent transform translate-x-2 -translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.1s"></div>
+                <div class="absolute bottom-0 left-0 w-8 h-8 bg-gradient-to-tr from-orange-400/80 to-transparent transform -translate-x-2 translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.2s"></div>
+                <div class="absolute bottom-0 right-0 w-8 h-8 bg-gradient-to-tl from-purple-400/80 to-transparent transform translate-x-2 translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.3s"></div>
+                
+                <!-- Extended light rays -->
+                <div class="absolute top-1/2 left-0 w-12 h-1 bg-gradient-to-r from-orange-400/60 to-transparent transform -translate-x-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.4s"></div>
+                <div class="absolute top-1/2 right-0 w-12 h-1 bg-gradient-to-l from-purple-400/60 to-transparent transform translate-x-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.5s"></div>
+                <div class="absolute top-0 left-1/2 w-1 h-12 bg-gradient-to-b from-orange-400/60 to-transparent transform -translate-y-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.6s"></div>
+                <div class="absolute bottom-0 left-1/2 w-1 h-12 bg-gradient-to-t from-purple-400/60 to-transparent transform translate-y-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.7s"></div>
+                
+                <!-- Diagonal light rays -->
+                <div class="absolute top-0 left-0 w-16 h-1 bg-gradient-to-r from-orange-400/40 to-transparent transform -translate-x-8 -translate-y-1 rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.8s"></div>
+                <div class="absolute top-0 right-0 w-16 h-1 bg-gradient-to-l from-purple-400/40 to-transparent transform translate-x-8 -translate-y-1 -rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 0.9s"></div>
+                <div class="absolute bottom-0 left-0 w-16 h-1 bg-gradient-to-r from-orange-400/40 to-transparent transform -translate-x-8 translate-y-1 -rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 1.0s"></div>
+                <div class="absolute bottom-0 right-0 w-16 h-1 bg-gradient-to-l from-purple-400/40 to-transparent transform translate-x-8 translate-y-1 rotate-45 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="transition-delay: 1.1s"></div>
+              </div>
               
               <!-- Floating sparkles -->
               <div class="absolute top-2 right-2 w-1 h-1 bg-white/80 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -1012,6 +1033,20 @@ onMounted(() => {
 
 .animate-orbit {
   animation: orbit 8s linear infinite;
+}
+
+/* Square light frame animation */
+.square-light-frame {
+  animation: lightPulse 2s ease-in-out infinite;
+}
+
+@keyframes lightPulse {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.2) saturate(1.3);
+  }
 }
 
 .line-clamp-2 {
