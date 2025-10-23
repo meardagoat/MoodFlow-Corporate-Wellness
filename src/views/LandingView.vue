@@ -127,10 +127,10 @@
           </div>
         </div>
 
-        <!-- Interactive Mood Selector - Enhanced Headspace Style -->
+        <!-- Modern Mood Selector - Redesigned -->
         <div class="relative w-full mt-16 md:mt-20 px-4 md:px-6">
           <div class="max-w-6xl mx-auto">
-            <!-- Main selector -->
+            <!-- Main selector with modern design -->
             <div class="text-center mb-16">
               <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow drop-shadow-lg">
                 Comment vous sentez-vous ?
@@ -139,96 +139,120 @@
                 Sélectionnez votre humeur actuelle pour découvrir des insights personnalisés
               </p>
             
-              <!-- Enhanced Headspace-style mood cards -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 max-w-5xl mx-auto">
-                <button v-for="(mood, i) in moods" :key="i"
-                        @click="selectedMoodIndex = i"
-                        class="group relative flex flex-col items-center p-6 md:p-8 rounded-3xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 cursor-pointer focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
-                        :class="selectedMoodIndex === i 
-                          ? 'bg-white/95 backdrop-blur-md shadow-2xl border-3 border-orange-400 scale-105 ring-4 ring-orange-200 ring-opacity-60' 
-                          : 'bg-white/80 backdrop-blur-sm hover:bg-white/90 shadow-xl hover:shadow-2xl border-2 border-white/60 hover:border-orange-200'">
-                  
-                  <!-- Enhanced emoji container -->
-                  <div class="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-3xl flex items-center justify-center mb-4 transition-all duration-500 shadow-xl border-2 border-white/30"
-                       :class="[
-                         mood.gradient,
-                         selectedMoodIndex === i ? 'scale-110 shadow-2xl border-orange-300' : 'group-hover:scale-105'
-                       ]">
-                    <span class="text-5xl md:text-6xl lg:text-7xl transition-transform duration-500 group-hover:scale-110 drop-shadow-lg">
-                      {{ mood.emoji }}
-                    </span>
+              <!-- Modern mood selector with slider design -->
+              <div class="relative max-w-4xl mx-auto">
+                <!-- Background track -->
+                <div class="relative h-2 bg-gradient-to-r from-red-200 via-yellow-200 via-green-200 to-green-300 rounded-full overflow-hidden shadow-inner">
+                  <!-- Progress indicator -->
+                  <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-purple-400 rounded-full transition-all duration-500 ease-out"
+                       :style="`width: ${(selectedMoodIndex / (moods.length - 1)) * 100}%`">
+                  </div>
+                </div>
+                
+                <!-- Mood indicators -->
+                <div class="relative -mt-1">
+                  <div v-for="(mood, i) in moods" :key="i" 
+                       class="absolute transform -translate-x-1/2 cursor-pointer group"
+                       :style="`left: ${(i / (moods.length - 1)) * 100}%`"
+                       @click="selectedMoodIndex = i">
                     
-                    <!-- Glow effect for selected -->
-                    <div v-if="selectedMoodIndex === i" 
-                         class="absolute inset-0 rounded-3xl blur-xl opacity-60 animate-pulse"
-                         :class="mood.gradient"></div>
-                    
-                    <!-- Hover glow effect -->
-                    <div class="absolute inset-0 rounded-3xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300"
-                         :class="mood.gradient"></div>
-                  </div>
-                  
-                  <!-- Enhanced label -->
-                  <p class="text-lg md:text-xl lg:text-2xl font-bold text-center leading-tight mb-2 drop-shadow-sm"
-                     :class="selectedMoodIndex === i ? 'text-neutral-900' : 'text-neutral-700 group-hover:text-neutral-900'">
-                    {{ mood.label }}
-                  </p>
-                  
-                  <!-- Mood description -->
-                  <p class="text-sm md:text-base text-neutral-500 text-center leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
-                    {{ mood.shortDescription || 'Cliquez pour en savoir plus' }}
-                  </p>
-                  
-                  <!-- Enhanced selection indicator -->
-                  <div v-if="selectedMoodIndex === i" 
-                       class="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full flex items-center justify-center shadow-xl animate-bounce border-2 border-white">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                  </div>
-                  
-                  <!-- Floating particles for selected state -->
-                  <div v-if="selectedMoodIndex === i" class="absolute inset-0 pointer-events-none">
-                    <div class="absolute top-2 left-2 w-3 h-3 bg-orange-400 rounded-full animate-ping opacity-70"></div>
-                    <div class="absolute bottom-3 right-3 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-70" style="animation-delay: 0.5s"></div>
-                    <div class="absolute top-1/2 right-1 w-1.5 h-1.5 bg-orange-300 rounded-full animate-ping opacity-50" style="animation-delay: 1s"></div>
-                    <div class="absolute top-1/3 left-1/3 w-2 h-2 bg-yellow-400 rounded-full animate-ping opacity-60" style="animation-delay: 1.5s"></div>
-                  </div>
-                  
-                  <!-- Click hint for unselected states -->
-                  <div v-if="selectedMoodIndex !== i" class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div class="bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">
-                      Cliquer
+                    <!-- Mood button -->
+                    <div class="relative">
+                      <!-- Main button -->
+                      <button class="relative w-16 h-16 md:w-20 md:h-20 rounded-full transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
+                              :class="selectedMoodIndex === i 
+                                ? 'scale-125 shadow-2xl' 
+                                : 'scale-100 shadow-lg hover:scale-110 hover:shadow-xl'">
+                        
+                        <!-- Background with gradient -->
+                        <div class="absolute inset-0 rounded-full transition-all duration-500"
+                             :class="selectedMoodIndex === i 
+                               ? mood.gradient + ' opacity-100' 
+                               : 'bg-white/90 backdrop-blur-sm border-2 border-white/60 group-hover:border-orange-200'">
+                        </div>
+                        
+                        <!-- Emoji -->
+                        <div class="relative z-10 flex items-center justify-center h-full">
+                          <span class="text-2xl md:text-3xl transition-transform duration-500 group-hover:scale-110 drop-shadow-sm">
+                            {{ mood.emoji }}
+                          </span>
+                        </div>
+                        
+                        <!-- Selection ring -->
+                        <div v-if="selectedMoodIndex === i" 
+                             class="absolute inset-0 rounded-full border-4 border-white shadow-lg animate-pulse"></div>
+                        
+                        <!-- Hover glow -->
+                        <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-md"
+                             :class="mood.gradient"></div>
+                      </button>
+                      
+                      <!-- Label -->
+                      <div class="absolute top-full mt-3 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                        <span class="text-sm md:text-base font-semibold px-3 py-1 rounded-full transition-all duration-300"
+                              :class="selectedMoodIndex === i 
+                                ? 'bg-white/95 backdrop-blur-sm text-neutral-900 shadow-lg' 
+                                : 'text-neutral-600 group-hover:text-neutral-900 group-hover:bg-white/80 group-hover:backdrop-blur-sm group-hover:shadow-md'">
+                          {{ mood.label }}
+                        </span>
+                      </div>
+                      
+                      <!-- Description tooltip -->
+                      <div class="absolute bottom-full mb-3 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div class="bg-white/95 backdrop-blur-sm text-neutral-700 text-xs px-3 py-2 rounded-lg shadow-lg border border-white/60 max-w-48 text-center">
+                          {{ mood.shortDescription || 'Cliquez pour en savoir plus' }}
+                        </div>
+                        <!-- Arrow -->
+                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/95"></div>
+                      </div>
                     </div>
                   </div>
-                </button>
+                </div>
               </div>
             </div>
           </div>
           
-          <!-- Dynamic content based on selection -->
-          <div class="w-full">
-            <div class="bg-white/80 backdrop-blur-xl rounded-xl p-4 md:p-6 shadow-lg border border-white/60">
-              <div class="text-center mb-4">
-                <h3 class="text-lg md:text-xl font-bold text-neutral-900 mb-2">
+          <!-- Modern mood summary -->
+          <div class="w-full mt-12">
+            <div class="bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-xl border border-white/60 max-w-4xl mx-auto">
+              <div class="text-center mb-6">
+                <h3 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3">
                   {{ moods[selectedMoodIndex].title }}
                 </h3>
-                <p class="text-neutral-600 text-sm md:text-base mx-auto leading-relaxed max-w-2xl">
+                <p class="text-neutral-600 text-base md:text-lg mx-auto leading-relaxed max-w-3xl">
                   {{ moods[selectedMoodIndex].description }}
                 </p>
               </div>
               
-              <!-- Animated stats bar -->
-              <div class="relative h-2 bg-neutral-100 rounded-full overflow-hidden mb-2 max-w-2xl mx-auto">
-                <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
-                     :class="moods[selectedMoodIndex].gradient"
-                     :style="`width: ${moods[selectedMoodIndex].percentage}%`">
+              <!-- Modern stats visualization -->
+              <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-white/40">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-4 h-4 rounded-full" :class="moods[selectedMoodIndex].gradient"></div>
+                    <span class="text-sm font-semibold text-neutral-700">Statistiques de l'équipe</span>
+                  </div>
+                  <span class="text-2xl md:text-3xl font-bold text-neutral-900">{{ moods[selectedMoodIndex].percentage }}%</span>
                 </div>
-              </div>
-              
-              <div class="flex flex-col sm:flex-row justify-between gap-1 text-xs md:text-sm text-neutral-600 font-medium max-w-2xl mx-auto">
-                <span>{{ moods[selectedMoodIndex].percentage }}% de vos collègues</span>
-                <span>se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}</span>
+                
+                <!-- Enhanced progress bar -->
+                <div class="relative h-3 bg-neutral-100 rounded-full overflow-hidden mb-3">
+                  <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-1000 ease-out shadow-sm"
+                       :class="moods[selectedMoodIndex].gradient"
+                       :style="`width: ${moods[selectedMoodIndex].percentage}%`">
+                    <div class="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row justify-between gap-2 text-sm text-neutral-600 font-medium">
+                  <span class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                    {{ moods[selectedMoodIndex].percentage }}% de vos collègues
+                  </span>
+                  <span class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                    se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
