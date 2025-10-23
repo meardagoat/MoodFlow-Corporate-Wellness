@@ -43,7 +43,7 @@
                 muted 
                 playsinline
                 loop
-                class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-contain drop-shadow-2xl group-hover:scale-110 transition-all duration-700 group-hover:rotate-3"
+                class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-contain drop-shadow-2xl group-hover:scale-110 transition-all duration-700 group-hover:rotate-3 relative z-10"
               >
                 <source :src="logoVideo" type="video/mp4">
                 <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
@@ -53,7 +53,7 @@
               <div class="absolute inset-0 bg-gradient-to-r from-orange-400/30 via-purple-400/30 to-orange-400/30 rounded-full blur-2xl -z-10 group-hover:blur-3xl group-hover:scale-110 transition-all duration-700 animate-pulse"></div>
               
               <!-- Square frame with light rays effect on hover -->
-              <div class="absolute inset-0 -z-5 opacity-0 group-hover:opacity-100 transition-all duration-700 square-light-frame">
+              <div class="absolute inset-0 -z-20 opacity-0 group-hover:opacity-100 transition-all duration-700 square-light-frame">
                 <!-- Square border with gradient -->
                 <div class="absolute inset-0 border-4 border-transparent bg-gradient-to-r from-orange-400 via-purple-400 to-orange-400 bg-clip-border rounded-lg group-hover:scale-110 transition-all duration-700"></div>
                 
