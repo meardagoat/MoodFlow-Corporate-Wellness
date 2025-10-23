@@ -1,41 +1,82 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center px-4 md:px-6">
-      <!-- Animated organic blobs -->
+    <section class="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden">
+      <!-- Enhanced animated organic blobs with more variety -->
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-32 -left-20 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl animate-blob"></div>
         <div class="absolute top-20 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
         <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+        <div class="absolute top-1/2 -right-32 w-64 h-64 bg-pink-400/15 rounded-full blur-2xl animate-blob animation-delay-1000"></div>
+        <div class="absolute bottom-1/4 -left-16 w-48 h-48 bg-blue-400/15 rounded-full blur-2xl animate-blob animation-delay-3000"></div>
       </div>
+
+      <!-- Interactive floating particles -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-orange-400/60 rounded-full animate-float opacity-70"></div>
+        <div class="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-purple-400/60 rounded-full animate-float animation-delay-1000 opacity-60"></div>
+        <div class="absolute bottom-1/3 left-1/3 w-2.5 h-2.5 bg-yellow-400/50 rounded-full animate-float animation-delay-2000 opacity-50"></div>
+        <div class="absolute top-2/3 right-1/4 w-1 h-1 bg-pink-400/70 rounded-full animate-float animation-delay-3000 opacity-80"></div>
+        <div class="absolute bottom-1/4 right-1/2 w-3 h-3 bg-blue-400/40 rounded-full animate-float animation-delay-4000 opacity-60"></div>
+        <div class="absolute top-1/2 left-1/6 w-1.5 h-1.5 bg-green-400/60 rounded-full animate-float animation-delay-5000 opacity-70"></div>
+      </div>
+
+      <!-- Gradient mesh overlay for depth -->
+      <div class="absolute inset-0 bg-gradient-to-br from-orange-100/30 via-transparent to-purple-100/30 pointer-events-none"></div>
 
       <div class="relative z-10 max-w-7xl mx-auto text-center pt-16 md:pt-24">
         <div class="space-y-8 mb-16">
-          <!-- Logo interactif en grand -->
+          <!-- Logo interactif en grand avec effets avancés -->
           <div class="mb-8 md:mb-12 flex justify-center">
             <div class="relative group">
-              <!-- Logo vidéo interactif - clean et simple -->
+              <!-- Orbiting particles around logo -->
+              <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-0 left-1/2 w-2 h-2 bg-orange-400/80 rounded-full animate-orbit opacity-60"></div>
+                <div class="absolute top-1/2 right-0 w-1.5 h-1.5 bg-purple-400/80 rounded-full animate-orbit animation-delay-1000 opacity-70"></div>
+                <div class="absolute bottom-0 left-1/2 w-2.5 h-2.5 bg-yellow-400/60 rounded-full animate-orbit animation-delay-2000 opacity-50"></div>
+                <div class="absolute top-1/2 left-0 w-1 h-1 bg-pink-400/90 rounded-full animate-orbit animation-delay-3000 opacity-80"></div>
+              </div>
+
+              <!-- Logo vidéo interactif avec effets améliorés -->
               <video 
                 autoplay 
                 muted 
                 playsinline
                 loop
-                class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-contain drop-shadow-2xl group-hover:scale-105 transition-all duration-500"
+                class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-contain drop-shadow-2xl group-hover:scale-110 transition-all duration-700 group-hover:rotate-3"
               >
                 <source :src="logoVideo" type="video/mp4">
                 <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
               </video>
               
-              <!-- Effet de glow subtil en arrière-plan -->
-              <div class="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-purple-400/20 to-orange-400/20 rounded-full blur-2xl -z-10 group-hover:blur-3xl transition-all duration-500"></div>
+              <!-- Effet de glow dynamique en arrière-plan -->
+              <div class="absolute inset-0 bg-gradient-to-r from-orange-400/30 via-purple-400/30 to-orange-400/30 rounded-full blur-2xl -z-10 group-hover:blur-3xl group-hover:scale-110 transition-all duration-700 animate-pulse"></div>
+              
+              <!-- Ring effect on hover -->
+              <div class="absolute inset-0 rounded-full border-2 border-orange-300/0 group-hover:border-orange-300/50 transition-all duration-500 -z-5 group-hover:scale-125"></div>
+              
+              <!-- Floating sparkles -->
+              <div class="absolute top-2 right-2 w-1 h-1 bg-white/80 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-3 left-3 w-1.5 h-1.5 bg-yellow-300/80 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="animation-delay: 0.2s"></div>
+              <div class="absolute top-1/2 right-1 w-1 h-1 bg-purple-300/80 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="animation-delay: 0.4s"></div>
             </div>
           </div>
 
-          <!-- Logo/Nom de l'app -->
-          <div class="mb-6 md:mb-8">
-            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent mb-4 px-4 animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-500">
+          <!-- Logo/Nom de l'app avec effets avancés -->
+          <div class="mb-6 md:mb-8 relative">
+            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent mb-4 px-4 animate-gradient-flow cursor-default hover:scale-105 transition-all duration-700 drop-shadow-2xl relative z-10">
               MoodFlow
             </h1>
+            
+            <!-- Text shadow effect -->
+            <div class="absolute inset-0 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-orange-200/20 blur-sm px-4 animate-pulse">
+              MoodFlow
+            </div>
+            
+            <!-- Floating accent particles around title -->
+            <div class="absolute top-0 left-1/4 w-1 h-1 bg-orange-400/60 rounded-full animate-float opacity-70"></div>
+            <div class="absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-purple-400/60 rounded-full animate-float animation-delay-1000 opacity-60"></div>
+            <div class="absolute bottom-0 left-1/2 w-2 h-2 bg-yellow-400/50 rounded-full animate-float animation-delay-2000 opacity-50"></div>
           </div>
           
           <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight px-4">
@@ -910,6 +951,10 @@ onMounted(() => {
   animation-delay: 4s;
 }
 
+.animation-delay-5000 {
+  animation-delay: 5s;
+}
+
 .animate-scroll {
   animation: scroll 40s linear infinite;
 }
@@ -952,8 +997,21 @@ onMounted(() => {
   }
 }
 
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(60px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(60px) rotate(-360deg);
+  }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: orbit 8s linear infinite;
 }
 
 .line-clamp-2 {
