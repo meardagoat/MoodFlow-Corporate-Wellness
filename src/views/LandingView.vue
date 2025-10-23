@@ -51,14 +51,16 @@
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <button @click="goToRegister" 
-                    class="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
-              <span class="relative z-10">Essayer gratuitement</span>
+                    class="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50 border-2 border-orange-400">
+              <span class="relative z-10 drop-shadow-sm">Essayer gratuitement</span>
               <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             
             <button @click="scrollToFeatures" 
-                    class="px-8 py-4 bg-white/60 backdrop-blur-sm text-neutral-800 rounded-full text-lg font-semibold border border-neutral-200 hover:bg-white/80 transition-all duration-300">
-              Découvrir
+                    class="group relative px-8 py-4 bg-white/70 backdrop-blur-sm text-neutral-800 rounded-full text-lg font-semibold border-2 border-neutral-300 hover:bg-white/90 hover:border-orange-300 transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200 focus:ring-opacity-50">
+              <span class="relative z-10">Découvrir</span>
+              <div class="absolute inset-0 bg-orange-100/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>
@@ -68,10 +70,10 @@
           <div class="max-w-6xl mx-auto">
             <!-- Main selector -->
             <div class="text-center mb-16">
-              <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
+              <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow drop-shadow-lg">
                 Comment vous sentez-vous ?
               </h3>
-              <p class="text-xl md:text-2xl text-neutral-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+              <p class="text-xl md:text-2xl text-neutral-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
                 Sélectionnez votre humeur actuelle pour découvrir des insights personnalisés
               </p>
             
@@ -79,51 +81,63 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 max-w-5xl mx-auto">
                 <button v-for="(mood, i) in moods" :key="i"
                         @click="selectedMoodIndex = i"
-                        class="group relative flex flex-col items-center p-6 md:p-8 rounded-3xl transition-all duration-500 hover:scale-105 hover:-translate-y-2"
+                        class="group relative flex flex-col items-center p-6 md:p-8 rounded-3xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 cursor-pointer focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
                         :class="selectedMoodIndex === i 
-                          ? 'bg-white/95 backdrop-blur-md shadow-2xl border-2 border-orange-300 scale-105' 
-                          : 'bg-white/70 backdrop-blur-sm hover:bg-white/85 shadow-xl hover:shadow-2xl border border-white/50'">
+                          ? 'bg-white/95 backdrop-blur-md shadow-2xl border-3 border-orange-400 scale-105 ring-4 ring-orange-200 ring-opacity-60' 
+                          : 'bg-white/80 backdrop-blur-sm hover:bg-white/90 shadow-xl hover:shadow-2xl border-2 border-white/60 hover:border-orange-200'">
                   
                   <!-- Enhanced emoji container -->
-                  <div class="relative w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 rounded-3xl flex items-center justify-center mb-4 transition-all duration-500 shadow-lg"
+                  <div class="relative w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-3xl flex items-center justify-center mb-4 transition-all duration-500 shadow-xl border-2 border-white/30"
                        :class="[
                          mood.gradient,
-                         selectedMoodIndex === i ? 'scale-110 shadow-2xl' : 'group-hover:scale-105'
+                         selectedMoodIndex === i ? 'scale-110 shadow-2xl border-orange-300' : 'group-hover:scale-105'
                        ]">
-                    <span class="text-4xl md:text-5xl lg:text-6xl transition-transform duration-500 group-hover:scale-110">
+                    <span class="text-5xl md:text-6xl lg:text-7xl transition-transform duration-500 group-hover:scale-110 drop-shadow-lg">
                       {{ mood.emoji }}
                     </span>
                     
                     <!-- Glow effect for selected -->
                     <div v-if="selectedMoodIndex === i" 
-                         class="absolute inset-0 rounded-3xl blur-xl opacity-50"
+                         class="absolute inset-0 rounded-3xl blur-xl opacity-60 animate-pulse"
+                         :class="mood.gradient"></div>
+                    
+                    <!-- Hover glow effect -->
+                    <div class="absolute inset-0 rounded-3xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300"
                          :class="mood.gradient"></div>
                   </div>
                   
                   <!-- Enhanced label -->
-                  <p class="text-base md:text-lg lg:text-xl font-bold text-center leading-tight mb-2"
+                  <p class="text-lg md:text-xl lg:text-2xl font-bold text-center leading-tight mb-2 drop-shadow-sm"
                      :class="selectedMoodIndex === i ? 'text-neutral-900' : 'text-neutral-700 group-hover:text-neutral-900'">
                     {{ mood.label }}
                   </p>
                   
                   <!-- Mood description -->
-                  <p class="text-xs md:text-sm text-neutral-500 text-center leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p class="text-sm md:text-base text-neutral-500 text-center leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
                     {{ mood.shortDescription || 'Cliquez pour en savoir plus' }}
                   </p>
                   
                   <!-- Enhanced selection indicator -->
                   <div v-if="selectedMoodIndex === i" 
-                       class="absolute -top-3 -right-3 w-8 h-8 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                       class="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full flex items-center justify-center shadow-xl animate-bounce border-2 border-white">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                     </svg>
                   </div>
                   
                   <!-- Floating particles for selected state -->
                   <div v-if="selectedMoodIndex === i" class="absolute inset-0 pointer-events-none">
-                    <div class="absolute top-2 left-2 w-2 h-2 bg-orange-400 rounded-full animate-ping opacity-60"></div>
-                    <div class="absolute bottom-3 right-3 w-1.5 h-1.5 bg-purple-400 rounded-full animate-ping opacity-60" style="animation-delay: 0.5s"></div>
-                    <div class="absolute top-1/2 right-1 w-1 h-1 bg-orange-300 rounded-full animate-ping opacity-40" style="animation-delay: 1s"></div>
+                    <div class="absolute top-2 left-2 w-3 h-3 bg-orange-400 rounded-full animate-ping opacity-70"></div>
+                    <div class="absolute bottom-3 right-3 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-70" style="animation-delay: 0.5s"></div>
+                    <div class="absolute top-1/2 right-1 w-1.5 h-1.5 bg-orange-300 rounded-full animate-ping opacity-50" style="animation-delay: 1s"></div>
+                    <div class="absolute top-1/3 left-1/3 w-2 h-2 bg-yellow-400 rounded-full animate-ping opacity-60" style="animation-delay: 1.5s"></div>
+                  </div>
+                  
+                  <!-- Click hint for unselected states -->
+                  <div v-if="selectedMoodIndex !== i" class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium shadow-lg">
+                      Cliquer
+                    </div>
                   </div>
                 </button>
               </div>
@@ -174,13 +188,15 @@
           <div class="flex gap-3 justify-center min-w-max mx-auto pb-4">
             <button v-for="(feature, index) in features" :key="index"
                     @click="currentFeature = index"
-                    class="group relative px-6 py-4 rounded-2xl font-semibold transition-all duration-300 whitespace-nowrap border-2"
+                    class="group relative px-6 py-4 rounded-2xl font-semibold transition-all duration-300 whitespace-nowrap border-2 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
                     :class="currentFeature === index 
-                      ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-xl border-transparent' 
-                      : 'bg-white/80 backdrop-blur-sm text-neutral-700 hover:bg-white/90 border-neutral-200 hover:border-orange-200 hover:shadow-lg'">
-              <span class="relative z-10">{{ feature.title }}</span>
+                      ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-xl border-transparent scale-105 ring-4 ring-orange-200 ring-opacity-60' 
+                      : 'bg-white/80 backdrop-blur-sm text-neutral-700 hover:bg-white/90 border-neutral-200 hover:border-orange-200 hover:shadow-lg hover:scale-105'">
+              <span class="relative z-10 drop-shadow-sm">{{ feature.title }}</span>
               <div v-if="currentFeature === index" 
                    class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div v-if="currentFeature !== index" 
+                   class="absolute inset-0 bg-orange-100/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>
@@ -237,9 +253,9 @@
                             
                             <!-- CTA Button -->
                             <button @click="goToRegister"
-                                    class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-xl border border-white/30 hover:bg-white/30 transition-all duration-300 group/btn">
-                              <span class="text-white text-sm font-semibold">Découvrir</span>
-                              <svg class="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="inline-flex items-center gap-2 px-4 py-2 bg-white/30 backdrop-blur-sm rounded-xl border-2 border-white/40 hover:bg-white/40 transition-all duration-300 group/btn shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white/50">
+                              <span class="text-white text-sm font-semibold drop-shadow-sm">Découvrir</span>
+                              <svg class="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                               </svg>
                             </button>
@@ -273,14 +289,16 @@
                       <!-- CTA Button with Headspace style -->
                       <div class="flex flex-col sm:flex-row gap-4">
                         <button @click="goToRegister"
-                                class="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden">
-                          <span class="relative z-10">Découvrir</span>
+                                class="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50 border-2 border-orange-400">
+                          <span class="relative z-10 drop-shadow-sm">Découvrir</span>
                           <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
                         
                         <button @click="scrollToFeatures"
-                                class="px-8 py-4 bg-white/80 backdrop-blur-sm text-neutral-700 rounded-2xl font-semibold border border-neutral-200 hover:bg-white/90 hover:border-orange-200 transition-all duration-300">
-                          En savoir plus
+                                class="group relative px-8 py-4 bg-white/80 backdrop-blur-sm text-neutral-700 rounded-2xl font-semibold border-2 border-neutral-200 hover:bg-white/90 hover:border-orange-300 transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200 focus:ring-opacity-50">
+                          <span class="relative z-10">En savoir plus</span>
+                          <div class="absolute inset-0 bg-orange-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
                       </div>
                     </div>
@@ -294,10 +312,10 @@
           <div class="flex justify-center gap-3 mt-12">
             <button v-for="(_, index) in features" :key="index"
                     @click="currentFeature = index"
-                    class="transition-all duration-300"
+                    class="transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-opacity-50 rounded-full"
                     :class="currentFeature === index 
-                      ? 'w-10 h-2 bg-orange-500 rounded-full' 
-                      : 'w-2 h-2 bg-neutral-300 hover:bg-neutral-400 rounded-full'">
+                      ? 'w-12 h-3 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full shadow-lg scale-110' 
+                      : 'w-3 h-3 bg-neutral-300 hover:bg-orange-400 rounded-full hover:scale-110 shadow-md'">
             </button>
           </div>
         </div>
@@ -360,11 +378,11 @@
           
           <!-- Pause/Play Button -->
           <button @click="toggleExpertCarousel" 
-                  class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group z-10">
-            <svg v-if="expertCarouselPaused" width="14" height="14" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
+                  class="absolute top-4 right-4 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center group z-10 border-2 border-orange-200 hover:border-orange-300 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50">
+            <svg v-if="expertCarouselPaused" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform drop-shadow-sm">
               <path d="M8 5v14l11-7z"/>
             </svg>
-            <svg v-else width="14" height="14" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform">
+            <svg v-else width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform drop-shadow-sm">
               <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
             </svg>
           </button>
@@ -449,8 +467,9 @@
         </h2>
         
         <button @click="goToPricing" 
-                class="px-12 py-5 bg-white text-orange-600 rounded-full text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl">
-          Voir les tarifs
+                class="group relative px-12 py-5 bg-white text-orange-600 rounded-full text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 border-orange-200 hover:border-orange-300 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50">
+          <span class="relative z-10 drop-shadow-sm">Voir les tarifs</span>
+          <div class="absolute inset-0 bg-orange-100/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
       </div>
     </section>
@@ -471,8 +490,9 @@
           Découvrez MoodFlow en action avec une démo personnalisée
         </p>
         <button @click="goToDemo" 
-                class="px-8 sm:px-10 md:px-12 py-4 md:py-5 bg-white text-orange-600 rounded-full text-lg md:text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-orange-900/50">
-          Demander une démo
+                class="group relative px-8 sm:px-10 md:px-12 py-4 md:py-5 bg-white text-orange-600 rounded-full text-lg md:text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 border-orange-200 hover:border-orange-300 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50">
+          <span class="relative z-10 drop-shadow-sm">Demander une démo</span>
+          <div class="absolute inset-0 bg-orange-100/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
       </div>
     </section>
@@ -492,17 +512,17 @@
             <div>
               <h4 class="font-semibold mb-4">Produit</h4>
               <div class="space-y-2">
-                <router-link to="/pricing" class="block text-neutral-400 hover:text-orange-400 transition-colors">Tarifs</router-link>
-                <router-link to="/demo" class="block text-neutral-400 hover:text-orange-400 transition-colors">Demander une démo</router-link>
+                <router-link to="/pricing" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Tarifs</router-link>
+                <router-link to="/demo" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Demander une démo</router-link>
               </div>
             </div>
             
             <div>
               <h4 class="font-semibold mb-4">Entreprise</h4>
               <div class="space-y-2">
-                <router-link to="/about" class="block text-neutral-400 hover:text-orange-400 transition-colors">À propos</router-link>
-                <router-link to="/contact" class="block text-neutral-400 hover:text-orange-400 transition-colors">Contact</router-link>
-                <router-link to="/privacy" class="block text-neutral-400 hover:text-orange-400 transition-colors">Confidentialité</router-link>
+                <router-link to="/about" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">À propos</router-link>
+                <router-link to="/contact" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Contact</router-link>
+                <router-link to="/privacy" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Confidentialité</router-link>
               </div>
             </div>
           </div>
@@ -948,6 +968,39 @@ onMounted(() => {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Enhanced visibility styles */
+.hover\:shadow-3xl:hover {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Improved focus states */
+.focus\:ring-orange-300:focus {
+  --tw-ring-color: rgb(253 186 116 / 0.5);
+}
+
+/* Enhanced button interactions */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+/* Better contrast for accessibility */
+.text-neutral-600 {
+  color: rgb(82 82 91);
+}
+
+.text-neutral-700 {
+  color: rgb(64 64 70);
+}
+
+/* Enhanced drop shadows */
+.drop-shadow-lg {
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.drop-shadow-sm {
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.05));
 }
 
 </style>
