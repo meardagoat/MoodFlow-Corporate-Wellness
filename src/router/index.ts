@@ -3,6 +3,10 @@ import { isAuthenticated, isLoading, initAuth, isSystemAdmin } from '../lib/auth
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    // Toujours aller en haut de page lors de la navigation
+    return { top: 0 }
+  },
   routes: [
     {
       path: '/',

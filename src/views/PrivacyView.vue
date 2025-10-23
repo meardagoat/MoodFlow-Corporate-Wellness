@@ -296,7 +296,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+
+// Scroll vers le haut au chargement de la page
+onMounted(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 const openFaqs = ref<number[]>([]);
 const lastUpdated = '15 janvier 2025';

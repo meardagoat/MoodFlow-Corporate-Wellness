@@ -332,6 +332,13 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
+
+// Scroll vers le haut au chargement de la page
+onMounted(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 const leadership = [
   {
     name: 'David',
