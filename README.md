@@ -249,7 +249,7 @@ MIT License - Voir le fichier LICENSE pour plus de détails.
 
 ---
 
-**Version** : 1.2.0  
-**Dernière mise à jour** : 20 Octobre 2025  
+**Version** : 2.0  
+**Dernière mise à jour** : 22 Octobre 2025  
 
 Codé par Abdoul, Mathieu, Amaury, Jerobel et Mehmet
