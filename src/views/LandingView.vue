@@ -131,7 +131,7 @@
         <div class="relative w-full mt-16 md:mt-20 px-4 md:px-6">
           <div class="max-w-6xl mx-auto">
             <!-- Main selector with modern design -->
-            <div class="text-center mb-20 md:mb-24">
+            <div class="text-center mb-24 md:mb-32 lg:mb-40">
               <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow drop-shadow-lg">
                 Comment vous sentez-vous ?
               </h3>
@@ -213,7 +213,7 @@
           </div>
           
           <!-- Modern mood summary -->
-          <div class="w-full mt-20 md:mt-24">
+          <div class="w-full mt-24 md:mt-32 lg:mt-40">
             <div class="bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-xl border border-white/60 max-w-4xl mx-auto">
               <div class="text-center mb-6">
                 <h3 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3">
