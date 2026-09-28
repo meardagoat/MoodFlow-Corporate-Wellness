@@ -1,353 +1,453 @@
 <template>
   <div class="min-h-screen">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
-      <!-- En-tête Super Admin -->
-      <header class="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div class="flex items-center gap-4 sm:gap-5">
-          <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-coral sm:h-16 sm:w-16">
-            <Icon name="crown" class="h-7 w-7" />
-          </span>
-          <div>
-            <h1 class="display text-display-md">Super Admin</h1>
-            <p class="mt-1 text-ink/65">Gestion complète de l'organisation</p>
-          </div>
+    <!-- ============================================================
+         EN-TÊTE
+         ============================================================ -->
+    <section class="shell pt-6 md:pt-10" aria-labelledby="admin-title">
+      <div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+        <div class="min-w-0">
+          <p class="label flex flex-wrap items-center gap-x-3 gap-y-2 text-ink/55">
+            <span>(04) Administration</span>
+            <span class="inline-flex items-center gap-2 rounded-full bg-ink px-3 py-1.5 text-paper">
+              <span class="relative flex h-2 w-2" aria-hidden="true">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#4ADE80] opacity-70" />
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-[#4ADE80]" />
+              </span>
+              Super admin
+            </span>
+          </p>
+          <h1 id="admin-title" v-split="{ chars: true, immediate: true, delay: 0.1 }" class="display mt-5 text-display-lg">
+            La <span class="accent text-coral">console</span>
+          </h1>
         </div>
-
-        <!-- Status Badge -->
-        <div class="chip self-start sm:self-auto">
-          <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22C55E] opacity-60" />
-            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22C55E]" />
-          </span>
-          System Admin
-        </div>
-      </header>
-
-      <!-- Compteurs -->
-      <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <section
-          v-for="tile in statTiles"
-          :key="tile.label"
-          class="flex min-h-[9.5rem] flex-col rounded-[1.75rem] p-5 sm:min-h-[11rem] sm:p-6"
-          :style="{ backgroundColor: tile.color }"
-        >
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-semibold">{{ tile.label }}</h2>
-            <Icon :name="tile.icon" class="h-5 w-5" />
-          </div>
-          <p class="display mt-auto text-5xl leading-none tracking-[-0.05em]">{{ tile.value }}</p>
-          <p class="mt-2 hidden text-xs text-ink/65 sm:block">{{ tile.caption }}</p>
-        </section>
+        <p v-reveal="0.3" class="max-w-sm text-pretty text-lg leading-snug text-ink/65">
+          Gérez les membres de l'organisation, leurs rôles et les demandes de modification, depuis un seul endroit.
+        </p>
       </div>
 
-      <!-- Créer un utilisateur -->
-      <section class="mt-3 rounded-[2rem] border border-ink/10 bg-white p-5 sm:p-8">
-        <div class="flex items-center gap-4">
-          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-sun">
-            <Icon name="user-plus" class="h-5 w-5" />
-          </span>
-          <div>
-            <h2 class="display text-2xl tracking-[-0.04em] sm:text-3xl">Créer un utilisateur</h2>
-            <p class="hidden text-ink/60 sm:block">Ajoutez des membres à votre organisation</p>
+      <!-- ============================================================
+           KPI
+           ============================================================ -->
+      <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-12">
+        <!-- Utilisateurs -->
+        <div
+          v-reveal="0.1"
+          class="kpi relative col-span-2 flex min-h-[17rem] flex-col overflow-hidden rounded-[2.5rem] bg-ink p-6 text-paper sm:p-8 md:col-span-12 lg:col-span-6 lg:row-span-2"
+        >
+          <div class="kpi-glow pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-coral/45 blur-3xl" aria-hidden="true" />
+          <div class="relative flex items-start justify-between gap-4">
+            <p class="label text-paper/60">Utilisateurs</p>
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-coral text-ink">
+              <Icon name="users" class="h-5 w-5" />
+            </span>
+          </div>
+          <div v-if="users.length" class="relative mt-6 flex items-center" aria-hidden="true">
+            <span
+              v-for="(u, i) in users.slice(0, 6)"
+              :key="u.id"
+              class="display -ml-2 grid h-11 w-11 place-items-center rounded-full text-xs ring-[3px] ring-ink first:ml-0"
+              :style="{ ...avatarStyle(u.id), zIndex: 10 - i }"
+            >{{ initialsFrom(u.display_name || u.email) }}</span>
+            <span v-if="users.length > 6" class="-ml-2 grid h-11 min-w-[2.75rem] place-items-center rounded-full bg-paper/15 px-2 font-mono text-xs text-paper ring-[3px] ring-ink">+{{ users.length - 6 }}</span>
+          </div>
+          <div class="relative mt-auto pt-8">
+            <p class="display text-[clamp(4.5rem,11vw,8.5rem)] leading-[0.8] tracking-[-0.06em]">
+              <CountUp :key="`u-${stats.totalUsers}`" :value="String(stats.totalUsers)" />
+            </p>
+            <p class="mt-3 text-sm text-paper/65">membres actifs dans l'organisation</p>
+
+            <div
+              class="mt-6 flex h-3 overflow-hidden rounded-full bg-paper/10"
+              role="img"
+              :aria-label="`Répartition : ${stats.superAdmins} super admin, ${stats.managers} managers, ${stats.employees} employés`"
+            >
+              <span
+                v-for="seg in roleSegments"
+                :key="seg.key"
+                class="role-bar h-full"
+                :style="{ width: `${seg.pct}%`, backgroundColor: seg.color }"
+              />
+            </div>
+            <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-paper/70">
+              <li v-for="seg in roleSegments" :key="seg.key" class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full" :style="{ backgroundColor: seg.color }" aria-hidden="true" />
+                <span class="font-semibold text-paper">{{ seg.value }}</span> {{ seg.label }}
+              </li>
+            </ul>
           </div>
         </div>
 
-        <form @submit.prevent="createUserHandler" class="mt-8 space-y-6">
-          <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-            <div>
-              <label for="newEmail" class="field-label">
-                Email
-              </label>
-              <input
-                id="newEmail"
-                v-model="newUser.email"
-                type="email"
-                required
-                class="field"
-                placeholder="nouvel.utilisateur@entreprise.com"
-              />
-            </div>
-
-            <div>
-              <label for="newPassword" class="field-label">
-                Mot de passe temporaire
-              </label>
-              <input
-                id="newPassword"
-                v-model="newUser.password"
-                type="password"
-                required
-                minlength="6"
-                autocomplete="new-password"
-                class="field"
-                placeholder="••••••••"
-              />
-            </div>
-
-            <div>
-              <label for="newService" class="field-label">
-                Département
-              </label>
-              <input
-                id="newService"
-                v-model="newUser.service"
-                type="text"
-                required
-                class="field"
-                placeholder="ex: Ingénierie, Ventes, RH"
-              />
-            </div>
-
-            <div>
-              <label for="newRole" class="field-label">
-                Rôle
-              </label>
-              <select
-                id="newRole"
-                v-model="newUser.role"
-                required
-                class="field"
-              >
-                <option value="employee">👤 Employé</option>
-                <option value="manager">👔 Manager</option>
-                <option v-if="isSystemAdmin" value="system_admin">👑 Super Admin</option>
-              </select>
-            </div>
+        <!-- Autres indicateurs -->
+        <div
+          v-for="(kpi, i) in kpiTiles"
+          :key="kpi.key"
+          v-reveal="0.15 + i * 0.06"
+          class="kpi group relative flex min-h-[10rem] flex-col overflow-hidden rounded-[2rem] p-5 sm:min-h-[12rem] sm:p-6 md:col-span-6 lg:col-span-3"
+          :class="kpi.bg"
+        >
+          <div class="flex items-start justify-between gap-3">
+            <p class="label" :class="kpi.muted">{{ kpi.label }}</p>
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full transition-transform duration-500 ease-out-back group-hover:rotate-12 group-hover:scale-110" :class="kpi.iconBg">
+              <Icon :name="kpi.icon" class="h-[1.1rem] w-[1.1rem]" />
+            </span>
           </div>
+          <p class="display mt-auto pt-6 text-[clamp(3rem,6vw,4.75rem)] leading-[0.82] tracking-[-0.06em]">
+            <CountUp :key="`${kpi.key}-${kpi.value}`" :value="String(kpi.value)" />
+          </p>
+          <p class="mt-2 text-xs sm:text-sm" :class="kpi.muted">{{ kpi.caption }}</p>
+        </div>
+      </div>
+    </section>
 
-          <div v-if="createError" class="notice notice-error animate-shake" role="alert">
-            {{ createError }}
-          </div>
+    <!-- ============================================================
+         DEMANDES + CRÉATION
+         ============================================================ -->
+    <section class="shell mt-16 grid gap-3 md:mt-20 lg:grid-cols-12" aria-labelledby="requests-title">
+      <!-- File des demandes -->
+      <div class="min-w-0 lg:col-span-7">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <h2 id="requests-title" class="display text-display-md">Les <span class="accent text-coral">demandes</span></h2>
+          <p class="label text-ink/50">{{ modificationRequests.length }} au total</p>
+        </div>
 
-          <div v-if="createSuccess" class="notice notice-success" role="status">
-            ✅ Utilisateur créé avec succès !
-          </div>
-
+        <div class="-mx-5 mt-6 flex gap-2 overflow-x-auto px-5 pb-1 scrollbar-hide sm:mx-0 sm:px-0" role="group" aria-label="Filtrer les demandes par statut">
           <button
-            type="submit"
-            :disabled="creating"
-            class="btn btn-ink w-full md:w-auto"
+            v-for="f in requestFilters"
+            :key="f.value"
+            type="button"
+            :aria-pressed="requestFilter === f.value"
+            class="flex shrink-0 items-center gap-2 rounded-full py-2 pl-4 pr-2 text-sm font-semibold transition-colors duration-300"
+            :class="requestFilter === f.value ? 'bg-ink text-paper' : 'bg-ink/[0.05] text-ink/70 hover:bg-ink/10 hover:text-ink'"
+            @click="requestFilter = f.value"
           >
-            <span v-if="creating" class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-            {{ creating ? 'Création...' : 'Créer l\'utilisateur' }}
+            {{ f.label }}
+            <span
+              class="grid h-6 min-w-[1.5rem] place-items-center rounded-full px-1.5 font-mono text-[11px]"
+              :class="requestFilter === f.value ? 'bg-paper/15 text-paper' : 'bg-white text-ink/60'"
+            >{{ f.count }}</span>
           </button>
-        </form>
-      </section>
-
-      <!-- Demandes de modification -->
-      <section class="mt-3 rounded-[2rem] border border-ink/10 bg-white p-5 sm:p-8">
-        <div class="flex items-center gap-4">
-          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-lilac">
-            <Icon name="pen" class="h-5 w-5" />
-          </span>
-          <div>
-            <h2 class="display text-2xl tracking-[-0.04em] sm:text-3xl">Demandes</h2>
-            <p class="hidden text-ink/60 sm:block">Traitez les demandes de changement d'informations</p>
-          </div>
         </div>
 
-        <!-- Stats des demandes -->
-        <div class="mt-6 grid grid-cols-3 gap-2 sm:gap-3">
-          <div class="rounded-2xl bg-sun/35 p-3 sm:p-4">
-            <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
-              <Icon name="hourglass" class="h-5 w-5" />
-              <div>
-                <p class="text-xs sm:text-sm">Attente</p>
-                <p class="display text-2xl leading-none sm:text-3xl">{{ pendingRequests.length }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-2xl bg-[#D9F5E4] p-3 text-[#14532D] sm:p-4">
-            <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
-              <Icon name="check" class="h-5 w-5" />
-              <div>
-                <p class="text-xs sm:text-sm">Validées</p>
-                <p class="display text-2xl leading-none sm:text-3xl">{{ approvedRequests.length }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-2xl bg-coral/20 p-3 text-[#9F1239] sm:p-4">
-            <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
-              <Icon name="x" class="h-5 w-5" />
-              <div>
-                <p class="text-xs sm:text-sm">Rejetées</p>
-                <p class="display text-2xl leading-none sm:text-3xl">{{ rejectedRequests.length }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div v-if="visibleRequests.length > 0" class="mt-6 space-y-3">
+          <article
+            v-for="(request, index) in visibleRequests"
+            :key="request.id"
+            v-reveal="(index % 4) * 0.06"
+            class="request-card relative overflow-hidden rounded-[2rem] border border-ink/10 bg-white p-5 sm:p-7"
+            :style="{ '--status': statusMeta(request.status).color }"
+          >
+            <span class="request-strip absolute inset-y-0 left-0 w-1.5" aria-hidden="true" />
 
-        <!-- Liste des demandes en attente -->
-        <div v-if="pendingRequests.length > 0" class="mt-8 space-y-3">
-          <h3 class="label text-ink/55">Demandes en attente</h3>
-          <article v-for="request in pendingRequests" :key="request.id" class="rounded-[1.5rem] border border-ink/10 bg-paper p-4 sm:p-6">
-            <div class="flex flex-wrap items-center gap-3">
-              <span class="rounded-full bg-sun px-3 py-1 text-sm font-semibold">
-                {{ getRequestTypeLabel(request.request_type) }}
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="flex min-w-0 flex-wrap items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold leading-none"
+                  :class="statusMeta(request.status).chip"
+                >
+                  <Icon :name="statusMeta(request.status).icon" class="h-3.5 w-3.5" />
+                  {{ statusMeta(request.status).label }}
+                </span>
+                <span class="tag">{{ getRequestTypeLabel(request.request_type) }}</span>
+              </div>
+              <time :datetime="request.created_at" class="font-mono text-[11px] uppercase tracking-[0.08em] text-ink/45">
+                {{ formatDate(request.created_at) }}
+              </time>
+            </div>
+
+            <!-- Valeur actuelle → nouvelle valeur -->
+            <div class="mt-5 grid items-center gap-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:gap-3 lg:grid-cols-1 lg:gap-2 xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:gap-3">
+              <div class="min-w-0 rounded-2xl bg-paper-deep/70 px-4 py-3">
+                <p class="label text-ink/45">Valeur actuelle</p>
+                <p class="mt-1.5 break-words font-medium text-ink/60 line-through decoration-ink/25">{{ formatRequestValue(request, request.current_value) }}</p>
+              </div>
+              <span class="mx-auto grid h-9 w-9 shrink-0 rotate-90 place-items-center rounded-full bg-ink text-paper sm:rotate-0 lg:rotate-90 xl:rotate-0" aria-hidden="true">
+                <Icon name="arrow-right" class="h-4 w-4" />
               </span>
-              <span class="font-mono text-xs text-ink/55">{{ formatDate(request.created_at) }}</span>
-            </div>
-            <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div>
-                <p class="text-sm text-ink/55">Valeur actuelle:</p>
-                <p class="font-medium">{{ request.current_value }}</p>
+              <div class="min-w-0 rounded-2xl px-4 py-3" :class="statusMeta(request.status).soft">
+                <p class="label text-ink/55">Nouvelle valeur</p>
+                <p class="mt-1.5 break-words font-semibold">{{ formatRequestValue(request, request.requested_value) }}</p>
               </div>
-              <div>
-                <p class="text-sm text-ink/55">Nouvelle valeur demandée:</p>
-                <p class="font-medium">{{ request.requested_value }}</p>
-              </div>
-            </div>
-            <div class="mt-3">
-              <p class="text-sm text-ink/55">Raison:</p>
-              <p>{{ request.reason }}</p>
-            </div>
-            <div class="mt-3">
-              <p class="text-sm text-ink/55">Demandeur:</p>
-              <p class="font-medium">{{ request.user_email || 'Email non disponible' }}</p>
             </div>
 
-            <!-- Actions -->
-            <div class="mt-5 flex flex-col gap-2 sm:flex-row">
-              <button
-                type="button"
-                @click="processRequest(request.id, 'approved')"
-                class="btn btn-sm flex-1 bg-[#22C55E] text-ink hover:bg-ink hover:text-paper"
-              >
-                <Icon name="check" class="h-4 w-4" />
-                <span class="hidden sm:inline">Approuver</span>
-              </button>
-              <button
-                type="button"
-                @click="processRequest(request.id, 'rejected')"
-                class="btn btn-sm btn-danger flex-1"
-              >
-                <Icon name="x" class="h-4 w-4" />
-                <span class="hidden sm:inline">Rejeter</span>
-              </button>
-              <button
-                type="button"
-                @click="showRequestDetails(request)"
-                class="btn btn-sm btn-outline flex-1"
-              >
-                <Icon name="eye" class="h-4 w-4" />
-                <span class="hidden sm:inline">Détails</span>
-              </button>
+            <blockquote v-if="request.reason" class="mt-4 border-l-2 border-ink/15 pl-4 text-pretty text-ink/75">
+              « {{ request.reason }} »
+            </blockquote>
+
+            <div class="mt-5 flex flex-col gap-4 border-t border-ink/[0.07] pt-4 sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-stretch xl:flex-row xl:items-center">
+              <div class="flex min-w-0 items-center gap-3">
+                <span
+                  class="display grid h-9 w-9 shrink-0 place-items-center rounded-full text-xs"
+                  :style="avatarStyle(request.user_email || request.id)"
+                  aria-hidden="true"
+                >{{ initialsFrom(request.user_email) }}</span>
+                <div class="min-w-0">
+                  <p class="label text-ink/45">Demandeur</p>
+                  <p class="truncate text-sm font-semibold">{{ request.user_email || 'E-mail non disponible' }}</p>
+                </div>
+              </div>
+
+              <div class="flex shrink-0 gap-2">
+                <template v-if="request.status === 'pending'">
+                  <button
+                    type="button"
+                    @click="processRequest(request.id, 'approved')"
+                    class="btn btn-sm flex-1 bg-[#BDEBCB] text-[#0F3D22] hover:bg-ink hover:text-paper sm:flex-none lg:flex-1 xl:flex-none"
+                  >
+                    <Icon name="check" class="h-4 w-4" />
+                    Approuver
+                  </button>
+                  <button
+                    type="button"
+                    @click="processRequest(request.id, 'rejected')"
+                    class="btn btn-sm btn-coral flex-1 sm:flex-none lg:flex-1 xl:flex-none"
+                  >
+                    <Icon name="x" class="h-4 w-4" />
+                    Rejeter
+                  </button>
+                </template>
+                <button
+                  type="button"
+                  @click="showRequestDetails(request)"
+                  class="btn btn-sm btn-outline shrink-0 px-3.5"
+                  :aria-label="`Voir les détails de la demande de ${request.user_email || 'ce membre'}`"
+                >
+                  <Icon name="eye" class="h-4 w-4" />
+                  <span :class="request.status === 'pending' ? 'sr-only md:not-sr-only' : ''">Détails</span>
+                </button>
+              </div>
             </div>
           </article>
         </div>
 
-        <div v-else class="mt-8 flex flex-col items-center rounded-[1.5rem] bg-paper py-10 text-center">
-          <MoodFace mood="very_happy" class="h-14 w-14" />
-          <p class="mt-4 text-ink/65">Aucune demande en attente</p>
+        <div v-else class="mt-6 grid place-items-center rounded-[2.5rem] bg-paper-deep/70 px-6 py-16 text-center">
+          <MoodFace mood="very_happy" class="h-16 w-16" />
+          <p class="display mt-5 text-2xl tracking-[-0.04em]">{{ emptyRequestsTitle }}</p>
+          <p class="mt-2 max-w-xs text-sm text-ink/60">Tout est à jour. Les nouvelles demandes des membres apparaîtront ici.</p>
         </div>
-      </section>
+      </div>
 
-      <!-- Utilisateurs -->
-      <section class="mt-3 overflow-hidden rounded-[2rem] border border-ink/10 bg-white">
-        <div class="flex items-center gap-4 p-5 sm:p-8">
-          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-aqua">
-            <Icon name="users" class="h-5 w-5" />
-          </span>
-          <div>
-            <h2 class="display text-2xl tracking-[-0.04em] sm:text-3xl">Utilisateurs</h2>
-            <p class="hidden text-ink/60 sm:block">Gérez les rôles et permissions</p>
+      <!-- Créer un utilisateur -->
+      <aside class="mt-10 min-w-0 lg:col-span-5 lg:mt-0" aria-labelledby="create-title">
+        <div class="lg:sticky lg:top-8">
+          <div v-reveal="0.15" class="relative overflow-hidden rounded-[2.5rem] bg-coral p-6 sm:p-8">
+            <span class="pointer-events-none absolute -right-10 -top-10 grid h-40 w-40 place-items-center rounded-full bg-paper/70" aria-hidden="true">
+              <MoodFace mood="peek" class="mr-4 mt-4 h-20 w-20" />
+            </span>
+
+            <div class="relative pr-28">
+              <p class="label text-ink/65">Nouveau compte</p>
+              <h2 id="create-title" class="display mt-4 text-[clamp(2rem,4vw,2.9rem)] leading-[0.92] tracking-[-0.045em]">
+                Inviter un <span class="accent">membre</span>
+              </h2>
+            </div>
+            <p class="relative mt-3 max-w-xs text-sm text-ink/75">Il recevra ses accès avec un mot de passe temporaire à modifier.</p>
+
+            <form @submit.prevent="createUserHandler" class="relative mt-7 space-y-4">
+              <div>
+                <label for="newEmail" class="field-label text-ink">Adresse e-mail</label>
+                <input
+                  id="newEmail"
+                  v-model="newUser.email"
+                  type="email"
+                  required
+                  autocomplete="off"
+                  class="field border-transparent"
+                  placeholder="prenom.nom@entreprise.com"
+                />
+              </div>
+
+              <div>
+                <label for="newPassword" class="field-label text-ink">Mot de passe temporaire</label>
+                <input
+                  id="newPassword"
+                  v-model="newUser.password"
+                  type="password"
+                  required
+                  minlength="6"
+                  autocomplete="new-password"
+                  class="field border-transparent"
+                  placeholder="6 caractères minimum"
+                />
+              </div>
+
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                <div class="min-w-0">
+                  <label for="newService" class="field-label text-ink">Service</label>
+                  <input
+                    id="newService"
+                    v-model="newUser.service"
+                    type="text"
+                    required
+                    class="field border-transparent"
+                    placeholder="Ex. Tech, Ventes, RH"
+                  />
+                </div>
+
+                <div class="min-w-0">
+                  <label for="newRole" class="field-label text-ink">Rôle</label>
+                  <select id="newRole" v-model="newUser.role" required class="field border-transparent">
+                    <option value="employee">Employé</option>
+                    <option value="manager">Manager</option>
+                    <option v-if="isSystemAdmin" value="system_admin">Super admin</option>
+                  </select>
+                </div>
+              </div>
+
+              <div v-if="createError" class="notice notice-error animate-shake" role="alert">
+                {{ createError }}
+              </div>
+
+              <div v-if="createSuccess" class="notice notice-success" role="status">
+                Utilisateur créé avec succès.
+              </div>
+
+              <button type="submit" :disabled="creating" class="btn btn-ink btn-lg mt-2 w-full">
+                <span v-if="creating" class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" aria-hidden="true" />
+                <Icon v-else name="user-plus" class="h-5 w-5" />
+                {{ creating ? 'Création…' : 'Créer l\'utilisateur' }}
+              </button>
+            </form>
+          </div>
+
+          <div class="mt-3 flex items-center gap-4 rounded-[2rem] border border-ink/10 bg-white p-5">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lilac">
+              <Icon name="shield" class="h-5 w-5" />
+            </span>
+            <p class="text-sm text-ink/70">Chaque changement de rôle est journalisé. Attribuez le rôle super admin avec parcimonie.</p>
           </div>
         </div>
+      </aside>
+    </section>
 
-        <!-- Desktop Table -->
-        <div class="hidden overflow-x-auto md:block">
-          <table class="w-full">
-            <thead class="border-y border-ink/10 bg-paper/60">
-              <tr>
-                <th scope="col" class="label px-8 py-4 text-left text-ink/55">Utilisateur</th>
-                <th scope="col" class="label px-4 py-4 text-left text-ink/55">Département</th>
-                <th scope="col" class="label px-4 py-4 text-left text-ink/55">Rôle</th>
-                <th scope="col" class="label px-4 py-4 text-left text-ink/55">Créé</th>
-                <th scope="col" class="label px-4 py-4 text-left text-ink/55 pr-8">Actions</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-ink/[0.07]">
-              <tr v-for="user in users" :key="user.id" class="transition-colors hover:bg-paper/70">
-                <td class="whitespace-nowrap px-8 py-4">
-                  <div class="flex items-center gap-3">
-                    <span class="display grid h-10 w-10 place-items-center rounded-full bg-paper-deep text-sm">
-                      {{ user.email?.charAt(0)?.toUpperCase() || 'U' }}
-                    </span>
-                    <div>
-                      <div class="text-sm font-semibold">{{ user.email || 'No email' }}</div>
-                      <div class="text-sm text-ink/55">{{ user.display_name || 'No display name' }}</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="whitespace-nowrap px-4 py-4">
-                  <span class="tag">
-                    {{ user.service || 'No service' }}
-                  </span>
-                </td>
-                <td class="whitespace-nowrap px-4 py-4">
-                  <span :class="getRoleBadgeClass(user.role)">
-                    {{ getRoleLabel(user.role) }}
-                  </span>
-                </td>
-                <td class="whitespace-nowrap px-4 py-4 font-mono text-xs text-ink/55">
-                  {{ user.created_at ? formatDate(user.created_at) : 'No date' }}
-                </td>
-                <td class="whitespace-nowrap px-4 py-4 pr-8">
-                  <button
-                    type="button"
-                    @click="editUser(user)"
-                    class="link text-sm font-semibold"
-                  >
-                    Modifier
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- ============================================================
+         ANNUAIRE
+         ============================================================ -->
+    <section class="shell mt-16 md:mt-20" aria-labelledby="users-title">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 id="users-title" class="display text-display-md">L'<span class="accent text-coral">annuaire</span></h2>
+        <div class="relative w-full sm:w-72">
+          <Icon name="search" class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/45" />
+          <input
+            v-model="userQuery"
+            type="search"
+            class="field rounded-full py-3 pl-11"
+            placeholder="Rechercher un membre…"
+            aria-label="Rechercher un membre"
+          />
         </div>
+      </div>
 
-        <!-- Mobile Cards -->
-        <div class="space-y-2 px-4 pb-4 md:hidden">
-          <div v-for="user in users" :key="user.id" class="rounded-[1.5rem] bg-paper p-4">
-            <div class="flex items-center gap-3">
-              <span class="display grid h-10 w-10 shrink-0 place-items-center rounded-full bg-paper-deep text-sm">
-                {{ user.email?.charAt(0)?.toUpperCase() || 'U' }}
-              </span>
-              <div class="min-w-0">
-                <div class="truncate text-sm font-semibold">{{ user.email || 'No email' }}</div>
-                <div class="text-xs text-ink/55">{{ user.display_name || 'No name' }}</div>
-              </div>
-            </div>
+      <!-- Filtres rôle -->
+      <div class="-mx-5 mt-6 flex gap-2 overflow-x-auto px-5 pb-1 scrollbar-hide sm:mx-0 sm:px-0" role="group" aria-label="Filtrer par rôle">
+        <button
+          v-for="f in roleFilters"
+          :key="f.value"
+          type="button"
+          :aria-pressed="roleFilter === f.value"
+          class="flex shrink-0 items-center gap-2 rounded-full py-2 pl-4 pr-2 text-sm font-semibold transition-colors duration-300"
+          :class="roleFilter === f.value ? 'bg-ink text-paper' : 'bg-ink/[0.05] text-ink/70 hover:bg-ink/10 hover:text-ink'"
+          @click="roleFilter = f.value"
+        >
+          {{ f.label }}
+          <span
+            class="grid h-6 min-w-[1.5rem] place-items-center rounded-full px-1.5 font-mono text-[11px]"
+            :class="roleFilter === f.value ? 'bg-paper/15 text-paper' : 'bg-white text-ink/60'"
+          >{{ f.count }}</span>
+        </button>
+      </div>
 
-            <div class="mt-4 grid grid-cols-2 gap-2">
-              <div>
-                <p class="mb-1 text-xs text-ink/55">Département</p>
-                <span class="tag">
-                  {{ user.service || 'No service' }}
-                </span>
-              </div>
-              <div>
-                <p class="mb-1 text-xs text-ink/55">Rôle</p>
+      <div v-reveal="0.1" class="mt-6 overflow-hidden rounded-[2.5rem] border border-ink/10 bg-white">
+        <!-- Tableau (très grand écran) -->
+        <table class="hidden w-full table-fixed xl:table">
+          <caption class="sr-only">Liste des utilisateurs</caption>
+          <thead class="border-b border-ink/10 bg-paper/60">
+            <tr>
+              <th scope="col" class="label px-8 py-5 text-left font-normal text-ink/55">Membre</th>
+              <th scope="col" class="label w-[18%] px-4 py-5 text-left font-normal text-ink/55">Service</th>
+              <th scope="col" class="label w-[17%] px-4 py-5 text-left font-normal text-ink/55">Rôle</th>
+              <th scope="col" class="label w-[15%] px-4 py-5 text-left font-normal text-ink/55">Créé le</th>
+              <th scope="col" class="label w-[10rem] px-8 py-5 text-right font-normal text-ink/55"><span class="sr-only">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-ink/[0.07]">
+            <tr v-for="user in filteredUsers" :key="user.id" class="user-row">
+              <td class="px-8 py-4">
+                <div class="flex min-w-0 items-center gap-4">
+                  <span
+                    class="avatar display grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm"
+                    :style="avatarStyle(user.id)"
+                    aria-hidden="true"
+                  >{{ initialsFrom(user.display_name || user.email) }}</span>
+                  <div class="min-w-0">
+                    <p class="truncate font-semibold">{{ user.display_name || 'Sans nom' }}</p>
+                    <p class="truncate text-sm text-ink/55" :title="user.email || undefined">{{ user.email || 'Aucun e-mail' }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-4">
+                <span class="tag max-w-full truncate">{{ user.service || 'Aucun service' }}</span>
+              </td>
+              <td class="px-4 py-4">
                 <span :class="getRoleBadgeClass(user.role)">
+                  <Icon :name="roleIcon(user.role)" class="h-3.5 w-3.5 shrink-0" />
                   {{ getRoleLabel(user.role) }}
                 </span>
+              </td>
+              <td class="px-4 py-4 font-mono text-xs text-ink/55">
+                {{ user.created_at ? formatDate(user.created_at) : '—' }}
+              </td>
+              <td class="px-8 py-4 text-right">
+                <button type="button" @click="editUser(user)" class="btn btn-sm btn-outline" :aria-label="`Modifier ${user.display_name || user.email || 'cet utilisateur'}`">
+                  <Icon name="pen" class="h-3.5 w-3.5" />
+                  Modifier
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Cartes (mobile / tablette) -->
+        <ul class="grid gap-2 p-2 sm:grid-cols-2 sm:gap-3 sm:p-3 lg:grid-cols-3 xl:hidden">
+          <li v-for="user in filteredUsers" :key="user.id" class="min-w-0 rounded-[1.75rem] bg-paper p-4 sm:p-5">
+            <div class="flex items-center gap-3">
+              <span
+                class="display grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm"
+                :style="avatarStyle(user.id)"
+                aria-hidden="true"
+              >{{ initialsFrom(user.display_name || user.email) }}</span>
+              <div class="min-w-0 flex-1">
+                <p class="truncate font-semibold">{{ user.display_name || 'Sans nom' }}</p>
+                <p class="break-all text-xs text-ink/55">{{ user.email || 'Aucun e-mail' }}</p>
               </div>
             </div>
 
-            <div class="mt-4 flex items-center justify-between border-t border-ink/10 pt-3">
-              <span class="font-mono text-xs text-ink/55">{{ user.created_at ? formatDate(user.created_at) : 'No date' }}</span>
-              <button
-                type="button"
-                @click="editUser(user)"
-                class="btn btn-sm btn-ink"
-              >
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span :class="getRoleBadgeClass(user.role)">
+                <Icon :name="roleIcon(user.role)" class="h-3.5 w-3.5 shrink-0" />
+                {{ getRoleLabel(user.role) }}
+              </span>
+              <span class="tag">{{ user.service || 'Aucun service' }}</span>
+            </div>
+
+            <div class="mt-4 flex items-center justify-between gap-3 border-t border-ink/10 pt-3">
+              <span class="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-ink/50">
+                <Icon name="calendar" class="h-3.5 w-3.5 shrink-0" />
+                <span class="sr-only">Créé le</span>
+                <span class="whitespace-nowrap">{{ user.created_at ? formatDate(user.created_at) : '—' }}</span>
+              </span>
+              <button type="button" @click="editUser(user)" class="btn btn-sm btn-ink" :aria-label="`Modifier ${user.display_name || user.email || 'cet utilisateur'}`">
                 Modifier
               </button>
             </div>
-          </div>
+          </li>
+        </ul>
+
+        <div v-if="filteredUsers.length === 0" class="grid place-items-center px-6 py-16 text-center">
+          <MoodFace mood="peek" class="h-14 w-14" />
+          <p class="mt-4 text-ink/65">Aucun membre ne correspond à votre recherche.</p>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -357,6 +457,7 @@ import { supabase } from '../lib/supabase';
 import { createUser } from '../lib/auth';
 import { isSystemAdmin } from '../lib/auth';
 import MoodFace from '../components/brand/MoodFace.vue';
+import CountUp from '../components/ui/CountUp.vue';
 import Icon, { type IconName } from '../components/ui/Icon.vue';
 
 const users = ref<any[]>([]);
@@ -368,12 +469,6 @@ const stats = ref({
   employees: 0
 });
 
-const statTiles = computed<{ label: string; value: number; caption: string; icon: IconName; color: string }[]>(() => [
-  { label: 'Total', value: stats.value.totalUsers, caption: 'Active members', icon: 'users', color: '#FED94E' },
-  { label: 'Admins', value: stats.value.superAdmins, caption: 'System administrators', icon: 'crown', color: '#FA4D52' },
-  { label: 'Managers', value: stats.value.managers, caption: 'Team leaders', icon: 'badge', color: '#FF8944' },
-  { label: 'Employees', value: stats.value.employees, caption: 'Team members', icon: 'user', color: '#CDB8FF' },
-]);
 
 const newUser = ref({
   email: '',
@@ -396,6 +491,114 @@ const approvedRequests = computed(() =>
 const rejectedRequests = computed(() =>
   modificationRequests.value.filter(req => req.status === 'rejected')
 );
+
+// --- Présentation (purement visuel) ---
+const roleSegments = computed(() => {
+  const total = stats.value.totalUsers || 1;
+  return [
+    { key: 'system_admin', label: 'super admin', value: stats.value.superAdmins, color: '#FA4D52' },
+    { key: 'manager', label: 'managers', value: stats.value.managers, color: '#FF8944' },
+    { key: 'employee', label: 'employés', value: stats.value.employees, color: '#CDB8FF' },
+  ].map(seg => ({ ...seg, pct: (seg.value / total) * 100 }));
+});
+
+const kpiTiles = computed<{ key: string; label: string; value: number; caption: string; icon: IconName; bg: string; iconBg: string; muted: string }[]>(() => [
+  { key: 'managers', label: 'Managers', value: stats.value.managers, caption: 'responsables d\'équipe', icon: 'badge', bg: 'bg-tangerine', iconBg: 'bg-paper/70', muted: 'text-ink/70' },
+  { key: 'pending', label: 'En attente', value: pendingRequests.value.length, caption: 'demandes à traiter', icon: 'hourglass', bg: 'bg-sun', iconBg: 'bg-ink text-sun', muted: 'text-ink/70' },
+  { key: 'approved', label: 'Approuvées', value: approvedRequests.value.length, caption: 'demandes validées', icon: 'check', bg: 'bg-[#BDEBCB]', iconBg: 'bg-paper/70', muted: 'text-ink/70' },
+  { key: 'rejected', label: 'Rejetées', value: rejectedRequests.value.length, caption: 'demandes refusées', icon: 'x', bg: 'bg-[#FFD3D4]', iconBg: 'bg-coral', muted: 'text-ink/70' },
+]);
+
+type RequestFilter = 'pending' | 'approved' | 'rejected' | 'all';
+const requestFilter = ref<RequestFilter>('pending');
+const requestFilters = computed<{ value: RequestFilter; label: string; count: number }[]>(() => [
+  { value: 'pending', label: 'En attente', count: pendingRequests.value.length },
+  { value: 'approved', label: 'Approuvées', count: approvedRequests.value.length },
+  { value: 'rejected', label: 'Rejetées', count: rejectedRequests.value.length },
+  { value: 'all', label: 'Toutes', count: modificationRequests.value.length },
+]);
+const visibleRequests = computed(() => {
+  switch (requestFilter.value) {
+    case 'pending': return pendingRequests.value;
+    case 'approved': return approvedRequests.value;
+    case 'rejected': return rejectedRequests.value;
+    default: return modificationRequests.value;
+  }
+});
+const emptyRequestsTitle = computed(() => {
+  switch (requestFilter.value) {
+    case 'pending': return 'Aucune demande en attente';
+    case 'approved': return 'Aucune demande approuvée';
+    case 'rejected': return 'Aucune demande rejetée';
+    default: return 'Aucune demande';
+  }
+});
+
+function statusMeta(status: string): { label: string; icon: IconName; color: string; chip: string; soft: string } {
+  switch (status) {
+    case 'approved': return { label: 'Approuvée', icon: 'check', color: '#5CC98A', chip: 'bg-[#BDEBCB] text-[#0F3D22]', soft: 'bg-[#BDEBCB]/60' };
+    case 'rejected': return { label: 'Rejetée', icon: 'x', color: '#FA4D52', chip: 'bg-coral text-ink', soft: 'bg-[#FFD3D4]/70' };
+    default: return { label: 'En attente', icon: 'hourglass', color: '#FED94E', chip: 'bg-sun text-ink', soft: 'bg-sun/45' };
+  }
+}
+
+function formatRequestValue(request: any, value: string | null | undefined) {
+  if (value === null || value === undefined || value === '') return '—';
+  return String(request.request_type || '').includes('role') ? getRoleLabel(value) : value;
+}
+
+type RoleFilter = 'all' | 'system_admin' | 'manager' | 'employee';
+const roleFilter = ref<RoleFilter>('all');
+const userQuery = ref('');
+const roleFilters = computed<{ value: RoleFilter; label: string; count: number }[]>(() => [
+  { value: 'all', label: 'Tous', count: stats.value.totalUsers },
+  { value: 'system_admin', label: 'Super admin', count: stats.value.superAdmins },
+  { value: 'manager', label: 'Managers', count: stats.value.managers },
+  { value: 'employee', label: 'Employés', count: stats.value.employees },
+]);
+const filteredUsers = computed(() => {
+  const q = userQuery.value.trim().toLowerCase();
+  return users.value.filter(u => {
+    if (roleFilter.value !== 'all' && u.role !== roleFilter.value) return false;
+    if (!q) return true;
+    return [u.display_name, u.email, u.service].some((v: unknown) => typeof v === 'string' && v.toLowerCase().includes(q));
+  });
+});
+
+const AVATAR_COLORS: [string, string][] = [
+  ['#FED94E', '#1A0E2B'],
+  ['#FF8944', '#1A0E2B'],
+  ['#FA4D52', '#1A0E2B'],
+  ['#CDB8FF', '#1A0E2B'],
+  ['#5EDDE7', '#1A0E2B'],
+  ['#8248FE', '#FFF8EF'],
+  ['#FF5BBC', '#1A0E2B'],
+  ['#1A0E2B', '#FED94E'],
+];
+
+function avatarStyle(seed: string | null | undefined) {
+  const str = seed || 'x';
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  const [bg, fg] = AVATAR_COLORS[h % AVATAR_COLORS.length];
+  return { backgroundColor: bg, color: fg };
+}
+
+function initialsFrom(value: string | null | undefined) {
+  if (!value) return 'U';
+  const base = value.includes('@') ? value.split('@')[0] : value;
+  const parts = base.split(/[\s._-]+/).filter(Boolean);
+  const letters = parts.length > 1 ? parts[0][0] + parts[1][0] : base.slice(0, 1);
+  return letters.toUpperCase();
+}
+
+function roleIcon(role: string): IconName {
+  switch (role) {
+    case 'system_admin': return 'crown';
+    case 'manager': return 'badge';
+    default: return 'user';
+  }
+}
 
 // Load users and stats
 async function loadUsers() {
@@ -476,19 +679,19 @@ async function createUserHandler() {
 // Helper functions
 function getRoleLabel(role: string) {
   switch (role) {
-    case 'system_admin': return '👑 Super Admin';
-    case 'manager': return '👔 Manager';
-    case 'employee': return '👤 Employé';
+    case 'system_admin': return 'Super admin';
+    case 'manager': return 'Manager';
+    case 'employee': return 'Employé';
     default: return role;
   }
 }
 
 function getRoleBadgeClass(role: string) {
   switch (role) {
-    case 'system_admin': return 'inline-flex rounded-full bg-coral/20 px-3 py-1 text-xs font-semibold text-[#9F1239]';
-    case 'manager': return 'inline-flex rounded-full bg-tangerine/25 px-3 py-1 text-xs font-semibold text-ink';
-    case 'employee': return 'inline-flex rounded-full bg-lilac/60 px-3 py-1 text-xs font-semibold text-ink';
-    default: return 'inline-flex rounded-full bg-ink/[0.06] px-3 py-1 text-xs font-semibold text-ink';
+    case 'system_admin': return 'inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-coral px-3 py-1.5 text-xs font-semibold leading-none text-ink';
+    case 'manager': return 'inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-tangerine/30 px-3 py-1.5 text-xs font-semibold leading-none text-ink';
+    case 'employee': return 'inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-lilac/70 px-3 py-1.5 text-xs font-semibold leading-none text-ink';
+    default: return 'inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-ink/[0.06] px-3 py-1.5 text-xs font-semibold leading-none text-ink';
   }
 }
 
@@ -528,15 +731,20 @@ async function processRequest(requestId: string, status: 'approved' | 'rejected'
 
 // Show request details
 function showRequestDetails(request: any) {
-  alert(`Détails de la demande:\n\nType: ${getRequestTypeLabel(request.request_type)}\nValeur actuelle: ${request.current_value}\nNouvelle valeur: ${request.requested_value}\nRaison: ${request.reason}\nDemandeur: ${request.user_email}`);
+  alert(`Détails de la demande\n\nType : ${getRequestTypeLabel(request.request_type)}\nStatut : ${statusMeta(request.status).label}\nValeur actuelle : ${formatRequestValue(request, request.current_value)}\nNouvelle valeur : ${formatRequestValue(request, request.requested_value)}\nRaison : ${request.reason || '—'}\nDemandeur : ${request.user_email || 'E-mail non disponible'}`);
 }
 
 // Get request type label
 function getRequestTypeLabel(type: string) {
   switch (type) {
-    case 'email_change': return 'Changement d\'email';
-    case 'service_change': return 'Changement de département';
-    case 'display_name_change': return 'Changement de nom';
+    case 'email_change':
+    case 'email': return 'Changement d\'e-mail';
+    case 'service_change':
+    case 'service': return 'Changement de service';
+    case 'display_name_change':
+    case 'display_name': return 'Changement de nom';
+    case 'role_change':
+    case 'role': return 'Changement de rôle';
     default: return type;
   }
 }
@@ -546,3 +754,57 @@ onMounted(() => {
   loadModificationRequests();
 });
 </script>
+
+<style scoped>
+.kpi {
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.kpi:hover {
+  transform: translateY(-4px);
+}
+.kpi-glow {
+  animation: drift 9s ease-in-out infinite;
+}
+.role-bar {
+  transition: width 1.4s var(--ease-out-expo);
+}
+.role-bar + .role-bar {
+  box-shadow: inset 2px 0 0 #1a0e2b;
+}
+.request-strip {
+  background: var(--status);
+}
+.request-card {
+  transition:
+    transform 0.6s var(--ease-out-expo),
+    box-shadow 0.6s var(--ease-out-expo),
+    border-color 0.4s ease;
+}
+.request-card:hover {
+  transform: translateY(-3px);
+  border-color: transparent;
+  box-shadow: 0 30px 60px -36px rgba(26, 14, 43, 0.5);
+}
+.user-row {
+  transition: background-color 0.3s ease;
+}
+.user-row:hover {
+  background-color: rgba(255, 248, 239, 0.8);
+}
+.user-row .avatar {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.user-row:hover .avatar {
+  transform: scale(1.1) rotate(-6deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .kpi:hover,
+  .request-card:hover,
+  .user-row:hover .avatar {
+    transform: none;
+  }
+  .kpi-glow {
+    animation: none;
+  }
+}
+</style>

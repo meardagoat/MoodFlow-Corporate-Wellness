@@ -76,7 +76,7 @@
                     :class="selectedMood === mood.value ? 'scale-[1.04] ring-2 ring-ink' : 'bg-ink/[0.04] hover:bg-ink/[0.08]'"
                     :style="selectedMood === mood.value ? { backgroundColor: moodColor(mood.value), color: moodOnColor(mood.value) } : undefined"
                   >
-                    <MoodFace :mood="mood.value" class="h-12 w-12 transition-transform duration-500 ease-out-back group-hover:scale-110 sm:h-14 sm:w-14" />
+                    <MoodFace :mood="mood.value" class="h-12 w-12 transition-transform duration-500 ease-out-back group-hover:scale-110 sm:h-14 sm:w-14" :class="selectedMood === mood.value ? 'rounded-full ring-4 ring-paper' : ''" />
                     <span class="text-sm font-semibold">{{ mood.label }}</span>
                   </button>
                 </div>
@@ -107,7 +107,7 @@
                         : 'bg-ink/[0.04] hover:bg-ink/[0.08]'
                     ]"
                   >
-                    <span class="text-xl" aria-hidden="true">{{ tag.emoji }}</span>
+                    <Icon :name="tag.icon" class="h-5 w-5 shrink-0" />
                     <span class="flex-1 text-sm font-semibold">{{ tag.label }}</span>
                     <Icon v-if="selectedTags.includes(tag.id)" name="check" class="h-4 w-4 text-sun" stroke-width="2.5" />
                   </button>
@@ -139,7 +139,7 @@
                   </label>
 
                   <p class="mt-4 text-sm text-ink/70">
-                    {{ isAnonymous ? '✅ Vos posts seront anonymes' : '⚠️ Vos posts seront publics' }}
+                    {{ isAnonymous ? 'Vos publications seront anonymes.' : 'Votre nom sera visible sur vos publications.' }}
                   </p>
                 </div>
               </div>
@@ -157,8 +157,8 @@
                       <Icon name="user" class="h-5 w-5" />
                     </span>
                     <div class="min-w-0 flex-1">
-                      <p class="font-mono text-xs text-ink/50">Anonymous • il y a 2h</p>
-                      <p class="truncate">Super journée d'équipe ! 🎉</p>
+                      <p class="font-mono text-xs text-ink/50">Anonyme · il y a 2 h</p>
+                      <p class="truncate">Super journée d'équipe !</p>
                     </div>
                   </div>
 
@@ -215,7 +215,7 @@
               @click="completeGuide"
               class="btn btn-sun"
             >
-              🎉 Commencer
+              Commencer
             </button>
           </div>
         </div>
@@ -229,7 +229,7 @@ import { ref, onMounted, computed } from 'vue';
 import { currentProfile } from '../lib/auth';
 import SunMark from './brand/SunMark.vue';
 import MoodFace from './brand/MoodFace.vue';
-import Icon from './ui/Icon.vue';
+import Icon, { type IconName } from './ui/Icon.vue';
 import { moodColor, moodOnColor } from '../lib/moods';
 
 const showGuide = ref(false);
@@ -243,20 +243,20 @@ const isAnonymous = ref(true);
 const demoReaction = ref(false);
 
 const interactiveMoods = [
-  { value: 'very_happy', emoji: '😄', label: 'Great' },
-  { value: 'happy', emoji: '😊', label: 'Good' },
-  { value: 'neutral', emoji: '😐', label: 'Okay' },
-  { value: 'sad', emoji: '😟', label: 'Bad' },
-  { value: 'very_sad', emoji: '😢', label: 'Awful' },
+  { value: 'very_happy', label: 'Radieux' },
+  { value: 'happy', label: 'Bien' },
+  { value: 'neutral', label: 'Correct' },
+  { value: 'sad', label: 'Pas top' },
+  { value: 'very_sad', label: 'Difficile' },
 ];
 
-const interactiveTags = [
-  { id: 'workload', emoji: '💼', label: 'Workload' },
-  { id: 'team', emoji: '👥', label: 'Team Spirit' },
-  { id: 'work_life', emoji: '⚖️', label: 'Work-Life Balance' },
-  { id: 'management', emoji: '👔', label: 'Management' },
-  { id: 'environment', emoji: '🏢', label: 'Environment' },
-  { id: 'growth', emoji: '📈', label: 'Growth' },
+const interactiveTags: { id: string; icon: IconName; label: string }[] = [
+  { id: 'workload', icon: 'clipboard', label: 'Charge de travail' },
+  { id: 'team', icon: 'users', label: 'Esprit d\'équipe' },
+  { id: 'work_life', icon: 'repeat', label: 'Équilibre pro/perso' },
+  { id: 'management', icon: 'badge', label: 'Management' },
+  { id: 'environment', icon: 'building', label: 'Environnement' },
+  { id: 'growth', icon: 'trending', label: 'Évolution' },
 ];
 
 // Computed properties

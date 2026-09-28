@@ -25,7 +25,7 @@
       </div>
 
       <h1 ref="title" class="display mt-10 text-[clamp(3rem,11vw,7.5rem)] leading-[0.9] tracking-[-0.055em]">
-        See You Soon
+        À très vite
       </h1>
 
       <p ref="subtitle" class="mt-6 text-2xl text-ink/80 sm:text-3xl">
