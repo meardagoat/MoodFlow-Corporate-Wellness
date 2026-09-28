@@ -7,179 +7,102 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Palette Headspace - Orange pêche chaleureux
-        primary: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+        // Palette MoodFlow — tirée du logo (soleil, MOOD violet, FLOW rouge)
+        // et des fonds des vidéos / portraits du site.
+        ink: {
+          DEFAULT: '#1A0E2B', // aubergine presque noire, couleur du texte
+          soft: '#3D2E52',
         },
-        
-        // Violet Headspace pour accents
-        accent: {
-          50: '#faf5ff',
-          100: '#f3e8ff',
-          200: '#e9d5ff',
-          300: '#d8b4fe',
-          400: '#c084fc',
-          500: '#a855f7',
-          600: '#9333ea',
-          700: '#7e22ce',
-          800: '#6b21a8',
-          900: '#581c87',
+        paper: {
+          DEFAULT: '#FFF8EF', // crème chaud, fond principal
+          deep: '#F6EADC',
         },
-        
-        // Gradients Headspace - Orange vers violet
-        gradient: {
-          from: '#f97316',
-          via: '#c084fc',
-          to: '#a855f7',
+        blush: '#FFE3D8',
+        sun: {
+          DEFAULT: '#FED94E',
+          deep: '#F5C518',
         },
-        
-        // Couleur crème/beige Headspace
-        cream: {
-          50: '#fefce8',
-          100: '#fef9c3',
-          200: '#fef08a',
-          300: '#fde047',
-          400: '#facc15',
-          500: '#eab308',
-          600: '#ca8a04',
-          700: '#a16207',
-          800: '#854d0e',
-          900: '#713f12',
+        tangerine: '#FF8944',
+        flame: '#FF691C',
+        coral: '#FA4D52',
+        candy: '#FF5BBC',
+        grape: {
+          DEFAULT: '#8248FE',
+          deep: '#5B2BD9',
         },
-        
-        // Couleurs neutres sophistiquées
-        neutral: {
-          50: '#fafafa',
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
-        },
-        
-        // Couleurs d'état modernes
-        success: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-        },
-        
-        warning: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
-        },
-        
-        error: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#ef4444',
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
-        },
-        
-        // Couleurs pour les moods - palette Headspace
+        lilac: '#CDB8FF',
+        aqua: '#5EDDE7',
+        lagoon: '#11C1DC',
+
+        // Échelle des humeurs : du plein soleil à l'orage
         mood: {
-          very_happy: '#22c55e', // vert success
-          happy: '#facc15',      // jaune Headspace
-          neutral: '#fb923c',    // orange doux
-          sad: '#c084fc',        // violet doux
-          very_sad: '#a855f7',   // violet foncé
+          very_happy: '#FED94E',
+          happy: '#FF8944',
+          neutral: '#CDB8FF',
+          sad: '#5EDDE7',
+          very_sad: '#8248FE',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Cal Sans', 'Inter', 'sans-serif'],
+        sans: ['"Instrument Sans Variable"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Bricolage Grotesque Variable"', '"Instrument Sans Variable"', 'system-ui', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+        mono: ['"DM Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       fontSize: {
-        '2xs': ['0.625rem', { lineHeight: '0.875rem' }],
+        '2xs': ['0.6875rem', { lineHeight: '1rem' }],
+        // Titres fluides, du plus spectaculaire au plus sobre
+        'display-2xl': ['clamp(3.75rem, 13.5vw, 15rem)', { lineHeight: '0.84', letterSpacing: '-0.055em' }],
+        'display-xl': ['clamp(3.25rem, 10vw, 10.5rem)', { lineHeight: '0.86', letterSpacing: '-0.05em' }],
+        'display-lg': ['clamp(2.6rem, 7vw, 7rem)', { lineHeight: '0.9', letterSpacing: '-0.045em' }],
+        'display-md': ['clamp(2.1rem, 4.6vw, 4.5rem)', { lineHeight: '0.95', letterSpacing: '-0.04em' }],
+        'display-sm': ['clamp(1.65rem, 2.8vw, 2.6rem)', { lineHeight: '1.02', letterSpacing: '-0.03em' }],
       },
       borderRadius: {
         '4xl': '2rem',
         '5xl': '2.5rem',
+        '6xl': '3rem',
       },
-      boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-        'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 20px 60px -15px rgba(0, 0, 0, 0.06)',
-        'glow': '0 0 20px rgba(14, 165, 233, 0.3)',
-        'glow-lg': '0 0 40px rgba(14, 165, 233, 0.4)',
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'out-back': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'in-out-quart': 'cubic-bezier(0.76, 0, 0.24, 1)',
       },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'float-slow': 'float 8s ease-in-out infinite',
-        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
-        'shimmer': 'shimmer 2s linear infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'slide-up': 'slide-up 0.5s ease-out',
-        'slide-down': 'slide-down 0.5s ease-out',
-        'fade-in': 'fade-in 0.5s ease-out',
-        'scale-in': 'scale-in 0.3s ease-out',
+      maxWidth: {
+        'site': '96rem',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+        'spin-slow': {
+          to: { transform: 'rotate(360deg)' },
         },
-        'pulse-soft': {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.8' },
+        twinkle: {
+          '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: '1' },
+          '50%': { transform: 'scale(0.6) rotate(45deg)', opacity: '0.55' },
         },
-        shimmer: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' },
+        drift: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0) rotate(0deg)' },
+          '50%': { transform: 'translate3d(0, -14px, 0) rotate(4deg)' },
         },
-        glow: {
-          '0%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.3)' },
-          '100%': { boxShadow: '0 0 40px rgba(14, 165, 233, 0.6)' },
+        'marquee-x': {
+          to: { transform: 'translate3d(-50%, 0, 0)' },
         },
-        'slide-up': {
-          '0%': { transform: 'translateY(100%)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        'fade-up': {
+          from: { opacity: '0', transform: 'translate3d(0, 16px, 0)' },
+          to: { opacity: '1', transform: 'none' },
         },
-        'slide-down': {
-          '0%': { transform: 'translateY(-100%)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '25%': { transform: 'translateX(-6px)' },
+          '75%': { transform: 'translateX(6px)' },
         },
-        'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        'scale-in': {
-          '0%': { transform: 'scale(0.9)', opacity: '0' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
-        },
+      },
+      animation: {
+        'spin-slow': 'spin-slow 48s linear infinite',
+        'spin-slower': 'spin-slow 90s linear infinite',
+        twinkle: 'twinkle 3.2s ease-in-out infinite',
+        drift: 'drift 7s ease-in-out infinite',
+        'fade-up': 'fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both',
+        shake: 'shake 0.45s ease-in-out',
       },
     },
   },

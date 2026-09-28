@@ -1,334 +1,215 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- Home Button -->
-    <div class="fixed top-6 left-6 z-50">
-      <router-link to="/" 
-                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
-        <span class="text-2xl">🏠</span>
-      </router-link>
-    </div>
+  <div class="overflow-x-clip">
+    <PageHero
+      label="Tarifs"
+      subtitle="Des tarifs transparents et flexibles pour toutes les tailles d'entreprise. Commencez gratuitement, évoluez selon vos besoins."
+      :indicators="['Essai gratuit 14 jours', 'Sans engagement', 'Support inclus']"
+      tone="#FED94E"
+      disc="#FFF8EF"
+      mood="very_happy"
+      :dots="['#8248FE', '#FA4D52', '#11C1DC']"
+    >
+      Tarifs <span class="accent text-grape">MoodFlow</span>
+    </PageHero>
 
-    <!-- Hero Section - Enhanced Headspace Style -->
-    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
-      <!-- Background decorative elements -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
-        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
-      </div>
-      
-      <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-20">
-          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Tarifs MoodFlow
-            </span>
-          </h1>
-          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
-            Des tarifs transparents et flexibles pour toutes les tailles d'entreprise. 
-            Commencez gratuitement, évoluez selon vos besoins.
-          </p>
-          
-          <!-- Value proposition -->
-          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-lg font-medium">Essai gratuit 14 jours</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span class="text-lg font-medium">Sans engagement</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span class="text-lg font-medium">Support inclus</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Plans -->
+    <section class="pb-24 pt-20 md:pb-40 md:pt-28">
+      <div class="shell">
+        <div class="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+          <p class="label text-ink/55">(01)</p>
 
-    <!-- Enhanced Pricing Toggle -->
-    <section class="py-12 px-4 md:px-6 bg-white">
-      <div class="max-w-5xl mx-auto">
-        <div class="flex justify-center mb-12">
-          <div class="bg-neutral-100 rounded-3xl p-3 flex shadow-lg border border-neutral-200">
-            <button @click="billingCycle = 'monthly'" 
-                    :class="billingCycle === 'monthly' ? 'bg-white text-orange-600 shadow-xl scale-105' : 'text-neutral-600 hover:text-neutral-800'"
-                    class="px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center gap-2">
-              <span>Mensuel</span>
+          <div
+            class="relative inline-flex rounded-full bg-ink/[0.06] p-1.5"
+            role="radiogroup"
+            aria-label="Période de facturation"
+          >
+            <span
+              class="absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-full bg-ink transition-transform duration-500 ease-out-expo"
+              :class="billingCycle === 'yearly' ? 'translate-x-full' : 'translate-x-0'"
+              aria-hidden="true"
+            />
+            <button
+              type="button"
+              role="radio"
+              :aria-checked="billingCycle === 'monthly'"
+              class="relative z-10 w-36 rounded-full py-3 text-[15px] font-semibold transition-colors duration-300 sm:w-44"
+              :class="billingCycle === 'monthly' ? 'text-paper' : 'text-ink'"
+              @click="billingCycle = 'monthly'"
+            >
+              Mensuel
             </button>
-            <button @click="billingCycle = 'yearly'" 
-                    :class="billingCycle === 'yearly' ? 'bg-white text-orange-600 shadow-xl scale-105' : 'text-neutral-600 hover:text-neutral-800'"
-                    class="px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center gap-2">
-              <span>Annuel</span>
-              <span class="text-sm bg-gradient-to-r from-orange-500 to-purple-500 text-white px-3 py-1 rounded-full font-semibold shadow-lg">-20%</span>
+            <button
+              type="button"
+              role="radio"
+              :aria-checked="billingCycle === 'yearly'"
+              class="relative z-10 flex w-36 items-center justify-center gap-2 rounded-full py-3 text-[15px] font-semibold transition-colors duration-300 sm:w-44"
+              :class="billingCycle === 'yearly' ? 'text-paper' : 'text-ink'"
+              @click="billingCycle = 'yearly'"
+            >
+              Annuel
+              <span class="rounded-full bg-coral px-2 py-0.5 text-xs font-bold text-ink">-20%</span>
             </button>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Enhanced Pricing Cards -->
-    <section class="py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-neutral-50 to-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-3 gap-8 md:gap-12">
-          <!-- Starter Plan -->
-          <div class="group relative bg-white rounded-3xl p-8 border border-neutral-200 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative z-10">
-              <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
-                  🚀
-                </div>
-                <h3 class="text-3xl font-bold text-neutral-900 mb-3">Starter</h3>
-                <p class="text-lg text-neutral-600 mb-8">Parfait pour les petites équipes qui commencent</p>
-                <div class="mb-8">
-                  <span class="text-6xl font-bold text-neutral-900">{{ billingCycle === 'yearly' ? '€8' : '€10' }}</span>
-                  <span class="text-lg text-neutral-600">/employé/mois</span>
-                </div>
-                <button class="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl font-bold text-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:scale-105 shadow-lg">
-                  Commencer gratuitement
-                </button>
-              </div>
-              
-              <div class="space-y-5">
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Jusqu'à 50 employés</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Expression libre anonyme</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Dashboard de base</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Support email</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Rapports mensuels</span>
-                </div>
-              </div>
+        <div class="mt-14 grid gap-4 lg:grid-cols-3">
+          <!-- Starter -->
+          <article v-reveal class="flex min-w-0 flex-col rounded-[2.25rem] border border-ink/10 bg-white p-7 md:p-10 lg:p-7 xl:p-10">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="display text-3xl tracking-[-0.035em]">Starter</h3>
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-aqua xl:h-12 xl:w-12"><Icon name="rocket" class="h-5 w-5" /></span>
             </div>
-          </div>
+            <p class="mt-3 text-ink/70">Parfait pour les petites équipes qui commencent</p>
+            <div class="mt-10 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <Transition name="price" mode="out-in">
+                <span :key="billingCycle" class="display text-6xl xl:text-7xl leading-none tracking-[-0.06em]">{{ billingCycle === 'yearly' ? '€8' : '€10' }}</span>
+              </Transition>
+              <span class="text-ink/60">/employé/mois</span>
+            </div>
+            <router-link to="/register" class="btn btn-outline mt-10 w-full">
+              <RollText text="Commencer gratuitement" />
+            </router-link>
+            <ul class="mt-10 space-y-4 border-t border-ink/10 pt-8">
+              <li v-for="item in starterFeatures" :key="item" class="flex items-center gap-3">
+                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-aqua"><Icon name="check" class="h-3.5 w-3.5" stroke-width="2.5" /></span>
+                <span class="text-base xl:text-lg">{{ item }}</span>
+              </li>
+            </ul>
+          </article>
 
-          <!-- Professional Plan - Enhanced -->
-          <div class="group relative bg-white rounded-3xl p-8 border-2 border-orange-500 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 scale-105 lg:scale-110">
-            <div class="absolute inset-0 bg-gradient-to-br from-orange-50 to-purple-50 rounded-3xl opacity-100"></div>
-            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20">
-              <span class="bg-gradient-to-r from-orange-500 to-purple-600 text-white px-8 py-3 rounded-full text-lg font-bold shadow-xl animate-pulse">
-                ⭐ Populaire
-              </span>
+          <!-- Professional -->
+          <article v-reveal="0.1" class="relative flex min-w-0 flex-col rounded-[2.25rem] bg-grape p-7 text-paper md:p-10 lg:-my-4 lg:p-7 lg:py-12 xl:p-10 xl:py-14">
+            <span
+              class="absolute -top-4 right-8 inline-flex rotate-[4deg] items-center gap-2 rounded-full bg-sun px-4 py-2 text-sm font-bold text-ink shadow-[0_10px_30px_-10px_rgba(26,14,43,0.5)]"
+            >
+              <Icon name="spark" class="h-4 w-4 text-coral" />
+              Populaire
+            </span>
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="display text-3xl tracking-[-0.04em] xl:text-4xl">Professional</h3>
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-sun text-ink xl:h-12 xl:w-12"><Icon name="zap" class="h-5 w-5" /></span>
             </div>
-            
-            <div class="relative z-10">
-              <div class="text-center mb-8">
-                <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-3xl mx-auto mb-6 group-hover:scale-110 transition-transform duration-500 shadow-xl">
-                  💎
-                </div>
-                <h3 class="text-4xl font-bold text-neutral-900 mb-3">Professional</h3>
-                <p class="text-xl text-neutral-600 mb-8">Pour les entreprises en croissance</p>
-                <div class="mb-8">
-                  <span class="text-7xl font-bold text-neutral-900">{{ billingCycle === 'yearly' ? '€16' : '€20' }}</span>
-                  <span class="text-xl text-neutral-600">/employé/mois</span>
-                </div>
-                <button class="w-full px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-bold text-lg hover:from-orange-600 hover:to-purple-700 transition-all duration-300 hover:scale-105 shadow-xl">
-                  Essayer 30 jours gratuits
-                </button>
-              </div>
-              
-              <div class="space-y-5">
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Jusqu'à 500 employés</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Tout Starter +</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Insights en temps réel</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Actions ciblées</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Support prioritaire</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Rapports hebdomadaires</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Intégrations API</span>
-                </div>
-              </div>
+            <p class="mt-3 text-lg text-paper/80">Pour les entreprises en croissance</p>
+            <div class="mt-10 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <Transition name="price" mode="out-in">
+                <span :key="billingCycle" class="display text-7xl xl:text-8xl leading-none tracking-[-0.06em]">{{ billingCycle === 'yearly' ? '€16' : '€20' }}</span>
+              </Transition>
+              <span class="text-paper/70">/employé/mois</span>
             </div>
-          </div>
+            <router-link to="/register" class="btn btn-sun mt-10 w-full" v-magnetic="0.15">
+              <RollText text="Essayer 30 jours gratuits" />
+              <span class="btn-dot hidden xl:grid"><Icon name="arrow-right" /></span>
+            </router-link>
+            <ul class="mt-10 space-y-4 border-t border-paper/20 pt-8">
+              <li v-for="item in professionalFeatures" :key="item" class="flex items-center gap-3">
+                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sun text-ink"><Icon name="check" class="h-3.5 w-3.5" stroke-width="2.5" /></span>
+                <span class="text-base xl:text-lg">{{ item }}</span>
+              </li>
+            </ul>
+          </article>
 
-          <!-- Enterprise Plan - Enhanced -->
-          <div class="group relative bg-white rounded-3xl p-8 border border-neutral-200 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative z-10">
-              <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform duration-500">
-                  🏢
-                </div>
-                <h3 class="text-3xl font-bold text-neutral-900 mb-3">Enterprise</h3>
-                <p class="text-lg text-neutral-600 mb-8">Pour les grandes organisations</p>
-                <div class="mb-8">
-                  <span class="text-6xl font-bold text-neutral-900">Sur mesure</span>
-                </div>
-                <button class="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl font-bold text-lg hover:from-purple-600 hover:to-purple-700 transition-all duration-300 hover:scale-105 shadow-lg">
-                  Nous contacter
-                </button>
-              </div>
-              
-              <div class="space-y-5">
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Employés illimités</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Tout Professional +</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Déploiement sur site</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Support dédié 24/7</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Formation personnalisée</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">SLA garantie</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">✓</div>
-                  <span class="text-neutral-700 text-lg">Conformité avancée</span>
-                </div>
-              </div>
+          <!-- Enterprise -->
+          <article v-reveal="0.2" class="flex min-w-0 flex-col rounded-[2.25rem] bg-ink p-7 text-paper md:p-10 lg:p-7 xl:p-10">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="display text-3xl tracking-[-0.035em]">Enterprise</h3>
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-candy text-ink xl:h-12 xl:w-12"><Icon name="building" class="h-5 w-5" /></span>
             </div>
-          </div>
+            <p class="mt-3 text-paper/70">Pour les grandes organisations</p>
+            <div class="mt-10">
+              <span class="display text-5xl leading-none tracking-[-0.055em] xl:text-6xl">Sur mesure</span>
+            </div>
+            <router-link to="/contact" class="btn btn-paper mt-10 w-full">
+              <RollText text="Nous contacter" />
+            </router-link>
+            <ul class="mt-10 space-y-4 border-t border-paper/15 pt-8">
+              <li v-for="item in enterpriseFeatures" :key="item" class="flex items-center gap-3">
+                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-candy text-ink"><Icon name="check" class="h-3.5 w-3.5" stroke-width="2.5" /></span>
+                <span class="text-base xl:text-lg">{{ item }}</span>
+              </li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Features Comparison -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Comparaison des fonctionnalités
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+    <!-- Comparaison -->
+    <section class="bg-paper-deep/60 py-24 md:py-40">
+      <div class="shell">
+        <div class="grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7">
+            <p class="label text-ink/55">(02)</p>
+            <h2 v-split class="display mt-6 text-display-lg">Comparaison des fonctionnalités</h2>
+          </div>
+          <p v-reveal class="text-pretty text-xl text-ink/75 md:col-span-4 md:col-start-9">
             Découvrez toutes les fonctionnalités incluses dans chaque plan
           </p>
         </div>
-        
-        <div class="bg-white rounded-3xl overflow-hidden shadow-xl">
-          <div class="overflow-x-auto">
-            <table class="w-full">
-              <thead class="bg-neutral-50">
-                <tr>
-                  <th class="text-left p-6 font-semibold text-neutral-900">Fonctionnalités</th>
-                  <th class="text-center p-6 font-semibold text-neutral-900">Starter</th>
-                  <th class="text-center p-6 font-semibold text-orange-600">Professional</th>
-                  <th class="text-center p-6 font-semibold text-neutral-900">Enterprise</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-neutral-200">
-                <tr v-for="feature in features" :key="feature.name" class="hover:bg-neutral-50">
-                  <td class="p-6 font-medium text-neutral-900">{{ feature.name }}</td>
-                  <td class="p-6 text-center">
-                    <span v-if="feature.starter" class="text-green-600 font-bold">✓</span>
-                    <span v-else class="text-neutral-400">-</span>
-                  </td>
-                  <td class="p-6 text-center">
-                    <span v-if="feature.professional" class="text-green-600 font-bold">✓</span>
-                    <span v-else class="text-neutral-400">-</span>
-                  </td>
-                  <td class="p-6 text-center">
-                    <span v-if="feature.enterprise" class="text-green-600 font-bold">✓</span>
-                    <span v-else class="text-neutral-400">-</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+
+        <div v-reveal class="mt-16 overflow-x-auto rounded-[2rem] bg-paper" data-lenis-prevent>
+          <table class="w-full min-w-[40rem] border-collapse text-left">
+            <thead>
+              <tr class="border-b border-ink/15">
+                <th scope="col" class="label px-6 py-6 text-ink/60 md:px-8">Fonctionnalités</th>
+                <th scope="col" class="px-4 py-6 text-center font-display text-lg font-bold">Starter</th>
+                <th scope="col" class="bg-grape/10 px-4 py-6 text-center font-display text-lg font-bold text-grape">Professional</th>
+                <th scope="col" class="px-4 py-6 text-center font-display text-lg font-bold">Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="feature in features"
+                :key="feature.name"
+                class="border-b border-ink/10 transition-colors last:border-0 hover:bg-sun/25"
+              >
+                <th scope="row" class="px-6 py-5 font-medium md:px-8">{{ feature.name }}</th>
+                <td v-for="plan in (['starter', 'professional', 'enterprise'] as const)" :key="plan" class="px-4 py-5 text-center" :class="plan === 'professional' ? 'bg-grape/10' : ''">
+                  <span v-if="feature[plan]" class="inline-grid h-7 w-7 place-items-center rounded-full bg-ink text-paper">
+                    <Icon name="check" class="h-3.5 w-3.5" stroke-width="2.5" />
+                    <span class="sr-only">Inclus</span>
+                  </span>
+                  <span v-else class="text-ink/25">—<span class="sr-only">Non inclus</span></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Questions fréquentes
-            </span>
-          </h2>
+    <!-- FAQ -->
+    <section class="py-24 md:py-40">
+      <div class="shell grid gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="label text-ink/55">(03)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Questions fréquentes</h2>
         </div>
-        
-        <div class="space-y-6">
-          <div v-for="(faq, index) in faqs" :key="index" 
-               class="bg-white rounded-2xl border border-neutral-200 overflow-hidden">
-            <button @click="toggleFaq(index)"
-                    class="w-full p-6 text-left flex justify-between items-center hover:bg-neutral-50 transition-colors">
-              <h3 class="font-semibold text-neutral-900">{{ faq.question }}</h3>
-              <div class="w-6 h-6 flex items-center justify-center">
-                <span class="text-neutral-500 transform transition-transform duration-300"
-                      :class="openFaqs.includes(index) ? 'rotate-180' : ''">▼</span>
-              </div>
-            </button>
-            <div v-if="openFaqs.includes(index)" 
-                 class="px-6 pb-6 text-neutral-600 leading-relaxed">
-              {{ faq.answer }}
-            </div>
-          </div>
+        <div class="lg:col-span-8">
+          <FaqList :items="faqs" :open="openFaqs" @toggle="toggleFaq" />
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-          <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
-            Prêt à commencer ?
-          </span>
-        </h2>
-        <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-          Rejoignez des milliers d'entreprises qui ont déjà transformé leur bien-être au travail
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <router-link to="/demo" 
-                       class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl">
-            Essayer gratuitement
+    <!-- CTA -->
+    <section class="relative overflow-hidden bg-grape pb-36 pt-24 text-paper md:pb-48 md:pt-36">
+      <div class="shell relative z-10 grid gap-10 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-8">
+          <h2 v-split class="display text-display-xl">Prêt à <span class="whitespace-nowrap">commencer ?</span></h2>
+          <p v-reveal class="mt-8 max-w-xl text-pretty text-xl leading-snug text-paper/85 md:text-2xl">
+            Rejoignez des milliers d'entreprises qui ont déjà transformé leur bien-être au travail
+          </p>
+        </div>
+        <div v-reveal="0.15" class="flex flex-wrap gap-3 md:col-span-4 md:justify-end">
+          <router-link to="/demo" class="btn btn-sun btn-lg" v-magnetic>
+            <RollText text="Essayer gratuitement" />
+            <span class="btn-dot"><Icon name="arrow-right" /></span>
           </router-link>
-          <router-link to="/contact" 
-                       class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-2xl font-bold hover:bg-white/30 transition-all duration-300 border border-white/30">
-            Nous contacter
+          <router-link to="/contact" class="btn btn-outline-light btn-lg">
+            <RollText text="Nous contacter" />
           </router-link>
         </div>
+      </div>
+      <div class="pointer-events-none absolute -bottom-[20vw] -right-[8vw] w-[60vw] md:w-[36vw]" aria-hidden="true">
+        <SunMark state="very_happy" :ray-colors="['#FED94E', '#FF5BBC']" />
       </div>
     </section>
   </div>
@@ -336,6 +217,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import PageHero from '../components/site/PageHero.vue';
+import FaqList from '../components/site/FaqList.vue';
+import SunMark from '../components/brand/SunMark.vue';
+import Icon from '../components/ui/Icon.vue';
+import RollText from '../components/ui/RollText.vue';
 
 // Scroll vers le haut au chargement de la page
 onMounted(() => {
@@ -344,6 +230,34 @@ onMounted(() => {
 
 const billingCycle = ref('monthly');
 const openFaqs = ref<number[]>([]);
+
+const starterFeatures = [
+  'Jusqu\'à 50 employés',
+  'Expression libre anonyme',
+  'Dashboard de base',
+  'Support email',
+  'Rapports mensuels',
+];
+
+const professionalFeatures = [
+  'Jusqu\'à 500 employés',
+  'Tout Starter +',
+  'Insights en temps réel',
+  'Actions ciblées',
+  'Support prioritaire',
+  'Rapports hebdomadaires',
+  'Intégrations API',
+];
+
+const enterpriseFeatures = [
+  'Employés illimités',
+  'Tout Professional +',
+  'Déploiement sur site',
+  'Support dédié 24/7',
+  'Formation personnalisée',
+  'SLA garantie',
+  'Conformité avancée',
+];
 
 const features = [
   { name: 'Expression libre anonyme', starter: true, professional: true, enterprise: true },
@@ -399,17 +313,20 @@ const toggleFaq = (index: number) => {
 </script>
 
 <style scoped>
-@keyframes gradient-flow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+.price-enter-active,
+.price-leave-active {
+  transition:
+    opacity 0.25s ease,
+    transform 0.45s var(--ease-out-expo);
 }
 
-.animate-gradient-flow {
-  background-size: 200% 200%;
-  animation: gradient-flow 3s ease-in-out infinite;
+.price-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 40%, 0);
+}
+
+.price-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -40%, 0);
 }
 </style>

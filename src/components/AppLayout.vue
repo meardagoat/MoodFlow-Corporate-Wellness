@@ -1,214 +1,118 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50">
-    <!--  Navigation moderne avec glassmorphism -->
-    <nav class="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex justify-between h-16">
-          <div class="flex items-center gap-8">
-            <router-link to="/feed" class="flex items-center gap-3 group">
-              <div class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform overflow-hidden">
-                <video 
-                  autoplay 
-                  muted 
-                  playsinline
-                  loop
-                  class="w-full h-full object-contain"
-                >
-                  <source :src="logoVideo" type="video/mp4">
-                  <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
-                </video>
-              </div>
-              <span class="text-xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent hidden sm:inline animate-gradient-flow">
-                MoodFlow
-              </span>
+  <div class="flex min-h-screen flex-col bg-paper">
+    <!-- Barre de navigation -->
+    <nav class="safe-top sticky top-0 z-50 border-b border-ink/10 bg-paper/85 backdrop-blur-md" aria-label="Navigation de l'application">
+      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <div class="flex items-center gap-6">
+          <router-link to="/feed" class="group flex items-center gap-2.5" aria-label="MoodFlow, feed">
+            <SunMark
+              class="h-9 w-9 transition-transform duration-700 ease-out-expo group-hover:rotate-45"
+              :ray-count="16"
+              :ray-width="8"
+              :blink="false"
+            />
+            <span class="display hidden text-xl tracking-[-0.045em] sm:inline">MoodFlow</span>
+          </router-link>
+
+          <div class="hidden items-center gap-1 rounded-full bg-ink/[0.05] p-1 md:flex">
+            <router-link to="/feed" :class="navClass('/feed')">
+              <Icon name="grid" class="h-4 w-4" />
+              Feed
             </router-link>
 
-            <div class="hidden md:flex items-center gap-1">
-              <router-link
-                to="/feed"
-                :class="[
-                  'px-4 py-2 rounded-lg font-medium transition',
-                  $route.path === '/feed'
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-200'
-                    : 'text-gray-700 hover:bg-white/80 hover:text-orange-600'
-                ]"
-              >
-                Feed
-              </router-link>
-
-              <router-link
-                v-if="isManager"
-                to="/dashboard"
-                :class="[
-                  'px-4 py-2 rounded-lg font-medium transition',
-                  $route.path === '/dashboard'
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-200'
-                    : 'text-gray-700 hover:bg-white/80 hover:text-orange-600'
-                ]"
-              >
-                Dashboard
-              </router-link>
-
-              <router-link
-                v-if="isSystemAdmin"
-                to="/admin"
-                :class="[
-                  'px-4 py-2 rounded-2xl font-semibold transition-all',
-                  $route.path === '/admin'
-                    ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-200'
-                    : 'text-gray-700 hover:bg-white/80 hover:text-red-600'
-                ]"
-              >
-                <span class="flex items-center gap-2">
-                  <span>👑</span>
-                  <span>Admin</span>
-                </span>
-              </router-link>
-
-              <router-link
-                to="/chat"
-                :class="[
-                  'px-4 py-2 rounded-lg font-medium transition',
-                  $route.path === '/chat'
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-200'
-                    : 'text-gray-700 hover:bg-white/80 hover:text-orange-600'
-                ]"
-              >
-                Chat
-              </router-link>
-            </div>
-          </div>
-
-          <!-- Actions de droite -->
-          <div class="flex items-center gap-3">
-            <!-- Service badge -->
-            <div class="hidden sm:flex items-center gap-2 px-4 py-2 bg-orange-100/50 rounded-2xl">
-              <span class="text-sm font-medium text-orange-700">{{ currentProfile?.service }}</span>
-            </div>
-
-            <router-link
-              to="/profile"
-              :class="[
-                'w-10 h-10 rounded-full flex items-center justify-center font-semibold transition',
-                $route.path === '/profile'
-                  ? 'bg-gradient-to-br from-orange-500 to-orange-600 text-white scale-110'
-                  : 'bg-white text-orange-600 hover:scale-105'
-              ]"
-            >
-              {{ getInitial() }}
+            <router-link v-if="isManager" to="/dashboard" :class="navClass('/dashboard')">
+              <Icon name="chart" class="h-4 w-4" />
+              Dashboard
             </router-link>
 
-            <!-- Sign out button -->
-            <button
-              @click="handleSignOut"
-              class="w-10 h-10 rounded-full bg-white text-gray-600 hover:text-red-600 hover:bg-red-50 transition-all duration-300 hover:scale-105 flex items-center justify-center"
-              title="Se déconnecter"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-              </svg>
-            </button>
+            <router-link v-if="isSystemAdmin" to="/admin" :class="navClass('/admin', true)">
+              <Icon name="crown" class="h-4 w-4" />
+              Admin
+            </router-link>
 
-            <button
-              @click="mobileMenuOpen = !mobileMenuOpen"
-              class="md:hidden p-2 text-gray-600 hover:text-gray-900"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  v-if="!mobileMenuOpen"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
+            <router-link to="/chat" :class="navClass('/chat')">
+              <Icon name="message" class="h-4 w-4" />
+              Chat
+            </router-link>
           </div>
+        </div>
+
+        <!-- Actions de droite -->
+        <div class="flex items-center gap-2">
+          <!-- Service badge -->
+          <span
+            v-if="currentProfile?.service"
+            class="label hidden rounded-full border border-ink/15 px-3.5 py-2.5 text-ink/70 sm:inline-flex"
+          >
+            {{ currentProfile?.service }}
+          </span>
+
+          <router-link
+            to="/profile"
+            class="display grid h-10 w-10 place-items-center rounded-full text-base transition-[transform,box-shadow] duration-300 hover:scale-105"
+            :class="$route.path === '/profile' ? 'bg-ink text-sun ring-4 ring-sun' : 'bg-sun text-ink'"
+            :aria-label="`Profil de ${currentProfile?.display_name || 'l’utilisateur'}`"
+          >
+            {{ getInitial() }}
+          </router-link>
+
+          <!-- Sign out button -->
+          <button
+            type="button"
+            @click="handleSignOut"
+            :disabled="signingOut"
+            class="grid h-10 w-10 place-items-center rounded-full text-ink/60 transition-colors hover:bg-coral hover:text-ink"
+            title="Se déconnecter"
+            aria-label="Se déconnecter"
+          >
+            <span v-if="signingOut" class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+            <Icon v-else name="logout" class="h-5 w-5" />
+          </button>
+
+          <button
+            type="button"
+            @click="mobileMenuOpen = !mobileMenuOpen"
+            class="grid h-10 w-10 place-items-center rounded-full bg-ink text-paper md:hidden"
+            :aria-expanded="mobileMenuOpen"
+            aria-controls="app-menu-mobile"
+            :aria-label="mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+          >
+            <Icon :name="mobileMenuOpen ? 'x' : 'menu'" class="h-5 w-5" />
+          </button>
         </div>
       </div>
 
-      <div v-if="mobileMenuOpen" class="md:hidden border-t border-gray-200 py-2">
-        <router-link
-          to="/feed"
-          @click="mobileMenuOpen = false"
-          :class="[
-            'block px-4 py-2 text-base font-medium',
-            $route.path === '/feed'
-              ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-              : 'text-gray-700 hover:bg-white/80'
-          ]"
-        >
-          Feed
-        </router-link>
-
-        <router-link
-          v-if="isManager"
-          to="/dashboard"
-          @click="mobileMenuOpen = false"
-          :class="[
-            'block px-4 py-2 text-base font-medium',
-            $route.path === '/dashboard'
-              ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-              : 'text-gray-700 hover:bg-white/80'
-          ]"
-        >
-          Dashboard
-        </router-link>
-
-        <router-link
-          v-if="isSystemAdmin"
-          to="/admin"
-          @click="mobileMenuOpen = false"
-          :class="[
-            'flex items-center gap-3 px-4 py-3 rounded-2xl font-semibold transition-all',
-            $route.path === '/admin'
-              ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg'
-              : 'text-gray-700 hover:bg-white/80'
-          ]"
-        >
-          <span>👑</span>
-          <span>Admin</span>
-        </router-link>
-
-        <router-link
-          to="/chat"
-          @click="mobileMenuOpen = false"
-          :class="[
-            'block px-4 py-2 text-base font-medium',
-            $route.path === '/chat'
-              ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-              : 'text-gray-700 hover:bg-white/80'
-          ]"
-        >
-          <span>💬</span>
-          <span>Chat</span>
-        </router-link>
-
-        <router-link
-          to="/profile"
-          @click="mobileMenuOpen = false"
-          :class="[
-            'flex items-center gap-3 px-4 py-3 rounded-2xl font-semibold transition-all',
-            $route.path === '/profile'
-              ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-              : 'text-gray-700 hover:bg-white/80'
-          ]"
-        >
-          <span>👤</span>
-          <span>Profile</span>
-        </router-link>
-      </div>
+      <Transition
+        enter-active-class="transition duration-300 ease-out-expo"
+        leave-active-class="transition duration-200 ease-in"
+        enter-from-class="-translate-y-2 opacity-0"
+        leave-to-class="-translate-y-2 opacity-0"
+      >
+        <div v-if="mobileMenuOpen" id="app-menu-mobile" class="border-t border-ink/10 px-4 pb-5 pt-3 md:hidden">
+          <router-link
+            v-for="item in mobileLinks"
+            :key="item.to"
+            :to="item.to"
+            @click="mobileMenuOpen = false"
+            class="flex items-center justify-between border-b border-ink/10 py-4"
+          >
+            <span class="flex items-center gap-4">
+              <span
+                class="grid h-10 w-10 place-items-center rounded-full"
+                :class="$route.path === item.to ? 'bg-ink text-paper' : 'bg-ink/[0.06]'"
+              >
+                <Icon :name="item.icon" class="h-5 w-5" />
+              </span>
+              <span class="display text-3xl tracking-[-0.04em]">{{ item.label }}</span>
+            </span>
+            <Icon name="arrow-right" class="h-5 w-5 text-ink/40" />
+          </router-link>
+        </div>
+      </Transition>
     </nav>
 
     <!-- Main content avec safe area en bas -->
-    <main class="flex-1 safe-bottom">
+    <main class="safe-bottom flex-1">
       <slot />
     </main>
   </div>
@@ -216,19 +120,34 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { currentProfile, isManager, isSystemAdmin, signOut } from '../lib/auth';
-import logoVideo from '../assets/MoodFlow_final_logo.mp4';
-import logoImage from '../assets/MoodFlow_final_logo.png';
+import SunMark from './brand/SunMark.vue';
+import Icon, { type IconName } from './ui/Icon.vue';
 
 const router = useRouter();
+const route = useRoute();
 const mobileMenuOpen = ref(false);
-const showProfileMenu = ref(false);
+const signingOut = ref(false);
 
-const navigation = [
-  { name: 'Feed', href: '/feed' },
-  { name: 'Chat', href: '/chat' },
-];
+const mobileLinks = computed(() => {
+  const links: { to: string; label: string; icon: IconName }[] = [{ to: '/feed', label: 'Feed', icon: 'grid' }];
+  if (isManager.value) links.push({ to: '/dashboard', label: 'Dashboard', icon: 'chart' });
+  if (isSystemAdmin.value) links.push({ to: '/admin', label: 'Admin', icon: 'crown' });
+  links.push({ to: '/chat', label: 'Chat', icon: 'message' });
+  links.push({ to: '/profile', label: 'Profile', icon: 'user' });
+  return links;
+});
+
+function navClass(path: string, admin = false) {
+  const active = route.path === path;
+  return [
+    'flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300',
+    active
+      ? admin ? 'bg-coral text-ink' : 'bg-ink text-paper'
+      : 'text-ink/70 hover:bg-ink/[0.06] hover:text-ink',
+  ];
+}
 
 const getInitial = computed(() => {
   return () => {
@@ -242,28 +161,22 @@ const getInitial = computed(() => {
 async function handleSignOut() {
   try {
     // Désactiver le bouton pendant la déconnexion
-    const signOutBtn = document.querySelector('[title="Se déconnecter"]') as HTMLButtonElement;
-    if (signOutBtn) {
-      signOutBtn.disabled = true;
-      signOutBtn.innerHTML = '<svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>';
-    }
-    
+    signingOut.value = true;
+
     const { error } = await signOut();
-    
+
     if (error) {
       console.error('Erreur lors de la déconnexion:', error);
       // Réactiver le bouton en cas d'erreur
-      if (signOutBtn) {
-        signOutBtn.disabled = false;
-        signOutBtn.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>';
-      }
+      signingOut.value = false;
       return;
     }
-    
+
     // Rediriger vers la page de connexion
     router.push('/login');
   } catch (error) {
     console.error('Erreur lors de la déconnexion:', error);
+    signingOut.value = false;
   }
 }
 </script>

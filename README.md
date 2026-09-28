@@ -28,7 +28,7 @@ Disponible en Web et Mobile (iOS/Android).
 ### Auth
 - Login/Register
 - OAuth Google et GitHub
-- Fonds 3D avec Vanta.js
+- Soleil animé qui ferme les yeux pendant la saisie du mot de passe
 - Rôles (Employee/Manager)
 
 ### Mobile
@@ -52,9 +52,10 @@ Disponible en Web et Mobile (iOS/Android).
 - Migrations SQL
 
 ### Design
-- Vanta.js + Three.js (fonds 3D)
-- Animations CSS
-- Transitions
+- Design system maison : tokens Tailwind, polices auto-hébergées (Bricolage Grotesque, Instrument Serif, Instrument Sans, DM Mono)
+- GSAP + ScrollTrigger + Lenis : défilement doux, titres révélés ligne par ligne, cartes empilées, bandeaux défilants
+- Soleil de la marque et visages d'humeur en SVG animés
+- Respect de `prefers-reduced-motion`
 
 ### Mobile
 - Capacitor 7.x (iOS et Android)
@@ -153,37 +154,27 @@ npm run cap:copy         # Copier web assets vers native
 
 ## Personnalisation
 
-### Couleurs Vanta.js (Login/Register)
-
-Éditez `src/composables/useVantaEffect.ts` :
-
-```typescript
-skyColor: 0x68b8d7,        // Couleur du ciel
-cloudColor: 0xadc9d8,      // Couleur des nuages
-sunColor: 0xff9919,        // Couleur du soleil
-speed: 1.2                 // Vitesse d'animation
-```
-
-Voir [VANTA_SETUP.md](VANTA_SETUP.md) pour plus d'options.
-
 ### Thème et couleurs
 
-Les couleurs sont définies dans `tailwind.config.js` :
+La palette vient du logo (soleil jaune, MOOD violet, FLOW rouge) et des fonds des vidéos. Elle est définie dans `tailwind.config.js` :
 
 ```javascript
 colors: {
-  primary: {...},    // Indigo
-  secondary: {...},  // Bleu
-  accent: {...},     // Violet
-  mood: {...}        // Couleurs pour chaque humeur
+  ink: '#1A0E2B',      // texte
+  paper: '#FFF8EF',    // fond
+  sun: '#FED94E',
+  coral: '#FA4D52',
+  grape: '#8248FE',
+  tangerine, flame, candy, lilac, aqua, blush,
+  mood: {...}          // une couleur par humeur
 }
 ```
+
+Les couleurs et les visages des humeurs sont centralisés dans `src/lib/moods.ts`, les animations dans `src/lib/motion.ts` et `src/directives/motion.ts` (`v-reveal`, `v-split`, `v-magnetic`, `v-parallax`).
 
 ## Documentation
 
 - [MOBILE_SETUP.md](MOBILE_SETUP.md) - Guide complet mobile
-- [VANTA_SETUP.md](VANTA_SETUP.md) - Configuration Vanta.js
-- [CHANGELOG_VANTA.md](CHANGELOG_VANTA.md) - Changements Vanta
 - [CHANGELOG_MOBILE.md](CHANGELOG_MOBILE.md) - Changements Mobile
 
 ## Structure du projet
@@ -198,8 +189,8 @@ MoodFlow-Corporate-Wellness/
 │   │   ├── SplashScreen.vue
 │   │   └── ...
 │   ├── composables/      # Composables réutilisables
-│   │   ├── useNative.ts     # Fonctionnalités natives
-│   │   └── useVantaEffect.ts # Effet Vanta.js
+│   │   └── useNative.ts     # Fonctionnalités natives
+│   ├── directives/       # Directives d'animation (v-reveal, v-split…)
 │   ├── lib/              # Utilitaires
 │   │   ├── auth.ts
 │   │   ├── supabase.ts
@@ -224,11 +215,6 @@ MoodFlow-Corporate-Wellness/
 ```
 
 ## Dépannage
-
-### Problème : Vanta.js ne s'affiche pas
-- Vérifier que Three.js est bien chargé dans `index.html`
-- Ouvrir la console pour voir les erreurs
-- Tester sur un autre navigateur
 
 ### Problème : Build mobile échoue
 - Vérifier les prérequis (Android Studio/Xcode)

@@ -1,293 +1,201 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- Home Button -->
-    <div class="fixed top-6 left-6 z-50">
-      <router-link to="/" 
-                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
-        <span class="text-2xl">🏠</span>
-      </router-link>
-    </div>
+  <div class="overflow-x-clip">
+    <PageHero
+      label="Confidentialité"
+      subtitle="Votre vie privée est notre priorité. Découvrez comment nous protégeons vos données."
+      :indicators="['RGPD conforme', 'Chiffrement SSL', 'Données sécurisées']"
+      tone="#FF8944"
+      mood="happy"
+      :rays="['#8248FE', '#1A0E2B']"
+      :dots="['#8248FE', '#FED94E', '#1A0E2B']"
+    >
+      Politique de <span class="accent">confidentialité</span>
+    </PageHero>
 
-    <!-- Hero Section - Enhanced Headspace Style -->
-    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
-      <!-- Background decorative elements -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
-        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
-      </div>
-      
-      <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-20">
-          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Politique de confidentialité
-            </span>
-          </h1>
-          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
-            Votre vie privée est notre priorité. Découvrez comment nous protégeons vos données.
-          </p>
-          
-          <!-- Privacy indicators -->
-          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-lg font-medium">RGPD conforme</span>
+    <!-- Engagement -->
+    <section class="py-24 md:py-40">
+      <div class="shell grid gap-14 lg:grid-cols-12 lg:items-center">
+        <div class="flex justify-center lg:col-span-4 lg:justify-start">
+          <div v-reveal="{ variant: 'scale' }" class="relative grid h-56 w-56 place-items-center md:h-72 md:w-72">
+            <svg viewBox="0 0 200 200" class="absolute inset-0 h-full w-full motion-safe:animate-spin-slow" aria-hidden="true">
+              <defs>
+                <path :id="circleId" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
+              </defs>
+              <text class="fill-ink font-mono text-[13px] uppercase tracking-[0.2em]">
+                <textPath :href="`#${circleId}`">Certifié RGPD · Conformité européenne garantie ·</textPath>
+              </text>
+            </svg>
+            <div class="grid h-[52%] w-[52%] place-items-center rounded-full bg-grape text-paper">
+              <Icon name="check" class="h-1/2 w-1/2" stroke-width="2.25" />
             </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span class="text-lg font-medium">Chiffrement SSL</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span class="text-lg font-medium">Données sécurisées</span>
-            </div>
+            <p class="sr-only">Certifié RGPD. Conformité européenne garantie.</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Privacy Badge - Enhanced -->
-    <section class="py-24 md:py-40 px-4 md:px-6 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-20">
-          <div class="inline-flex items-center gap-6 bg-gradient-to-r from-green-100 to-emerald-100 rounded-3xl px-12 py-6 mb-12 shadow-xl border border-green-200">
-            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-3xl shadow-lg">
-              ✓
-            </div>
-            <div class="text-left">
-              <h3 class="font-bold text-green-800 text-2xl">Certifié RGPD</h3>
-              <p class="text-green-700 text-lg">Conformité européenne garantie</p>
-            </div>
-          </div>
-          <h2 class="text-5xl md:text-6xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Notre engagement envers votre vie privée
-            </span>
-          </h2>
-          <p class="text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
-            Chez MoodFlow, nous croyons que la confidentialité est un droit fondamental. 
+        <div class="lg:col-span-8">
+          <p class="label text-ink/55">(01)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Notre engagement envers votre vie privée</h2>
+          <p v-reveal class="mt-8 max-w-3xl text-pretty text-xl leading-relaxed text-ink/80 md:text-2xl">
+            Chez MoodFlow, nous croyons que la confidentialité est un droit fondamental.
             Nous nous engageons à protéger vos données avec les plus hauts standards de sécurité.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Data Protection Cards -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl md:text-6xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Comment nous protégeons vos données
-            </span>
-          </h2>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
-              🔒
+    <!-- Protections -->
+    <section class="bg-paper-deep/60 py-24 md:py-40">
+      <div class="shell">
+        <p class="label text-ink/55">(02)</p>
+        <h2 v-split class="display mt-6 max-w-[18ch] text-display-lg">Comment nous protégeons vos données</h2>
+
+        <div class="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <article
+            v-for="(item, i) in protections"
+            :key="item.title"
+            v-reveal="(i % 3) * 0.08"
+            class="group flex min-h-[17rem] flex-col rounded-[2rem] bg-paper p-7 md:p-8"
+          >
+            <div class="flex items-start justify-between">
+              <span
+                class="grid h-14 w-14 place-items-center rounded-full transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110"
+                :style="{ backgroundColor: item.color }"
+                :class="item.dark ? 'text-paper' : 'text-ink'"
+              >
+                <Icon :name="item.icon" class="h-6 w-6" />
+              </span>
+              <span class="label text-ink/35">{{ String(i + 1).padStart(2, '0') }}</span>
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Chiffrement de bout en bout</h3>
-            <p class="text-neutral-600">Toutes vos données sont chiffrées avec AES-256, le standard militaire de sécurité.</p>
-          </div>
-          
-          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
-              🇪🇺
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Hébergement européen</h3>
-            <p class="text-neutral-600">Vos données restent en Europe, conformément au RGPD et aux réglementations françaises.</p>
-          </div>
-          
-          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
-              👥
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Anonymat garanti</h3>
-            <p class="text-neutral-600">Vos réponses sont anonymisées et ne peuvent jamais être liées à votre identité.</p>
-          </div>
-          
-          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
-              🛡️
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Audits réguliers</h3>
-            <p class="text-neutral-600">Nos systèmes sont audités régulièrement par des experts en cybersécurité indépendants.</p>
-          </div>
-          
-          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
-              📋
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Conformité RGPD</h3>
-            <p class="text-neutral-600">Nous respectons intégralement le Règlement Général sur la Protection des Données.</p>
-          </div>
-          
-          <div class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200 hover:shadow-xl transition-all duration-300">
-            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-6">
-              🚫
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Aucune revente</h3>
-            <p class="text-neutral-600">Nous ne vendons jamais vos données à des tiers. Jamais.</p>
-          </div>
+            <h3 class="display mt-auto text-2xl leading-tight tracking-[-0.03em]">{{ item.title }}</h3>
+            <p class="mt-3 text-pretty text-ink/70">{{ item.description }}</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Privacy FAQ -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Questions sur la confidentialité
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600">
+    <!-- FAQ -->
+    <section class="py-24 md:py-40">
+      <div class="shell grid gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="label text-ink/55">(03)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Questions sur la confidentialité</h2>
+          <p v-reveal class="mt-8 text-pretty text-xl text-ink/75">
             Les réponses aux questions les plus fréquentes sur la protection de vos données
           </p>
         </div>
-        
-        <div class="space-y-6">
-          <div v-for="(faq, index) in privacyFaqs" :key="index" 
-               class="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-lg">
-            <button @click="toggleFaq(index)"
-                    class="w-full p-6 text-left flex justify-between items-center hover:bg-neutral-50 transition-colors">
-              <h3 class="font-semibold text-neutral-900">{{ faq.question }}</h3>
-              <div class="w-6 h-6 flex items-center justify-center">
-                <span class="text-neutral-500 transform transition-transform duration-300"
-                      :class="openFaqs.includes(index) ? 'rotate-180' : ''">▼</span>
-              </div>
-            </button>
-            <div v-if="openFaqs.includes(index)" 
-                 class="px-6 pb-6 text-neutral-600 leading-relaxed">
-              {{ faq.answer }}
-            </div>
-          </div>
+        <div class="lg:col-span-8">
+          <FaqList :items="privacyFaqs" :open="openFaqs" @toggle="toggleFaq" />
         </div>
       </div>
     </section>
 
-    <!-- Your Rights -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Vos droits
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+    <!-- Vos droits -->
+    <section class="relative mx-3 overflow-hidden rounded-[2.5rem] bg-ink py-24 text-paper md:mx-5 md:rounded-[3.5rem] md:py-36">
+      <div class="shell">
+        <div class="grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7">
+            <p class="label text-paper/55">(04)</p>
+            <h2 v-split class="display mt-6 text-display-lg">Vos droits</h2>
+          </div>
+          <p v-reveal class="text-pretty text-xl leading-snug text-paper/75 md:col-span-5">
             En tant qu'utilisateur de MoodFlow, vous disposez de droits spécifiques sur vos données
           </p>
         </div>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-          <div v-for="(right, index) in userRights" :key="index" 
-               class="bg-white rounded-2xl p-8 shadow-lg border border-neutral-200">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                {{ index + 1 }}
-              </div>
-              <div>
-                <h3 class="text-xl font-bold text-neutral-900 mb-3">{{ right.title }}</h3>
-                <p class="text-neutral-600 leading-relaxed">{{ right.description }}</p>
-              </div>
+
+        <ol class="mt-16 grid gap-x-10 md:grid-cols-2">
+          <li
+            v-for="(right, index) in userRights"
+            :key="index"
+            v-reveal="(index % 2) * 0.08"
+            class="flex gap-6 border-t border-paper/15 py-8"
+          >
+            <span class="display w-14 shrink-0 text-4xl leading-none tracking-[-0.05em] text-sun">{{ String(index + 1).padStart(2, '0') }}</span>
+            <div>
+              <h3 class="font-display text-2xl font-bold tracking-[-0.025em]">{{ right.title }}</h3>
+              <p class="mt-3 text-pretty leading-relaxed text-paper/70">{{ right.description }}</p>
             </div>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- Data Usage -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Utilisation de vos données
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+    <!-- Utilisation des données -->
+    <section class="py-24 md:py-40">
+      <div class="shell">
+        <div class="grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7">
+            <p class="label text-ink/55">(05)</p>
+            <h2 v-split class="display mt-6 text-display-lg">Utilisation de vos données</h2>
+          </div>
+          <p v-reveal class="text-pretty text-xl leading-snug text-ink/75 md:col-span-4 md:col-start-9">
             Transparence totale sur l'utilisation de vos données personnelles
           </p>
         </div>
-        
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Données que nous collectons</h3>
-            <div class="space-y-4">
-              <div v-for="dataType in dataTypes" :key="dataType.type" 
-                   class="flex items-center gap-4 p-4 bg-neutral-50 rounded-xl">
-                <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                  {{ dataType.icon }}
-                </div>
+
+        <div class="mt-16 grid gap-6 lg:grid-cols-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-display text-2xl font-bold tracking-[-0.025em]">Données que nous collectons</h3>
+            <ul class="mt-8 border-t border-ink/15">
+              <li
+                v-for="(dataType, i) in dataTypes"
+                :key="dataType.type"
+                v-reveal="i * 0.06"
+                class="flex items-center gap-5 border-b border-ink/15 py-5"
+              >
+                <span
+                  class="grid h-12 w-12 shrink-0 place-items-center rounded-full"
+                  :style="{ backgroundColor: dataColors[i % dataColors.length] }"
+                >
+                  <Icon :name="dataType.icon" class="h-5 w-5" />
+                </span>
                 <div>
-                  <h4 class="font-semibold text-neutral-900">{{ dataType.type }}</h4>
-                  <p class="text-sm text-neutral-600">{{ dataType.purpose }}</p>
+                  <h4 class="text-lg font-semibold">{{ dataType.type }}</h4>
+                  <p class="text-ink/65">{{ dataType.purpose }}</p>
                 </div>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
-          
-          <div class="bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl p-8">
-            <h3 class="text-2xl font-bold text-neutral-900 mb-6">Pourquoi nous les collectons</h3>
-            <div class="space-y-4">
-              <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
-                <p class="text-neutral-700">Améliorer votre expérience utilisateur</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
-                <p class="text-neutral-700">Fournir un support technique efficace</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
-                <p class="text-neutral-700">Assurer la sécurité de la plateforme</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">✓</div>
-                <p class="text-neutral-700">Respecter nos obligations légales</p>
-              </div>
-            </div>
+
+          <div v-reveal="{ variant: 'scale', delay: 0.1 }" class="rounded-[2.25rem] bg-sun p-8 md:p-10 lg:col-span-5">
+            <h3 class="display text-3xl tracking-[-0.035em]">Pourquoi nous les collectons</h3>
+            <ul class="mt-8 space-y-5">
+              <li v-for="reason in reasons" :key="reason" class="flex items-start gap-4">
+                <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink text-sun">
+                  <Icon name="check" class="h-4 w-4" stroke-width="2.5" />
+                </span>
+                <p class="text-lg">{{ reason }}</p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Privacy -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-          <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
-            Questions sur la confidentialité ?
-          </span>
-        </h2>
-        <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-          Notre équipe est là pour répondre à toutes vos questions sur la protection de vos données
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:privacy@moodflow.com" 
-             class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl">
-            Contacter notre DPO
+    <!-- Contact confidentialité -->
+    <section class="relative overflow-hidden bg-grape pb-28 pt-24 text-paper md:pb-36 md:pt-36">
+      <div class="shell relative z-10 grid gap-10 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-8">
+          <h2 v-split class="display text-display-lg">Questions sur la <span class="whitespace-nowrap">confidentialité ?</span></h2>
+          <p v-reveal class="mt-8 max-w-xl text-pretty text-xl leading-snug text-paper/85 md:text-2xl">
+            Notre équipe est là pour répondre à toutes vos questions sur la protection de vos données
+          </p>
+        </div>
+        <div v-reveal="0.15" class="flex flex-wrap gap-3 md:col-span-4 md:justify-end">
+          <a href="mailto:privacy@moodflow.com" class="btn btn-sun btn-lg" v-magnetic>
+            <RollText text="Contacter notre DPO" />
+            <span class="btn-dot"><Icon name="mail" /></span>
           </a>
-          <router-link to="/contact" 
-                       class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-2xl font-bold hover:bg-white/30 transition-all duration-300 border border-white/30">
-            Nous contacter
+          <router-link to="/contact" class="btn btn-outline-light btn-lg">
+            <RollText text="Nous contacter" />
           </router-link>
         </div>
       </div>
     </section>
 
-    <!-- Last Updated -->
-    <section class="py-12 px-4 md:px-6 bg-neutral-100">
-      <div class="max-w-4xl mx-auto text-center">
-        <p class="text-neutral-600">
-          Dernière mise à jour : {{ lastUpdated }}
-        </p>
-        <p class="text-sm text-neutral-500 mt-2">
+    <!-- Dernière mise à jour -->
+    <section class="bg-grape pb-36 text-paper/70 md:pb-48">
+      <div class="shell flex flex-col gap-2 border-t border-paper/15 pt-8 md:flex-row md:items-center md:justify-between">
+        <p class="label">Dernière mise à jour : {{ lastUpdated }}</p>
+        <p class="text-sm">
           Cette politique de confidentialité peut être mise à jour. Nous vous informerons de tout changement significatif.
         </p>
       </div>
@@ -296,15 +204,61 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, useId } from 'vue';
+import PageHero from '../components/site/PageHero.vue';
+import FaqList from '../components/site/FaqList.vue';
+import Icon from '../components/ui/Icon.vue';
+import type { IconName } from '../components/ui/Icon.vue';
+import RollText from '../components/ui/RollText.vue';
 
 // Scroll vers le haut au chargement de la page
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+const circleId = `rgpd-${useId()}`;
 const openFaqs = ref<number[]>([]);
 const lastUpdated = '15 janvier 2025';
+
+const protections: { title: string; description: string; icon: IconName; color: string; dark?: boolean }[] = [
+  {
+    title: 'Chiffrement de bout en bout',
+    description: 'Toutes vos données sont chiffrées avec AES-256, le standard militaire de sécurité.',
+    icon: 'lock',
+    color: '#8248FE',
+    dark: true,
+  },
+  {
+    title: 'Hébergement européen',
+    description: 'Vos données restent en Europe, conformément au RGPD et aux réglementations françaises.',
+    icon: 'globe',
+    color: '#5EDDE7',
+  },
+  {
+    title: 'Anonymat garanti',
+    description: 'Vos réponses sont anonymisées et ne peuvent jamais être liées à votre identité.',
+    icon: 'mask',
+    color: '#FF5BBC',
+  },
+  {
+    title: 'Audits réguliers',
+    description: 'Nos systèmes sont audités régulièrement par des experts en cybersécurité indépendants.',
+    icon: 'shield',
+    color: '#FED94E',
+  },
+  {
+    title: 'Conformité RGPD',
+    description: 'Nous respectons intégralement le Règlement Général sur la Protection des Données.',
+    icon: 'clipboard',
+    color: '#FF8944',
+  },
+  {
+    title: 'Aucune revente',
+    description: 'Nous ne vendons jamais vos données à des tiers. Jamais.',
+    icon: 'ban',
+    color: '#FA4D52',
+  },
+];
 
 const privacyFaqs = [
   {
@@ -360,27 +314,36 @@ const userRights = [
   }
 ];
 
-const dataTypes = [
+const dataColors = ['#FED94E', '#CDB8FF', '#5EDDE7', '#FF8944'];
+
+const dataTypes: { type: string; icon: IconName; purpose: string }[] = [
   {
     type: 'Informations de compte',
-    icon: '👤',
+    icon: 'user',
     purpose: 'Nom, email, entreprise pour créer votre compte'
   },
   {
     type: 'Réponses anonymes',
-    icon: '💭',
+    icon: 'message',
     purpose: 'Vos réponses aux questions de bien-être (anonymisées)'
   },
   {
     type: 'Données d\'utilisation',
-    icon: '📊',
+    icon: 'chart',
     purpose: 'Comment vous utilisez la plateforme pour l\'améliorer'
   },
   {
     type: 'Données techniques',
-    icon: '🔧',
+    icon: 'settings',
     purpose: 'Adresse IP, type de navigateur pour la sécurité'
   }
+];
+
+const reasons = [
+  'Améliorer votre expérience utilisateur',
+  'Fournir un support technique efficace',
+  'Assurer la sécurité de la plateforme',
+  'Respecter nos obligations légales',
 ];
 
 const toggleFaq = (index: number) => {
@@ -391,19 +354,3 @@ const toggleFaq = (index: number) => {
   }
 };
 </script>
-
-<style scoped>
-@keyframes gradient-flow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-flow {
-  background-size: 200% 200%;
-  animation: gradient-flow 3s ease-in-out infinite;
-}
-</style>

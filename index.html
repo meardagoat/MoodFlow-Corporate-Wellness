@@ -1,19 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/src/assets/MoodFlow_final_logo.png" />
-    <link rel="apple-touch-icon" href="/src/assets/MoodFlow_final_logo.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Transformez le bien-être en entreprise avec une approche simple, anonyme et bienveillante" />
+    <meta name="theme-color" content="#FFF8EF" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="MoodFlow" />
+    <meta property="og:title" content="MoodFlow - Corporate Wellness" />
+    <meta property="og:description" content="Transformez le bien-être en entreprise avec une approche simple, anonyme et bienveillante" />
+    <meta property="og:type" content="website" />
     <title>MoodFlow - Corporate Wellness</title>
-    <!-- Vanta.js dependencies -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
     <style>
       /* Critical safe area CSS - charge avant tout */
       :root {
@@ -21,6 +23,10 @@
         --sar: env(safe-area-inset-right);
         --sab: env(safe-area-inset-bottom);
         --sal: env(safe-area-inset-left);
+      }
+      /* Évite un flash blanc avant le chargement des styles */
+      html {
+        background: #FFF8EF;
       }
     </style>
   </head>

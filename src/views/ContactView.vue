@@ -1,230 +1,158 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- Home Button -->
-    <div class="fixed top-6 left-6 z-50">
-      <router-link to="/" 
-                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
-        <span class="text-2xl">🏠</span>
-      </router-link>
-    </div>
+  <div class="overflow-x-clip">
+    <PageHero
+      label="Contact"
+      subtitle="Notre équipe d'experts est là pour vous accompagner dans votre transformation digitale du bien-être en entreprise."
+      :indicators="['Réponse sous 24h', 'Support dédié', 'Accompagnement personnalisé']"
+      tone="#5EDDE7"
+      mood="happy"
+    >
+      <span class="accent text-grape">Contactez</span>-nous
+    </PageHero>
 
-    <!-- Hero Section - Enhanced Headspace Style -->
-    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
-      <!-- Background decorative elements -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
-        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
-      </div>
-      
-      <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-20">
-          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Contactez-nous
-            </span>
-          </h1>
-          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
-            Notre équipe d'experts est là pour vous accompagner dans votre transformation digitale du bien-être en entreprise.
-          </p>
-          
-          <!-- Trust indicators -->
-          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-lg font-medium">Réponse sous 24h</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span class="text-lg font-medium">Support dédié</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span class="text-lg font-medium">Accompagnement personnalisé</span>
-            </div>
+    <!-- Comment nous joindre -->
+    <section class="py-24 md:py-40">
+      <div class="shell">
+        <div class="grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7">
+            <p class="label text-ink/55">(01)</p>
+            <h2 v-split class="display mt-6 text-display-lg">Comment nous joindre</h2>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Methods - Enhanced Headspace Style -->
-    <section class="py-24 md:py-40 px-4 md:px-6 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl md:text-6xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Comment nous joindre
-            </span>
-          </h2>
-          <p class="text-2xl text-neutral-600 max-w-4xl mx-auto leading-relaxed">
+          <p v-reveal class="text-pretty text-xl leading-snug text-ink/75 md:col-span-4 md:col-start-9">
             Choisissez la méthode qui vous convient le mieux. Notre équipe est là pour vous accompagner.
           </p>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-          <!-- Email Card -->
-          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
-            <div class="absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative z-10">
-              <div class="w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
-                📧
-              </div>
-              <h3 class="text-2xl font-bold text-neutral-900 mb-4 text-center">Email</h3>
-              <p class="text-neutral-600 mb-6 text-center leading-relaxed">
-                Pour toutes vos questions générales, demandes de devis ou informations sur nos services.
-              </p>
-              <div class="text-center">
-                <a href="mailto:hello@moodflow.com" 
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 text-white font-semibold rounded-2xl hover:bg-orange-600 transition-all duration-300 hover:scale-105 shadow-lg">
-                  <span>hello@moodflow.com</span>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Chat Card -->
-          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100">
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative z-10">
-              <div class="w-24 h-24 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
-                💬
-              </div>
-              <h3 class="text-2xl font-bold text-neutral-900 mb-4 text-center">Chat en direct</h3>
-              <p class="text-neutral-600 mb-6 text-center leading-relaxed">
-                Support instantané 24/7. Obtenez des réponses immédiates à vos questions les plus urgentes.
-              </p>
-              <div class="text-center">
-                <button class="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 text-white font-semibold rounded-2xl hover:bg-purple-600 transition-all duration-300 hover:scale-105 shadow-lg">
-                  <span>Ouvrir le chat</span>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Phone Card -->
-          <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100 md:col-span-2 lg:col-span-1">
-            <div class="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative z-10">
-              <div class="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl flex items-center justify-center text-white text-4xl mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
-                📞
-              </div>
-              <h3 class="text-2xl font-bold text-neutral-900 mb-4 text-center">Téléphone</h3>
-              <p class="text-neutral-600 mb-6 text-center leading-relaxed">
-                Pour les questions urgentes ou les discussions complexes nécessitant une approche personnalisée.
-              </p>
-              <div class="text-center">
-                <a href="tel:+33123456789" 
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white font-semibold rounded-2xl hover:bg-green-600 transition-all duration-300 hover:scale-105 shadow-lg">
-                  <span>+33 1 23 45 67 89</span>
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
+
+        <div class="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <article v-reveal class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-coral p-8 md:p-10">
+            <span class="grid h-16 w-16 place-items-center rounded-full bg-ink text-coral transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110">
+              <Icon name="mail" class="h-7 w-7" />
+            </span>
+            <h3 class="display mt-auto text-4xl tracking-[-0.04em]">Email</h3>
+            <p class="mt-4 text-pretty text-lg text-ink/80">
+              Pour toutes vos questions générales, demandes de devis ou informations sur nos services.
+            </p>
+            <a href="mailto:hello@moodflow.com" class="btn btn-ink mt-8 self-start">
+              <RollText text="hello@moodflow.com" />
+              <span class="btn-dot"><Icon name="arrow-up-right" /></span>
+            </a>
+          </article>
+
+          <article v-reveal="0.1" class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-grape p-8 text-paper md:p-10">
+            <span class="grid h-16 w-16 place-items-center rounded-full bg-sun text-ink transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110">
+              <Icon name="message" class="h-7 w-7" />
+            </span>
+            <h3 class="display mt-auto text-4xl tracking-[-0.04em]">Chat en direct</h3>
+            <p class="mt-4 text-pretty text-lg text-paper/80">
+              Support instantané 24/7. Obtenez des réponses immédiates à vos questions les plus urgentes.
+            </p>
+            <button type="button" class="btn btn-sun mt-8 self-start">
+              <RollText text="Ouvrir le chat" />
+              <span class="btn-dot"><Icon name="message" /></span>
+            </button>
+          </article>
+
+          <article v-reveal="0.2" class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-sun p-8 md:col-span-2 md:p-10 lg:col-span-1">
+            <span class="grid h-16 w-16 place-items-center rounded-full bg-ink text-sun transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110">
+              <Icon name="phone" class="h-7 w-7" />
+            </span>
+            <h3 class="display mt-auto text-4xl tracking-[-0.04em]">Téléphone</h3>
+            <p class="mt-4 text-pretty text-lg text-ink/80">
+              Pour les questions urgentes ou les discussions complexes nécessitant une approche personnalisée.
+            </p>
+            <a href="tel:+33123456789" class="btn btn-ink mt-8 self-start">
+              <RollText text="+33 1 23 45 67 89" />
+              <span class="btn-dot"><Icon name="phone" /></span>
+            </a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Notre équipe
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+    <!-- Notre équipe -->
+    <section class="bg-paper-deep/60 py-24 md:py-40">
+      <div class="shell">
+        <div class="grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7">
+            <p class="label text-ink/55">(02)</p>
+            <h2 v-split class="display mt-6 text-display-lg">Notre équipe</h2>
+          </div>
+          <p v-reveal class="text-pretty text-xl leading-snug text-ink/75 md:col-span-4 md:col-start-9">
             Rencontrez les personnes qui vous accompagneront dans votre transformation
           </p>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div v-for="(member, index) in team" :key="index" class="text-center">
-            <div class="w-32 h-32 bg-gradient-to-br from-orange-400 to-purple-500 rounded-full flex items-center justify-center text-white text-4xl font-bold mx-auto mb-6">
+
+        <div class="mt-16 grid gap-4 md:grid-cols-3">
+          <article
+            v-for="(member, index) in team"
+            :key="index"
+            v-reveal="index * 0.1"
+            class="flex flex-col rounded-[2rem] bg-paper p-7 md:p-8"
+          >
+            <div
+              class="display grid h-24 w-24 place-items-center rounded-full text-5xl"
+              :style="{ backgroundColor: avatarColors[index].bg, color: avatarColors[index].fg }"
+            >
               {{ member.initial }}
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-2">{{ member.name }}</h3>
-            <p class="text-orange-600 font-semibold mb-4">{{ member.role }}</p>
-            <p class="text-neutral-600 text-sm mb-4">{{ member.description }}</p>
-            <div class="flex justify-center gap-4">
-              <a :href="`mailto:${member.email}`" 
-                 class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 hover:bg-orange-200 transition-colors">
-                📧
+            <h3 class="display mt-10 text-3xl tracking-[-0.035em]">{{ member.name }}</h3>
+            <p class="label mt-3 text-coral">{{ member.role }}</p>
+            <p class="mt-5 flex-1 text-pretty text-ink/70">{{ member.description }}</p>
+            <div class="mt-8 flex gap-2">
+              <a
+                :href="`mailto:${member.email}`"
+                class="grid h-11 w-11 place-items-center rounded-full border border-ink/15 transition-colors hover:bg-ink hover:text-paper"
+                :aria-label="`Écrire à ${member.name}`"
+              >
+                <Icon name="mail" class="h-4 w-4" />
               </a>
-              <a :href="member.linkedin" target="_blank"
-                 class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-200 transition-colors">
-                💼
+              <a
+                :href="member.linkedin"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="grid h-11 w-11 place-items-center rounded-full border border-ink/15 transition-colors hover:bg-ink hover:text-paper"
+                :aria-label="`${member.name} sur LinkedIn`"
+              >
+                <Icon name="linkedin" class="h-4 w-4" />
               </a>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Contact Form -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Envoyez-nous un message
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600">
+    <!-- Formulaire -->
+    <section class="py-24 md:py-40">
+      <div class="shell grid gap-14 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <p class="label text-ink/55">(03)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Envoyez-nous un message</h2>
+          <p v-reveal class="mt-8 max-w-md text-pretty text-xl text-ink/75">
             Remplissez le formulaire et nous vous recontacterons sous 24h
           </p>
         </div>
-        
-        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-neutral-200">
-          <form @submit.prevent="handleSubmit" class="space-y-6">
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-sm font-semibold text-neutral-700 mb-2">
-                  Prénom
-                </label>
-                <input v-model="form.firstName" type="text" required
-                       class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-neutral-700 mb-2">
-                  Nom
-                </label>
-                <input v-model="form.lastName" type="text" required
-                       class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
-              </div>
-            </div>
 
+        <form v-reveal class="min-w-0 rounded-[2.25rem] bg-blush p-7 md:p-12 lg:col-span-7" @submit.prevent="handleSubmit">
+          <div class="grid gap-x-8 gap-y-9 md:grid-cols-2 [&>div]:min-w-0">
             <div>
-              <label class="block text-sm font-semibold text-neutral-700 mb-2">
-                Email
-              </label>
-              <input v-model="form.email" type="email" required
-                     class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
+              <label for="contact-first-name" class="label text-ink/60">Prénom</label>
+              <input id="contact-first-name" v-model="form.firstName" type="text" required autocomplete="given-name" class="field-line mt-2">
             </div>
-
             <div>
-              <label class="block text-sm font-semibold text-neutral-700 mb-2">
-                Entreprise
-              </label>
-              <input v-model="form.company" type="text" required
-                     class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
+              <label for="contact-last-name" class="label text-ink/60">Nom</label>
+              <input id="contact-last-name" v-model="form.lastName" type="text" required autocomplete="family-name" class="field-line mt-2">
             </div>
-
+            <div class="md:col-span-2">
+              <label for="contact-email" class="label text-ink/60">Email</label>
+              <input id="contact-email" v-model="form.email" type="email" required autocomplete="email" class="field-line mt-2">
+            </div>
             <div>
-              <label class="block text-sm font-semibold text-neutral-700 mb-2">
-                Sujet
-              </label>
-              <select v-model="form.subject" required
-                      class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
+              <label for="contact-company" class="label text-ink/60">Entreprise</label>
+              <input id="contact-company" v-model="form.company" type="text" required autocomplete="organization" class="field-line mt-2">
+            </div>
+            <div>
+              <label for="contact-subject" class="label text-ink/60">Sujet</label>
+              <select id="contact-subject" v-model="form.subject" required class="field-line mt-2">
                 <option value="">Sélectionnez un sujet</option>
                 <option value="demo">Demande de démo</option>
                 <option value="pricing">Question sur les tarifs</option>
@@ -233,84 +161,66 @@
                 <option value="other">Autre</option>
               </select>
             </div>
-
-            <div>
-              <label class="block text-sm font-semibold text-neutral-700 mb-2">
-                Message
-              </label>
-              <textarea v-model="form.message" rows="6" required
-                        class="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none"
-                        placeholder="Décrivez votre demande en détail..."></textarea>
+            <div class="md:col-span-2">
+              <label for="contact-message" class="label text-ink/60">Message</label>
+              <textarea
+                id="contact-message"
+                v-model="form.message"
+                rows="5"
+                required
+                class="field-line mt-2 resize-none"
+                placeholder="Décrivez votre demande en détail..."
+              ></textarea>
             </div>
+          </div>
 
-            <button type="submit" :disabled="submitted"
-                    class="w-full px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
-              {{ submitted ? '🎉 Message envoyé !' : 'Envoyer le message' }}
-            </button>
-          </form>
+          <button type="submit" :disabled="submitted" class="btn btn-ink btn-lg mt-12 w-full sm:w-auto" v-magnetic="0.2">
+            <RollText :text="submitted ? '🎉 Message envoyé !' : 'Envoyer le message'" />
+            <span v-if="!submitted" class="btn-dot"><Icon name="send" /></span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-paper-deep/60 py-24 md:py-40">
+      <div class="shell grid gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <p class="label text-ink/55">(04)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Questions fréquentes</h2>
+          <p v-reveal class="mt-8 text-pretty text-xl text-ink/75">Trouvez rapidement les réponses à vos questions</p>
+        </div>
+        <div class="lg:col-span-8">
+          <FaqList :items="faqs" :open="openFaqs" @toggle="toggleFaq" />
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Questions fréquentes
+    <!-- Réponse garantie -->
+    <section class="pb-36 pt-24 md:pb-48 md:pt-40">
+      <div class="shell">
+        <div v-reveal="{ variant: 'scale' }" class="relative overflow-hidden rounded-[2.5rem] bg-coral p-8 md:rounded-[3.5rem] md:p-16 lg:p-20">
+          <div class="relative z-10 max-w-3xl">
+            <span class="grid h-16 w-16 place-items-center rounded-full bg-ink text-sun">
+              <Icon name="zap" class="h-7 w-7" />
             </span>
-          </h2>
-          <p class="text-xl text-neutral-600">
-            Trouvez rapidement les réponses à vos questions
-          </p>
-        </div>
-        
-        <div class="space-y-6">
-          <div v-for="(faq, index) in faqs" :key="index" 
-               class="bg-white rounded-2xl border border-neutral-200 overflow-hidden">
-            <button @click="toggleFaq(index)"
-                    class="w-full p-6 text-left flex justify-between items-center hover:bg-neutral-50 transition-colors">
-              <h3 class="font-semibold text-neutral-900">{{ faq.question }}</h3>
-              <div class="w-6 h-6 flex items-center justify-center">
-                <span class="text-neutral-500 transform transition-transform duration-300"
-                      :class="openFaqs.includes(index) ? 'rotate-180' : ''">▼</span>
-              </div>
-            </button>
-            <div v-if="openFaqs.includes(index)" 
-                 class="px-6 pb-6 text-neutral-600 leading-relaxed">
-              {{ faq.answer }}
+            <h2 class="display mt-10 text-display-lg">Réponse garantie sous 24h</h2>
+            <p class="mt-6 max-w-xl text-pretty text-xl leading-snug">
+              Notre équipe s'engage à vous répondre dans les 24 heures,
+              même le weekend pour les questions urgentes.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-3">
+              <router-link to="/demo" class="btn btn-ink btn-lg" v-magnetic>
+                <RollText text="Demander une démo" />
+                <span class="btn-dot"><Icon name="arrow-right" /></span>
+              </router-link>
+              <a href="mailto:hello@moodflow.com" class="btn btn-outline btn-lg">
+                <RollText text="Nous écrire" />
+              </a>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Response Time -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl p-12">
-          <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-8">
-            ⚡
-          </div>
-          <h2 class="text-3xl md:text-4xl font-bold mb-6">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Réponse garantie sous 24h
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600 mb-8">
-            Notre équipe s'engage à vous répondre dans les 24 heures, 
-            même le weekend pour les questions urgentes.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <router-link to="/demo" 
-                         class="px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-lg">
-              Demander une démo
-            </router-link>
-            <a href="mailto:hello@moodflow.com" 
-               class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:bg-orange-50 transition-all duration-300 border border-orange-200">
-              Nous écrire
-            </a>
+          <div class="pointer-events-none absolute -bottom-[14%] -right-[8%] hidden w-[42%] md:block" aria-hidden="true">
+            <SunMark state="very_happy" :ray-colors="['#1A0E2B', '#FED94E']" />
           </div>
         </div>
       </div>
@@ -320,6 +230,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import PageHero from '../components/site/PageHero.vue';
+import FaqList from '../components/site/FaqList.vue';
+import SunMark from '../components/brand/SunMark.vue';
+import Icon from '../components/ui/Icon.vue';
+import RollText from '../components/ui/RollText.vue';
 
 // Scroll vers le haut au chargement de la page
 onMounted(() => {
@@ -337,6 +252,12 @@ const form = ref({
   subject: '',
   message: ''
 });
+
+const avatarColors = [
+  { bg: '#8248FE', fg: '#FFF8EF' },
+  { bg: '#FED94E', fg: '#1A0E2B' },
+  { bg: '#FF5BBC', fg: '#1A0E2B' },
+];
 
 const team = [
   {
@@ -395,16 +316,16 @@ const faqs = [
 const handleSubmit = () => {
   console.log('Contact form:', form.value);
   submitted.value = true;
-  
+
   setTimeout(() => {
     submitted.value = false;
-    form.value = { 
-      firstName: '', 
-      lastName: '', 
-      email: '', 
-      company: '', 
-      subject: '', 
-      message: '' 
+    form.value = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      company: '',
+      subject: '',
+      message: ''
     };
   }, 3000);
 };
@@ -417,19 +338,3 @@ const toggleFaq = (index: number) => {
   }
 };
 </script>
-
-<style scoped>
-@keyframes gradient-flow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-flow {
-  background-size: 200% 200%;
-  animation: gradient-flow 3s ease-in-out infinite;
-}
-</style>

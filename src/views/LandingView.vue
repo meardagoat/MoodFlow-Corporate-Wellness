@@ -1,622 +1,426 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden">
-      <!-- Enhanced animated organic blobs with more variety -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-32 -left-20 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl animate-blob"></div>
-        <div class="absolute top-20 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
-        <div class="absolute top-1/2 -right-32 w-64 h-64 bg-pink-400/15 rounded-full blur-2xl animate-blob animation-delay-1000"></div>
-        <div class="absolute bottom-1/4 -left-16 w-48 h-48 bg-blue-400/15 rounded-full blur-2xl animate-blob animation-delay-3000"></div>
+  <div ref="rootEl" class="overflow-x-clip">
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section ref="heroSection" class="relative flex min-h-[100svh] flex-col overflow-hidden pb-8 pt-28 md:pt-32">
+      <!-- Le soleil de la marque : il vous regarde -->
+      <div
+        class="pointer-events-none absolute right-[-16vw] top-20 w-[66vw] sm:right-[-12vw] sm:top-24 sm:w-[60vw] md:right-[-10vw] md:top-1/2 md:w-[52vw] md:-translate-y-[58%] lg:right-[-6vw] lg:w-[44vw]"
+      >
+        <div ref="heroSunParallax">
+          <div ref="heroSunInner">
+            <SunMark class="w-full" state="happy" track title="Le soleil MoodFlow" />
+          </div>
+        </div>
       </div>
 
-      <!-- Interactive floating particles -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-orange-400/60 rounded-full animate-float opacity-70"></div>
-        <div class="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-purple-400/60 rounded-full animate-float animation-delay-1000 opacity-60"></div>
-        <div class="absolute bottom-1/3 left-1/3 w-2.5 h-2.5 bg-yellow-400/50 rounded-full animate-float animation-delay-2000 opacity-50"></div>
-        <div class="absolute top-2/3 right-1/4 w-1 h-1 bg-pink-400/70 rounded-full animate-float animation-delay-3000 opacity-80"></div>
-        <div class="absolute bottom-1/4 right-1/2 w-3 h-3 bg-blue-400/40 rounded-full animate-float animation-delay-4000 opacity-60"></div>
-        <div class="absolute top-1/2 left-1/6 w-1.5 h-1.5 bg-green-400/60 rounded-full animate-float animation-delay-5000 opacity-70"></div>
-      </div>
+      <Icon name="spark" class="hero-spark absolute left-[46%] top-[20%] h-7 w-7 animate-twinkle text-coral" />
+      <Icon name="spark" class="hero-spark absolute right-[6%] top-[16%] h-5 w-5 animate-twinkle text-grape [animation-delay:0.8s]" />
+      <Icon name="spark" class="hero-spark absolute right-[40%] top-[58%] hidden h-4 w-4 animate-twinkle text-candy [animation-delay:1.6s] md:block" />
+      <Icon name="spark" class="hero-spark absolute bottom-[26%] right-[5%] h-8 w-8 animate-twinkle text-sun-deep [animation-delay:2.2s]" />
 
-      <!-- Gradient mesh overlay for depth -->
-      <div class="absolute inset-0 bg-gradient-to-br from-orange-100/30 via-transparent to-purple-100/30 pointer-events-none"></div>
+      <div class="shell relative z-10 flex flex-1 flex-col">
+        <p v-reveal class="label text-ink/60">MoodFlow ©2025</p>
 
-      <div class="relative z-10 max-w-7xl mx-auto text-center pt-16 md:pt-24">
-        <div class="space-y-8 mb-16">
-          <!-- Logo interactif en grand avec effets avancés -->
-          <div class="mb-8 md:mb-12 flex justify-center">
-            <div class="relative group">
-              <!-- Orbiting particles around logo -->
-              <div class="absolute inset-0 pointer-events-none">
-                <div class="absolute top-0 left-1/2 w-2 h-2 bg-orange-400/80 rounded-full animate-orbit opacity-60"></div>
-                <div class="absolute top-1/2 right-0 w-1.5 h-1.5 bg-purple-400/80 rounded-full animate-orbit animation-delay-1000 opacity-70"></div>
-                <div class="absolute bottom-0 left-1/2 w-2.5 h-2.5 bg-yellow-400/60 rounded-full animate-orbit animation-delay-2000 opacity-50"></div>
-                <div class="absolute top-1/2 left-0 w-1 h-1 bg-pink-400/90 rounded-full animate-orbit animation-delay-3000 opacity-80"></div>
-              </div>
+        <h1 class="display mt-auto pt-40 text-[clamp(3.4rem,12.4vw,13.75rem)] leading-[0.84] tracking-[-0.055em] md:pt-0">
+          <span class="sr-only">MoodFlow, </span>
+          <span v-split="{ immediate: true, delay: 0.25 }" class="block">
+            Prendre soin<br />
+            de <span class="accent text-[1.06em] text-coral">vos équipes</span>
+          </span>
+        </h1>
 
-              <!-- Logo vidéo interactif avec effets améliorés -->
-              <video 
-                autoplay 
-                muted 
-                playsinline
-                loop
-                class="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 object-contain drop-shadow-2xl group-hover:scale-110 transition-all duration-700 group-hover:rotate-3 relative z-10"
-              >
-                <source :src="logoVideo" type="video/mp4">
-                <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
-              </video>
-              
-              <!-- Effet de glow dynamique en arrière-plan -->
-              <div class="absolute inset-0 bg-gradient-to-r from-orange-400/30 via-purple-400/30 to-orange-400/30 rounded-full blur-2xl -z-10 group-hover:blur-3xl group-hover:scale-110 transition-all duration-700 animate-pulse"></div>
-              
-              <!-- Simple glow effect on hover -->
-              <div class="absolute inset-0 -z-20 opacity-0 group-hover:opacity-100 transition-all duration-700">
-                <!-- Simple glowing background -->
-                <div class="absolute inset-0 bg-gradient-to-r from-orange-400/40 via-purple-400/40 to-orange-400/40 rounded-lg blur-xl group-hover:blur-2xl group-hover:scale-110 transition-all duration-700"></div>
-              </div>
-              
-              <!-- Floating sparkles -->
-              <div class="absolute top-2 right-2 w-1 h-1 bg-white/80 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute bottom-3 left-3 w-1.5 h-1.5 bg-yellow-300/80 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="animation-delay: 0.2s"></div>
-              <div class="absolute top-1/2 right-1 w-1 h-1 bg-purple-300/80 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-700" style="animation-delay: 0.4s"></div>
-            </div>
-          </div>
-
-          <!-- Logo/Nom de l'app avec effets avancés -->
-          <div class="mb-6 md:mb-8 relative">
-            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent mb-4 px-4 animate-gradient-flow cursor-default hover:scale-105 transition-all duration-700 drop-shadow-2xl relative z-10">
-              MoodFlow
-            </h1>
-            
-            <!-- Text shadow effect -->
-            <div class="absolute inset-0 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-orange-200/20 blur-sm px-4 animate-pulse">
-              MoodFlow
-            </div>
-            
-            <!-- Floating accent particles around title -->
-            <div class="absolute top-0 left-1/4 w-1 h-1 bg-orange-400/60 rounded-full animate-float opacity-70"></div>
-            <div class="absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-purple-400/60 rounded-full animate-float animation-delay-1000 opacity-60"></div>
-            <div class="absolute bottom-0 left-1/2 w-2 h-2 bg-yellow-400/50 rounded-full animate-float animation-delay-2000 opacity-50"></div>
-          </div>
-          
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight px-4">
-            <span class="block text-neutral-900 mb-2">Prendre soin de</span>
-            <span class="block bg-gradient-to-r from-orange-500 via-orange-400 to-purple-500 bg-clip-text text-transparent animate-gradient">
-              vos équipes
-            </span>
-          </h2>
-          
-          <p class="text-lg sm:text-xl md:text-2xl text-neutral-600 max-w-2xl mx-auto leading-relaxed font-light px-4">
+        <div class="mt-10 grid gap-8 md:mt-14 md:grid-cols-12 md:items-end">
+          <p v-reveal="0.55" class="text-pretty text-lg leading-snug text-ink/80 md:col-span-5 md:text-xl lg:col-span-4">
             MoodFlow transforme le bien-être en entreprise avec une approche simple, anonyme et bienveillante
           </p>
-
-          <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <button @click="goToRegister" 
-                    class="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50 border-2 border-orange-400">
-              <span class="relative z-10 drop-shadow-sm">Essayer gratuitement</span>
-              <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div v-reveal="0.65" class="flex flex-wrap gap-3 md:col-span-7 md:justify-end lg:col-span-8">
+            <button type="button" class="btn btn-ink btn-lg" v-magnetic @click="goToRegister">
+              <RollText text="Essayer gratuitement" />
+              <span class="btn-dot"><Icon name="arrow-right" /></span>
             </button>
-            
-            <button @click="scrollToFeatures" 
-                    class="group relative px-8 py-4 bg-white/70 backdrop-blur-sm text-neutral-800 rounded-full text-lg font-semibold border-2 border-neutral-300 hover:bg-white/90 hover:border-orange-300 transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200 focus:ring-opacity-50">
-              <span class="relative z-10">Découvrir</span>
-              <div class="absolute inset-0 bg-orange-100/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <button type="button" class="btn btn-outline btn-lg" @click="scrollToFeatures">
+              <RollText text="Découvrir" />
             </button>
           </div>
         </div>
 
-        <!-- Modern Mood Selector - Redesigned -->
-        <div class="relative w-full mt-16 md:mt-20 px-4 md:px-6">
-          <div class="max-w-6xl mx-auto">
-            <!-- Main selector with modern design -->
-            <div class="text-center mb-24 md:mb-32 lg:mb-40">
-              <h3 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow drop-shadow-lg">
-                Comment vous sentez-vous ?
-              </h3>
-              <p class="text-xl md:text-2xl text-neutral-600 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-                Sélectionnez votre humeur actuelle pour découvrir des insights personnalisés
-              </p>
-            
-              <!-- Modern mood selector with slider design -->
-              <div class="relative max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
-                <!-- Background track -->
-                <div class="relative h-2 bg-gradient-to-r from-red-200 via-yellow-200 via-green-200 to-green-300 rounded-full overflow-hidden shadow-inner">
-                  <!-- Progress indicator -->
-                  <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-purple-400 rounded-full transition-all duration-500 ease-out"
-                       :style="`width: ${(selectedMoodIndex / (moods.length - 1)) * 100}%`">
-                  </div>
-                </div>
-                
-                <!-- Mood indicators -->
-                <div class="relative -mt-1">
-                  <div v-for="(mood, i) in moods" :key="i" 
-                       class="absolute transform -translate-x-1/2 cursor-pointer group"
-                       :style="`left: ${(i / (moods.length - 1)) * 100}%`"
-                       @click="selectedMoodIndex = i">
-                    
-                    <!-- Mood button -->
-                    <div class="relative">
-                      <!-- Main button -->
-                      <button class="relative w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 rounded-full transition-all duration-500 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
-                              :class="selectedMoodIndex === i 
-                                ? 'scale-125 shadow-2xl' 
-                                : 'scale-100 shadow-lg hover:scale-110 hover:shadow-xl'">
-                        
-                        <!-- Background with gradient -->
-                        <div class="absolute inset-0 rounded-full transition-all duration-500"
-                             :class="selectedMoodIndex === i 
-                               ? mood.gradient + ' opacity-100' 
-                               : 'bg-white/90 backdrop-blur-sm border-2 border-white/60 group-hover:border-orange-200'">
-                        </div>
-                        
-                        <!-- Emoji -->
-                        <div class="relative z-10 flex items-center justify-center h-full">
-                          <span class="text-lg sm:text-xl md:text-3xl transition-transform duration-500 group-hover:scale-110 drop-shadow-sm">
-                            {{ mood.emoji }}
-                          </span>
-                        </div>
-                        
-                        <!-- Selection ring -->
-                        <div v-if="selectedMoodIndex === i" 
-                             class="absolute inset-0 rounded-full border-4 border-white shadow-lg animate-pulse"></div>
-                        
-                        <!-- Hover glow -->
-                        <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-md"
-                             :class="mood.gradient"></div>
-                      </button>
-                      
-                      <!-- Label -->
-                      <div class="absolute top-full mt-2 sm:mt-3 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                        <span class="text-xs sm:text-sm md:text-base font-semibold px-2 sm:px-3 py-1 rounded-full transition-all duration-300"
-                              :class="selectedMoodIndex === i 
-                                ? 'bg-white/95 backdrop-blur-sm text-neutral-900 shadow-lg' 
-                                : 'text-neutral-600 group-hover:text-neutral-900 group-hover:bg-white/80 group-hover:backdrop-blur-sm group-hover:shadow-md'">
-                          {{ mood.label }}
-                        </span>
-                      </div>
-                      
-                      <!-- Description tooltip -->
-                      <div class="absolute bottom-full mb-3 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                        <div class="bg-white/95 backdrop-blur-sm text-neutral-700 text-xs px-3 py-2 rounded-lg shadow-lg border border-white/60 max-w-48 text-center">
-                          {{ mood.shortDescription || 'Cliquez pour en savoir plus' }}
-                        </div>
-                        <!-- Arrow -->
-                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/95"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Modern mood summary -->
-          <div class="w-full mt-24 md:mt-32 lg:mt-40 pb-8 md:pb-12 lg:pb-16">
-            <div class="bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-xl border border-white/60 max-w-4xl mx-auto">
-              <div class="text-center mb-6">
-                <h3 class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3">
-                  {{ moods[selectedMoodIndex].title }}
-                </h3>
-                <p class="text-neutral-600 text-base md:text-lg mx-auto leading-relaxed max-w-3xl">
-                  {{ moods[selectedMoodIndex].description }}
-                </p>
-              </div>
-              
-              <!-- Modern stats visualization -->
-              <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-white/40">
-                <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center gap-3">
-                    <div class="w-4 h-4 rounded-full" :class="moods[selectedMoodIndex].gradient"></div>
-                    <span class="text-sm font-semibold text-neutral-700">Statistiques de l'équipe</span>
-                  </div>
-                  <span class="text-2xl md:text-3xl font-bold text-neutral-900">{{ moods[selectedMoodIndex].percentage }}%</span>
-                </div>
-                
-                <!-- Enhanced progress bar -->
-                <div class="relative h-3 bg-neutral-100 rounded-full overflow-hidden mb-3">
-                  <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-1000 ease-out shadow-sm"
-                       :class="moods[selectedMoodIndex].gradient"
-                       :style="`width: ${moods[selectedMoodIndex].percentage}%`">
-                    <div class="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
-                  </div>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row justify-between gap-2 text-sm text-neutral-600 font-medium">
-                  <span class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
-                    {{ moods[selectedMoodIndex].percentage }}% de vos collègues
-                  </span>
-                  <span class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    se sentent {{ moods[selectedMoodIndex].label.toLowerCase() }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="label mt-12 flex items-center justify-between border-t border-ink/15 pt-5 text-ink/55">
+          <span>Simple · Anonyme · Bienveillant</span>
+          <span class="hidden items-center gap-2 sm:flex">
+            Défiler
+            <Icon name="arrow-down" class="h-3.5 w-3.5 animate-bounce" />
+          </span>
         </div>
       </div>
     </section>
 
-    <!-- Features Section - Style Headspace Tabs -->
-    <section ref="featuresSection" class="py-20 md:py-28 lg:py-36 relative bg-white">
-      <div class="max-w-7xl mx-auto px-4 md:px-6">
-        <div class="text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900">
-            L'app bien-être pour chaque moment
-          </h2>
-        </div>
-
-        <!-- Headspace-style Tabs -->
-        <div class="overflow-x-auto scrollbar-hide mb-16">
-          <div class="flex gap-3 justify-center min-w-max mx-auto pb-4">
-            <button v-for="(feature, index) in features" :key="index"
-                    @click="currentFeature = index"
-                    class="group relative px-6 py-4 rounded-2xl font-semibold transition-all duration-300 whitespace-nowrap border-2 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50"
-                    :class="currentFeature === index 
-                      ? 'bg-gradient-to-r from-orange-500 to-purple-600 text-white shadow-xl border-transparent scale-105 ring-4 ring-orange-200 ring-opacity-60' 
-                      : 'bg-white/80 backdrop-blur-sm text-neutral-700 hover:bg-white/90 border-neutral-200 hover:border-orange-200 hover:shadow-lg hover:scale-105'">
-              <span class="relative z-10 drop-shadow-sm">{{ feature.title }}</span>
-              <div v-if="currentFeature === index" 
-                   class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-700 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div v-if="currentFeature !== index" 
-                   class="absolute inset-0 bg-orange-100/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
-          </div>
-        </div>
-
-        <!-- Slides -->
-        <div class="relative">
-          <div class="overflow-hidden">
-            <div class="flex transition-transform duration-500 ease-out"
-                 :style="`transform: translateX(-${currentFeature * 100}%)`">
-              <div v-for="(feature, index) in features" :key="index" 
-                   class="min-w-full">
-                <div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-                  <!-- Video Card with Expert Style (Landscape) -->
-                  <div class="order-2 md:order-1">
-                    <div class="group relative w-full max-w-2xl mx-auto">
-                      <div class="relative w-full h-80 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                        <!-- Video as background -->
-                        <div class="relative w-full h-full overflow-hidden rounded-3xl">
-                          <video 
-                            autoplay 
-                            muted 
-                            playsinline
-                            loop
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                            preload="metadata"
-                          >
-                            <source :src="feature.video" type="video/mp4">
-                            <!-- Fallback avec l'icône si la vidéo ne charge pas -->
-                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-100 to-purple-100">
-                              <div class="text-8xl opacity-80">{{ feature.icon }}</div>
-                            </div>
-                          </video>
-                          
-                          <!-- Dark overlay for text readability -->
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                          
-                          <!-- Content overlay -->
-                          <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <!-- Category badge -->
-                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full mb-4 border border-white/30">
-                              <div class="w-2 h-2 bg-gradient-to-r from-orange-400 to-purple-400 rounded-full animate-pulse"></div>
-                              <span class="text-sm font-semibold text-white">{{ feature.category }}</span>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h3 class="font-bold text-2xl mb-2 group-hover:text-orange-300 transition-colors">
-                              {{ feature.title }}
-                            </h3>
-                            
-                            <!-- Description -->
-                            <p class="text-white/90 text-sm mb-4 leading-relaxed line-clamp-2">
-                              {{ feature.description }}
-                            </p>
-                            
-                            <!-- CTA Button -->
-                            <button @click="goToRegister"
-                                    class="inline-flex items-center gap-2 px-4 py-2 bg-white/30 backdrop-blur-sm rounded-xl border-2 border-white/40 hover:bg-white/40 transition-all duration-300 group/btn shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white/50">
-                              <span class="text-white text-sm font-semibold drop-shadow-sm">Découvrir</span>
-                              <svg class="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Headspace-style Content -->
-                  <div class="order-1 md:order-2 text-center md:text-left">
-                    <div class="max-w-lg mx-auto md:mx-0">
-                      <!-- Feature badge -->
-                      <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-100 to-purple-100 rounded-full mb-6">
-                        <div class="w-2 h-2 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-pulse"></div>
-                        <span class="text-sm font-semibold text-neutral-700">{{ feature.category || 'Fonctionnalité' }}</span>
-                      </div>
-                      
-                      <!-- Title with gradient -->
-                      <h3 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                        <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-                          {{ feature.title }}
-                        </span>
-                      </h3>
-                      
-                      <!-- Description -->
-                      <p class="text-xl text-neutral-600 leading-relaxed mb-8">
-                        {{ feature.description }}
-                      </p>
-                      
-                      <!-- CTA Button with Headspace style -->
-                      <div class="flex flex-col sm:flex-row gap-4">
-                        <button @click="goToRegister"
-                                class="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50 border-2 border-orange-400">
-                          <span class="relative z-10 drop-shadow-sm">Découvrir</span>
-                          <div class="absolute inset-0 bg-gradient-to-r from-orange-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                          <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </button>
-                        
-                        <button @click="scrollToFeatures"
-                                class="group relative px-8 py-4 bg-white/80 backdrop-blur-sm text-neutral-700 rounded-2xl font-semibold border-2 border-neutral-200 hover:bg-white/90 hover:border-orange-300 transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200 focus:ring-opacity-50">
-                          <span class="relative z-10">En savoir plus</span>
-                          <div class="absolute inset-0 bg-orange-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Indicators -->
-          <div class="flex justify-center gap-3 mt-12">
-            <button v-for="(_, index) in features" :key="index"
-                    @click="currentFeature = index"
-                    class="transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-opacity-50 rounded-full"
-                    :class="currentFeature === index 
-                      ? 'w-12 h-3 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full shadow-lg scale-110' 
-                      : 'w-3 h-3 bg-neutral-300 hover:bg-orange-400 rounded-full hover:scale-110 shadow-md'">
-            </button>
-          </div>
-        </div>
+    <!-- Bandes croisées -->
+    <div class="relative z-20 my-6 py-14 md:my-10 md:py-20" aria-hidden="true">
+      <div class="absolute inset-x-[-5%] top-1/2 -translate-y-1/2 rotate-[5deg] bg-grape py-3 text-paper md:py-4">
+        <Marquee :speed="48" reverse :repeat="3">
+          <template v-for="f in features" :key="`b-${f.title}`">
+            <span class="display whitespace-nowrap text-[clamp(1.4rem,3vw,2.6rem)] tracking-[-0.03em]">{{ f.category }}</span>
+            <Icon name="spark" class="mx-6 h-5 w-5 text-sun md:mx-9 md:h-6 md:w-6" />
+          </template>
+        </Marquee>
       </div>
-    </section>
+      <div class="relative w-[110%] -translate-x-[4.5%] -rotate-[3deg] bg-coral py-4 text-ink md:py-6">
+        <Marquee :speed="36" reactive :repeat="2">
+          <template v-for="f in features" :key="`a-${f.title}`">
+            <span class="display whitespace-nowrap text-[clamp(2.2rem,5.6vw,5.5rem)] tracking-[-0.045em]">{{ f.title }}</span>
+            <Icon name="spark" class="mx-8 h-8 w-8 text-sun md:mx-12 md:h-12 md:w-12" />
+          </template>
+        </Marquee>
+      </div>
+    </div>
 
-    <!-- Expert Users Carousel - Headspace Style -->
-    <section class="py-20 md:py-28 lg:py-36 px-4 md:px-6 bg-gradient-to-br from-purple-50/50 to-orange-50/50 relative overflow-hidden">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12 md:mb-16">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-3 md:mb-4 px-4">
-            Conçu par des experts, livré avec soin
-          </h2>
-          <p class="text-lg md:text-xl text-neutral-600 px-4 max-w-3xl mx-auto">
-            De l'expression libre aux insights en temps réel, notre équipe d'experts en bien-être au travail 
-            travaille ensemble pour vous apporter des solutions éprouvées.
-          </p>
+    <!-- ============================================================
+         HUMEUR : la section prend la couleur de l'humeur choisie
+         ============================================================ -->
+    <section
+      class="relative overflow-hidden pb-24 pt-28 transition-colors duration-700 ease-out-expo md:pb-32 md:pt-36"
+      :style="{ backgroundColor: currentTheme.bg, color: currentTheme.fg }"
+    >
+      <div class="shell">
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+          <div class="lg:col-span-7">
+            <p class="label mb-8 opacity-70">(01) Humeurs</p>
+            <h2 v-split class="display text-display-lg">Comment vous <span class="whitespace-nowrap">sentez-vous ?</span></h2>
+            <p v-reveal="0.1" class="mt-8 max-w-xl text-pretty text-xl leading-snug opacity-80 md:text-2xl">
+              Sélectionnez votre humeur actuelle pour découvrir des insights personnalisés
+            </p>
+          </div>
+          <div class="flex justify-center lg:col-span-5 lg:justify-end">
+            <SunMark
+              class="w-[74vw] max-w-[28rem] lg:w-full"
+              :state="currentMood.value"
+              :disc="currentTheme.disc"
+              :ray-colors="currentTheme.rays"
+              track
+            />
+          </div>
         </div>
 
-        <!-- Auto-scrolling Expert Carousel -->
-        <div class="relative">
-          <div class="overflow-hidden">
-            <div class="flex transition-transform duration-1000 ease-linear"
-                 :style="`transform: translateX(-${expertScrollPosition}px)`"
-                 ref="expertCarousel">
-              <!-- Duplicate experts for seamless loop -->
-              <div v-for="(expert, index) in [...experts, ...experts]" :key="`expert-${index}`" 
-                   class="flex-shrink-0 mx-2">
-                <div class="group relative w-64 h-80 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                  <!-- Expert Image with Overlay Text -->
-                  <div class="relative w-full h-full overflow-hidden rounded-3xl">
-                    <img :src="expert.image" 
-                         :alt="expert.name"
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    
-                    <!-- Dark overlay for text readability -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                    
-                    <!-- Expert Info Overlay -->
-                    <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                      <h3 class="font-bold text-lg mb-1 group-hover:text-orange-300 transition-colors">
-                        {{ expert.name }}
-                      </h3>
-                      <p class="text-white/90 text-xs mb-2 leading-relaxed">
-                        {{ expert.role }}
-                      </p>
-                      
-                      <!-- Testimonial Quote - Fixed height for consistency -->
-                      <div class="bg-white/10 backdrop-blur-sm rounded-lg p-2 border border-white/20 h-16 flex items-center">
-                        <p class="text-white text-xs italic leading-tight line-clamp-3">
-                          "{{ expert.testimonial }}"
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Pause/Play Button -->
-          <button @click="toggleExpertCarousel" 
-                  class="absolute top-4 right-4 w-12 h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center group z-10 border-2 border-orange-200 hover:border-orange-300 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50">
-            <svg v-if="expertCarouselPaused" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform drop-shadow-sm">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg v-else width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="text-orange-600 group-hover:scale-110 transition-transform drop-shadow-sm">
-              <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-            </svg>
+        <div
+          role="radiogroup"
+          aria-label="Votre humeur actuelle"
+          class="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:mt-20 lg:grid-cols-5"
+        >
+          <button
+            v-for="(mood, i) in moods"
+            :key="mood.value"
+            :ref="(el) => (moodButtons[i] = el as HTMLButtonElement)"
+            type="button"
+            role="radio"
+            :aria-checked="selectedMoodIndex === i"
+            :tabindex="selectedMoodIndex === i ? 0 : -1"
+            class="group flex items-center gap-4 rounded-full border py-2.5 pl-2.5 pr-6 text-left transition-[background-color,border-color,color,transform] duration-500 ease-out-expo active:scale-[0.98] lg:flex-col lg:items-start lg:gap-5 lg:rounded-[1.75rem] lg:p-5"
+            :class="
+              selectedMoodIndex === i
+                ? 'border-ink bg-ink text-paper'
+                : isDark
+                  ? 'border-paper/30 hover:border-paper hover:bg-paper/10'
+                  : 'border-ink/20 hover:border-ink hover:bg-white/25'
+            "
+            @click="selectedMoodIndex = i"
+            @keydown="onMoodKeydown($event, i)"
+          >
+            <MoodFace
+              :mood="mood.value"
+              class="h-12 w-12 shrink-0 transition-transform duration-500 ease-out-back group-hover:rotate-[-8deg] group-hover:scale-110"
+            />
+            <span class="min-w-0">
+              <span class="block font-display text-lg font-bold leading-tight tracking-[-0.02em]">{{ mood.label }}</span>
+              <span class="mt-0.5 block truncate text-xs opacity-70 lg:mt-1.5 lg:whitespace-normal lg:text-sm lg:leading-snug">{{ mood.shortDescription }}</span>
+            </span>
           </button>
         </div>
-      </div>
-    </section>
 
-    <!-- Companies Carousel -->
-    <section class="py-20 md:py-24 lg:py-28 px-4 md:px-6 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <h3 class="text-center mb-12 md:mb-16 px-4">
-          <span class="inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-text hover:scale-105 transition-transform duration-300 cursor-default bg-white px-8 py-4 rounded-2xl shadow-lg">
-            Ils font confiance à MoodFlow
-          </span>
-        </h3>
-        
-        <div class="relative overflow-hidden">
-          <div class="flex animate-scroll">
-            <div class="flex gap-16 items-center min-w-max">
-              <!-- First set -->
-              <div v-for="logo in [...companyLogos, ...companyLogos]" :key="logo.name" 
-                   class="flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0">
-                <div v-html="logo.svg" class="w-32 h-16"></div>
+        <div
+          class="mt-14 grid gap-10 border-t pt-12 lg:mt-20 lg:grid-cols-12"
+          :class="isDark ? 'border-paper/25' : 'border-ink/20'"
+          aria-live="polite"
+        >
+          <div class="lg:col-span-7">
+            <Transition name="swap" mode="out-in">
+              <div :key="selectedMoodIndex">
+                <h3 class="display text-display-md">{{ currentMood.title }}</h3>
+                <p class="mt-6 max-w-2xl text-pretty text-lg leading-relaxed opacity-80 md:text-xl">
+                  {{ currentMood.description }}
+                </p>
               </div>
+            </Transition>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="flex items-end justify-between gap-6">
+              <span class="label pb-3 opacity-70">Statistiques de l'équipe</span>
+              <span class="display text-[clamp(4.5rem,11vw,9.5rem)] leading-[0.8] tracking-[-0.06em]">
+                {{ displayedPercentage }}<span class="text-[0.45em] tracking-normal">%</span>
+              </span>
+            </div>
+            <div
+              class="mt-6 h-3 overflow-hidden rounded-full"
+              :class="isDark ? 'bg-paper/20' : 'bg-ink/10'"
+              role="progressbar"
+              :aria-valuenow="currentMood.percentage"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              :aria-label="`${currentMood.percentage}% de vos collègues`"
+            >
+              <div
+                class="h-full rounded-full transition-[width] duration-1000 ease-out-expo"
+                :class="isDark ? 'bg-paper' : 'bg-ink'"
+                :style="{ width: `${currentMood.percentage}%` }"
+              />
+            </div>
+            <div class="mt-4 flex flex-col justify-between gap-1 text-sm font-medium opacity-80 sm:flex-row">
+              <span>{{ currentMood.percentage }}% de vos collègues</span>
+              <span>se sentent {{ currentMood.label.toLowerCase() }}</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Stats Section - Style Headspace -->
-    <section class="relative py-36 px-6 overflow-hidden">
-      <!-- Sky background -->
-      <div class="absolute inset-0 bg-gradient-to-b from-sky-400 via-sky-300 to-orange-200"></div>
-      
-      <!-- Floating avatars -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-orange-400 opacity-80 animate-float"></div>
-        <div class="absolute top-40 right-20 w-24 h-24 rounded-full bg-purple-400 opacity-70 animate-float-slow"></div>
-        <div class="absolute bottom-32 left-1/4 w-28 h-28 rounded-full bg-yellow-400 opacity-75 animate-float animation-delay-1000"></div>
-        <div class="absolute bottom-40 right-1/3 w-20 h-20 rounded-full bg-pink-400 opacity-80 animate-float-slow"></div>
-      </div>
-      
-      <div class="relative z-10 max-w-6xl mx-auto text-center">
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-            <div class="flex justify-center mb-3">
-              <div class="text-4xl">⭐</div>
-            </div>
-            <p class="text-3xl font-bold text-neutral-900 mb-1">4.8</p>
-            <p class="text-sm text-neutral-600">Note App Store</p>
-          </div>
-          
-          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-            <div class="flex justify-center mb-3">
-              <div class="text-4xl">👥</div>
-            </div>
-            <p class="text-3xl font-bold text-neutral-900 mb-1">10K+</p>
-            <p class="text-sm text-neutral-600">Entreprises</p>
-          </div>
-          
-          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-            <div class="flex justify-center mb-3">
-              <div class="text-4xl">😊</div>
-            </div>
-            <p class="text-3xl font-bold text-neutral-900 mb-1">2M+</p>
-            <p class="text-sm text-neutral-600">Humeurs partagées</p>
-          </div>
-          
-          <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-            <div class="flex justify-center mb-3">
-              <div class="text-4xl">🏆</div>
-            </div>
-            <p class="text-3xl font-bold text-neutral-900 mb-1">98%</p>
-            <p class="text-sm text-neutral-600">Satisfaction</p>
-          </div>
-        </div>
-        
-        <h2 class="text-5xl md:text-6xl font-bold text-white mb-8 drop-shadow-lg">
-          Rejoignez les milliers qui utilisent MoodFlow chaque jour
-        </h2>
-        
-        <button @click="goToPricing" 
-                class="group relative px-12 py-5 bg-white text-orange-600 rounded-full text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 border-orange-200 hover:border-orange-300 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50">
-          <span class="relative z-10 drop-shadow-sm">Voir les tarifs</span>
-          <div class="absolute inset-0 bg-orange-100/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </button>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 md:py-28 lg:py-36 px-4 md:px-6 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-400 to-purple-500"></div>
-      <div class="absolute inset-0">
-        <div class="absolute top-20 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-blob"></div>
-        <div class="absolute bottom-20 right-20 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-      </div>
-      
-      <div class="relative z-10 max-w-4xl mx-auto text-center text-white space-y-6 md:space-y-8 px-4">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
-          Prêt à transformer votre entreprise ?
-        </h2>
-        <p class="text-lg sm:text-xl md:text-2xl font-light opacity-90">
-          Découvrez MoodFlow en action avec une démo personnalisée
-        </p>
-        <button @click="goToDemo" 
-                class="group relative px-8 sm:px-10 md:px-12 py-4 md:py-5 bg-white text-orange-600 rounded-full text-lg md:text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl border-2 border-orange-200 hover:border-orange-300 focus:outline-none focus:ring-4 focus:ring-orange-300 focus:ring-opacity-50">
-          <span class="relative z-10 drop-shadow-sm">Demander une démo</span>
-          <div class="absolute inset-0 bg-orange-100/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </button>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-20 px-6 bg-neutral-900 text-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
-          <div class="text-center md:text-left">
-            <h3 class="text-3xl font-bold mb-3 bg-gradient-to-r from-orange-400 via-purple-400 to-orange-400 bg-clip-text text-transparent animate-gradient-flow cursor-default hover:scale-105 transition-transform duration-300 inline-block">
-              MoodFlow
-            </h3>
-            <p class="text-neutral-400 max-w-sm">Le bien-être au travail, simplifié</p>
-          </div>
-          
-          <div class="flex flex-col sm:flex-row gap-12 sm:gap-16">
-            <div>
-              <h4 class="font-semibold mb-4">Produit</h4>
-              <div class="space-y-2">
-                <router-link to="/pricing" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Tarifs</router-link>
-                <router-link to="/demo" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Demander une démo</router-link>
-              </div>
-            </div>
-            
-            <div>
-              <h4 class="font-semibold mb-4">Entreprise</h4>
-              <div class="space-y-2">
-                <router-link to="/about" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">À propos</router-link>
-                <router-link to="/contact" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Contact</router-link>
-                <router-link to="/privacy" class="block text-neutral-400 hover:text-orange-400 transition-colors hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-opacity-50 rounded px-1">Confidentialité</router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="mt-12 pt-8 border-t border-neutral-800 text-center text-neutral-400">
-          <p class="mb-2">&copy; 2025 MoodFlow</p>
-          <p class="text-sm">
-            Codé avec ❤️ et du Flow par 
-            <span class="text-orange-400 font-semibold">A</span>bdoul, 
-            <span class="text-purple-400 font-semibold">M</span>athieu, 
-            <span class="text-yellow-400 font-semibold">A</span>maury, 
-            <span class="text-orange-400 font-semibold">J</span>erobel et 
-            <span class="text-purple-400 font-semibold">M</span>ehmet
+    <!-- ============================================================
+         FONCTIONNALITÉS : cartes empilées
+         ============================================================ -->
+    <section ref="featuresSection" class="relative scroll-mt-24 pb-10 pt-28 md:pb-24 md:pt-40">
+      <div class="shell">
+        <div class="mb-14 grid gap-8 md:mb-20 md:grid-cols-12 md:items-end">
+          <p class="label text-ink/60 md:col-span-12">(02) Fonctionnalités</p>
+          <h2 v-split class="display text-display-xl md:col-span-9">L'app bien-être pour chaque moment</h2>
+          <p
+            class="display hidden text-right text-[clamp(4rem,9vw,8.5rem)] leading-[0.8] tracking-[-0.06em] text-ink/10 md:col-span-3 md:block"
+            aria-hidden="true"
+          >
+            06
           </p>
         </div>
+
+        <div class="flex flex-col gap-5 md:gap-0">
+          <article
+            v-for="(feature, i) in features"
+            :key="feature.title"
+            class="feature-card md:sticky md:mb-[18vh] md:last:mb-0"
+            :style="{ top: `calc(6.25rem + ${i} * 1.1rem)` }"
+          >
+            <div
+              class="feature-inner relative grid origin-top gap-8 overflow-hidden rounded-[2rem] p-6 sm:p-8 md:min-h-[78svh] md:grid-cols-12 md:rounded-[2.75rem] md:p-10 lg:p-14"
+              :style="{ backgroundColor: feature.color }"
+              :class="feature.dark ? 'text-paper' : 'text-ink'"
+            >
+              <div class="relative z-10 flex flex-col md:col-span-7">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="label">{{ String(i + 1).padStart(2, '0') }} / {{ String(features.length).padStart(2, '0') }}</span>
+                  <span class="chip" :class="feature.dark ? 'border-paper/30' : 'border-ink/20'">{{ feature.category }}</span>
+                </div>
+                <h3 class="display mt-12 text-display-lg md:mt-auto">{{ feature.title }}</h3>
+                <p class="mt-6 max-w-md text-pretty text-lg leading-snug opacity-85 md:text-xl">
+                  {{ feature.description }}
+                </p>
+                <div class="mt-10">
+                  <button
+                    type="button"
+                    class="btn"
+                    :class="feature.dark ? 'btn-sun' : 'btn-ink'"
+                    @click="goToRegister"
+                  >
+                    <RollText text="Découvrir" />
+                    <span class="btn-dot"><Icon name="arrow-right" /></span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="relative z-10 flex items-center justify-center md:col-span-5 md:justify-end">
+                <video
+                  data-lazy-video
+                  class="aspect-[2424/3414] w-full max-w-[22rem] rounded-[1.5rem] object-cover ring-1 md:h-[min(66svh,44rem)] md:w-auto md:max-w-none md:rounded-[2rem]"
+                  :class="feature.dark ? 'ring-paper/15' : 'ring-ink/10'"
+                  muted
+                  playsinline
+                  loop
+                  preload="none"
+                  :aria-label="feature.title"
+                  data-cursor="Découvrir"
+                  :data-cursor-color="feature.dark ? '#FED94E' : '#1A0E2B'"
+                  :data-cursor-text="feature.dark ? '#1A0E2B' : '#FFF8EF'"
+                  @click="goToRegister"
+                >
+                  <source :src="feature.video" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="feature-shade pointer-events-none absolute inset-0 z-20 bg-ink opacity-0" />
+            </div>
+          </article>
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- ============================================================
+         EXPERTS
+         ============================================================ -->
+    <section class="relative overflow-hidden bg-blush py-28 md:py-40">
+      <div class="shell grid gap-8 md:grid-cols-12 md:items-end">
+        <p class="label text-ink/60 md:col-span-12">(03) Témoignages</p>
+        <h2 v-split class="display text-display-lg md:col-span-7">Conçu par des experts, livré avec soin</h2>
+        <p v-reveal="0.1" class="text-pretty text-lg leading-relaxed text-ink/75 md:col-span-4 md:col-start-9">
+          De l'expression libre aux insights en temps réel, notre équipe d'experts en bien-être au travail
+          travaille ensemble pour vous apporter des solutions éprouvées.
+        </p>
+      </div>
+
+      <div class="mt-16 md:mt-24">
+        <Marquee :speed="70" :paused="expertCarouselPaused" :repeat="2">
+          <article
+            v-for="expert in experts"
+            :key="expert.name"
+            class="mx-2.5 flex w-[80vw] shrink-0 flex-col rounded-[2rem] bg-paper p-3 pb-7 sm:w-[21rem] md:mx-3.5 md:w-[25rem]"
+          >
+            <div class="aspect-[4/5] overflow-hidden rounded-[1.5rem]">
+              <img
+                :src="expert.image"
+                :alt="expert.name"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover object-top transition-transform duration-1000 ease-out-expo hover:scale-105"
+              />
+            </div>
+            <blockquote class="flex-1 px-3 pt-7 md:px-4">
+              <p class="font-serif text-[1.55rem] leading-[1.12] tracking-[-0.01em] md:text-[1.75rem]">
+                “{{ expert.testimonial }}”
+              </p>
+            </blockquote>
+            <div class="mt-7 flex items-center justify-between gap-4 border-t border-ink/10 px-3 pt-5 md:px-4">
+              <div class="min-w-0">
+                <p class="font-display text-lg font-bold leading-tight tracking-[-0.02em]">{{ expert.name }}</p>
+                <p class="label mt-2 truncate text-ink/55">{{ expert.role }}</p>
+              </div>
+              <MoodFace mood="very_happy" class="h-10 w-10 shrink-0" />
+            </div>
+          </article>
+        </Marquee>
+      </div>
+
+      <div class="shell mt-10 flex justify-end">
+        <button
+          type="button"
+          class="grid h-14 w-14 place-items-center rounded-full bg-ink text-paper transition-transform duration-500 ease-out-back hover:scale-110"
+          :aria-label="expertCarouselPaused ? 'Reprendre le défilement des témoignages' : 'Mettre en pause le défilement des témoignages'"
+          :aria-pressed="expertCarouselPaused"
+          @click="toggleExpertCarousel"
+        >
+          <Icon :name="expertCarouselPaused ? 'play' : 'pause'" class="h-5 w-5" />
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ENTREPRISES
+         ============================================================ -->
+    <section class="py-20 md:py-28">
+      <div class="shell flex flex-col gap-10 md:flex-row md:items-center md:gap-16">
+        <h3 v-reveal class="display max-w-[12ch] shrink-0 text-display-sm">Ils font confiance à MoodFlow</h3>
+        <Marquee
+          class="min-w-0 flex-1 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]"
+          :speed="32"
+          :repeat="2"
+        >
+          <div
+            v-for="logo in companyLogos"
+            :key="logo.name"
+            class="mx-8 flex h-10 items-center text-ink/55 transition-colors duration-300 hover:text-ink md:mx-12 md:h-12 [&>svg]:h-full [&>svg]:w-auto"
+            :title="logo.name"
+            v-html="logo.svg"
+          />
+        </Marquee>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CHIFFRES
+         ============================================================ -->
+    <section class="relative mx-3 overflow-hidden rounded-[2.5rem] bg-grape py-24 text-paper md:mx-5 md:rounded-[3.5rem] md:py-36">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div v-parallax="0.5" class="absolute left-[6%] top-[10%] w-16 md:w-24">
+          <MoodFace mood="very_happy" class="animate-drift" />
+        </div>
+        <div v-parallax="0.25" class="absolute right-[9%] top-[18%] w-20 md:w-28">
+          <MoodFace mood="happy" class="animate-drift [animation-delay:1.5s]" />
+        </div>
+        <div v-parallax="0.7" class="absolute bottom-[14%] right-[30%] hidden w-14 md:block">
+          <MoodFace mood="neutral" class="animate-drift [animation-delay:3s]" />
+        </div>
+        <div v-parallax="0.4" class="absolute bottom-[8%] left-[38%] w-12 md:w-16">
+          <MoodFace mood="sad" class="animate-drift [animation-delay:2.2s]" />
+        </div>
+      </div>
+
+      <div class="shell relative z-10">
+        <p class="label text-paper/60">(04) En chiffres</p>
+        <dl class="mt-12 grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-4">
+          <div v-for="stat in stats" :key="stat.label" class="flex flex-col-reverse border-t border-paper/25 pt-6">
+            <dt class="label mt-5 text-paper/70">{{ stat.label }}</dt>
+            <dd class="display text-[clamp(3.6rem,8.4vw,8.5rem)] leading-[0.82] tracking-[-0.06em]">
+              <CountUp :value="stat.value" />
+            </dd>
+          </div>
+        </dl>
+
+        <div class="mt-24 grid gap-10 md:mt-36 md:grid-cols-12 md:items-end">
+          <h2 v-split class="display text-display-lg md:col-span-9">
+            Rejoignez les milliers qui utilisent MoodFlow chaque jour
+          </h2>
+          <div class="md:col-span-3 md:flex md:justify-end">
+            <button type="button" class="btn btn-sun btn-lg" v-magnetic @click="goToPricing">
+              <RollText text="Voir les tarifs" />
+              <span class="btn-dot"><Icon name="arrow-right" /></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA : lever de soleil
+         ============================================================ -->
+    <section ref="ctaSection" class="relative mt-24 overflow-hidden bg-coral pb-40 pt-28 md:mt-32 md:pb-64 md:pt-40">
+      <div class="shell relative z-10">
+        <p class="label text-ink/70">(05) Démo</p>
+        <h2 v-split class="display mt-8 max-w-[13ch] text-display-xl">Prêt à transformer votre <span class="whitespace-nowrap">entreprise ?</span></h2>
+        <p v-reveal="0.1" class="mt-8 max-w-xl text-pretty text-xl leading-snug md:text-2xl">
+          Découvrez MoodFlow en action avec une démo personnalisée
+        </p>
+        <button type="button" class="btn btn-ink btn-lg mt-12" v-magnetic="0.4" @click="goToDemo">
+          <RollText text="Demander une démo" />
+          <span class="btn-dot"><Icon name="arrow-right" /></span>
+        </button>
+      </div>
+      <div
+        ref="sunriseEl"
+        class="pointer-events-none absolute bottom-[-38vw] right-[-22vw] w-[88vw] md:bottom-[-30vw] md:right-[-6vw] md:w-[62vw]"
+        aria-hidden="true"
+      >
+        <SunMark state="very_happy" :ray-colors="['#1A0E2B', '#FED94E']" :ray-count="26" />
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import logoVideo from '../assets/MoodFlow_final_logo.mp4';
-import logoImage from '../assets/MoodFlow_final_logo.png';
+import SunMark from '../components/brand/SunMark.vue';
+import MoodFace from '../components/brand/MoodFace.vue';
+import Icon from '../components/ui/Icon.vue';
+import RollText from '../components/ui/RollText.vue';
+import Marquee from '../components/ui/Marquee.vue';
+import CountUp from '../components/ui/CountUp.vue';
+import { gsap, prefersReducedMotion, scrollToElement } from '../lib/motion';
+import type { MoodValue } from '../lib/moods';
 
 // Import des cards vidéo
 import expressionLibreVideo from '../assets/feature-cards/Expression libre.mp4';
@@ -626,116 +430,175 @@ import anonymatVideo from '../assets/feature-cards/Anonymat garanti.mp4';
 import simpleVideo from '../assets/feature-cards/Simple d\'utilisation.mp4';
 import deploiementVideo from '../assets/feature-cards/Déploiement rapide.mp4';
 
-// Import des images d'experts/utilisateurs
-import alexandreImage from '../assets/card_avis_personne/Alexandre.png';
-import marieImage from '../assets/card_avis_personne/Marie.png';
-import sophieImage from '../assets/card_avis_personne/Sophie.png';
-import thomasImage from '../assets/card_avis_personne/Thomas.png';
+// Import des images d'experts/utilisateurs (versions allégées)
+import alexandreImage from '../assets/card_avis_personne/Alexandre.jpg';
+import marieImage from '../assets/card_avis_personne/Marie.jpg';
+import sophieImage from '../assets/card_avis_personne/Sophie.jpg';
+import thomasImage from '../assets/card_avis_personne/Thomas.jpg';
 
 const router = useRouter();
-const isVisible = ref(false);
+const rootEl = ref<HTMLElement | null>(null);
+const heroSection = ref<HTMLElement | null>(null);
+const heroSunParallax = ref<HTMLElement | null>(null);
+const heroSunInner = ref<HTMLElement | null>(null);
 const featuresSection = ref<HTMLElement | null>(null);
-const currentTestimonial = ref(0);
-const currentFeature = ref(0);
+const ctaSection = ref<HTMLElement | null>(null);
+const sunriseEl = ref<HTMLElement | null>(null);
+const moodButtons = ref<HTMLButtonElement[]>([]);
 const selectedMoodIndex = ref(1);
 
-// Expert carousel variables
-const expertCarousel = ref<HTMLElement | null>(null);
-const expertScrollPosition = ref(0);
+// Expert carousel
 const expertCarouselPaused = ref(false);
-const expertScrollSpeed = 0.5; // pixels per frame (slower for better visibility)
-let expertScrollInterval: number;
 
-const moods = [
-  { 
-    emoji: '😄', 
+const INK = '#1A0E2B';
+const PAPER = '#FFF8EF';
+
+const moods: {
+  value: MoodValue;
+  label: string;
+  shortDescription: string;
+  percentage: number;
+  title: string;
+  description: string;
+}[] = [
+  {
+    value: 'very_happy',
     label: 'Excellent',
     shortDescription: 'Équipe motivée et productive',
-    gradient: 'bg-gradient-to-br from-green-400 to-green-500',
     percentage: 45,
     title: 'Votre équipe est au top',
     description: 'Un climat positif favorise la productivité et l\'innovation. Continuez à cultiver cette dynamique.'
   },
-  { 
-    emoji: '😊', 
+  {
+    value: 'happy',
     label: 'Bien',
     shortDescription: 'Ambiance positive au travail',
-    gradient: 'bg-gradient-to-br from-yellow-300 to-orange-400',
     percentage: 32,
     title: 'L\'ambiance est bonne',
     description: 'Vos collaborateurs se sentent globalement bien. Quelques ajustements peuvent encore améliorer le quotidien.'
   },
-  { 
-    emoji: '😐', 
+  {
+    value: 'neutral',
     label: 'Neutre',
     shortDescription: 'Signaux à surveiller',
-    gradient: 'bg-gradient-to-br from-purple-300 to-purple-400',
     percentage: 15,
     title: 'Une attention nécessaire',
     description: 'Certains signaux neutres méritent d\'être explorés. C\'est le moment d\'écouter vos équipes.'
   },
-  { 
-    emoji: '😔', 
+  {
+    value: 'sad',
     label: 'Difficile',
     shortDescription: 'Action immédiate requise',
-    gradient: 'bg-gradient-to-br from-orange-400 to-orange-500',
     percentage: 6,
     title: 'Agir rapidement',
     description: 'Des collaborateurs expriment des difficultés. Un accompagnement bienveillant est recommandé.'
   },
-  { 
-    emoji: '😢', 
+  {
+    value: 'very_sad',
     label: 'Très difficile',
     shortDescription: 'Intervention urgente',
-    gradient: 'bg-gradient-to-br from-red-400 to-orange-500',
     percentage: 2,
     title: 'Intervention urgente',
     description: 'Ces signaux nécessitent une action immédiate. Contactez vos équipes RH ou de soutien psychologique.'
   }
 ];
 
+// Chaque humeur repeint la section : fond, texte, disque et rayons du soleil
+const moodThemes: Record<MoodValue, { bg: string; fg: string; disc: string; rays: string[] }> = {
+  very_happy: { bg: '#FED94E', fg: INK, disc: PAPER, rays: ['#FA4D52', '#8248FE'] },
+  happy: { bg: '#FF8944', fg: INK, disc: '#FED94E', rays: [INK, PAPER] },
+  neutral: { bg: '#CDB8FF', fg: INK, disc: '#FED94E', rays: ['#8248FE', '#FA4D52'] },
+  sad: { bg: '#5EDDE7', fg: INK, disc: '#FED94E', rays: ['#8248FE', INK] },
+  very_sad: { bg: '#8248FE', fg: PAPER, disc: '#FED94E', rays: [PAPER, '#FF5BBC'] },
+};
+
+const currentMood = computed(() => moods[selectedMoodIndex.value]);
+const currentTheme = computed(() => moodThemes[currentMood.value.value]);
+const isDark = computed(() => currentTheme.value.fg === PAPER);
+
+// Le pourcentage défile jusqu'à sa nouvelle valeur
+const displayedPercentage = ref(currentMood.value.percentage);
+const percentageCounter = { n: currentMood.value.percentage };
+
+watch(selectedMoodIndex, () => {
+  const target = currentMood.value.percentage;
+  if (prefersReducedMotion()) {
+    displayedPercentage.value = target;
+    return;
+  }
+  gsap.to(percentageCounter, {
+    n: target,
+    duration: 1,
+    ease: 'expo.out',
+    overwrite: true,
+    onUpdate: () => {
+      displayedPercentage.value = Math.round(percentageCounter.n);
+    },
+  });
+});
+
+function onMoodKeydown(event: KeyboardEvent, index: number) {
+  const count = moods.length;
+  let next = -1;
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % count;
+  else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index - 1 + count) % count;
+  else if (event.key === 'Home') next = 0;
+  else if (event.key === 'End') next = count - 1;
+  if (next < 0) return;
+  event.preventDefault();
+  selectedMoodIndex.value = next;
+  moodButtons.value[next]?.focus();
+}
+
+// Couleurs reprises du fond de chaque vidéo
 const features = [
   {
-    icon: '💬',
     video: expressionLibreVideo,
     title: 'Expression libre',
     description: 'Vos équipes partagent leur ressenti quotidien en toute confidentialité, sans jugement.',
-    category: 'Communication'
+    category: 'Communication',
+    color: '#FF691C',
+    dark: false,
   },
   {
-    icon: '📊',
     video: insightsVideo,
     title: 'Insights en temps réel',
     description: 'Comprenez instantanément le climat de votre organisation avec des données claires.',
-    category: 'Analytics'
+    category: 'Analytics',
+    color: '#8248FE',
+    dark: true,
   },
   {
-    icon: '🎯',
     video: actionsVideo,
     title: 'Actions ciblées',
     description: 'Identifiez rapidement les signaux faibles et agissez avant que ça devienne critique.',
-    category: 'Action'
+    category: 'Action',
+    color: '#FA4D52',
+    dark: false,
   },
   {
-    icon: '🔒',
     video: anonymatVideo,
     title: 'Anonymat garanti',
     description: 'Architecture pensée pour protéger l\'identité de vos collaborateurs. Toujours.',
-    category: 'Sécurité'
+    category: 'Sécurité',
+    color: '#FED64E',
+    dark: false,
   },
   {
-    icon: '✨',
     video: simpleVideo,
     title: 'Simple d\'utilisation',
     description: 'Pas besoin de formation. Intuitif dès le premier jour, sur mobile et desktop.',
-    category: 'UX/UI'
+    category: 'UX/UI',
+    color: '#FF5BBC',
+    dark: false,
   },
   {
-    icon: '🚀',
     video: deploiementVideo,
     title: 'Déploiement rapide',
     description: 'Opérationnel en quelques minutes. Vos équipes peuvent commencer immédiatement.',
-    category: 'Déploiement'
+    category: 'Déploiement',
+    color: '#FED94E',
+    dark: false,
   }
 ];
 
@@ -766,27 +629,11 @@ const experts = [
   }
 ];
 
-const testimonials = [
-  {
-    name: 'Sophie Durand',
-    role: 'DRH chez Doctolib',
-    text: 'Depuis qu\'on utilise MoodFlow, on a vraiment vu la différence. Les gens osent enfin dire ce qu\'ils ressentent. C\'est devenu un réflexe quotidien.'
-  },
-  {
-    name: 'Thomas Rivière',
-    role: 'CEO chez Alan',
-    text: 'Le retour sur investissement est impressionnant. En 3 mois, on a réduit le turnover de 35% et l\'engagement a explosé.'
-  },
-  {
-    name: 'Marie Leclerc',
-    role: 'Manager chez Blablacar',
-    text: 'L\'interface est tellement simple que tout le monde l\'utilise. Même les plus réticents à la tech. C\'est rare de voir ça.'
-  },
-  {
-    name: 'Alexandre Chen',
-    role: 'Head of People chez Qonto',
-    text: 'MoodFlow nous a permis d\'anticiper des problèmes qu\'on n\'aurait jamais vus autrement. Un vrai game changer.'
-  }
+const stats = [
+  { value: '4.8', label: 'Note App Store' },
+  { value: '10K+', label: 'Entreprises' },
+  { value: '2M+', label: 'Humeurs partagées' },
+  { value: '98%', label: 'Satisfaction' },
 ];
 
 const companyLogos = [
@@ -829,264 +676,123 @@ const goToDemo = () => {
 };
 
 const scrollToFeatures = () => {
-  featuresSection.value?.scrollIntoView({ behavior: 'smooth' });
-};
-
-// Expert carousel functions
-const startExpertCarousel = () => {
-  expertScrollInterval = window.setInterval(() => {
-    if (!expertCarouselPaused.value) {
-      expertScrollPosition.value += expertScrollSpeed;
-      
-      // Reset position when we've scrolled through one set of experts
-      const cardWidth = 256 + 16; // card width (w-64) + margin (mx-2)
-      const totalWidth = cardWidth * experts.length;
-      
-      if (expertScrollPosition.value >= totalWidth) {
-        expertScrollPosition.value = 0;
-      }
-    }
-  }, 16); // ~60fps
-};
-
-const stopExpertCarousel = () => {
-  if (expertScrollInterval) {
-    clearInterval(expertScrollInterval);
-  }
+  scrollToElement(featuresSection.value, -40);
 };
 
 const toggleExpertCarousel = () => {
   expertCarouselPaused.value = !expertCarouselPaused.value;
 };
 
-const getFeatureGradient = (index: number) => {
-  const gradients = [
-    'bg-gradient-to-br from-orange-500 to-orange-600',
-    'bg-gradient-to-br from-purple-500 to-purple-600',
-    'bg-gradient-to-br from-orange-400 to-purple-500',
-    'bg-gradient-to-br from-yellow-400 to-orange-500',
-    'bg-gradient-to-br from-purple-400 to-pink-500',
-    'bg-gradient-to-br from-orange-500 to-yellow-500'
-  ];
-  return gradients[index % gradients.length];
-};
+// Les vidéos ne se chargent et ne jouent que lorsqu'elles sont à l'écran
+let videoObserver: IntersectionObserver | null = null;
 
-// Auto-scroll testimonials
-let testimonialInterval: number;
+function observeVideos() {
+  const videos = rootEl.value?.querySelectorAll<HTMLVideoElement>('video[data-lazy-video]');
+  if (!videos?.length) return;
 
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          isVisible.value = true;
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  if (featuresSection.value) {
-    observer.observe(featuresSection.value);
+  if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
+    videos.forEach((video) => {
+      video.preload = 'metadata';
+      video.load();
+    });
+    return;
   }
 
-  // Auto-scroll testimonials every 5 seconds
-  testimonialInterval = window.setInterval(() => {
-    currentTestimonial.value = (currentTestimonial.value + 1) % testimonials.length;
-  }, 5000);
+  videoObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      }
+    },
+    { threshold: 0.15 },
+  );
+  videos.forEach((video) => videoObserver?.observe(video));
+}
 
-  // Start expert carousel
-  startExpertCarousel();
+let ctx: gsap.Context | null = null;
 
-  onUnmounted(() => {
-    observer.disconnect();
-    if (testimonialInterval) {
-      clearInterval(testimonialInterval);
-    }
-    stopExpertCarousel();
-  });
+onMounted(() => {
+  observeVideos();
+  if (prefersReducedMotion()) return;
+
+  ctx = gsap.context(() => {
+    // Entrée du soleil
+    gsap.from(heroSunInner.value, {
+      scale: 0.5,
+      rotate: -80,
+      opacity: 0,
+      duration: 1.9,
+      ease: 'expo.out',
+      delay: 0.1,
+    });
+
+    // Le soleil descend doucement quand on quitte le hero
+    gsap.to(heroSunParallax.value, {
+      yPercent: 22,
+      scale: 0.88,
+      ease: 'none',
+      scrollTrigger: { trigger: heroSection.value, start: 'top top', end: 'bottom top', scrub: true },
+    });
+
+    // Cartes empilées : la carte recouverte recule et s'assombrit
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 768px)', () => {
+      const cards = gsap.utils.toArray<HTMLElement>('.feature-card');
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        if (!next) return;
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: next,
+              start: 'top bottom',
+              end: `top ${100 + (i + 1) * 18}px`,
+              scrub: true,
+            },
+          })
+          .to(card.querySelector('.feature-inner'), { scale: 0.9, ease: 'none' }, 0)
+          .to(card.querySelector('.feature-shade'), { opacity: 0.35, ease: 'none' }, 0);
+      });
+    });
+
+    // Lever de soleil sur la section finale
+    gsap.fromTo(
+      sunriseEl.value,
+      { yPercent: 40, rotate: -30 },
+      {
+        yPercent: 0,
+        rotate: 0,
+        ease: 'none',
+        scrollTrigger: { trigger: ctaSection.value, start: 'top bottom', end: 'bottom bottom', scrub: true },
+      },
+    );
+  }, rootEl.value ?? undefined);
+});
+
+onUnmounted(() => {
+  ctx?.revert();
+  videoObserver?.disconnect();
+  gsap.killTweensOf(percentageCounter);
 });
 </script>
 
 <style scoped>
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+.swap-enter-active,
+.swap-leave-active {
+  transition:
+    opacity 0.45s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo);
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.swap-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 1.25rem, 0);
 }
 
-@keyframes gradient {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+.swap-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -0.75rem, 0);
 }
-
-@keyframes gradient-text {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1s;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-.animation-delay-5000 {
-  animation-delay: 5s;
-}
-
-.animate-scroll {
-  animation: scroll 40s linear infinite;
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 3s ease infinite;
-}
-
-.animate-gradient-text {
-  background-size: 200% 200%;
-  animation: gradient-text 4s ease-in-out infinite;
-}
-
-.animate-gradient-flow {
-  background-size: 300% 300%;
-  animation: gradientFlow 3s ease infinite;
-}
-
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-20px) scale(1.1);
-    opacity: 1;
-  }
-}
-
-@keyframes orbit {
-  0% {
-    transform: rotate(0deg) translateX(60px) rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg) translateX(60px) rotate(-360deg);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-orbit {
-  animation: orbit 8s linear infinite;
-}
-
-
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Enhanced visibility styles */
-.hover\:shadow-3xl:hover {
-  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* Improved focus states */
-.focus\:ring-orange-300:focus {
-  --tw-ring-color: rgb(253 186 116 / 0.5);
-}
-
-/* Enhanced button interactions */
-.group:hover .group-hover\:scale-110 {
-  transform: scale(1.1);
-}
-
-/* Better contrast for accessibility */
-.text-neutral-600 {
-  color: rgb(82 82 91);
-}
-
-.text-neutral-700 {
-  color: rgb(64 64 70);
-}
-
-/* Enhanced drop shadows */
-.drop-shadow-lg {
-  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
-}
-
-.drop-shadow-sm {
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.05));
-}
-
 </style>

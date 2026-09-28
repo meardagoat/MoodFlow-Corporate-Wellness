@@ -1,86 +1,94 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 safe-top safe-bottom">
-    <div class="max-w-6xl mx-auto px-4 py-6 sm:py-8">
-      <div class="mb-8 sm:mb-12">
-        <h1 class="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow mb-4">Anonymous Chat</h1>
-        <p class="text-lg sm:text-xl text-gray-600 max-w-2xl">Connect with colleagues anonymously and share your thoughts in a safe space</p>
-        
-        <!-- Chat benefits -->
-        <div class="flex flex-wrap items-center gap-6 mt-6">
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-            <span class="text-sm font-medium text-gray-600">100% Anonymous</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-            <span class="text-sm font-medium text-gray-600">Safe Space</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-            <span class="text-sm font-medium text-gray-600">Real-time</span>
-          </div>
-        </div>
-      </div>
+  <div class="min-h-screen safe-top safe-bottom">
+    <div class="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+      <header class="mb-8 sm:mb-10">
+        <h1 class="display text-display-md">Anonymous Chat</h1>
+        <p class="mt-3 max-w-2xl text-lg text-ink/65">Connect with colleagues anonymously and share your thoughts in a safe space</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="md:col-span-1">
-          <div class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 overflow-hidden">
-              <div class="p-6 bg-gradient-to-r from-orange-500 to-purple-600 text-white flex justify-between items-center">
-              <h2 class="text-xl font-bold">Conversations</h2>
+        <!-- Chat benefits -->
+        <ul class="mt-6 flex flex-wrap gap-2">
+          <li class="chip">
+            <span class="h-2.5 w-2.5 rounded-full bg-sun" />
+            100% Anonymous
+          </li>
+          <li class="chip">
+            <span class="h-2.5 w-2.5 rounded-full bg-aqua" />
+            Safe Space
+          </li>
+          <li class="chip">
+            <span class="h-2.5 w-2.5 rounded-full bg-grape" />
+            Real-time
+          </li>
+        </ul>
+      </header>
+
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <!-- Conversations -->
+        <div class="md:col-span-1" :class="selectedConversationId ? 'hidden md:block' : ''">
+          <div class="flex h-[min(640px,calc(100svh-12rem))] min-h-[420px] flex-col overflow-hidden rounded-[2rem] border border-ink/10 bg-white">
+            <div class="flex items-center justify-between bg-grape px-5 py-4 text-paper">
+              <h2 class="display text-2xl tracking-[-0.04em]">Conversations</h2>
               <button
+                type="button"
                 @click="showNewChatModal = true"
-                class="md:hidden bg-white/20 p-2 rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110"
+                class="grid h-10 w-10 place-items-center rounded-full bg-paper/15 transition-colors hover:bg-paper hover:text-ink md:hidden"
+                aria-label="New Chat"
               >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
+                <Icon name="plus" class="h-5 w-5" />
               </button>
             </div>
 
-            <div v-if="loadingConversations" class="p-8 text-center text-gray-500">
+            <div v-if="loadingConversations" class="grid flex-1 place-items-center p-8 text-ink/50" role="status">
               Loading...
             </div>
 
-            <div v-else-if="conversations.length === 0" class="p-8 text-center">
-              <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span class="text-2xl">💬</span>
-              </div>
-              <p class="text-gray-500 text-base mb-6">No conversations yet</p>
+            <div v-else-if="conversations.length === 0" class="flex flex-1 flex-col items-center justify-center p-8 text-center">
+              <MoodFace mood="sleepy" class="h-16 w-16" />
+              <p class="mt-5 text-ink/60">No conversations yet</p>
               <button
+                type="button"
                 @click="showNewChatModal = true"
-                class="px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                class="btn btn-ink mt-6"
               >
                 Start Chat
               </button>
             </div>
 
-            <div v-else class="divide-y divide-gray-100/50">
+            <div v-else class="flex-1 divide-y divide-ink/[0.07] overflow-y-auto">
               <button
                 v-for="conv in conversations"
                 :key="conv.id"
+                type="button"
                 @click="selectConversation(conv.id)"
+                :aria-current="selectedConversationId === conv.id ? 'true' : undefined"
                 :class="[
-                  'w-full p-5 text-left hover:bg-gradient-to-r hover:from-orange-50 hover:to-purple-50 transition-all duration-300 hover:scale-[1.02]',
-                  selectedConversationId === conv.id ? 'bg-gradient-to-r from-orange-50 to-purple-50 border-r-4 border-orange-500' : ''
+                  'relative w-full px-5 py-4 text-left transition-colors duration-300',
+                  selectedConversationId === conv.id ? 'bg-sun/40' : 'hover:bg-paper-deep/60'
                 ]"
               >
+                <span
+                  v-if="selectedConversationId === conv.id"
+                  class="absolute inset-y-3 left-0 w-1 rounded-r-full bg-ink"
+                  aria-hidden="true"
+                />
                 <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold relative shadow-lg">
+                  <div class="display relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-lilac text-lg">
                     A
-                    <span 
-                      v-if="conv.unread_count && conv.unread_count > 0" 
-                      class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold shadow-lg">
+                    <span
+                      v-if="conv.unread_count && conv.unread_count > 0"
+                      class="absolute -right-1 -top-1 grid h-6 min-w-6 place-items-center rounded-full bg-coral px-1.5 font-sans text-xs font-bold text-ink ring-2 ring-white"
+                    >
                       {{ conv.unread_count > 9 ? '9+' : conv.unread_count }}
                     </span>
                   </div>
-                  <div class="flex-1 min-w-0">
-                    <div class="flex justify-between items-center">
-                      <p class="font-semibold text-gray-900 truncate">Anonymous User</p>
-                      <p class="text-xs text-gray-500">
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center justify-between gap-2">
+                      <p class="truncate font-semibold">Anonymous User</p>
+                      <p class="shrink-0 font-mono text-[11px] text-ink/45">
                         {{ formatDate(conv.last_message_at) }}
                       </p>
                     </div>
-                    <p class="text-sm text-gray-500 truncate">
+                    <p class="truncate text-sm text-ink/55">
                       {{ getLastMessagePreview(conv.id) }}
                     </p>
                   </div>
@@ -88,59 +96,62 @@
               </button>
             </div>
 
-            <div class="p-6 border-t border-gray-100/50">
+            <div class="border-t border-ink/10 p-4">
               <button
+                type="button"
                 @click="showNewChatModal = true"
-                class="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-purple-600 text-white rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+                class="btn btn-ink w-full"
               >
-                💬 New Chat
+                <RollText text="💬 New Chat" />
               </button>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-2">
-          <div v-if="!selectedConversationId" class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 h-[600px] flex items-center justify-center">
-            <div class="text-center text-gray-500">
-              <div class="w-24 h-24 bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                <span class="text-4xl">💬</span>
-              </div>
-              <p class="text-xl font-semibold mb-3">Select a conversation to start chatting</p>
-              <p class="text-base mb-6">Or start a new conversation to connect with colleagues</p>
+        <!-- Discussion -->
+        <div class="md:col-span-2" :class="!selectedConversationId ? 'hidden md:block' : ''">
+          <div
+            v-if="!selectedConversationId"
+            class="relative flex h-[min(640px,calc(100svh-12rem))] min-h-[420px] items-center justify-center overflow-hidden rounded-[2rem] bg-paper-deep/70 p-8"
+          >
+            <div class="relative z-10 max-w-sm text-center">
+              <SunMark class="mx-auto h-32 w-32" state="sleepy" :ray-colors="['#8248FE', '#FA4D52']" />
+              <p class="display mt-8 text-3xl leading-tight tracking-[-0.04em]">Select a conversation to start chatting</p>
+              <p class="mt-3 text-ink/60">Or start a new conversation to connect with colleagues</p>
               <button
+                type="button"
                 @click="showNewChatModal = true"
-                class="bg-gradient-to-r from-orange-500 to-purple-600 text-white px-6 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 md:hidden"
+                class="btn btn-ink mt-6 md:hidden"
               >
                 Start New Chat
               </button>
             </div>
           </div>
 
-          <div v-else class="bg-white rounded-xl shadow h-[600px] flex flex-col">
-            <div class="p-4 border-b border-gray-200">
-              <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                  <button 
-                    class="md:hidden p-2 rounded-full hover:bg-gray-100 transition"
-                    @click="selectedConversationId = ''"
-                  >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                  </button>
-                  <div class="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white font-semibold">
-                    A
-                  </div>
-                  <div>
-                    <p class="font-semibold text-gray-900">Anonymous User</p>
-                    <p class="text-xs text-gray-500">All messages are anonymous</p>
-                  </div>
-                </div>
+          <div v-else class="flex h-[min(640px,calc(100svh-12rem))] min-h-[420px] flex-col overflow-hidden rounded-[2rem] border border-ink/10 bg-white">
+            <div class="flex items-center gap-3 border-b border-ink/10 px-4 py-3.5 sm:px-5">
+              <button
+                type="button"
+                class="grid h-10 w-10 place-items-center rounded-full transition-colors hover:bg-ink/[0.06] md:hidden"
+                @click="selectedConversationId = ''"
+                aria-label="Back"
+              >
+                <Icon name="chevron-left" class="h-5 w-5" />
+              </button>
+              <div class="display grid h-11 w-11 place-items-center rounded-full bg-lilac text-lg">
+                A
+              </div>
+              <div>
+                <p class="font-semibold">Anonymous User</p>
+                <p class="flex items-center gap-1.5 text-xs text-ink/55">
+                  <Icon name="lock" class="h-3 w-3" />
+                  All messages are anonymous
+                </p>
               </div>
             </div>
 
-            <div ref="messagesContainer" class="flex-1 overflow-y-auto p-4 space-y-4">
-              <div v-if="loadingMessages" class="text-center text-gray-500">
+            <div ref="messagesContainer" class="flex-1 space-y-3 overflow-y-auto bg-paper/60 p-4 sm:p-5" aria-live="polite">
+              <div v-if="loadingMessages" class="text-center text-sm text-ink/50" role="status">
                 Loading messages...
               </div>
 
@@ -154,17 +165,17 @@
               >
                 <div
                   :class="[
-                    'max-w-[70%] rounded-2xl px-4 py-2',
+                    'max-w-[78%] px-4 py-2.5 sm:max-w-[70%]',
                     message.sender_id === currentProfile?.id
-                      ? 'bg-primary-600 text-white'
-                      : 'bg-gray-100 text-gray-900'
+                      ? 'rounded-3xl rounded-br-lg bg-grape text-paper'
+                      : 'rounded-3xl rounded-bl-lg border border-ink/10 bg-white text-ink'
                   ]"
                 >
-                  <p class="break-words">{{ message.message }}</p>
+                  <p class="break-words leading-relaxed">{{ message.message }}</p>
                   <p
                     :class="[
-                      'text-xs mt-1',
-                      message.sender_id === currentProfile?.id ? 'text-primary-100' : 'text-gray-500'
+                      'mt-1 font-mono text-[10px]',
+                      message.sender_id === currentProfile?.id ? 'text-paper/65' : 'text-ink/45'
                     ]"
                   >
                     {{ formatTime(message.created_at) }}
@@ -173,20 +184,22 @@
               </div>
             </div>
 
-            <div class="p-4 border-t border-gray-200">
+            <div class="border-t border-ink/10 p-3 sm:p-4">
               <form @submit.prevent="sendMessage" class="flex gap-2">
                 <input
                   v-model="newMessage"
                   type="text"
                   placeholder="Type a message..."
-                  class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  aria-label="Type a message..."
+                  class="field min-w-0 flex-1 rounded-full"
                 />
                 <button
                   type="submit"
                   :disabled="!newMessage.trim() || sending"
-                  class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="btn btn-ink px-5"
                 >
-                  Send
+                  <span class="hidden sm:inline">Send</span>
+                  <Icon name="send" class="h-4 w-4" />
                 </button>
               </form>
             </div>
@@ -195,50 +208,67 @@
       </div>
     </div>
 
-    <div
-      v-if="showNewChatModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-      @click.self="showNewChatModal = false"
-    >
-      <div class="bg-white rounded-xl shadow-xl p-6 max-w-md w-full">
-        <h3 class="text-xl font-semibold text-gray-900 mb-4">Start New Chat</h3>
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition duration-300 ease-out-expo"
+        leave-active-class="transition duration-200 ease-in"
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="showNewChatModal"
+          class="modal-backdrop"
+          @click.self="showNewChatModal = false"
+        >
+          <div class="modal-panel p-6 sm:p-8" role="dialog" aria-modal="true" aria-labelledby="new-chat-title">
+            <div class="flex items-center gap-4">
+              <span class="grid h-12 w-12 place-items-center rounded-full bg-grape text-paper">
+                <Icon name="message" class="h-5 w-5" />
+              </span>
+              <h3 id="new-chat-title" class="display text-3xl tracking-[-0.04em]">Start New Chat</h3>
+            </div>
 
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Select a colleague
-          </label>
-          <select
-            v-model="selectedUserId"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-          >
-            <option value="">Choose...</option>
-            <option
-              v-for="user in availableUsers"
-              :key="user.id"
-              :value="user.id"
-            >
-              {{ user.service }} - Anonymous User
-            </option>
-          </select>
-        </div>
+            <div class="mb-8 mt-8">
+              <label for="new-chat-user" class="field-label">
+                Select a colleague
+              </label>
+              <select
+                id="new-chat-user"
+                v-model="selectedUserId"
+                class="field"
+              >
+                <option value="">Choose...</option>
+                <option
+                  v-for="user in availableUsers"
+                  :key="user.id"
+                  :value="user.id"
+                >
+                  {{ user.service }} - Anonymous User
+                </option>
+              </select>
+            </div>
 
-        <div class="flex gap-3">
-          <button
-            @click="showNewChatModal = false"
-            class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition"
-          >
-            Cancel
-          </button>
-          <button
-            @click="startNewChat"
-            :disabled="!selectedUserId || creating"
-            class="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {{ creating ? 'Creating...' : 'Start Chat' }}
-          </button>
+            <div class="flex gap-3">
+              <button
+                type="button"
+                @click="showNewChatModal = false"
+                class="btn btn-outline flex-1"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                @click="startNewChat"
+                :disabled="!selectedUserId || creating"
+                class="btn btn-ink flex-1"
+              >
+                {{ creating ? 'Creating...' : 'Start Chat' }}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -247,6 +277,10 @@ import { ref, onMounted, nextTick, watch } from 'vue';
 import { supabase } from '../lib/supabase';
 import { currentProfile } from '../lib/auth';
 import type { Database } from '../lib/database.types';
+import MoodFace from '../components/brand/MoodFace.vue';
+import SunMark from '../components/brand/SunMark.vue';
+import Icon from '../components/ui/Icon.vue';
+import RollText from '../components/ui/RollText.vue';
 
 // Function to show notifications
 function showNotification(title: string, message: string) {
@@ -312,13 +346,13 @@ async function loadConversations() {
         .eq('conversation_id', conv.id)
         .eq('read', false)
         .neq('sender_id', currentProfile.value?.id);
-      
+
       return {
         ...conv,
         unread_count: count || 0
       };
     }));
-    
+
     conversations.value = conversationsWithUnread;
   }
 
@@ -359,7 +393,7 @@ async function loadAvailableUsers() {
 async function selectConversation(conversationId: string) {
   selectedConversationId.value = conversationId;
   await loadMessages(conversationId);
-  
+
   // Marquer tous les messages comme lus lorsqu'une conversation est sélectionnée
   if (currentProfile.value) {
     await supabase
@@ -367,7 +401,7 @@ async function selectConversation(conversationId: string) {
       .update({ read: true })
       .eq('conversation_id', conversationId)
       .neq('sender_id', currentProfile.value.id);
-    
+
     // Recharger les conversations pour mettre à jour les compteurs
     await loadConversations();
   }
@@ -447,26 +481,26 @@ function scrollToBottom() {
 function getLastMessagePreview(conversationId: string): string {
   // Trouver les messages de cette conversation
   const conversationMessages = messages.value.filter(msg => msg.conversation_id === conversationId);
-  
+
   // Si aucun message, retourner un texte par défaut
   if (conversationMessages.length === 0) {
     return "Démarrer une nouvelle conversation...";
   }
-  
+
   // Récupérer le dernier message
   const lastMessage = conversationMessages[conversationMessages.length - 1];
-  
+
   // Vérifier si c'est l'utilisateur actuel qui a envoyé le message
   const isCurrentUser = lastMessage.sender_id === currentProfile.value?.id;
-  
+
   // Formater le préfixe en fonction de l'expéditeur
   const prefix = isCurrentUser ? "Vous: " : "";
-  
+
   // Tronquer le message s'il est trop long
-  const messageText = lastMessage.message.length > 25 
-    ? lastMessage.message.substring(0, 25) + "..." 
+  const messageText = lastMessage.message.length > 25
+    ? lastMessage.message.substring(0, 25) + "..."
     : lastMessage.message;
-  
+
   return prefix + messageText;
 }
 
@@ -484,11 +518,11 @@ onMounted(async () => {
         table: 'chat_messages',
       }, async (payload) => {
         const newMessage = payload.new as Message;
-        
+
         // Si le message est pour la conversation actuellement ouverte
         if (selectedConversationId.value === newMessage.conversation_id) {
           await loadMessages(selectedConversationId.value);
-          
+
           // Marquer comme lu si ce n'est pas l'utilisateur actuel qui l'a envoyé
           if (newMessage.sender_id !== currentProfile.value?.id) {
             await supabase
@@ -496,11 +530,11 @@ onMounted(async () => {
               .update({ read: true })
               .eq('id', newMessage.id);
           }
-        } 
+        }
         // Sinon, afficher une notification
         else if (newMessage.sender_id !== currentProfile.value?.id) {
           showNotification('Nouveau message', 'Vous avez reçu un nouveau message');
-          
+
           // Recharger les conversations pour mettre à jour les compteurs
           await loadConversations();
         }

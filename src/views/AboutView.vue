@@ -1,331 +1,265 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- Home Button -->
-    <div class="fixed top-6 left-6 z-50">
-      <router-link to="/" 
-                   class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-white/20">
-        <span class="text-2xl">🏠</span>
-      </router-link>
-    </div>
+  <div class="overflow-x-clip">
+    <PageHero
+      label="À propos"
+      subtitle="Notre mission est de fournir à chaque entreprise un accès à un support continu pour le bien-être mental de ses équipes."
+      :indicators="['Bien-être mental', 'Support continu', 'Équipes saines']"
+      tone="#FFE3D8"
+      mood="very_happy"
+    >
+      À propos de <span class="accent text-coral">MoodFlow</span>
+    </PageHero>
 
-    <!-- Hero Section - Enhanced Headspace Style -->
-    <section class="relative py-24 md:py-40 px-4 md:px-6 bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 overflow-hidden">
-      <!-- Background decorative elements -->
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
-        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200/30 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s"></div>
-      </div>
-      
-      <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-20">
-          <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-8 leading-tight">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              À propos de MoodFlow
-            </span>
-          </h1>
-          <p class="text-2xl md:text-3xl text-neutral-600 max-w-5xl mx-auto leading-relaxed mb-12">
-            Notre mission est de fournir à chaque entreprise un accès à un support continu pour le bien-être mental de ses équipes.
-          </p>
-          
-          <!-- Mission indicators -->
-          <div class="flex flex-wrap justify-center items-center gap-8 text-neutral-500">
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-              <span class="text-lg font-medium">Bien-être mental</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span class="text-lg font-medium">Support continu</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span class="text-lg font-medium">Équipes saines</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Who we are - Enhanced -->
-    <section class="py-24 md:py-40 px-4 md:px-6 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-16 md:gap-20 items-center">
-          <div>
-            <h2 class="text-5xl md:text-6xl font-bold mb-8">
-              <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-                Qui nous sommes
-              </span>
-            </h2>
-            <p class="text-xl text-neutral-600 leading-relaxed mb-8">
-              Considérez MoodFlow comme votre guide de confiance pour un meilleur bien-être en entreprise. 
-              Nous sommes là pour vous, quand vous en avez besoin, où que vous soyez, vous aidant à traverser 
+    <!-- Qui nous sommes -->
+    <section class="py-24 md:py-40">
+      <div class="shell grid gap-16 lg:grid-cols-12 lg:gap-12">
+        <div class="lg:col-span-7">
+          <p class="label text-ink/55">(01)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Qui nous sommes</h2>
+          <div class="mt-10 max-w-2xl space-y-6 text-pretty text-xl leading-relaxed text-ink/80">
+            <p v-reveal>
+              Considérez MoodFlow comme votre guide de confiance pour un meilleur bien-être en entreprise.
+              Nous sommes là pour vous, quand vous en avez besoin, où que vous soyez, vous aidant à traverser
               les moments difficiles et à trouver la joie dans chaque journée de travail.
             </p>
-            <p class="text-xl text-neutral-600 leading-relaxed mb-8">
-              Notre équipe d'experts va des cliniciens en santé mentale aux développeurs primés, 
+            <p v-reveal="0.1">
+              Notre équipe d'experts va des cliniciens en santé mentale aux développeurs primés,
               travaillant ensemble pour aider des milliers d'entreprises dans le monde à être plus saines et productives.
             </p>
-            
-            <!-- Key stats -->
-            <div class="grid grid-cols-2 gap-6 mt-12">
-              <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl">
-                <div class="text-3xl font-bold text-orange-600 mb-2">1000+</div>
-                <div class="text-neutral-600">Entreprises</div>
-              </div>
-              <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl">
-                <div class="text-3xl font-bold text-purple-600 mb-2">50K+</div>
-                <div class="text-neutral-600">Employés</div>
-              </div>
-            </div>
           </div>
-          
-          <div class="relative">
-            <div class="group relative bg-gradient-to-br from-orange-100 to-purple-100 rounded-3xl p-12 h-96 flex items-center justify-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div class="absolute inset-0 bg-gradient-to-br from-orange-200/50 to-purple-200/50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div class="relative z-10 text-center">
-                <div class="w-40 h-40 bg-gradient-to-br from-orange-500 to-purple-600 rounded-full flex items-center justify-center text-white text-7xl font-bold mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-xl">
-                  💙
-                </div>
-                <h3 class="text-3xl font-bold text-neutral-900 mb-3">Notre Mission</h3>
-                <p class="text-xl text-neutral-600">Transformer le bien-être en entreprise</p>
-              </div>
+
+          <dl class="mt-14 grid max-w-xl grid-cols-2 gap-6">
+            <div v-reveal class="border-t-2 border-coral pt-5">
+              <dd class="display text-[clamp(3rem,6vw,5rem)] leading-none tracking-[-0.05em]"><CountUp value="1000+" /></dd>
+              <dt class="label mt-4 text-ink/60">Entreprises</dt>
+            </div>
+            <div v-reveal="0.1" class="border-t-2 border-grape pt-5">
+              <dd class="display text-[clamp(3rem,6vw,5rem)] leading-none tracking-[-0.05em]"><CountUp value="50K+" /></dd>
+              <dt class="label mt-4 text-ink/60">Employés</dt>
+            </div>
+          </dl>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div
+            v-reveal="{ variant: 'scale' }"
+            class="group relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-[2.5rem] bg-sun p-8 md:p-10"
+          >
+            <p class="label">Notre Mission</p>
+            <SunMark
+              class="mx-auto w-[70%] transition-transform duration-1000 ease-out-expo group-hover:scale-105"
+              state="very_happy"
+              disc="#FFF8EF"
+              track
+            />
+            <div>
+              <h3 class="display text-display-sm">Notre Mission</h3>
+              <p class="mt-3 text-lg text-ink/75">Transformer le bien-être en entreprise</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- What we do -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-          <div class="relative order-2 lg:order-1">
-            <div class="bg-gradient-to-br from-purple-100 to-orange-100 rounded-3xl p-8 h-96 flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-32 h-32 bg-gradient-to-br from-purple-500 to-orange-600 rounded-full flex items-center justify-center text-white text-6xl font-bold mx-auto mb-6">
-                  🎯
-                </div>
-                <h3 class="text-2xl font-bold text-neutral-900 mb-2">Notre Approche</h3>
-                <p class="text-neutral-600">Solutions éprouvées et personnalisées</p>
-              </div>
+    <!-- Ce que nous faisons -->
+    <section class="bg-paper-deep/60 py-24 md:py-40">
+      <div class="shell grid gap-16 lg:grid-cols-12 lg:items-center lg:gap-12">
+        <div class="order-2 lg:order-1 lg:col-span-5">
+          <div
+            v-reveal="{ variant: 'scale' }"
+            class="relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-[2.5rem] bg-lilac p-8 md:p-10"
+          >
+            <p class="label">Notre Approche</p>
+            <div class="relative mx-auto grid w-[62%] place-items-center">
+              <div class="absolute inset-0 rounded-full border-2 border-dashed border-ink/25 motion-safe:animate-spin-slower" />
+              <div class="absolute inset-[16%] rounded-full bg-grape" />
+              <div class="absolute inset-[34%] rounded-full bg-coral" />
+              <div class="absolute inset-[45%] rounded-full bg-sun" />
+              <div class="aspect-square w-full" />
+            </div>
+            <div>
+              <h3 class="display text-display-sm">Notre Approche</h3>
+              <p class="mt-3 text-lg text-ink/75">Solutions éprouvées et personnalisées</p>
             </div>
           </div>
-          <div class="order-1 lg:order-2">
-            <h2 class="text-4xl md:text-5xl font-bold mb-8">
-              <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-                Ce que nous faisons
-              </span>
-            </h2>
-            <p class="text-lg text-neutral-600 leading-relaxed mb-8">
-              Grâce à des outils d'expression libre et de mindfulness basés sur des preuves, 
-              du coaching en santé mentale et des insights en temps réel, MoodFlow vous aide 
-              à créer des habitudes transformatrices pour soutenir le bien-être mental de vos équipes 
-              et trouver un environnement de travail plus sain et plus heureux.
-            </p>
-            <div class="space-y-4">
-              <div class="flex items-center gap-4">
-                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
-                <span class="text-neutral-700">Expression libre et anonyme</span>
-              </div>
-              <div class="flex items-center gap-4">
-                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
-                <span class="text-neutral-700">Insights en temps réel</span>
-              </div>
-              <div class="flex items-center gap-4">
-                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
-                <span class="text-neutral-700">Actions ciblées et personnalisées</span>
-              </div>
-            </div>
-          </div>
+        </div>
+
+        <div class="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
+          <p class="label text-ink/55">(02)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Ce que nous faisons</h2>
+          <p v-reveal class="mt-10 text-pretty text-xl leading-relaxed text-ink/80">
+            Grâce à des outils d'expression libre et de mindfulness basés sur des preuves,
+            du coaching en santé mentale et des insights en temps réel, MoodFlow vous aide
+            à créer des habitudes transformatrices pour soutenir le bien-être mental de vos équipes
+            et trouver un environnement de travail plus sain et plus heureux.
+          </p>
+          <ol class="mt-12 border-t border-ink/15">
+            <li
+              v-for="(item, i) in approach"
+              :key="item"
+              v-reveal="i * 0.08"
+              class="flex items-baseline gap-6 border-b border-ink/15 py-5"
+            >
+              <span class="label w-8 text-coral">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span class="font-display text-2xl font-bold tracking-[-0.025em]">{{ item }}</span>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- How we do it -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Comment nous procédons
-            </span>
-          </h2>
-          <p class="text-xl text-neutral-600 max-w-3xl mx-auto">
+    <!-- Comment nous procédons -->
+    <section class="py-24 md:py-40">
+      <div class="shell">
+        <div class="grid gap-8 md:grid-cols-12 md:items-end">
+          <div class="md:col-span-7">
+            <p class="label text-ink/55">(03)</p>
+            <h2 v-split class="display mt-6 text-display-lg">Comment nous procédons</h2>
+          </div>
+          <p v-reveal class="text-pretty text-xl leading-snug text-ink/75 md:col-span-4 md:col-start-9">
             Nos quatre valeurs guident nos décisions et notre façon d'opérer au quotidien
           </p>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              🎯
+
+        <div class="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <article
+            v-for="(value, i) in values"
+            :key="value.title"
+            v-reveal="i * 0.08"
+            class="group flex min-h-[22rem] flex-col rounded-[2rem] p-7 transition-transform duration-700 ease-out-expo hover:-translate-y-2 hover:rotate-[-1deg]"
+            :style="{ backgroundColor: value.color }"
+          >
+            <div class="flex items-start justify-between">
+              <span class="display text-6xl leading-none tracking-[-0.06em]">{{ String(i + 1).padStart(2, '0') }}</span>
+              <Icon :name="value.icon" class="h-7 w-7 transition-transform duration-700 ease-out-expo group-hover:rotate-12" />
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Faire compter la mission</h3>
-            <p class="text-neutral-600">Chaque décision est guidée par notre mission de transformer le bien-être en entreprise.</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              🔄
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Itérer vers l'excellence</h3>
-            <p class="text-neutral-600">Nous améliorons constamment nos solutions basées sur vos retours.</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-purple-500 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              🎯
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Assumer le résultat</h3>
-            <p class="text-neutral-600">Nous nous engageons pleinement dans le succès de votre transformation.</p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-orange-500 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-6">
-              💙
-            </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-4">Se connecter avec courage</h3>
-            <p class="text-neutral-600">Nous créons des liens authentiques avec nos clients et leurs équipes.</p>
-          </div>
+            <h3 class="display mt-auto text-2xl leading-tight tracking-[-0.03em]">{{ value.title }}</h3>
+            <p class="mt-3 text-pretty text-ink/75">{{ value.description }}</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-            <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
-              MoodFlow en chiffres
-            </span>
-          </h2>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-12 text-center">
-          <div>
-            <div class="text-6xl md:text-7xl font-bold text-white mb-4">200+</div>
-            <div class="text-xl text-white/90">Entreprises dans le monde</div>
+    <!-- MoodFlow en chiffres -->
+    <section class="relative mx-3 overflow-hidden rounded-[2.5rem] bg-ink py-24 text-paper md:mx-5 md:rounded-[3.5rem] md:py-36">
+      <div class="shell">
+        <p class="label text-paper/55">(04)</p>
+        <h2 v-split class="display mt-6 text-display-lg">MoodFlow en chiffres</h2>
+        <dl class="mt-16 grid gap-y-12 md:grid-cols-3 md:gap-x-8">
+          <div v-for="(figure, i) in figures" :key="figure.label" v-reveal="i * 0.1" class="flex flex-col-reverse border-t border-paper/20 pt-6">
+            <dt class="label mt-5 text-paper/60">{{ figure.label }}</dt>
+            <dd class="display text-[clamp(4rem,10vw,9rem)] leading-[0.82] tracking-[-0.06em]" :style="{ color: figure.color }">
+              <CountUp :value="figure.value" />
+            </dd>
           </div>
-          
-          <div>
-            <div class="text-6xl md:text-7xl font-bold text-white mb-4">100K+</div>
-            <div class="text-xl text-white/90">Vies transformées</div>
-          </div>
-          
-          <div>
-            <div class="text-6xl md:text-7xl font-bold text-white mb-4">70K+</div>
-            <div class="text-xl text-white/90">Téléchargements d'app</div>
-          </div>
-        </div>
+        </dl>
       </div>
     </section>
 
-    <!-- Evidence-based outcomes -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Résultats basés sur des preuves
-            </span>
-          </h2>
+    <!-- Résultats basés sur des preuves -->
+    <section class="py-24 md:py-40">
+      <div class="shell grid gap-14 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <p class="label text-ink/55">(05)</p>
+          <h2 v-split class="display mt-6 text-display-lg">Résultats basés sur des preuves</h2>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="text-5xl font-bold text-orange-600 mb-2">32%</div>
-            <div class="text-neutral-600">Réduction du stress</div>
-          </div>
-          
-          <div class="text-center">
-            <div class="text-5xl font-bold text-orange-600 mb-2">14%</div>
-            <div class="text-neutral-600">Amélioration de l'engagement</div>
-          </div>
-          
-          <div class="text-center">
-            <div class="text-5xl font-bold text-orange-600 mb-2">59%</div>
-            <div class="text-neutral-600">Satisfaction des employés</div>
-          </div>
-          
-          <div class="text-center">
-            <div class="text-5xl font-bold text-orange-600 mb-2">70%</div>
-            <div class="text-neutral-600">Rétention des talents</div>
-          </div>
-        </div>
+        <ul class="lg:col-span-7">
+          <li
+            v-for="(outcome, i) in outcomes"
+            :key="outcome.label"
+            v-reveal="i * 0.08"
+            class="outcome border-b border-ink/15 py-6 first:pt-0"
+          >
+            <div class="flex items-end justify-between gap-6">
+              <span class="text-lg font-medium md:text-xl">{{ outcome.label }}</span>
+              <span class="display text-5xl leading-none tracking-[-0.05em] md:text-6xl">{{ outcome.value }}%</span>
+            </div>
+            <div class="mt-4 h-2.5 overflow-hidden rounded-full bg-ink/[0.07]">
+              <div
+                class="outcome-bar h-full origin-left rounded-full"
+                :style="{ width: `${outcome.value}%`, backgroundColor: outcome.color, transitionDelay: `${0.25 + i * 0.08}s` }"
+              />
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- Leadership Team -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-neutral-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Notre équipe dirigeante
-            </span>
-          </h2>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div v-for="(member, index) in leadership" :key="index" class="text-center">
-            <div class="w-32 h-32 bg-gradient-to-br from-orange-400 to-purple-500 rounded-full flex items-center justify-center text-white text-4xl font-bold mx-auto mb-6">
+    <!-- Équipe dirigeante -->
+    <section class="bg-paper-deep/60 py-24 md:py-40">
+      <div class="shell">
+        <p class="label text-ink/55">(06)</p>
+        <h2 v-split class="display mt-6 text-display-lg">Notre équipe dirigeante</h2>
+        <div class="mt-16 grid gap-4 md:grid-cols-3">
+          <article
+            v-for="(member, index) in leadership"
+            :key="index"
+            v-reveal="index * 0.1"
+            class="rounded-[2rem] bg-paper p-7 md:p-8"
+          >
+            <div
+              class="display grid h-24 w-24 place-items-center rounded-full text-5xl"
+              :style="{ backgroundColor: avatarColors[index % avatarColors.length].bg, color: avatarColors[index % avatarColors.length].fg }"
+            >
               {{ member.initial }}
             </div>
-            <h3 class="text-xl font-bold text-neutral-900 mb-2">{{ member.name }}</h3>
-            <p class="text-orange-600 font-semibold mb-4">{{ member.role }}</p>
-            <p class="text-neutral-600 text-sm">{{ member.description }}</p>
-          </div>
+            <h3 class="display mt-10 text-3xl tracking-[-0.035em]">{{ member.name }}</h3>
+            <p class="label mt-3 text-coral">{{ member.role }}</p>
+            <p class="mt-5 text-pretty text-ink/70">{{ member.description }}</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Our Team -->
-    <section class="py-20 md:py-32 px-4 md:px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-8">
-            <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Notre équipe
-            </span>
-          </h2>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div v-for="(member, index) in team" :key="index" class="text-center">
-            <div class="w-24 h-24 bg-gradient-to-br from-orange-400 to-purple-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6">
-              {{ member.initial }}
+    <!-- Notre équipe -->
+    <section class="py-24 md:py-40">
+      <div class="shell">
+        <p class="label text-ink/55">(07)</p>
+        <h2 v-split class="display mt-6 text-display-lg">Notre équipe</h2>
+        <ul class="mt-16 border-t border-ink/15">
+          <li
+            v-for="(member, index) in team"
+            :key="index"
+            v-reveal="index * 0.06"
+            class="group grid items-center gap-3 border-b border-ink/15 py-7 md:grid-cols-12 md:gap-6"
+          >
+            <div class="flex items-center gap-5 md:col-span-5">
+              <span
+                class="display grid h-14 w-14 shrink-0 place-items-center rounded-full text-2xl transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110"
+                :style="{ backgroundColor: avatarColors[(index + 1) % avatarColors.length].bg, color: avatarColors[(index + 1) % avatarColors.length].fg }"
+              >
+                {{ member.initial }}
+              </span>
+              <span class="display text-[clamp(2rem,4vw,3.25rem)] leading-none tracking-[-0.045em]">{{ member.name }}</span>
             </div>
-            <h3 class="text-lg font-bold text-neutral-900 mb-2">{{ member.name }}</h3>
-            <p class="text-orange-600 font-semibold mb-4">{{ member.role }}</p>
-            <p class="text-neutral-600 text-sm">{{ member.description }}</p>
-          </div>
-        </div>
+            <p class="label text-coral md:col-span-3">{{ member.role }}</p>
+            <p class="text-pretty text-ink/70 md:col-span-4">{{ member.description }}</p>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-orange-500 via-purple-500 to-orange-600">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-          <span class="bg-gradient-to-r from-white via-orange-100 to-white bg-clip-text text-transparent animate-gradient-flow">
-            Rejoignez l'aventure MoodFlow
-          </span>
-        </h2>
-        <p class="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
-          Découvrez comment MoodFlow peut transformer votre entreprise et le bien-être de vos équipes
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <router-link to="/demo" 
-                       class="px-8 py-4 bg-white text-orange-600 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl">
-            Demander une démo
+    <!-- CTA -->
+    <section class="relative overflow-hidden bg-sun pb-36 pt-24 md:pb-48 md:pt-36">
+      <div class="shell relative z-10 grid gap-10 md:grid-cols-12 md:items-end">
+        <div class="md:col-span-8">
+          <h2 v-split class="display text-display-xl">Rejoignez l'aventure MoodFlow</h2>
+          <p v-reveal class="mt-8 max-w-xl text-pretty text-xl leading-snug md:text-2xl">
+            Découvrez comment MoodFlow peut transformer votre entreprise et le bien-être de vos équipes
+          </p>
+        </div>
+        <div v-reveal="0.15" class="flex flex-wrap gap-3 md:col-span-4 md:justify-end">
+          <router-link to="/demo" class="btn btn-ink btn-lg" v-magnetic>
+            <RollText text="Demander une démo" />
+            <span class="btn-dot"><Icon name="arrow-right" /></span>
           </router-link>
-          <router-link to="/contact" 
-                       class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-2xl font-bold hover:bg-white/30 transition-all duration-300 border border-white/30">
-            Nous contacter
+          <router-link to="/contact" class="btn btn-outline btn-lg">
+            <RollText text="Nous contacter" />
           </router-link>
         </div>
+      </div>
+      <div class="pointer-events-none absolute -bottom-[16vw] -left-[10vw] w-[46vw] md:w-[30vw]" aria-hidden="true">
+        <MoodFace mood="very_happy" color="#FF8944" />
       </div>
     </section>
   </div>
@@ -333,11 +267,72 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import PageHero from '../components/site/PageHero.vue';
+import SunMark from '../components/brand/SunMark.vue';
+import MoodFace from '../components/brand/MoodFace.vue';
+import Icon, { type IconName } from '../components/ui/Icon.vue';
+import RollText from '../components/ui/RollText.vue';
+import CountUp from '../components/ui/CountUp.vue';
 
 // Scroll vers le haut au chargement de la page
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+const approach = [
+  'Expression libre et anonyme',
+  'Insights en temps réel',
+  'Actions ciblées et personnalisées',
+];
+
+const values: { title: string; description: string; icon: IconName; color: string }[] = [
+  {
+    title: 'Faire compter la mission',
+    description: 'Chaque décision est guidée par notre mission de transformer le bien-être en entreprise.',
+    icon: 'target',
+    color: '#FF8944',
+  },
+  {
+    title: 'Itérer vers l\'excellence',
+    description: 'Nous améliorons constamment nos solutions basées sur vos retours.',
+    icon: 'repeat',
+    color: '#CDB8FF',
+  },
+  {
+    title: 'Assumer le résultat',
+    description: 'Nous nous engageons pleinement dans le succès de votre transformation.',
+    icon: 'flag',
+    color: '#5EDDE7',
+  },
+  {
+    title: 'Se connecter avec courage',
+    description: 'Nous créons des liens authentiques avec nos clients et leurs équipes.',
+    icon: 'heart',
+    color: '#FF5BBC',
+  },
+];
+
+const figures = [
+  { value: '200+', label: 'Entreprises dans le monde', color: '#FED94E' },
+  { value: '100K+', label: 'Vies transformées', color: '#FF5BBC' },
+  { value: '70K+', label: 'Téléchargements d\'app', color: '#5EDDE7' },
+];
+
+const outcomes = [
+  { value: 32, label: 'Réduction du stress', color: '#FA4D52' },
+  { value: 14, label: 'Amélioration de l\'engagement', color: '#FF8944' },
+  { value: 59, label: 'Satisfaction des employés', color: '#8248FE' },
+  { value: 70, label: 'Rétention des talents', color: '#11C1DC' },
+];
+
+const avatarColors = [
+  { bg: '#8248FE', fg: '#FFF8EF' },
+  { bg: '#FED94E', fg: '#1A0E2B' },
+  { bg: '#FA4D52', fg: '#1A0E2B' },
+  { bg: '#5EDDE7', fg: '#1A0E2B' },
+  { bg: '#FF8944', fg: '#1A0E2B' },
+  { bg: '#FF5BBC', fg: '#1A0E2B' },
+];
 
 const leadership = [
   {
@@ -395,17 +390,18 @@ const team = [
 </script>
 
 <style scoped>
-@keyframes gradient-flow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+.outcome-bar {
+  transform: scaleX(0);
+  transition: transform 1.5s var(--ease-out-expo);
 }
 
-.animate-gradient-flow {
-  background-size: 200% 200%;
-  animation: gradient-flow 3s ease-in-out infinite;
+.outcome.is-revealed .outcome-bar {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outcome-bar {
+    transform: none;
+  }
 }
 </style>

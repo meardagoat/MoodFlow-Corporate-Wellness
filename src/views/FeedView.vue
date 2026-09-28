@@ -1,220 +1,190 @@
 <template>
-  <div class="min-h-screen bg-white">
-    <!-- Mobile Navigation -->
-    <div class="lg:hidden bg-white/90 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
-      <div class="flex items-center justify-between p-4">
-        <h1 class="text-xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-          MoodFlow
-        </h1>
-        <div class="flex items-center gap-3">
-          <router-link
-            to="/chat"
-            class="p-2 text-gray-600 hover:text-orange-600 transition-colors"
-          >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-            </svg>
-          </router-link>
-          <router-link
-            to="/profile"
-            class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-purple-400 flex items-center justify-center text-white font-bold text-sm"
-          >
-            {{ currentProfile?.email?.charAt(0).toUpperCase() }}
-          </router-link>
-        </div>
-      </div>
-    </div>
-    
-    <div class="max-w-7xl mx-auto flex">
-      <!-- Enhanced Sidebar - Headspace Style -->
-      <aside class="hidden lg:flex flex-col w-64 xl:w-72 px-6 py-6 bg-white/80 backdrop-blur-xl border-r border-gray-200/50 sticky top-0 h-screen">
-        <div class="flex-1 space-y-3">
-          <!-- Enhanced Logo -->
-          <div class="px-4 py-4 mb-6">
-            <h1 class="text-3xl font-black bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              MoodFlow
-            </h1>
+  <div class="min-h-screen">
+    <div
+      class="mx-auto grid max-w-7xl gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[15rem_minmax(0,1fr)] lg:py-10 xl:grid-cols-[15rem_minmax(0,1fr)_19rem]"
+    >
+      <!-- Colonne gauche -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-24 space-y-3">
+          <div class="relative overflow-hidden rounded-[2rem] bg-sun p-6">
+            <div class="flex -space-x-2.5" aria-hidden="true">
+              <MoodFace
+                v-for="mood in moods"
+                :key="mood.value"
+                :mood="mood.value"
+                class="h-10 w-10 rounded-full ring-[3px] ring-sun transition-transform duration-500 ease-out-back hover:-translate-y-1.5"
+              />
+            </div>
+            <p class="display mt-8 text-[1.9rem] leading-[0.95] tracking-[-0.045em]">How are you feeling?</p>
+            <button
+              type="button"
+              @click="showPostModal = true"
+              class="btn btn-ink mt-6 w-full"
+            >
+              <RollText text="✨ Share Mood" />
+            </button>
           </div>
 
-          <!-- Enhanced Navigation items -->
-          <button
-            class="w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-lg font-semibold bg-gradient-to-r from-orange-50 to-orange-100 text-orange-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-          >
-            <span class="text-2xl">🏠</span>
-            <span>Feed</span>
-          </button>
-
-          <!-- Enhanced Post button -->
-          <button
-            @click="showPostModal = true"
-            class="w-full mt-6 py-4 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-2xl hover:shadow-2xl hover:shadow-orange-200 transition-all duration-300 hover:scale-105 active:scale-95 animate-gradient-flow"
-          >
-            ✨ Share Mood
-          </button>
-        </div>
-
-        <!-- Enhanced User profile -->
-        <div class="p-4 rounded-2xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-purple-50 transition-all duration-300 cursor-pointer hover:shadow-lg">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-purple-400 flex items-center justify-center shadow-lg">
-              <span class="text-white font-bold text-lg">{{ currentProfile?.email?.charAt(0).toUpperCase() }}</span>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="text-base font-bold text-gray-900 truncate">{{ currentProfile?.display_name || 'You' }}</p>
-              <p class="text-sm text-gray-500 truncate">{{ currentProfile?.service }}</p>
+          <div class="flex items-center gap-3 rounded-[2rem] border border-ink/10 bg-white p-4">
+            <span class="display grid h-12 w-12 shrink-0 place-items-center rounded-full bg-grape text-lg text-paper">
+              {{ currentProfile?.email?.charAt(0).toUpperCase() }}
+            </span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate font-semibold">{{ currentProfile?.display_name || 'You' }}</p>
+              <p class="label mt-1 truncate text-ink/50">{{ currentProfile?.service }}</p>
             </div>
           </div>
         </div>
       </aside>
 
       <!-- Fil central - Posts -->
-      <main class="flex-1 max-w-2xl border-r border-gray-200">
-        <!-- Enhanced Header sticky -->
-        <div class="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-sm">
-          <div class="px-6 py-4">
-            <h2 class="text-2xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Wellness Feed
-            </h2>
-            <p class="text-sm text-gray-500 mt-1">Partagez votre humeur et découvrez celle de votre équipe</p>
-          </div>
-          
-          <!-- Enhanced Mood Filter Tabs -->
-          <div class="flex border-b border-gray-200/50 overflow-x-auto scrollbar-hide px-6">
+      <section class="min-w-0" aria-labelledby="feed-title">
+        <header>
+          <h1 id="feed-title" class="display text-display-md">Wellness Feed</h1>
+          <p class="mt-3 text-lg text-ink/65">Partagez votre humeur et découvrez celle de votre équipe</p>
+
+          <!-- Filtres d'humeur -->
+          <div class="-mx-4 mt-7 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-hide sm:mx-0 sm:px-0" role="tablist" aria-label="Filtrer par humeur">
             <button
+              type="button"
+              role="tab"
+              :aria-selected="filterMood === ''"
               @click="filterMood = ''; loadPosts()"
               :class="[
-                'flex-shrink-0 px-6 py-4 text-sm font-semibold transition-all duration-300 relative rounded-t-2xl',
-                filterMood === '' ? 'text-orange-600 bg-orange-50' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
+                'shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-300',
+                filterMood === '' ? 'bg-ink text-paper' : 'bg-ink/[0.05] text-ink/70 hover:bg-ink/10 hover:text-ink'
               ]"
             >
               All Moods
-              <div v-if="filterMood === ''" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-gradient-flow bg-[length:200%_auto]"></div>
             </button>
             <button
               v-for="mood in moods.slice(0, 3)"
               :key="mood.value"
+              type="button"
+              role="tab"
+              :aria-selected="filterMood === mood.value"
               @click="filterMood = mood.value; loadPosts()"
               :class="[
-                'flex-shrink-0 px-6 py-4 text-sm font-semibold transition-all duration-300 relative rounded-t-2xl',
-                filterMood === mood.value ? 'text-orange-600 bg-orange-50' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-700'
+                'flex shrink-0 items-center gap-2 rounded-full py-1.5 pl-1.5 pr-4 text-sm font-semibold transition-colors duration-300',
+                filterMood === mood.value ? 'bg-ink text-paper' : 'bg-ink/[0.05] text-ink/70 hover:bg-ink/10 hover:text-ink'
               ]"
             >
-              {{ mood.emoji }} {{ mood.label }}
-              <div v-if="filterMood === mood.value" class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-purple-500 rounded-full animate-gradient-flow bg-[length:200%_auto]"></div>
+              <MoodFace :mood="mood.value" class="h-7 w-7" />
+              {{ mood.label }}
             </button>
           </div>
-        </div>
+        </header>
 
-        <!-- Enhanced Post creation (mobile) -->
-        <div class="border-b border-gray-200/50 p-6 lg:hidden">
-          <button
-            @click="showPostModal = true"
-            class="w-full py-4 bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-[length:200%_auto] text-white font-bold rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 animate-gradient-flow"
-          >
-            ✨ Share Your Mood
-          </button>
-        </div>
+        <!-- Création de post (mobile) -->
+        <button
+          type="button"
+          @click="showPostModal = true"
+          class="btn btn-sun btn-lg mt-6 w-full lg:hidden"
+        >
+          ✨ Share Your Mood
+        </button>
 
         <!-- Loading -->
-        <div v-if="loadingPosts" class="flex justify-center py-12">
-          <div class="w-8 h-8 border-4 border-gray-200 border-t-orange-500 rounded-full animate-spin"></div>
+        <div v-if="loadingPosts" class="grid place-items-center py-20" role="status">
+          <SunMark class="h-16 w-16 animate-spin-slow" :face="false" :ray-count="14" :ray-width="9" />
+          <span class="sr-only">Loading</span>
         </div>
 
         <!-- Posts -->
-        <div v-else>
+        <div v-else class="mt-6 space-y-3">
           <article
             v-for="post in posts"
             :key="post.id"
-            class="border-b border-gray-200 p-4 hover:bg-gray-50/50 transition cursor-pointer"
+            class="rounded-[1.75rem] border border-ink/10 bg-white p-5 transition-shadow duration-300 hover:shadow-[0_18px_40px_-28px_rgba(26,14,43,0.45)] sm:p-6"
           >
-            <div class="flex gap-3">
+            <div class="flex gap-4">
               <!-- Avatar -->
-              <div class="flex-shrink-0">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                  <span class="text-lg">{{ getMoodEmoji(post.mood) }}</span>
-                </div>
-              </div>
+              <MoodFace :mood="post.mood" class="h-11 w-11 shrink-0" :label="getMoodName(post.mood)" />
 
               <!-- Content -->
-              <div class="flex-1 min-w-0">
+              <div class="min-w-0 flex-1">
                 <!-- Header -->
-                <div class="flex items-start justify-between mb-1">
-                  <div class="flex items-center gap-1 text-sm">
-                    <span class="font-bold text-gray-900">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                    <span class="truncate font-semibold">
                       {{ post.is_anonymous ? 'Anonymous' : (post.profiles?.display_name || 'User') }}
                     </span>
-                    <span class="text-gray-500">·</span>
-                    <span class="text-gray-500">{{ formatDate(post.created_at) }}</span>
+                    <span class="text-ink/30" aria-hidden="true">·</span>
+                    <time :datetime="post.created_at" class="font-mono text-xs text-ink/50">{{ formatDate(post.created_at) }}</time>
                   </div>
-                  
+
                   <button
                     v-if="canDeletePost(post)"
+                    type="button"
                     @click.stop="confirmDeletePost(post.id)"
-                    class="p-1.5 hover:bg-red-50 rounded-full text-gray-400 hover:text-red-500 transition"
+                    class="-mr-1.5 -mt-1.5 grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink/35 transition-colors hover:bg-coral/15 hover:text-coral"
+                    aria-label="Delete post"
                   >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
+                    <Icon name="trash" class="h-4 w-4" />
                   </button>
                 </div>
 
                 <!-- Message -->
-                <p class="text-gray-900 text-[15px] leading-normal mb-3">{{ post.message }}</p>
+                <p class="mt-2 text-pretty text-[16px] leading-relaxed">{{ post.message }}</p>
 
                 <!-- Tags -->
-                <div v-if="post.tags && post.tags.length > 0" class="flex flex-wrap gap-1.5 mb-3">
+                <div v-if="post.tags && post.tags.length > 0" class="mt-3 flex flex-wrap gap-1.5">
                   <span
                     v-for="tagId in post.tags"
                     :key="tagId"
-                    class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs font-medium"
+                    class="tag"
                   >
                     {{ getTagLabel(tagId) }}
                   </span>
                 </div>
 
                 <!-- Actions -->
-                <div class="flex items-center justify-between max-w-md">
+                <div class="mt-4 flex items-center gap-2">
                   <button
+                    type="button"
                     @click.stop="toggleReplyForm(post.id)"
-                    class="flex items-center gap-2 group"
+                    class="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors"
+                    :class="isReplyFormOpen(post.id) ? 'bg-lilac text-ink' : 'text-ink/55 hover:bg-lilac/50 hover:text-ink'"
+                    :aria-expanded="isReplyFormOpen(post.id)"
+                    aria-label="Replies"
                   >
-                    <div class="p-2 rounded-full group-hover:bg-blue-50 transition">
-                      <svg class="w-4 h-4 text-gray-500 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                      </svg>
-                    </div>
-                    <span class="text-xs text-gray-500 group-hover:text-blue-500">{{ getReplies(post.id).length }}</span>
+                    <Icon name="message" class="h-4 w-4" />
+                    <span>{{ getReplies(post.id).length }}</span>
                   </button>
 
                   <button
+                    type="button"
                     @click.stop="addReaction(post.id, '❤️')"
                     :class="[
-                      'flex items-center gap-2 group',
-                      hasUserReacted(post.id, '❤️') ? 'text-red-500' : ''
+                      'group flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors',
+                      hasUserReacted(post.id, '❤️') ? 'bg-coral/15 text-coral' : 'text-ink/55 hover:bg-coral/10 hover:text-coral'
                     ]"
+                    :aria-pressed="hasUserReacted(post.id, '❤️')"
+                    aria-label="Like"
                   >
-                    <div class="p-2 rounded-full group-hover:bg-red-50 transition-all group-hover:scale-110">
-                      <svg :class="['w-4 h-4 transition-all', hasUserReacted(post.id, '❤️') ? 'fill-red-500 text-red-500 scale-110' : 'text-gray-500 group-hover:text-red-500']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                      </svg>
-                    </div>
-                    <span :class="['text-xs transition-all', hasUserReacted(post.id, '❤️') ? 'text-red-500 font-bold' : 'text-gray-500 group-hover:text-red-500']">{{ getReactionCount(post.id, '❤️') }}</span>
+                    <Icon
+                      name="heart"
+                      :class="['h-4 w-4 transition-transform duration-300 ease-out-back group-active:scale-125', hasUserReacted(post.id, '❤️') ? 'fill-coral' : '']"
+                    />
+                    <span :class="hasUserReacted(post.id, '❤️') ? 'font-bold' : ''">{{ getReactionCount(post.id, '❤️') }}</span>
                   </button>
                 </div>
 
                 <!-- Reply form -->
-                <div v-if="isReplyFormOpen(post.id)" class="mt-3 pt-3 border-t border-gray-200">
+                <div v-if="isReplyFormOpen(post.id)" class="mt-4 border-t border-ink/10 pt-4">
                   <div class="flex gap-2">
                     <input
                       v-model="replyText[post.id]"
                       @keyup.enter="submitReply(post.id)"
-                      class="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent text-sm"
+                      class="field min-w-0 flex-1 rounded-full py-2.5 text-sm"
                       placeholder="Tweet your reply"
+                      aria-label="Tweet your reply"
                     />
                     <button
+                      type="button"
                       @click="submitReply(post.id)"
                       :disabled="!replyText[post.id]"
-                      class="px-4 py-2 bg-gradient-to-r from-orange-500 to-purple-500 text-white font-semibold rounded-full disabled:opacity-50 text-sm"
+                      class="btn btn-ink btn-sm"
                     >
                       Reply
                     </button>
@@ -222,24 +192,24 @@
                 </div>
 
                 <!-- Replies (threads) -->
-                <div v-if="getReplies(post.id).length > 0 && isReplyFormOpen(post.id)" class="mt-3 space-y-3 pl-4 border-l-2 border-gray-200">
+                <div v-if="getReplies(post.id).length > 0 && isReplyFormOpen(post.id)" class="mt-4 space-y-4 border-l-2 border-lilac pl-4">
                   <div
                     v-for="reply in getReplies(post.id)"
                     :key="reply.id"
-                    class="flex gap-2"
+                    class="flex gap-3"
                   >
-                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
-                      <span class="text-xs">👤</span>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <div class="flex items-center gap-1 text-xs mb-1">
-                        <span class="font-bold text-gray-900">
+                    <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-paper-deep text-ink/60">
+                      <Icon name="user" class="h-4 w-4" />
+                    </span>
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-baseline gap-2 text-xs">
+                        <span class="font-semibold">
                           {{ reply.is_anonymous ? 'Anonymous' : (reply.profiles?.display_name || 'User') }}
                         </span>
-                        <span class="text-gray-500">·</span>
-                        <span class="text-gray-500">{{ formatDate(reply.created_at) }}</span>
+                        <span class="text-ink/30" aria-hidden="true">·</span>
+                        <time :datetime="reply.created_at" class="font-mono text-ink/50">{{ formatDate(reply.created_at) }}</time>
                       </div>
-                      <p class="text-sm text-gray-900">{{ reply.message }}</p>
+                      <p class="mt-1 text-sm leading-relaxed">{{ reply.message }}</p>
                     </div>
                   </div>
                 </div>
@@ -247,170 +217,206 @@
             </div>
           </article>
         </div>
-      </main>
+      </section>
 
-      <!-- Sidebar droite - Widgets -->
-      <aside class="hidden xl:block w-80 px-4 py-4">
-        <div class="sticky top-4 space-y-4">
+      <!-- Colonne droite - Widgets -->
+      <aside class="hidden xl:block">
+        <div class="sticky top-24 space-y-3">
           <!-- Search -->
           <div class="relative">
+            <Icon name="search" class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/45" />
             <input
               type="text"
               placeholder="Search moods"
-              class="w-full pl-10 pr-4 py-3 bg-gray-100 border-none rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm"
+              aria-label="Search moods"
+              class="field rounded-full py-3 pl-11 text-sm"
             />
-            <svg class="w-4 h-4 text-gray-500 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
           </div>
 
           <!-- Mood filter -->
-          <div class="bg-gray-50 rounded-2xl p-4">
-            <h3 class="text-lg font-bold text-gray-900 mb-3">Filter by Mood</h3>
-            <div class="space-y-2">
+          <div class="rounded-[2rem] border border-ink/10 bg-white p-5">
+            <h3 class="label text-ink/55">Filter by Mood</h3>
+            <div class="mt-4 space-y-1">
               <button
                 v-for="mood in moods"
                 :key="mood.value"
+                type="button"
                 @click="filterMood = filterMood === mood.value ? '' : mood.value; loadPosts()"
-                :class="[
-                  'w-full flex items-center gap-3 px-3 py-2 rounded-xl transition',
-                  filterMood === mood.value ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white shadow-lg' : 'hover:bg-gray-100'
-                ]"
+                :aria-pressed="filterMood === mood.value"
+                class="flex w-full items-center gap-3 rounded-full py-1.5 pl-1.5 pr-4 text-left transition-colors duration-300"
+                :class="filterMood === mood.value ? 'bg-ink text-paper' : 'hover:bg-ink/[0.05]'"
               >
-                <span class="text-xl">{{ mood.emoji }}</span>
-                <span class="text-sm font-medium">{{ mood.label }}</span>
+                <MoodFace :mood="mood.value" class="h-8 w-8" />
+                <span class="text-sm font-semibold">{{ mood.label }}</span>
               </button>
             </div>
           </div>
 
           <!-- Stats -->
-          <div class="bg-gray-50 rounded-2xl p-4">
-            <h3 class="text-lg font-bold text-gray-900 mb-3">Team Pulse</h3>
-            <div class="space-y-2">
-              <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Total Posts</span>
-                <span class="font-bold text-gray-900">{{ posts.length }}</span>
+          <div class="rounded-[2rem] bg-grape p-5 text-paper">
+            <h3 class="label text-paper/65">Team Pulse</h3>
+            <dl class="mt-5 grid grid-cols-2 gap-3">
+              <div>
+                <dt class="text-xs text-paper/70">Total Posts</dt>
+                <dd class="display mt-1 text-4xl tracking-[-0.05em]">{{ posts.length }}</dd>
               </div>
-              <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Active Now</span>
-                <span class="font-bold text-green-600">{{ activeUsersCount }}</span>
+              <div>
+                <dt class="text-xs text-paper/70">Active Now</dt>
+                <dd class="display mt-1 flex items-center gap-2 text-4xl tracking-[-0.05em] text-sun">
+                  <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sun opacity-75" />
+                    <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-sun" />
+                  </span>
+                  {{ activeUsersCount }}
+                </dd>
               </div>
-            </div>
+            </dl>
           </div>
 
           <!-- Tags trending -->
-          <div class="bg-gray-50 rounded-2xl p-4">
-            <h3 class="text-lg font-bold text-gray-900 mb-3">Trending Topics</h3>
-            <div class="space-y-3">
-              <div v-for="(tag, i) in moodTags.slice(0, 5)" :key="tag.id" class="hover:bg-gray-100 -mx-2 px-2 py-2 rounded-xl cursor-pointer transition">
-                <p class="text-xs text-gray-500">{{ i + 1 }} · Trending</p>
-                <p class="text-sm font-bold text-gray-900">{{ tag.label }}</p>
-                <p class="text-xs text-gray-500">{{ tag.mentionCount || 42 }} mentions</p>
-              </div>
-            </div>
+          <div class="rounded-[2rem] border border-ink/10 bg-white p-5">
+            <h3 class="label text-ink/55">Trending Topics</h3>
+            <ol class="mt-3">
+              <li
+                v-for="(tag, i) in moodTags.slice(0, 5)"
+                :key="tag.id"
+                class="flex items-center gap-3 border-b border-ink/[0.07] py-3 last:border-0"
+              >
+                <span class="display w-6 text-xl text-ink/25">{{ i + 1 }}</span>
+                <div class="min-w-0">
+                  <p class="truncate text-sm font-semibold">{{ tag.label }}</p>
+                  <p class="font-mono text-[11px] text-ink/45">{{ i + 1 }} · Trending · {{ (tag as any).mentionCount || 42 }} mentions</p>
+                </div>
+              </li>
+            </ol>
           </div>
         </div>
       </aside>
     </div>
 
     <!-- Post Modal -->
-    <div v-if="showPostModal" class="fixed inset-0 z-50 flex items-start justify-center bg-black/50 backdrop-blur-sm pt-16 px-4" @click.self="showPostModal = false">
-      <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-          <button @click="showPostModal = false" class="p-2 hover:bg-gray-100 rounded-full transition">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-          <button
-            @click="createPost"
-            :disabled="!selectedMood || loading"
-            class="px-6 py-2 bg-gradient-to-r from-orange-500 to-purple-500 text-white font-bold rounded-full disabled:opacity-50"
-          >
-            {{ loading ? 'Posting...' : 'Post' }}
-          </button>
-        </div>
-
-        <div class="p-4">
-          <!-- Mood selector -->
-          <div class="mb-4">
-            <label class="text-sm font-semibold text-gray-700 mb-2 block">How are you feeling?</label>
-            <div class="grid grid-cols-5 gap-2">
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition duration-300 ease-out-expo"
+        leave-active-class="transition duration-200 ease-in"
+        enter-from-class="opacity-0"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="showPostModal"
+          class="modal-backdrop"
+          @click.self="showPostModal = false"
+          @keydown.esc="showPostModal = false"
+        >
+          <div class="modal-panel sm:max-w-2xl" role="dialog" aria-modal="true" aria-labelledby="post-modal-title" data-lenis-prevent>
+            <div class="sticky top-0 z-10 flex items-center justify-between border-b border-ink/10 bg-paper/95 px-5 py-4 backdrop-blur">
               <button
-                v-for="mood in moods"
-                :key="mood.value"
                 type="button"
-                @click="selectedMood = mood.value"
-                :class="[
-                  'p-4 rounded-xl transition text-center',
-                  selectedMood === mood.value
-                    ? 'bg-gradient-to-br from-orange-500 to-purple-500 text-white shadow-lg scale-105'
-                    : 'bg-gray-100 hover:bg-gray-200'
-                ]"
+                @click="showPostModal = false"
+                class="grid h-10 w-10 place-items-center rounded-full transition-colors hover:bg-ink/[0.06]"
+                aria-label="Close"
               >
-                <div class="text-3xl mb-1">{{ mood.emoji }}</div>
-                <div class="text-xs font-semibold">{{ mood.label }}</div>
+                <Icon name="x" class="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                @click="createPost"
+                :disabled="!selectedMood || loading"
+                class="btn btn-ink btn-sm px-6"
+              >
+                {{ loading ? 'Posting...' : 'Post' }}
               </button>
             </div>
-            <!-- Supportive message when selecting the most negative mood -->
-            <div v-if="selectedMood === 'very_sad'" class="mt-3 p-4 bg-red-50 border border-red-200 rounded-xl">
-              <p class="text-sm font-semibold text-red-800">We're here for you 💛</p>
-              <p class="text-xs text-red-700 mt-1">
-                If you're feeling overwhelmed, don't hesitate to talk to someone you trust
-                or a professional. In case of emergency, contact emergency services
-                in your country immediately.
-              </p>
-            </div>
-          </div>
 
-          <!-- Tags -->
-          <div v-if="selectedMood" class="mb-4">
-            <label class="text-sm font-semibold text-gray-700 mb-2 block">What's affecting your mood? (optional)</label>
-            <div class="flex flex-wrap gap-2">
-              <button
-                v-for="tag in moodTags"
-                :key="tag.id"
-                type="button"
-                @click="toggleTag(tag.id)"
-                :class="[
-                  'px-3 py-1.5 rounded-full text-xs font-medium transition',
-                  selectedTags.includes(tag.id)
-                    ? 'bg-gradient-to-r from-orange-500 to-purple-500 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                ]"
-              >
-                {{ tag.label }}
-              </button>
-            </div>
-          </div>
-
-          <!-- Message -->
-          <div class="mb-4">
-            <textarea
-              v-model="message"
-              rows="4"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 resize-none text-[15px]"
-              placeholder="What's happening? (optional)"
-            ></textarea>
-          </div>
-
-          <!-- Anonymous toggle -->
-          <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
-            <div class="flex items-center gap-3">
-              <span class="text-xl">🕶️</span>
+            <div class="space-y-6 p-5 sm:p-7">
+              <!-- Mood selector -->
               <div>
-                <p class="text-sm font-semibold text-gray-900">Post anonymously</p>
-                <p class="text-xs text-gray-500">Hide your identity</p>
+                <h2 id="post-modal-title" class="display text-3xl tracking-[-0.04em]">How are you feeling?</h2>
+                <div class="mt-5 grid grid-cols-5 gap-2" role="radiogroup" aria-labelledby="post-modal-title">
+                  <button
+                    v-for="mood in moods"
+                    :key="mood.value"
+                    type="button"
+                    role="radio"
+                    :aria-checked="selectedMood === mood.value"
+                    @click="selectedMood = mood.value"
+                    class="group flex flex-col items-center gap-2 rounded-3xl px-1 py-4 transition-[background-color,transform,box-shadow] duration-300 ease-out-expo"
+                    :class="selectedMood === mood.value ? 'scale-[1.04] ring-2 ring-ink' : 'bg-ink/[0.04] hover:bg-ink/[0.08]'"
+                    :style="selectedMood === mood.value ? { backgroundColor: moodColor(mood.value) } : undefined"
+                  >
+                    <MoodFace :mood="mood.value" class="h-11 w-11 transition-transform duration-500 ease-out-back group-hover:scale-110 sm:h-14 sm:w-14" />
+                    <span
+                      class="text-xs font-semibold"
+                      :style="selectedMood === mood.value ? { color: moodOnColor(mood.value) } : undefined"
+                    >{{ mood.label }}</span>
+                  </button>
+                </div>
+                <!-- Supportive message when selecting the most negative mood -->
+                <div v-if="selectedMood === 'very_sad'" class="mt-4 flex gap-4 rounded-3xl bg-lilac/60 p-5" role="note">
+                  <MoodFace mood="sleepy" class="h-10 w-10 shrink-0" />
+                  <div>
+                    <p class="font-semibold">We're here for you 💛</p>
+                    <p class="mt-1 text-sm leading-relaxed text-ink/75">
+                      If you're feeling overwhelmed, don't hesitate to talk to someone you trust
+                      or a professional. In case of emergency, contact emergency services
+                      in your country immediately.
+                    </p>
+                  </div>
+                </div>
               </div>
+
+              <!-- Tags -->
+              <div v-if="selectedMood">
+                <p class="field-label">What's affecting your mood? (optional)</p>
+                <div class="flex flex-wrap gap-2">
+                  <button
+                    v-for="tag in moodTags"
+                    :key="tag.id"
+                    type="button"
+                    @click="toggleTag(tag.id)"
+                    :aria-pressed="selectedTags.includes(tag.id)"
+                    :class="[
+                      'rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-300',
+                      selectedTags.includes(tag.id)
+                        ? 'bg-ink text-paper'
+                        : 'bg-ink/[0.05] text-ink/75 hover:bg-ink/10'
+                    ]"
+                  >
+                    {{ tag.label }}
+                  </button>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div>
+                <textarea
+                  v-model="message"
+                  rows="4"
+                  class="field resize-none text-[16px]"
+                  placeholder="What's happening? (optional)"
+                  aria-label="What's happening? (optional)"
+                ></textarea>
+              </div>
+
+              <!-- Anonymous toggle -->
+              <label class="flex cursor-pointer items-center justify-between gap-4 rounded-3xl bg-ink/[0.04] p-4">
+                <span class="flex items-center gap-3">
+                  <span class="grid h-11 w-11 place-items-center rounded-full bg-ink text-paper">
+                    <Icon name="mask" class="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span class="block text-sm font-semibold">Post anonymously</span>
+                    <span class="block text-xs text-ink/55">Hide your identity</span>
+                  </span>
+                </span>
+                <input v-model="isAnonymous" type="checkbox" class="peer sr-only">
+                <span class="switch" aria-hidden="true" />
+              </label>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer">
-              <input v-model="isAnonymous" type="checkbox" class="sr-only peer">
-              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-orange-500 peer-checked:to-purple-500"></div>
-            </label>
           </div>
         </div>
-      </div>
-    </div>
+      </Transition>
+    </Teleport>
 
     <!-- Onboarding Guide for New Users -->
     <OnboardingGuide />
@@ -423,6 +429,11 @@ import { supabase } from '../lib/supabase';
 import { currentProfile } from '../lib/auth';
 import type { Database } from '../lib/database.types';
 import OnboardingGuide from '../components/OnboardingGuide.vue';
+import MoodFace from '../components/brand/MoodFace.vue';
+import SunMark from '../components/brand/SunMark.vue';
+import Icon from '../components/ui/Icon.vue';
+import RollText from '../components/ui/RollText.vue';
+import { moodColor, moodOnColor } from '../lib/moods';
 
 type Post = Database['public']['Tables']['posts']['Row'] & {
   profiles?: {
@@ -463,8 +474,8 @@ const postReactions = ref<Record<string, any[]>>({});
 const showPostModal = ref(false);
 const activeUsersCount = ref(12); // Valeur fixe pour éviter Math.random()
 
-function getMoodEmoji(mood: string): string {
-  return moods.find(m => m.value === mood)?.emoji || '😐';
+function getMoodName(mood: string): string {
+  return moods.find(m => m.value === mood)?.label || 'Okay';
 }
 
 function getTagLabel(tagId: string): string {
@@ -482,11 +493,11 @@ function toggleTag(tagId: string) {
 
 function addReaction(contentId: string, emoji: string) {
   if (!currentProfile.value) return;
-  
+
   const existingReaction = postReactions.value[contentId]?.find(
     r => r.user_id === currentProfile.value.id && r.emoji === emoji
   );
-  
+
   if (existingReaction) {
     removeReaction(existingReaction.id, contentId, emoji);
   } else {
@@ -505,13 +516,13 @@ async function addNewReaction(contentId: string, emoji: string) {
       })
       .select()
       .single();
-      
+
     if (error) throw error;
-    
+
     if (!postReactions.value[contentId]) {
       postReactions.value[contentId] = [];
     }
-    
+
     postReactions.value[contentId].push(data);
   } catch (error) {
     console.error('Error adding reaction:', error);
@@ -524,9 +535,9 @@ async function removeReaction(reactionId: string, contentId: string, emoji: stri
       .from('post_reactions')
       .delete()
       .eq('id', reactionId);
-      
+
     if (error) throw error;
-    
+
     if (postReactions.value[contentId]) {
       postReactions.value[contentId] = postReactions.value[contentId].filter(
         r => !(r.user_id === currentProfile.value.id && r.emoji === emoji)
@@ -583,9 +594,9 @@ async function deletePost(postId: string) {
       .delete()
       .eq('id', postId)
       .eq('user_id', currentProfile.value.id);
-      
+
     if (error) throw error;
-    
+
     posts.value = posts.value.filter(post => post.id !== postId);
     delete postReplies.value[postId];
     delete postReactions.value[postId];
@@ -597,7 +608,7 @@ async function deletePost(postId: string) {
 
 async function submitReply(postId: string) {
   if (!currentProfile.value || !replyText[postId]) return;
-  
+
   try {
     const { data, error } = await supabase
       .from('post_replies')
@@ -609,24 +620,24 @@ async function submitReply(postId: string) {
       })
       .select()
       .single();
-      
+
     if (error) throw error;
-    
+
     if (!postReplies.value[postId]) {
       postReplies.value[postId] = [];
     }
-    
+
     const { data: profileData } = await supabase
       .from('profiles')
       .select('display_name')
       .eq('id', currentProfile.value.id)
       .single();
-    
+
     postReplies.value[postId].push({
       ...data,
       profiles: profileData
     });
-    
+
     replyText[postId] = '';
   } catch (error) {
     console.error('Error submitting reply:', error);
@@ -647,13 +658,13 @@ function formatDate(dateString: string): string {
 
   const diffDays = Math.floor(diffHours / 24);
   if (diffDays < 7) return `${diffDays}d`;
-  
+
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
 async function loadPosts() {
   loadingPosts.value = true;
-  
+
   try {
     let query = supabase
       .from('posts')
@@ -665,15 +676,15 @@ async function loadPosts() {
       `)
       .order('created_at', { ascending: false })
       .limit(50);
-      
+
     if (filterMood.value) {
       query = query.eq('mood', filterMood.value);
     }
-    
+
     const { data, error } = await query;
-    
+
     if (error) throw error;
-    
+
     posts.value = data || [];
     await loadRepliesAndReactions();
   } catch (error) {
@@ -690,7 +701,7 @@ async function loadRepliesAndReactions() {
         .from('post_replies')
         .select('*, profiles(display_name)')
         .order('created_at', { ascending: true });
-      
+
       if (repliesData) {
         postReplies.value = {};
         repliesData.forEach(reply => {
@@ -703,12 +714,12 @@ async function loadRepliesAndReactions() {
     } catch (repliesError) {
       console.log('Table post_replies not yet created');
     }
-    
+
     try {
       const { data: reactionsData } = await supabase
         .from('post_reactions')
         .select('*');
-      
+
       if (reactionsData) {
         postReactions.value = {};
         reactionsData.forEach(reaction => {
@@ -776,7 +787,7 @@ onMounted(() => {
   const handleOpenPostModal = () => {
     showPostModal.value = true;
   };
-  
+
   window.addEventListener('open-post-modal', handleOpenPostModal);
 
   return () => {
@@ -785,14 +796,3 @@ onMounted(() => {
   };
 });
 </script>
-
-<style scoped>
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>

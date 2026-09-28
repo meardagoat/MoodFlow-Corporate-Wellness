@@ -1,226 +1,264 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-orange-50 via-cream-50 to-purple-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <!-- Header premium -->
-      <div class="mb-8">
-        <div class="flex items-center gap-4 mb-3">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
-            <span class="text-3xl">📊</span>
-          </div>
-          <div>
-            <h1 class="text-3xl font-bold bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-              Wellness Analytics
-            </h1>
-            <p class="text-gray-600">Team wellness insights and trends</p>
-          </div>
+  <div class="min-h-screen py-6 sm:py-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <!-- En-tête -->
+      <header class="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="label flex items-center gap-2 text-ink/55">
+            <Icon name="chart" class="h-3.5 w-3.5" />
+            Team wellness insights and trends
+          </p>
+          <h1 class="display mt-4 text-display-md">Wellness Analytics</h1>
         </div>
-      </div>
+      </header>
 
-      <div v-if="!isManager" class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 p-8 text-center">
-        <div class="text-6xl mb-4">🔒</div>
-        <p class="text-gray-700 text-lg font-medium">Manager permissions required to view this dashboard</p>
+      <div v-if="!isManager" class="grid place-items-center rounded-[2rem] bg-paper-deep/70 px-6 py-20 text-center">
+        <span class="grid h-16 w-16 place-items-center rounded-full bg-ink text-paper">
+          <Icon name="lock" class="h-7 w-7" />
+        </span>
+        <p class="mt-6 max-w-sm text-lg font-medium">Manager permissions required to view this dashboard</p>
       </div>
 
       <template v-else>
-        <!-- Cards de statistiques modernes -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Indicateurs clés -->
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
           <!-- Total Participants -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6 hover:shadow-xl transition-all group">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Total Team</h3>
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span class="text-2xl">👥</span>
-              </div>
+          <section class="flex min-h-[12rem] flex-col rounded-[2rem] bg-sun p-6">
+            <div class="flex items-center justify-between">
+              <h2 class="text-sm font-semibold">Total Team</h2>
+              <Icon name="users" class="h-5 w-5" />
             </div>
-            <p class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent mb-2">
-              {{ stats.totalParticipants }}
-            </p>
-            <p class="text-sm text-gray-600">Active participants</p>
-          </div>
+            <p class="display mt-auto text-6xl leading-none tracking-[-0.05em]">{{ stats.totalParticipants }}</p>
+            <p class="mt-2 text-sm text-ink/70">Active participants</p>
+          </section>
 
           <!-- Total Posts -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6 hover:shadow-xl transition-all group">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Activity</h3>
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span class="text-2xl">💬</span>
-              </div>
+          <section class="flex min-h-[12rem] flex-col rounded-[2rem] bg-aqua p-6">
+            <div class="flex items-center justify-between">
+              <h2 class="text-sm font-semibold">Activity</h2>
+              <Icon name="message" class="h-5 w-5" />
             </div>
-            <p class="text-4xl font-bold bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent mb-2">
-              {{ stats.totalPosts }}
-            </p>
-            <p class="text-sm text-gray-600">Posts last 30 days</p>
-          </div>
+            <p class="display mt-auto text-6xl leading-none tracking-[-0.05em]">{{ stats.totalPosts }}</p>
+            <p class="mt-2 text-sm text-ink/70">Posts last 30 days</p>
+          </section>
 
           <!-- Average Mood -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6 hover:shadow-xl transition-all group">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wide">Team Mood</h3>
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span class="text-2xl">{{ getAverageMoodEmoji() }}</span>
-              </div>
+          <section class="flex min-h-[12rem] flex-col rounded-[2rem] bg-ink p-6 text-paper">
+            <div class="flex items-center justify-between">
+              <h2 class="text-sm font-semibold">Team Mood</h2>
+              <MoodFace :mood="averageMood" class="h-10 w-10" :label="`Team Mood ${stats.averageMood.toFixed(1)}/5`" />
             </div>
-            <p class="text-4xl font-bold bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent mb-2">
-              {{ stats.averageMood.toFixed(1) }}/5
+            <p class="display mt-auto text-6xl leading-none tracking-[-0.05em]">
+              {{ stats.averageMood.toFixed(1) }}<span class="text-2xl text-paper/50">/5</span>
             </p>
-            <div class="flex items-center text-sm">
-              <span :class="[
-                'font-semibold',
-                stats.weeklyChange >= 0 ? 'text-green-600' : 'text-red-600'
-              ]">
-                {{ stats.weeklyChange >= 0 ? '↑' : '↓' }} {{ Math.abs(stats.weeklyChange).toFixed(1) }}%
+            <p class="mt-2 flex items-center gap-2 text-sm">
+              <span
+                :class="[
+                  'inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold',
+                  stats.weeklyChange >= 0 ? 'bg-[#D9F5E4] text-[#14532D]' : 'bg-coral/25 text-paper'
+                ]"
+              >
+                <Icon :name="stats.weeklyChange >= 0 ? 'arrow-up' : 'arrow-down'" class="h-3.5 w-3.5" stroke-width="2.25" />
+                {{ Math.abs(stats.weeklyChange).toFixed(1) }}%
               </span>
-              <span class="text-gray-600 ml-2">vs last week</span>
-            </div>
-          </div>
+              <span class="text-paper/65">vs last week</span>
+            </p>
+          </section>
         </div>
-        
-        <!-- Secondary stats -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+
+        <!-- Indicateurs secondaires -->
+        <div class="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
           <!-- Participation Rate -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-lg font-bold text-gray-900">Participation Rate</h3>
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
-                <span class="text-2xl">📈</span>
-              </div>
+          <section class="rounded-[2rem] border border-ink/10 bg-white p-6">
+            <div class="flex items-center justify-between">
+              <h2 class="font-display text-xl font-bold tracking-[-0.025em]">Participation Rate</h2>
+              <Icon name="trending" class="h-5 w-5 text-ink/50" />
             </div>
-            <div class="mb-4">
-              <p class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
-                {{ stats.participationRate.toFixed(0) }}%
-              </p>
-              <p class="text-sm text-gray-600 mt-1">Active this week</p>
+            <div class="mt-5 flex items-end justify-between gap-4">
+              <p class="display text-5xl leading-none tracking-[-0.05em]">{{ stats.participationRate.toFixed(0) }}%</p>
+              <p class="text-sm text-ink/60">Active this week</p>
             </div>
-            <!-- Progress bar -->
-            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-              <div 
-                class="h-full bg-gradient-to-r from-violet-500 to-purple-500 rounded-full transition-all duration-500"
-                :style="{ width: stats.participationRate + '%' }"
+            <!-- Jauge : piste d'un ton plus clair de la même teinte -->
+            <div
+              class="mt-5 h-3 w-full overflow-hidden rounded-full bg-[#E6DDFF]"
+              role="meter"
+              :aria-valuenow="Math.round(stats.participationRate)"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-label="Participation Rate"
+            >
+              <div
+                class="h-full rounded-full bg-[#6B3BE0] transition-[width] duration-700 ease-out-expo"
+                :style="{ width: Math.min(stats.participationRate, 100) + '%' }"
               ></div>
             </div>
-          </div>
-          
+          </section>
+
           <!-- Top Tags -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-6">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-lg font-bold text-gray-900">Top Topics</h3>
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
-                <span class="text-2xl">🏷️</span>
-              </div>
+          <section class="rounded-[2rem] border border-ink/10 bg-white p-6">
+            <div class="flex items-center justify-between">
+              <h2 class="font-display text-xl font-bold tracking-[-0.025em]">Top Topics</h2>
+              <Icon name="tag" class="h-5 w-5 text-ink/50" />
             </div>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-4 py-2 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 rounded-full text-sm font-semibold">
-                💼 Workload
-              </span>
-              <span class="px-4 py-2 bg-gradient-to-r from-green-100 to-green-200 text-green-800 rounded-full text-sm font-semibold">
-                👥 Team
-              </span>
-              <span class="px-4 py-2 bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800 rounded-full text-sm font-semibold">
-                ⚖️ Balance
-              </span>
-              <span class="px-4 py-2 bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 rounded-full text-sm font-semibold">
-                👔 Leadership
-              </span>
-              <span class="px-4 py-2 bg-gradient-to-r from-pink-100 to-pink-200 text-pink-800 rounded-full text-sm font-semibold">
-                🏢 Environment
-              </span>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="tag px-3.5 py-2 text-sm">💼 Workload</span>
+              <span class="tag px-3.5 py-2 text-sm">👥 Team</span>
+              <span class="tag px-3.5 py-2 text-sm">⚖️ Balance</span>
+              <span class="tag px-3.5 py-2 text-sm">👔 Leadership</span>
+              <span class="tag px-3.5 py-2 text-sm">🏢 Environment</span>
             </div>
-          </div>
+          </section>
         </div>
 
-        <!-- Charts section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <!-- Mood Distribution -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-8">
-            <div class="flex items-center gap-3 mb-6">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
-                <span class="text-xl">📊</span>
+        <!-- Graphiques -->
+        <div class="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+          <!-- Mood Distribution : barre empilée 100 % + tableau des valeurs -->
+          <figure class="rounded-[2rem] border border-ink/10 bg-white p-6 sm:p-8">
+            <figcaption class="flex items-center justify-between">
+              <h2 class="font-display text-xl font-bold tracking-[-0.025em]">Mood Distribution</h2>
+              <Icon name="pie" class="h-5 w-5 text-ink/50" />
+            </figcaption>
+
+            <div class="relative mt-8">
+              <div class="flex h-11 w-full gap-[2px] overflow-hidden rounded-full bg-white" :class="moodTotal === 0 ? 'bg-ink/[0.06]' : ''">
+                <template v-for="segment in moodSegments" :key="segment.value">
+                  <div
+                    v-if="segment.count > 0"
+                    class="relative h-full min-w-[4px] outline-none transition-opacity duration-300 focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2"
+                    :class="hoveredMood && hoveredMood !== segment.value ? 'opacity-35' : 'opacity-100'"
+                    :style="{ flexGrow: segment.count, backgroundColor: segment.color }"
+                    tabindex="0"
+                    :aria-label="`${segment.label}: ${segment.count} (${segment.percent}%)`"
+                    @pointerenter="hoveredMood = segment.value"
+                    @pointerleave="hoveredMood = null"
+                    @focus="hoveredMood = segment.value"
+                    @blur="hoveredMood = null"
+                  />
+                </template>
               </div>
-              <h2 class="text-xl font-bold text-gray-900">Mood Distribution</h2>
+
+              <!-- Info-bulle : la valeur d'abord, puis le libellé -->
+              <div
+                v-if="hoveredSegment"
+                class="pointer-events-none absolute -top-2 left-1/2 z-10 -translate-x-1/2 -translate-y-full whitespace-nowrap rounded-xl bg-ink px-3 py-2 text-paper shadow-lg"
+                role="tooltip"
+              >
+                <span class="text-sm font-semibold">{{ hoveredSegment.count }} · {{ hoveredSegment.percent }}%</span>
+                <span class="ml-2 inline-flex items-center gap-1.5 text-xs text-paper/70">
+                  <span class="inline-block h-0.5 w-3 rounded-full" :style="{ backgroundColor: hoveredSegment.color }" />
+                  {{ hoveredSegment.label }}
+                </span>
+              </div>
             </div>
-            <canvas ref="moodChartCanvas"></canvas>
-          </div>
+
+            <table class="mt-8 w-full text-sm">
+              <thead class="sr-only">
+                <tr>
+                  <th scope="col">Mood</th>
+                  <th scope="col">Posts</th>
+                  <th scope="col">Share</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="segment in moodSegments"
+                  :key="segment.value"
+                  class="border-t border-ink/[0.07] transition-colors"
+                  :class="hoveredMood === segment.value ? 'bg-paper' : ''"
+                  @pointerenter="hoveredMood = segment.value"
+                  @pointerleave="hoveredMood = null"
+                >
+                  <th scope="row" class="py-2.5 text-left font-medium">
+                    <span class="flex items-center gap-3">
+                      <span class="h-3 w-1.5 rounded-full" :style="{ backgroundColor: segment.color }" aria-hidden="true" />
+                      <MoodFace :mood="segment.value" class="h-7 w-7" />
+                      {{ segment.label }}
+                    </span>
+                  </th>
+                  <td class="py-2.5 text-right font-semibold tabular-nums">{{ segment.count }}</td>
+                  <td class="w-20 py-2.5 text-right tabular-nums text-ink/60">{{ segment.percent }}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </figure>
 
           <!-- Trend Chart -->
-          <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 p-8">
-            <div class="flex items-center gap-3 mb-6">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
-                <span class="text-xl">📈</span>
-              </div>
-              <h2 class="text-xl font-bold text-gray-900">7-Day Trend</h2>
+          <figure class="flex flex-col rounded-[2rem] border border-ink/10 bg-white p-6 sm:p-8">
+            <figcaption class="flex items-center justify-between">
+              <h2 class="font-display text-xl font-bold tracking-[-0.025em]">7-Day Trend</h2>
+              <Icon name="activity" class="h-5 w-5 text-ink/50" />
+            </figcaption>
+            <div class="relative mt-8 h-72 flex-1 lg:h-auto lg:min-h-[18rem]">
+              <canvas ref="trendChartCanvas" aria-label="7-Day Trend, Average Mood" role="img"></canvas>
             </div>
-            <canvas ref="trendChartCanvas"></canvas>
-          </div>
+          </figure>
         </div>
 
         <!-- Department Analytics Table -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/40 shadow-lg shadow-orange-100/50 overflow-hidden">
-          <div class="p-8">
-            <div class="flex items-center gap-3 mb-6">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
-                <span class="text-xl">🏢</span>
-              </div>
-              <h2 class="text-xl font-bold text-gray-900">Department Breakdown</h2>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full">
-                <thead>
-                  <tr class="border-b-2 border-purple-100">
-                    <th class="text-left py-4 px-4 font-bold text-gray-700">Department</th>
-                    <th class="text-left py-4 px-4 font-bold text-gray-700">Team Size</th>
-                    <th class="text-left py-4 px-4 font-bold text-gray-700">Avg Mood</th>
-                    <th class="text-left py-4 px-4 font-bold text-gray-700">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="service in services"
-                    :key="service.id"
-                    class="border-b border-purple-50 hover:bg-purple-50/30 transition"
-                  >
-                    <td class="py-4 px-4 font-semibold text-gray-900">{{ service.name }}</td>
-                    <td class="py-4 px-4 text-gray-700">
-                      <span class="px-3 py-1 bg-purple-100/50 rounded-lg font-medium">
-                        {{ service.participant_count }} people
-                      </span>
-                    </td>
-                    <td class="py-4 px-4">
-                      <div class="flex items-center gap-3">
-                        <span class="text-3xl">{{ getServiceMoodEmoji(service.mood_average) }}</span>
-                        <span class="text-lg font-bold text-gray-900">{{ service.mood_average.toFixed(1) }}/5</span>
-                      </div>
-                    </td>
-                    <td class="py-4 px-4">
-                      <span
-                        :class="[
-                          'inline-flex items-center px-4 py-2 rounded-2xl text-sm font-semibold shadow-sm',
-                          service.mood_average >= 4 
-                            ? 'bg-gradient-to-r from-green-100 to-green-200 text-green-800' :
-                          service.mood_average >= 3 
-                            ? 'bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800' :
-                          'bg-gradient-to-r from-red-100 to-red-200 text-red-800'
-                        ]"
-                      >
-                        {{ service.mood_average >= 4 ? '✨ Excellent' : service.mood_average >= 3 ? '👍 Good' : '⚠️ Needs Support' }}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <section class="mt-3 overflow-hidden rounded-[2rem] border border-ink/10 bg-white">
+          <div class="flex items-center justify-between p-6 sm:p-8">
+            <h2 class="font-display text-xl font-bold tracking-[-0.025em]">Department Breakdown</h2>
+            <Icon name="building" class="h-5 w-5 text-ink/50" />
           </div>
-        </div>
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[40rem]">
+              <thead>
+                <tr class="border-y border-ink/10 bg-paper/60">
+                  <th scope="col" class="label px-6 py-4 text-left text-ink/55 sm:px-8">Department</th>
+                  <th scope="col" class="label px-4 py-4 text-left text-ink/55">Team Size</th>
+                  <th scope="col" class="label px-4 py-4 text-left text-ink/55">Avg Mood</th>
+                  <th scope="col" class="label px-4 py-4 text-left text-ink/55 sm:pr-8">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="service in services"
+                  :key="service.id"
+                  class="border-b border-ink/[0.07] transition-colors last:border-0 hover:bg-paper/70"
+                >
+                  <td class="px-6 py-4 font-semibold sm:px-8">{{ service.name }}</td>
+                  <td class="px-4 py-4 tabular-nums text-ink/70">
+                    {{ service.participant_count }} people
+                  </td>
+                  <td class="px-4 py-4">
+                    <div class="flex items-center gap-3">
+                      <MoodFace :mood="moodFromScore(service.mood_average)" class="h-8 w-8" />
+                      <span class="font-semibold tabular-nums">{{ service.mood_average.toFixed(1) }}/5</span>
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 sm:pr-8">
+                    <span
+                      :class="[
+                        'inline-flex items-center rounded-full px-3.5 py-1.5 text-sm font-semibold',
+                        service.mood_average >= 4
+                          ? 'bg-[#D9F5E4] text-[#14532D]' :
+                        service.mood_average >= 3
+                          ? 'bg-sun/45 text-ink' :
+                        'bg-coral/20 text-[#9F1239]'
+                      ]"
+                    >
+                      {{ service.mood_average >= 4 ? '✨ Excellent' : service.mood_average >= 3 ? '👍 Good' : '⚠️ Needs Support' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </template>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue';
-import { Chart, registerables } from 'chart.js';
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
+import { Chart, registerables, type Plugin } from 'chart.js';
 import { supabase } from '../lib/supabase';
 import { isManager } from '../lib/auth';
 import type { Database } from '../lib/database.types';
+import MoodFace from '../components/brand/MoodFace.vue';
+import Icon from '../components/ui/Icon.vue';
+import { moodFromScore, type MoodValue } from '../lib/moods';
 
 Chart.register(...registerables);
 
@@ -235,25 +273,72 @@ const stats = ref({
   weeklyChange: 0,
 });
 
-const moodChartCanvas = ref<HTMLCanvasElement | null>(null);
 const trendChartCanvas = ref<HTMLCanvasElement | null>(null);
+let trendChart: Chart | null = null;
 
-function getAverageMoodEmoji(): string {
-  const avg = stats.value.averageMood;
-  if (avg >= 4.5) return '😄';
-  if (avg >= 3.5) return '😊';
-  if (avg >= 2.5) return '😐';
-  if (avg >= 1.5) return '😟';
-  return '😢';
+const averageMood = computed(() => moodFromScore(stats.value.averageMood));
+
+// Teintes de la marque, prises un ton plus profond pour les graphiques
+// (palette validée : écarts suffisants en vision normale et daltonienne).
+const CHART_MOOD_COLORS: Record<MoodValue, string> = {
+  very_happy: '#E0A900',
+  happy: '#E2531D',
+  neutral: '#A58AFF',
+  sad: '#0FA5B8',
+  very_sad: '#6B3BE0',
+};
+
+const moodLabels: Record<MoodValue, string> = {
+  very_happy: 'Great',
+  happy: 'Good',
+  neutral: 'Okay',
+  sad: 'Bad',
+  very_sad: 'Awful',
+};
+
+const moodCounts = ref<Record<MoodValue, number>>({
+  very_happy: 0,
+  happy: 0,
+  neutral: 0,
+  sad: 0,
+  very_sad: 0,
+});
+
+const moodTotal = computed(() => Object.values(moodCounts.value).reduce((a, b) => a + b, 0));
+
+// Pourcentages arrondis au plus fort reste : leur somme fait toujours 100
+function roundedShares(values: number[]): number[] {
+  const total = values.reduce((a, b) => a + b, 0);
+  if (!total) return values.map(() => 0);
+  const raw = values.map((v) => (v / total) * 100);
+  const floors = raw.map(Math.floor);
+  let rest = 100 - floors.reduce((a, b) => a + b, 0);
+  raw
+    .map((r, i) => ({ i, frac: r - floors[i] }))
+    .sort((a, b) => b.frac - a.frac)
+    .forEach(({ i }) => {
+      if (rest > 0) {
+        floors[i]++;
+        rest--;
+      }
+    });
+  return floors;
 }
 
-function getServiceMoodEmoji(mood: number): string {
-  if (mood >= 4.5) return '😄';
-  if (mood >= 3.5) return '😊';
-  if (mood >= 2.5) return '😐';
-  if (mood >= 1.5) return '😟';
-  return '😢';
-}
+const moodSegments = computed(() => {
+  const values = Object.keys(moodLabels) as MoodValue[];
+  const shares = roundedShares(values.map((value) => moodCounts.value[value]));
+  return values.map((value, i) => ({
+    value,
+    label: moodLabels[value],
+    color: CHART_MOOD_COLORS[value],
+    count: moodCounts.value[value],
+    percent: shares[i],
+  }));
+});
+
+const hoveredMood = ref<MoodValue | null>(null);
+const hoveredSegment = computed(() => moodSegments.value.find((s) => s.value === hoveredMood.value) ?? null);
 
 async function loadData() {
   const { data: servicesData } = await supabase
@@ -284,7 +369,7 @@ async function loadData() {
 
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  
+
   const { data: activeUsers } = await supabase
     .from('posts')
     .select('user_id')
@@ -298,12 +383,12 @@ async function loadData() {
 
   const twoWeeksAgo = new Date();
   twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
-  
+
   const { data: lastWeekMoods } = await supabase
     .from('posts')
     .select('mood')
     .gte('created_at', oneWeekAgo.toISOString());
-    
+
   const { data: previousWeekMoods } = await supabase
     .from('posts')
     .select('mood')
@@ -322,7 +407,7 @@ async function loadData() {
       }
     });
     stats.value.averageMood = moodScores.reduce((a, b) => a + b, 0) / moodScores.length;
-    
+
     if (lastWeekMoods && previousWeekMoods && previousWeekMoods.length > 0) {
       const lastWeekScores = lastWeekMoods.map((p: any) => {
         switch (p.mood) {
@@ -334,7 +419,7 @@ async function loadData() {
           default: return 3;
         }
       });
-      
+
       const previousWeekScores = previousWeekMoods.map((p: any) => {
         switch (p.mood) {
           case 'very_happy': return 5;
@@ -345,10 +430,10 @@ async function loadData() {
           default: return 3;
         }
       });
-      
+
       const lastWeekAvg = lastWeekScores.reduce((a, b) => a + b, 0) / lastWeekScores.length;
       const previousWeekAvg = previousWeekScores.reduce((a, b) => a + b, 0) / previousWeekScores.length;
-      
+
       if (previousWeekAvg > 0) {
         stats.value.weeklyChange = ((lastWeekAvg - previousWeekAvg) / previousWeekAvg) * 100;
       }
@@ -361,9 +446,7 @@ async function loadData() {
 }
 
 async function createMoodChart(moodsData: any[]) {
-  if (!moodChartCanvas.value) return;
-
-  const moodCounts = {
+  const counts = {
     very_happy: 0,
     happy: 0,
     neutral: 0,
@@ -372,51 +455,32 @@ async function createMoodChart(moodsData: any[]) {
   };
 
   moodsData.forEach(p => {
-    if (p.mood in moodCounts) {
-      moodCounts[p.mood as keyof typeof moodCounts]++;
+    if (p.mood in counts) {
+      counts[p.mood as keyof typeof counts]++;
     }
   });
 
-  new Chart(moodChartCanvas.value, {
-    type: 'doughnut',
-    data: {
-      labels: ['😄 Great', '😊 Good', '😐 Okay', '😟 Bad', '😢 Awful'],
-      datasets: [{
-        data: [
-          moodCounts.very_happy,
-          moodCounts.happy,
-          moodCounts.neutral,
-          moodCounts.sad,
-          moodCounts.very_sad,
-        ],
-        backgroundColor: [
-          '#10b981',
-          '#3b82f6',
-          '#f59e0b',
-          '#f97316',
-          '#ef4444',
-        ],
-        borderWidth: 0,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            padding: 15,
-            font: {
-              size: 13,
-              weight: '600'
-            }
-          }
-        },
-      },
-    },
-  });
+  moodCounts.value = counts;
 }
+
+// Réticule vertical qui suit le jour survolé
+const crosshair: Plugin<'line'> = {
+  id: 'moodflowCrosshair',
+  afterDatasetsDraw(chart) {
+    const active = chart.tooltip?.getActiveElements?.() ?? [];
+    if (!active.length) return;
+    const { ctx, chartArea } = chart;
+    const x = active[0].element.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, chartArea.top);
+    ctx.lineTo(x, chartArea.bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(26, 14, 43, 0.25)';
+    ctx.stroke();
+    ctx.restore();
+  },
+};
 
 async function createTrendChart() {
   if (!trendChartCanvas.value) return;
@@ -458,59 +522,84 @@ async function createTrendChart() {
     }
   }
 
-  new Chart(trendChartCanvas.value, {
+  const axisFont = { family: '"DM Mono", ui-monospace, monospace', size: 11 };
+
+  trendChart?.destroy();
+  trendChart = new Chart(trendChartCanvas.value, {
     type: 'line',
     data: {
       labels,
       datasets: [{
         label: 'Average Mood',
         data,
-        borderColor: '#8b5cf6',
-        backgroundColor: 'rgba(139, 92, 246, 0.1)',
-        tension: 0.4,
+        borderColor: '#6B3BE0',
+        backgroundColor: 'rgba(107, 59, 224, 0.1)',
+        cubicInterpolationMode: 'monotone',
         fill: true,
-        borderWidth: 3,
-        pointBackgroundColor: '#8b5cf6',
-        pointBorderColor: '#fff',
+        borderWidth: 2,
+        borderCapStyle: 'round',
+        borderJoinStyle: 'round',
+        pointBackgroundColor: '#6B3BE0',
+        pointBorderColor: '#FFFFFF',
         pointBorderWidth: 2,
-        pointRadius: 5,
-        pointHoverRadius: 7,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        pointHitRadius: 16,
       }],
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
       scales: {
         y: {
           beginAtZero: true,
           max: 5,
           ticks: {
             stepSize: 1,
-            font: {
-              weight: '600'
-            }
+            color: '#8A7F93',
+            font: axisFont,
+            padding: 8,
           },
           grid: {
-            color: 'rgba(139, 92, 246, 0.1)'
-          }
+            color: '#EFE8E0',
+            drawTicks: false,
+          },
+          border: { display: false },
         },
         x: {
           grid: {
             display: false
           },
           ticks: {
-            font: {
-              weight: '600'
-            }
-          }
+            color: '#8A7F93',
+            font: axisFont,
+          },
+          border: { color: '#DDD4CA' },
         }
       },
       plugins: {
         legend: {
           display: false,
         },
+        tooltip: {
+          backgroundColor: '#1A0E2B',
+          titleColor: 'rgba(255, 248, 239, 0.65)',
+          titleFont: axisFont,
+          bodyColor: '#FFF8EF',
+          bodyFont: { family: '"Instrument Sans Variable", system-ui, sans-serif', size: 14, weight: 600 },
+          padding: 12,
+          cornerRadius: 12,
+          boxWidth: 12,
+          boxHeight: 2,
+          boxPadding: 6,
+          callbacks: {
+            label: (context) => `${(context.parsed.y ?? 0).toFixed(1)}/5  Average Mood`,
+          },
+        },
       },
     },
+    plugins: [crosshair],
   });
 }
 
@@ -520,5 +609,9 @@ onMounted(async () => {
     await nextTick();
     await loadData();
   }
+});
+
+onUnmounted(() => {
+  trendChart?.destroy();
 });
 </script>

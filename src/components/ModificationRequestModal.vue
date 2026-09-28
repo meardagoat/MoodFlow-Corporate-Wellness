@@ -1,116 +1,130 @@
 <template>
-  <div v-if="isOpen" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-      <div class="p-6">
-        <!-- Header -->
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center shadow-lg">
-            <span class="text-2xl">📝</span>
-          </div>
-          <div>
-            <h2 class="text-xl font-bold text-gray-900">Demande de Modification</h2>
-            <p class="text-sm text-gray-600">Demandez un changement d'information</p>
+  <Teleport to="body">
+    <Transition
+      enter-active-class="transition duration-300 ease-out-expo"
+      leave-active-class="transition duration-200 ease-in"
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
+    >
+      <div v-if="isOpen" class="modal-backdrop" @click.self="closeModal">
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modification-title">
+          <div class="p-6 sm:p-8">
+            <!-- Header -->
+            <div class="flex items-center gap-4">
+              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-sun">
+                <Icon name="pen" class="h-5 w-5" />
+              </span>
+              <div>
+                <h2 id="modification-title" class="display text-2xl tracking-[-0.04em]">Demande de Modification</h2>
+                <p class="text-sm text-ink/60">Demandez un changement d'information</p>
+              </div>
+            </div>
+
+            <!-- Form -->
+            <form @submit.prevent="submitRequest" class="mt-8 space-y-5">
+              <!-- Type de demande -->
+              <div>
+                <label for="modification-type" class="field-label">
+                  Type de modification
+                </label>
+                <select
+                  id="modification-type"
+                  v-model="requestType"
+                  required
+                  class="field"
+                >
+                  <option value="">Sélectionnez un type</option>
+                  <option value="email_change">Changement d'email</option>
+                  <option value="service_change">Changement de département</option>
+                  <option value="display_name_change">Changement de nom d'affichage</option>
+                </select>
+              </div>
+
+              <!-- Valeur actuelle -->
+              <div>
+                <label for="modification-current" class="field-label">
+                  Valeur actuelle
+                </label>
+                <input
+                  id="modification-current"
+                  v-model="currentValue"
+                  type="text"
+                  required
+                  readonly
+                  class="field cursor-not-allowed bg-paper-deep/60 text-ink/60"
+                />
+              </div>
+
+              <!-- Nouvelle valeur -->
+              <div>
+                <label for="modification-new" class="field-label">
+                  Nouvelle valeur
+                </label>
+                <input
+                  id="modification-new"
+                  v-model="requestedValue"
+                  type="text"
+                  required
+                  class="field"
+                  :placeholder="getPlaceholder()"
+                />
+              </div>
+
+              <!-- Raison -->
+              <div>
+                <label for="modification-reason" class="field-label">
+                  Raison de la demande
+                </label>
+                <textarea
+                  id="modification-reason"
+                  v-model="reason"
+                  required
+                  rows="3"
+                  class="field resize-none"
+                  placeholder="Expliquez pourquoi vous souhaitez ce changement..."
+                ></textarea>
+              </div>
+
+              <!-- Error message -->
+              <div v-if="error" class="notice notice-error" role="alert">
+                {{ error }}
+              </div>
+
+              <!-- Success message -->
+              <div v-if="success" class="notice notice-success" role="status">
+                {{ success }}
+              </div>
+
+              <!-- Actions -->
+              <div class="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  @click="closeModal"
+                  class="btn btn-outline flex-1"
+                >
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  :disabled="submitting"
+                  class="btn btn-ink flex-1"
+                >
+                  {{ submitting ? 'Envoi...' : 'Envoyer la demande' }}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-
-        <!-- Form -->
-        <form @submit.prevent="submitRequest" class="space-y-4">
-          <!-- Type de demande -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Type de modification
-            </label>
-            <select
-              v-model="requestType"
-              required
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition"
-            >
-              <option value="">Sélectionnez un type</option>
-              <option value="email_change">Changement d'email</option>
-              <option value="service_change">Changement de département</option>
-              <option value="display_name_change">Changement de nom d'affichage</option>
-            </select>
-          </div>
-
-          <!-- Valeur actuelle -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Valeur actuelle
-            </label>
-            <input
-              v-model="currentValue"
-              type="text"
-              required
-              readonly
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl bg-gray-50 text-gray-600 cursor-not-allowed"
-            />
-          </div>
-
-          <!-- Nouvelle valeur -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Nouvelle valeur
-            </label>
-            <input
-              v-model="requestedValue"
-              type="text"
-              required
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition"
-              :placeholder="getPlaceholder()"
-            />
-          </div>
-
-          <!-- Raison -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Raison de la demande
-            </label>
-            <textarea
-              v-model="reason"
-              required
-              rows="3"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition resize-none"
-              placeholder="Expliquez pourquoi vous souhaitez ce changement..."
-            ></textarea>
-          </div>
-
-          <!-- Error message -->
-          <div v-if="error" class="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
-            {{ error }}
-          </div>
-
-          <!-- Success message -->
-          <div v-if="success" class="bg-green-50 border-2 border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm">
-            {{ success }}
-          </div>
-
-          <!-- Actions -->
-          <div class="flex gap-3 pt-4">
-            <button
-              type="button"
-              @click="closeModal"
-              class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition font-medium"
-            >
-              Annuler
-            </button>
-            <button
-              type="submit"
-              :disabled="submitting"
-              class="flex-1 px-4 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl hover:from-yellow-600 hover:to-yellow-700 transition font-medium disabled:opacity-50"
-            >
-              {{ submitting ? 'Envoi...' : 'Envoyer la demande' }}
-            </button>
-          </div>
-        </form>
       </div>
-    </div>
-  </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { supabase } from '../lib/supabase';
 import { currentProfile, currentUser } from '../lib/auth';
+import Icon from './ui/Icon.vue';
 
 const props = defineProps<{
   isOpen: boolean;
@@ -133,7 +147,7 @@ const success = ref('');
 // Computed pour la valeur actuelle
 const currentProfileValue = computed(() => {
   if (!currentProfile.value) return '';
-  
+
   switch (requestType.value) {
     case 'email_change':
       return currentUser.value?.email || '';
@@ -198,7 +212,7 @@ async function submitRequest() {
     if (submitError) throw submitError;
 
     success.value = 'Demande envoyée avec succès !';
-    
+
     setTimeout(() => {
       emit('success');
       closeModal();

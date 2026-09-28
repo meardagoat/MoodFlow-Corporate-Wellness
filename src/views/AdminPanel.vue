@@ -1,101 +1,61 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-purple-50">
-    <!-- Header Super Admin -->
-    <div class="sticky top-0 z-30 backdrop-blur-xl bg-white/70 border-b border-white/20 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-        <div class="flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2 sm:gap-4">
-            <!-- Logo Super Admin -->
-            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-200">
-              <span class="text-2xl sm:text-3xl">👑</span>
-            </div>
-            <div>
-              <h1 class="text-xl sm:text-3xl font-black bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient-flow">
-                Super Admin
-              </h1>
-              <p class="text-xs sm:text-sm text-gray-600 mt-0.5 hidden sm:block">Gestion complète de l'organisation</p>
-            </div>
-      </div>
-
-          <!-- Status Badge -->
-          <div class="flex items-center gap-2 sm:gap-3">
-            <div class="hidden sm:block px-3 sm:px-4 py-1.5 sm:py-2 bg-red-100/50 rounded-xl sm:rounded-2xl border border-red-200">
-              <span class="text-xs sm:text-sm font-semibold text-red-700">System Admin</span>
-            </div>
-            <div class="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
-      <!-- Stats Cards Premium -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
-        <!-- Total Users -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Total</h3>
-            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-lg sm:text-2xl">👥</span>
-            </div>
-          </div>
-          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.totalUsers }}</p>
-          <p class="text-xs text-gray-500 hidden sm:block">Active members</p>
-        </div>
-
-        <!-- Super Admins -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Admins</h3>
-            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-lg sm:text-2xl">👑</span>
-            </div>
-          </div>
-          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.superAdmins }}</p>
-          <p class="text-xs text-gray-500 hidden sm:block">System administrators</p>
-        </div>
-
-        <!-- Managers -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-orange-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Managers</h3>
-            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-lg sm:text-2xl">👔</span>
-            </div>
-          </div>
-          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.managers }}</p>
-          <p class="text-xs text-gray-500 hidden sm:block">Team leaders</p>
-        </div>
-
-        <!-- Employees -->
-        <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-purple-100/50 p-3 sm:p-6 hover:shadow-2xl transition-all group">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-4 gap-2">
-            <h3 class="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide">Employees</h3>
-            <div class="w-8 h-8 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-              <span class="text-lg sm:text-2xl">👤</span>
-            </div>
-          </div>
-          <p class="text-2xl sm:text-3xl font-bold text-gray-900 mb-0.5 sm:mb-1">{{ stats.employees }}</p>
-          <p class="text-xs text-gray-500 hidden sm:block">Team members</p>
-        </div>
-      </div>
-
-      <!-- Create User Section Premium -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-4 sm:p-8 mb-6 sm:mb-8">
-        <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg">
-            <span class="text-xl sm:text-2xl">➕</span>
-          </div>
+  <div class="min-h-screen">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10">
+      <!-- En-tête Super Admin -->
+      <header class="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div class="flex items-center gap-4 sm:gap-5">
+          <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-coral sm:h-16 sm:w-16">
+            <Icon name="crown" class="h-7 w-7" />
+          </span>
           <div>
-            <h2 class="text-lg sm:text-2xl font-bold text-gray-900">Créer un utilisateur</h2>
-            <p class="text-xs sm:text-base text-gray-600 hidden sm:block">Ajoutez des membres à votre organisation</p>
+            <h1 class="display text-display-md">Super Admin</h1>
+            <p class="mt-1 text-ink/65">Gestion complète de l'organisation</p>
           </div>
         </div>
-        
-        <form @submit.prevent="createUserHandler" class="space-y-4 sm:space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+
+        <!-- Status Badge -->
+        <div class="chip self-start sm:self-auto">
+          <span class="relative flex h-2.5 w-2.5" aria-hidden="true">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22C55E] opacity-60" />
+            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22C55E]" />
+          </span>
+          System Admin
+        </div>
+      </header>
+
+      <!-- Compteurs -->
+      <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <section
+          v-for="tile in statTiles"
+          :key="tile.label"
+          class="flex min-h-[9.5rem] flex-col rounded-[1.75rem] p-5 sm:min-h-[11rem] sm:p-6"
+          :style="{ backgroundColor: tile.color }"
+        >
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-semibold">{{ tile.label }}</h2>
+            <Icon :name="tile.icon" class="h-5 w-5" />
+          </div>
+          <p class="display mt-auto text-5xl leading-none tracking-[-0.05em]">{{ tile.value }}</p>
+          <p class="mt-2 hidden text-xs text-ink/65 sm:block">{{ tile.caption }}</p>
+        </section>
+      </div>
+
+      <!-- Créer un utilisateur -->
+      <section class="mt-3 rounded-[2rem] border border-ink/10 bg-white p-5 sm:p-8">
+        <div class="flex items-center gap-4">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-sun">
+            <Icon name="user-plus" class="h-5 w-5" />
+          </span>
+          <div>
+            <h2 class="display text-2xl tracking-[-0.04em] sm:text-3xl">Créer un utilisateur</h2>
+            <p class="hidden text-ink/60 sm:block">Ajoutez des membres à votre organisation</p>
+          </div>
+        </div>
+
+        <form @submit.prevent="createUserHandler" class="mt-8 space-y-6">
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div>
-              <label for="newEmail" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="newEmail" class="field-label">
                 Email
               </label>
               <input
@@ -103,13 +63,13 @@
                 v-model="newUser.email"
                 type="email"
                 required
-                class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                class="field"
                 placeholder="nouvel.utilisateur@entreprise.com"
               />
             </div>
 
             <div>
-              <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="newPassword" class="field-label">
                 Mot de passe temporaire
               </label>
               <input
@@ -118,13 +78,14 @@
                 type="password"
                 required
                 minlength="6"
-                class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                autocomplete="new-password"
+                class="field"
                 placeholder="••••••••"
               />
             </div>
 
             <div>
-              <label for="newService" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="newService" class="field-label">
                 Département
               </label>
               <input
@@ -132,20 +93,20 @@
                 v-model="newUser.service"
                 type="text"
                 required
-                class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                class="field"
                 placeholder="ex: Ingénierie, Ventes, RH"
               />
             </div>
 
             <div>
-              <label for="newRole" class="block text-sm font-medium text-gray-700 mb-2">
+              <label for="newRole" class="field-label">
                 Rôle
               </label>
               <select
                 id="newRole"
                 v-model="newUser.role"
                 required
-                class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+                class="field"
               >
                 <option value="employee">👤 Employé</option>
                 <option value="manager">👔 Manager</option>
@@ -154,190 +115,188 @@
             </div>
           </div>
 
-          <div v-if="createError" class="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm animate-shake">
+          <div v-if="createError" class="notice notice-error animate-shake" role="alert">
             {{ createError }}
           </div>
 
-          <div v-if="createSuccess" class="bg-green-50 border-2 border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm">
+          <div v-if="createSuccess" class="notice notice-success" role="status">
             ✅ Utilisateur créé avec succès !
           </div>
 
           <button
             type="submit"
             :disabled="creating"
-            class="group relative w-full md:w-auto px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            class="btn btn-ink w-full md:w-auto"
           >
-            <span class="relative z-10 flex items-center justify-center gap-2">
-              <span v-if="creating" class="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
+            <span v-if="creating" class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
             {{ creating ? 'Création...' : 'Créer l\'utilisateur' }}
-            </span>
-            <div class="absolute inset-0 bg-gradient-to-r from-red-600 to-orange-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
         </form>
-      </div>
+      </section>
 
-      <!-- Modification Requests Section -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 p-4 sm:p-8 mb-6 sm:mb-8">
-        <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center shadow-lg">
-            <span class="text-xl sm:text-2xl">📝</span>
-          </div>
+      <!-- Demandes de modification -->
+      <section class="mt-3 rounded-[2rem] border border-ink/10 bg-white p-5 sm:p-8">
+        <div class="flex items-center gap-4">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-lilac">
+            <Icon name="pen" class="h-5 w-5" />
+          </span>
           <div>
-            <h2 class="text-lg sm:text-2xl font-bold text-gray-900">Demandes</h2>
-            <p class="text-xs sm:text-base text-gray-600 hidden sm:block">Traitez les demandes de changement d'informations</p>
+            <h2 class="display text-2xl tracking-[-0.04em] sm:text-3xl">Demandes</h2>
+            <p class="hidden text-ink/60 sm:block">Traitez les demandes de changement d'informations</p>
           </div>
         </div>
 
         <!-- Stats des demandes -->
-        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
-          <div class="bg-yellow-50 border border-yellow-200 rounded-lg sm:rounded-xl p-2 sm:p-4">
-            <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-3">
-              <span class="text-lg sm:text-2xl">⏳</span>
-              <div class="text-center sm:text-left">
-                <p class="text-xs sm:text-sm text-yellow-700">Attente</p>
-                <p class="text-xl sm:text-2xl font-bold text-yellow-800">{{ pendingRequests.length }}</p>
+        <div class="mt-6 grid grid-cols-3 gap-2 sm:gap-3">
+          <div class="rounded-2xl bg-sun/35 p-3 sm:p-4">
+            <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+              <Icon name="hourglass" class="h-5 w-5" />
+              <div>
+                <p class="text-xs sm:text-sm">Attente</p>
+                <p class="display text-2xl leading-none sm:text-3xl">{{ pendingRequests.length }}</p>
               </div>
             </div>
           </div>
-          <div class="bg-green-50 border border-green-200 rounded-lg sm:rounded-xl p-2 sm:p-4">
-            <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-3">
-              <span class="text-lg sm:text-2xl">✅</span>
-              <div class="text-center sm:text-left">
-                <p class="text-xs sm:text-sm text-green-700">Validées</p>
-                <p class="text-xl sm:text-2xl font-bold text-green-800">{{ approvedRequests.length }}</p>
+          <div class="rounded-2xl bg-[#D9F5E4] p-3 text-[#14532D] sm:p-4">
+            <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+              <Icon name="check" class="h-5 w-5" />
+              <div>
+                <p class="text-xs sm:text-sm">Validées</p>
+                <p class="display text-2xl leading-none sm:text-3xl">{{ approvedRequests.length }}</p>
               </div>
             </div>
           </div>
-          <div class="bg-red-50 border border-red-200 rounded-lg sm:rounded-xl p-2 sm:p-4">
-            <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-3">
-              <span class="text-lg sm:text-2xl">❌</span>
-              <div class="text-center sm:text-left">
-                <p class="text-xs sm:text-sm text-red-700">Rejetées</p>
-                <p class="text-xl sm:text-2xl font-bold text-red-800">{{ rejectedRequests.length }}</p>
+          <div class="rounded-2xl bg-coral/20 p-3 text-[#9F1239] sm:p-4">
+            <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
+              <Icon name="x" class="h-5 w-5" />
+              <div>
+                <p class="text-xs sm:text-sm">Rejetées</p>
+                <p class="display text-2xl leading-none sm:text-3xl">{{ rejectedRequests.length }}</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Liste des demandes en attente -->
-        <div v-if="pendingRequests.length > 0" class="space-y-3 sm:space-y-4">
-          <h3 class="text-base sm:text-lg font-semibold text-gray-900">Demandes en attente</h3>
-          <div v-for="request in pendingRequests" :key="request.id" class="bg-yellow-50 border border-yellow-200 rounded-lg sm:rounded-xl p-3 sm:p-6">
-            <div class="flex items-start justify-between mb-4">
-              <div class="flex-1">
-                <div class="flex items-center gap-3 mb-2">
-                  <span class="px-3 py-1 bg-yellow-200 text-yellow-800 rounded-full text-sm font-medium">
-                    {{ getRequestTypeLabel(request.request_type) }}
-                  </span>
-                  <span class="text-sm text-gray-600">{{ formatDate(request.created_at) }}</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <p class="text-sm text-gray-600">Valeur actuelle:</p>
-                    <p class="font-medium text-gray-900">{{ request.current_value }}</p>
-                  </div>
-                  <div>
-                    <p class="text-sm text-gray-600">Nouvelle valeur demandée:</p>
-                    <p class="font-medium text-gray-900">{{ request.requested_value }}</p>
-                  </div>
-                </div>
-                <div class="mt-3">
-                  <p class="text-sm text-gray-600">Raison:</p>
-                  <p class="text-gray-900">{{ request.reason }}</p>
-                </div>
-                <div class="mt-3">
-                  <p class="text-sm text-gray-600">Demandeur:</p>
-                  <p class="font-medium text-gray-900">{{ request.user_email || 'Email non disponible' }}</p>
-                </div>
+        <div v-if="pendingRequests.length > 0" class="mt-8 space-y-3">
+          <h3 class="label text-ink/55">Demandes en attente</h3>
+          <article v-for="request in pendingRequests" :key="request.id" class="rounded-[1.5rem] border border-ink/10 bg-paper p-4 sm:p-6">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="rounded-full bg-sun px-3 py-1 text-sm font-semibold">
+                {{ getRequestTypeLabel(request.request_type) }}
+              </span>
+              <span class="font-mono text-xs text-ink/55">{{ formatDate(request.created_at) }}</span>
+            </div>
+            <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <p class="text-sm text-ink/55">Valeur actuelle:</p>
+                <p class="font-medium">{{ request.current_value }}</p>
+              </div>
+              <div>
+                <p class="text-sm text-ink/55">Nouvelle valeur demandée:</p>
+                <p class="font-medium">{{ request.requested_value }}</p>
               </div>
             </div>
-            
+            <div class="mt-3">
+              <p class="text-sm text-ink/55">Raison:</p>
+              <p>{{ request.reason }}</p>
+            </div>
+            <div class="mt-3">
+              <p class="text-sm text-ink/55">Demandeur:</p>
+              <p class="font-medium">{{ request.user_email || 'Email non disponible' }}</p>
+            </div>
+
             <!-- Actions -->
-            <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <div class="mt-5 flex flex-col gap-2 sm:flex-row">
               <button
+                type="button"
                 @click="processRequest(request.id, 'approved')"
-                class="flex-1 px-3 sm:px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-medium text-sm sm:text-base"
+                class="btn btn-sm flex-1 bg-[#22C55E] text-ink hover:bg-ink hover:text-paper"
               >
-                ✅ <span class="hidden sm:inline">Approuver</span>
+                <Icon name="check" class="h-4 w-4" />
+                <span class="hidden sm:inline">Approuver</span>
               </button>
               <button
+                type="button"
                 @click="processRequest(request.id, 'rejected')"
-                class="flex-1 px-3 sm:px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium text-sm sm:text-base"
+                class="btn btn-sm btn-danger flex-1"
               >
-                ❌ <span class="hidden sm:inline">Rejeter</span>
+                <Icon name="x" class="h-4 w-4" />
+                <span class="hidden sm:inline">Rejeter</span>
               </button>
               <button
+                type="button"
                 @click="showRequestDetails(request)"
-                class="flex-1 px-3 sm:px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-medium text-sm sm:text-base"
+                class="btn btn-sm btn-outline flex-1"
               >
-                👁️ <span class="hidden sm:inline">Détails</span>
+                <Icon name="eye" class="h-4 w-4" />
+                <span class="hidden sm:inline">Détails</span>
               </button>
             </div>
+          </article>
+        </div>
+
+        <div v-else class="mt-8 flex flex-col items-center rounded-[1.5rem] bg-paper py-10 text-center">
+          <MoodFace mood="very_happy" class="h-14 w-14" />
+          <p class="mt-4 text-ink/65">Aucune demande en attente</p>
+        </div>
+      </section>
+
+      <!-- Utilisateurs -->
+      <section class="mt-3 overflow-hidden rounded-[2rem] border border-ink/10 bg-white">
+        <div class="flex items-center gap-4 p-5 sm:p-8">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-aqua">
+            <Icon name="users" class="h-5 w-5" />
+          </span>
+          <div>
+            <h2 class="display text-2xl tracking-[-0.04em] sm:text-3xl">Utilisateurs</h2>
+            <p class="hidden text-ink/60 sm:block">Gérez les rôles et permissions</p>
           </div>
         </div>
 
-        <div v-else class="text-center py-8">
-          <span class="text-4xl mb-4 block">🎉</span>
-          <p class="text-gray-600">Aucune demande en attente</p>
-        </div>
-      </div>
-
-      <!-- Users Management Table Premium -->
-      <div class="bg-white/60 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/40 shadow-xl shadow-red-100/50 overflow-hidden">
-        <div class="p-4 sm:p-6 border-b border-white/20">
-          <div class="flex items-center gap-3 sm:gap-4">
-            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-              <span class="text-xl sm:text-2xl">👥</span>
-            </div>
-            <div>
-              <h2 class="text-lg sm:text-2xl font-bold text-gray-900">Utilisateurs</h2>
-              <p class="text-xs sm:text-base text-gray-600 hidden sm:block">Gérez les rôles et permissions</p>
-            </div>
-          </div>
-        </div>
-        
         <!-- Desktop Table -->
-        <div class="hidden md:block overflow-x-auto">
+        <div class="hidden overflow-x-auto md:block">
           <table class="w-full">
-            <thead class="bg-gray-50/80">
+            <thead class="border-y border-ink/10 bg-paper/60">
               <tr>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Utilisateur</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Département</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rôle</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Créé</th>
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <th scope="col" class="label px-8 py-4 text-left text-ink/55">Utilisateur</th>
+                <th scope="col" class="label px-4 py-4 text-left text-ink/55">Département</th>
+                <th scope="col" class="label px-4 py-4 text-left text-ink/55">Rôle</th>
+                <th scope="col" class="label px-4 py-4 text-left text-ink/55">Créé</th>
+                <th scope="col" class="label px-4 py-4 text-left text-ink/55 pr-8">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200/50">
-              <tr v-for="user in users" :key="user.id" class="hover:bg-white/40 transition-colors">
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center mr-3">
-                      <span class="text-sm font-bold text-gray-600">{{ user.email?.charAt(0)?.toUpperCase() || 'U' }}</span>
-                    </div>
+            <tbody class="divide-y divide-ink/[0.07]">
+              <tr v-for="user in users" :key="user.id" class="transition-colors hover:bg-paper/70">
+                <td class="whitespace-nowrap px-8 py-4">
+                  <div class="flex items-center gap-3">
+                    <span class="display grid h-10 w-10 place-items-center rounded-full bg-paper-deep text-sm">
+                      {{ user.email?.charAt(0)?.toUpperCase() || 'U' }}
+                    </span>
                     <div>
-                      <div class="text-sm font-medium text-gray-900">{{ user.email || 'No email' }}</div>
-                      <div class="text-sm text-gray-500">{{ user.display_name || 'No display name' }}</div>
+                      <div class="text-sm font-semibold">{{ user.email || 'No email' }}</div>
+                      <div class="text-sm text-ink/55">{{ user.display_name || 'No display name' }}</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <span class="px-3 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
+                <td class="whitespace-nowrap px-4 py-4">
+                  <span class="tag">
                     {{ user.service || 'No service' }}
                   </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="whitespace-nowrap px-4 py-4">
                   <span :class="getRoleBadgeClass(user.role)">
                     {{ getRoleLabel(user.role) }}
                   </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td class="whitespace-nowrap px-4 py-4 font-mono text-xs text-ink/55">
                   {{ user.created_at ? formatDate(user.created_at) : 'No date' }}
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <td class="whitespace-nowrap px-4 py-4 pr-8">
                   <button
+                    type="button"
                     @click="editUser(user)"
-                    class="text-red-600 hover:text-red-900 transition-colors"
+                    class="link text-sm font-semibold"
                   >
                     Modifier
                   </button>
@@ -348,47 +307,46 @@
         </div>
 
         <!-- Mobile Cards -->
-        <div class="md:hidden p-4 space-y-3">
-          <div v-for="user in users" :key="user.id" class="bg-white rounded-xl p-4 shadow border border-gray-200">
-            <div class="flex items-start justify-between mb-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                  <span class="text-sm font-bold text-gray-600">{{ user.email?.charAt(0)?.toUpperCase() || 'U' }}</span>
-                </div>
-                <div>
-                  <div class="text-sm font-medium text-gray-900">{{ user.email || 'No email' }}</div>
-                  <div class="text-xs text-gray-500">{{ user.display_name || 'No name' }}</div>
-                </div>
+        <div class="space-y-2 px-4 pb-4 md:hidden">
+          <div v-for="user in users" :key="user.id" class="rounded-[1.5rem] bg-paper p-4">
+            <div class="flex items-center gap-3">
+              <span class="display grid h-10 w-10 shrink-0 place-items-center rounded-full bg-paper-deep text-sm">
+                {{ user.email?.charAt(0)?.toUpperCase() || 'U' }}
+              </span>
+              <div class="min-w-0">
+                <div class="truncate text-sm font-semibold">{{ user.email || 'No email' }}</div>
+                <div class="text-xs text-ink/55">{{ user.display_name || 'No name' }}</div>
               </div>
             </div>
-            
-            <div class="grid grid-cols-2 gap-2 mb-3">
+
+            <div class="mt-4 grid grid-cols-2 gap-2">
               <div>
-                <p class="text-xs text-gray-500">Département</p>
-                <span class="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
+                <p class="mb-1 text-xs text-ink/55">Département</p>
+                <span class="tag">
                   {{ user.service || 'No service' }}
                 </span>
               </div>
               <div>
-                <p class="text-xs text-gray-500">Rôle</p>
+                <p class="mb-1 text-xs text-ink/55">Rôle</p>
                 <span :class="getRoleBadgeClass(user.role)">
                   {{ getRoleLabel(user.role) }}
                 </span>
               </div>
             </div>
-            
-            <div class="flex justify-between items-center pt-2 border-t border-gray-200">
-              <span class="text-xs text-gray-500">{{ user.created_at ? formatDate(user.created_at) : 'No date' }}</span>
+
+            <div class="mt-4 flex items-center justify-between border-t border-ink/10 pt-3">
+              <span class="font-mono text-xs text-ink/55">{{ user.created_at ? formatDate(user.created_at) : 'No date' }}</span>
               <button
+                type="button"
                 @click="editUser(user)"
-                class="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-medium hover:bg-red-600 transition"
+                class="btn btn-sm btn-ink"
               >
                 Modifier
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </div>
 </template>
@@ -398,6 +356,8 @@ import { ref, onMounted, computed } from 'vue';
 import { supabase } from '../lib/supabase';
 import { createUser } from '../lib/auth';
 import { isSystemAdmin } from '../lib/auth';
+import MoodFace from '../components/brand/MoodFace.vue';
+import Icon, { type IconName } from '../components/ui/Icon.vue';
 
 const users = ref<any[]>([]);
 const modificationRequests = ref<any[]>([]);
@@ -407,6 +367,13 @@ const stats = ref({
   managers: 0,
   employees: 0
 });
+
+const statTiles = computed<{ label: string; value: number; caption: string; icon: IconName; color: string }[]>(() => [
+  { label: 'Total', value: stats.value.totalUsers, caption: 'Active members', icon: 'users', color: '#FED94E' },
+  { label: 'Admins', value: stats.value.superAdmins, caption: 'System administrators', icon: 'crown', color: '#FA4D52' },
+  { label: 'Managers', value: stats.value.managers, caption: 'Team leaders', icon: 'badge', color: '#FF8944' },
+  { label: 'Employees', value: stats.value.employees, caption: 'Team members', icon: 'user', color: '#CDB8FF' },
+]);
 
 const newUser = ref({
   email: '',
@@ -420,13 +387,13 @@ const createError = ref('');
 const createSuccess = ref(false);
 
 // Computed pour les demandes
-const pendingRequests = computed(() => 
+const pendingRequests = computed(() =>
   modificationRequests.value.filter(req => req.status === 'pending')
 );
-const approvedRequests = computed(() => 
+const approvedRequests = computed(() =>
   modificationRequests.value.filter(req => req.status === 'approved')
 );
-const rejectedRequests = computed(() => 
+const rejectedRequests = computed(() =>
   modificationRequests.value.filter(req => req.status === 'rejected')
 );
 
@@ -441,7 +408,7 @@ async function loadUsers() {
     if (error) throw error;
 
     users.value = data || [];
-    
+
     // Calculate stats
     stats.value = {
       totalUsers: data?.length || 0,
@@ -492,7 +459,7 @@ async function createUserHandler() {
       createSuccess.value = true;
       newUser.value = { email: '', password: '', service: '', role: 'employee' };
       await loadUsers();
-      
+
       // Hide success message after 3 seconds
       setTimeout(() => {
         createSuccess.value = false;
@@ -518,10 +485,10 @@ function getRoleLabel(role: string) {
 
 function getRoleBadgeClass(role: string) {
   switch (role) {
-    case 'system_admin': return 'px-3 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full';
-    case 'manager': return 'px-3 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full';
-    case 'employee': return 'px-3 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full';
-    default: return 'px-3 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full';
+    case 'system_admin': return 'inline-flex rounded-full bg-coral/20 px-3 py-1 text-xs font-semibold text-[#9F1239]';
+    case 'manager': return 'inline-flex rounded-full bg-tangerine/25 px-3 py-1 text-xs font-semibold text-ink';
+    case 'employee': return 'inline-flex rounded-full bg-lilac/60 px-3 py-1 text-xs font-semibold text-ink';
+    default: return 'inline-flex rounded-full bg-ink/[0.06] px-3 py-1 text-xs font-semibold text-ink';
   }
 }
 
@@ -551,7 +518,7 @@ async function processRequest(requestId: string, status: 'approved' | 'rejected'
 
     // Recharger les demandes
     await loadModificationRequests();
-    
+
     alert(`Demande ${status === 'approved' ? 'approuvée' : 'rejetée'} avec succès !`);
   } catch (error) {
     console.error('Error processing request:', error);
@@ -579,25 +546,3 @@ onMounted(() => {
   loadModificationRequests();
 });
 </script>
-
-<style scoped>
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-.animate-shake {
-  animation: shake 0.5s ease-in-out;
-}
-
-@keyframes gradient-flow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.animate-gradient-flow {
-  background-size: 200% 200%;
-  animation: gradient-flow 3s ease infinite;
-}
-</style>

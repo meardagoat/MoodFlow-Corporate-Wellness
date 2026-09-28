@@ -1,145 +1,41 @@
 <template>
-  <Motion
+  <div
     v-if="visible"
-    tag="div"
-    class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
-    :initial="{ opacity: 0, scale: 0.9 }"
-    :animate="{ opacity: 1, scale: 1 }"
-    :exit="{ opacity: 0, scale: 0.9 }"
-    :transition="{ duration: 0.8, ease: 'easeInOut' }"
-    :style="{ paddingTop: 'var(--sat, 0)', paddingBottom: 'var(--sab, 0)' }"
+    ref="panel"
+    class="splash-screen fixed inset-0 z-[85] flex flex-col overflow-hidden bg-grape text-paper"
+    role="status"
+    aria-live="polite"
   >
-    <!-- Background Video -->
-    <video 
-      autoplay 
-      muted 
-      playsinline
-      loop
-      class="absolute inset-0 w-full h-full object-cover"
-    >
-      <source :src="backgroundVideo" type="video/mp4">
-    </video>
-    
-    <!-- Overlay pour assurer la lisibilité -->
-    <div class="absolute inset-0 bg-black/20" />
-
-    <!-- Organic animated blobs -->
-    <div class="absolute inset-0 pointer-events-none">
-      <Motion
-        tag="div"
-        class="absolute top-32 -left-20 w-96 h-96 bg-orange-400/20 rounded-full blur-3xl"
-        :animate="{ x: [0, 30, 0], y: [0, -50, 0], scale: [1, 1.1, 1] }"
-        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut' }"
-      />
-      <Motion
-        tag="div"
-        class="absolute top-20 right-10 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl"
-        :animate="{ x: [0, -20, 0], y: [0, 20, 0], scale: [1, 0.9, 1] }"
-        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2 }"
-      />
-      <Motion
-        tag="div"
-        class="absolute -bottom-32 left-1/3 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl"
-        :animate="{ x: [0, 20, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }"
-        :transition="{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 4 }"
-      />
+    <div class="label px-6 pt-6 text-paper/60 sm:px-10 sm:pt-8">
+      {{ appName }} ©2025
     </div>
 
-    <!-- Logo and progress -->
-    <Motion
-      tag="div"
-      class="relative z-10 max-w-lg mx-auto text-center"
-      :initial="{ opacity: 0, scale: 0.9 }"
-      :animate="{ opacity: 1, scale: 1 }"
-      :transition="{ duration: 0.6, ease: 'easeOut' }"
-    >
-      <!-- Icon -->
-      <div class="inline-flex items-center justify-center mb-8 relative">
-        <Motion
-          tag="div"
-          class="absolute blur-[60px] rounded-full"
-          :style="{
-            inset: '-24px',
-            background:
-              'linear-gradient(135deg, rgba(249,115,22,0.3), rgba(168,85,247,0.3))',
-          }"
-          :animate="{ opacity: [0.4, 0.6, 0.4] }"
-          :transition="{ duration: 3, repeat: Infinity, ease: 'easeInOut' }"
-        />
-
-        <div
-          class="relative rounded-full overflow-hidden"
-          :style="{
-            background: 'rgba(255,255,255,0.6)',
-            backdropFilter: 'blur(20px)',
-            padding: '16px',
-            border: '1px solid rgba(255,255,255,0.8)',
-            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1)',
-          }"
-        >
-          <video 
-            autoplay 
-            muted 
-            playsinline
-            loop
-            class="w-16 h-16 md:w-20 md:h-20 object-contain"
-          >
-            <source :src="logoVideo" type="video/mp4">
-            <img :src="logoImage" alt="MoodFlow" class="w-full h-full object-contain" />
-          </video>
-        </div>
+    <div class="flex flex-1 flex-col items-center justify-center px-6 text-center">
+      <div ref="sun" class="w-[min(52vw,16rem)]">
+        <SunMark state="very_happy" :ray-colors="['#FED94E', '#FF5BBC']" />
       </div>
 
-      <!-- Message de bienvenue -->
-      <Motion
-        tag="h1"
-        class="mb-4 font-black cursor-default hover:scale-105 transition-transform duration-500"
-        :style="{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }"
-        :initial="{ opacity: 0, scale: 0.9 }"
-        :animate="{ opacity: 1, scale: 1 }"
-        :transition="{ delay: 0.2, duration: 0.8, ease: 'easeInOut' }"
-      >
-        <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-          Bienvenue !
-        </span>
-      </Motion>
+      <h1 ref="title" class="display mt-10 overflow-hidden whitespace-nowrap pb-[0.08em] text-[clamp(3.5rem,13vw,10rem)] leading-[0.9] tracking-[-0.055em]">
+        <span v-for="(letter, i) in letters" :key="i" class="splash-letter inline-block">{{ letter === ' ' ? ' ' : letter }}</span>
+      </h1>
+      <p ref="subtitle" class="mt-5 text-lg text-paper/75 sm:text-xl">Connexion en cours...</p>
+    </div>
 
-      <!-- Message de chargement -->
-      <Motion
-        tag="p"
-        class="mb-6 font-semibold"
-        :style="{ fontSize: 'clamp(1rem, 3vw, 1.5rem)' }"
-        :initial="{ opacity: 0, y: 20 }"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="{ delay: 0.4, duration: 0.8, ease: 'easeOut' }"
-      >
-        <span class="bg-gradient-to-r from-orange-500 via-purple-500 to-orange-500 bg-clip-text text-transparent animate-gradient-flow">
-          Connexion en cours...
-        </span>
-      </Motion>
-
-      <!-- Progress bar -->
-      <div
-        class="w-40 h-2 mx-auto mt-6 rounded-full overflow-hidden bg-white/60 backdrop-blur-md border border-white/80"
-      >
-        <Motion
-          tag="div"
-          class="h-full bg-gradient-to-r from-orange-500 to-purple-500"
-          :initial="{ width: '0%' }"
-          :animate="{ width: progress + '%' }"
-          :transition="{ duration: 0.3 }"
-        />
+    <div class="flex items-end justify-between gap-6 px-6 pb-8 sm:px-10 sm:pb-10">
+      <div class="h-1 flex-1 overflow-hidden rounded-full bg-paper/20" aria-hidden="true">
+        <div class="h-full rounded-full bg-sun" :style="{ width: progress + '%' }" />
       </div>
-    </Motion>
-  </Motion>
+      <span class="display w-[3ch] text-right text-5xl leading-none tracking-[-0.05em] sm:text-7xl" aria-hidden="true">
+        {{ String(Math.round(progress)).padStart(3, '0') }}
+      </span>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { Motion } from '@motionone/vue' // ✅ Import correct
-import logoVideo from '../assets/MoodFlow_final_logo.mp4'
-import logoImage from '../assets/MoodFlow_final_logo.png'
-import backgroundVideo from '../assets/Splashscreen_fond.mp4'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import SunMark from './brand/SunMark.vue'
+import { gsap, prefersReducedMotion } from '../lib/motion'
 
 interface Props {
   onComplete?: () => void
@@ -152,12 +48,32 @@ const props = withDefaults(defineProps<Props>(), {
   appName: 'MoodFlow',
 })
 
+const letters = 'Bienvenue !'.split('')
+
 const visible = ref(true)
 const progress = ref(0)
+const panel = ref<HTMLElement | null>(null)
+const sun = ref<HTMLElement | null>(null)
+const title = ref<HTMLElement | null>(null)
+const subtitle = ref<HTMLElement | null>(null)
 let timer: ReturnType<typeof setTimeout> | null = null
 let interval: ReturnType<typeof setInterval> | null = null
+let ctx: gsap.Context | null = null
 
-onMounted(() => {
+function finish() {
+  const done = () => {
+    visible.value = false
+    props.onComplete?.()
+  }
+  if (!panel.value || prefersReducedMotion()) {
+    visible.value = false
+    setTimeout(() => props.onComplete?.(), 500)
+    return
+  }
+  gsap.to(panel.value, { yPercent: -100, duration: 0.8, ease: 'power4.inOut', onComplete: done })
+}
+
+onMounted(async () => {
   const startTime = Date.now()
   const total = props.duration
 
@@ -167,33 +83,23 @@ onMounted(() => {
   }, 50)
 
   timer = setTimeout(() => {
-    visible.value = false
-    clearInterval(interval!)
-    setTimeout(() => props.onComplete?.(), 500)
+    if (interval) clearInterval(interval)
+    progress.value = 100
+    finish()
   }, props.duration)
+
+  await nextTick()
+  if (prefersReducedMotion()) return
+  ctx = gsap.context(() => {
+    gsap.from(sun.value, { scale: 0.3, rotate: -140, opacity: 0, duration: 1.6, ease: 'expo.out' })
+    gsap.from('.splash-letter', { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.04, delay: 0.25 })
+    gsap.from(subtitle.value, { opacity: 0, y: 16, duration: 0.8, ease: 'expo.out', delay: 0.7 })
+  }, panel.value ?? undefined)
 })
 
 onUnmounted(() => {
   if (timer) clearTimeout(timer)
   if (interval) clearInterval(interval)
+  ctx?.revert()
 })
 </script>
-
-<style scoped>
-@keyframes gradient-flow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient-flow {
-  background-size: 200% 200%;
-  animation: gradient-flow 3s ease infinite;
-}
-</style>
