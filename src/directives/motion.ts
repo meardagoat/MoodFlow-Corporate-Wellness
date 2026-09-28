@@ -43,7 +43,7 @@ export const vReveal: Directive<HTMLElement, RevealValue> = {
    v-split : les lignes d'un titre montent une à une derrière un masque
    v-split  ou  v-split="{ delay: 0.3, immediate: true }"
    ------------------------------------------------------------------ */
-type SplitValue = { delay?: number; immediate?: boolean; stagger?: number } | undefined;
+type SplitValue = { delay?: number; immediate?: boolean; stagger?: number; chars?: boolean } | undefined;
 
 interface SplitEl extends HTMLElement {
   __split?: SplitText;
@@ -66,12 +66,23 @@ export const vSplit: Directive<SplitEl, SplitValue> = {
       if (!el.isConnected) return;
       try {
         el.__split = SplitText.create(el, {
-          type: 'lines',
+          type: opts.chars ? 'lines,words,chars' : 'lines',
           mask: 'lines',
           linesClass: 'split-line',
           autoSplit: true,
           onSplit(self) {
             show();
+            if (opts.chars) {
+              return gsap.from(self.chars, {
+                yPercent: 120,
+                rotate: 12,
+                duration: 1.4,
+                ease: 'expo.out',
+                stagger: opts.stagger ?? 0.028,
+                delay: opts.delay ?? 0,
+                scrollTrigger: opts.immediate ? undefined : { trigger: el, start: 'top 90%', once: true },
+              });
+            }
             return gsap.from(self.lines, {
               yPercent: 118,
               duration: 1.25,
@@ -162,9 +173,97 @@ export const vParallax: Directive<ParallaxEl, number | undefined> = {
   },
 };
 
+/* ------------------------------------------------------------------
+   v-scrub-words : les mots s'allument un à un au fil du défilement
+   ------------------------------------------------------------------ */
+interface ScrubEl extends HTMLElement {
+  __scrub?: SplitText;
+}
+
+export const vScrubWords: Directive<ScrubEl, { start?: string; end?: string } | undefined> = {
+  mounted(el, binding) {
+    if (prefersReducedMotion()) return;
+    const opts = binding.value ?? {};
+    document.fonts.ready.then(() => {
+      if (!el.isConnected) return;
+      el.__scrub = SplitText.create(el, {
+        type: 'words',
+        wordsClass: 'scrub-word',
+        autoSplit: true,
+        onSplit(self) {
+          return gsap.fromTo(
+            self.words,
+            { opacity: 0.14 },
+            {
+              opacity: 1,
+              ease: 'none',
+              stagger: 0.1,
+              scrollTrigger: {
+                trigger: el,
+                start: opts.start ?? 'top 80%',
+                end: opts.end ?? 'bottom 45%',
+                scrub: true,
+              },
+            },
+          );
+        },
+      });
+    });
+  },
+  unmounted(el) {
+    el.__scrub?.revert();
+  },
+};
+
+/* ------------------------------------------------------------------
+   v-tilt : la carte s'incline en 3D sous le curseur
+   ------------------------------------------------------------------ */
+interface TiltEl extends HTMLElement {
+  __tilt?: { move: (e: PointerEvent) => void; leave: () => void };
+}
+
+export const vTilt: Directive<TiltEl, number | undefined> = {
+  mounted(el, binding) {
+    if (prefersReducedMotion() || !hasFinePointer()) return;
+    const max = binding.value ?? 8;
+    let ready = false;
+    const rx = gsap.quickTo(el, 'rotationX', { duration: 0.6, ease: 'power3.out' });
+    const ry = gsap.quickTo(el, 'rotationY', { duration: 0.6, ease: 'power3.out' });
+    const move = (e: PointerEvent) => {
+      // Posé au premier survol pour ne pas gêner l'animation d'entrée
+      if (!ready) {
+        gsap.set(el, { transformPerspective: 900 });
+        ready = true;
+      }
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      ry(px * max * 2);
+      rx(-py * max * 2);
+      el.style.setProperty('--tilt-x', `${(px + 0.5) * 100}%`);
+      el.style.setProperty('--tilt-y', `${(py + 0.5) * 100}%`);
+    };
+    const leave = () => {
+      rx(0);
+      ry(0);
+    };
+    el.addEventListener('pointermove', move);
+    el.addEventListener('pointerleave', leave);
+    el.__tilt = { move, leave };
+  },
+  unmounted(el) {
+    if (!el.__tilt) return;
+    el.removeEventListener('pointermove', el.__tilt.move);
+    el.removeEventListener('pointerleave', el.__tilt.leave);
+    gsap.killTweensOf(el);
+  },
+};
+
 export function registerMotionDirectives(app: App) {
   app.directive('reveal', vReveal);
   app.directive('split', vSplit);
   app.directive('magnetic', vMagnetic);
   app.directive('parallax', vParallax);
+  app.directive('scrub-words', vScrubWords);
+  app.directive('tilt', vTilt);
 }

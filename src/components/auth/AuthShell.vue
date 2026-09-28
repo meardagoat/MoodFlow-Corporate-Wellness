@@ -51,14 +51,14 @@
         </div>
       </div>
 
-      <p class="label text-ink/40 lg:hidden">© 2025 MoodFlow. Tous droits réservés.</p>
+      <p class="label text-ink/40 lg:hidden">© {{ currentYear }} MoodFlow. Tous droits réservés.</p>
     </div>
 
     <!-- Panneau de marque -->
     <aside class="relative hidden overflow-hidden bg-grape text-paper lg:block" aria-hidden="true">
       <div class="sticky top-0 flex h-[100svh] flex-col justify-between p-10 xl:p-14">
         <div class="label flex items-center justify-between text-paper/60">
-          <span>MoodFlow ©2025</span>
+          <span>MoodFlow ©{{ currentYear }}</span>
           <span>Bien-être au travail</span>
         </div>
 
@@ -73,7 +73,7 @@
             Le bien-être au travail, <span class="accent text-sun">simplifié</span>
           </p>
           <div class="mt-10 max-w-md border-t border-paper/20 pt-5 text-xs leading-relaxed text-paper/55">
-            <p class="text-sm text-paper/75">© 2025 MoodFlow. Tous droits réservés.</p>
+            <p class="text-sm text-paper/75">© {{ currentYear }} MoodFlow. Tous droits réservés.</p>
             <p class="mt-1">
               Toute reproduction, même partielle, des contenus de ce site est interdite. Pour en savoir plus,
               consultez notre <router-link to="/privacy" class="underline underline-offset-2 hover:text-paper">politique de confidentialité</router-link>.
@@ -86,6 +86,7 @@
 </template>
 
 <script setup lang="ts">
+const currentYear = new Date().getFullYear();
 import SunMark from '../brand/SunMark.vue';
 import Icon from '../ui/Icon.vue';
 import type { FaceState } from '../../lib/moods';

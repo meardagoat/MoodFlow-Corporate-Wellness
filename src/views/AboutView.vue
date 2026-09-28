@@ -17,7 +17,7 @@
           <p class="label text-ink/55">(01)</p>
           <h2 v-split class="display mt-6 text-display-lg">Qui nous sommes</h2>
           <div class="mt-10 max-w-2xl space-y-6 text-pretty text-xl leading-relaxed text-ink/80">
-            <p v-reveal>
+            <p v-scrub-words="{ end: 'bottom 55%' }">
               Considérez MoodFlow comme votre guide de confiance pour un meilleur bien-être en entreprise.
               Nous sommes là pour vous, quand vous en avez besoin, où que vous soyez, vous aidant à traverser
               les moments difficiles et à trouver la joie dans chaque journée de travail.
@@ -126,7 +126,8 @@
             v-for="(value, i) in values"
             :key="value.title"
             v-reveal="i * 0.08"
-            class="group flex min-h-[22rem] flex-col rounded-[2rem] p-7 transition-transform duration-700 ease-out-expo hover:-translate-y-2 hover:rotate-[-1deg]"
+            v-tilt="7"
+            class="group flex min-h-[22rem] flex-col rounded-[2rem] p-7"
             :style="{ backgroundColor: value.color }"
           >
             <div class="flex items-start justify-between">

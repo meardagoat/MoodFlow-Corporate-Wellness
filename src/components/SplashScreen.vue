@@ -7,7 +7,7 @@
     aria-live="polite"
   >
     <div class="label px-6 pt-6 text-paper/60 sm:px-10 sm:pt-8">
-      {{ appName }} ©2025
+      {{ appName }} ©{{ currentYear }}
     </div>
 
     <div class="flex flex-1 flex-col items-center justify-center px-6 text-center">
@@ -33,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+const currentYear = new Date().getFullYear();
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import SunMark from './brand/SunMark.vue'
 import { gsap, prefersReducedMotion } from '../lib/motion'

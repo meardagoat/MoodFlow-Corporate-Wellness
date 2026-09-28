@@ -6,7 +6,7 @@
     <section ref="heroSection" class="relative flex min-h-[100svh] flex-col overflow-hidden pb-8 pt-28 md:pt-32">
       <!-- Le soleil de la marque : il vous regarde -->
       <div
-        class="pointer-events-none absolute right-[-16vw] top-20 w-[66vw] sm:right-[-12vw] sm:top-24 sm:w-[60vw] md:right-[-10vw] md:top-1/2 md:w-[52vw] md:-translate-y-[58%] lg:right-[-6vw] lg:w-[44vw]"
+        class="pointer-events-none absolute right-[-16vw] top-20 w-[66vw] sm:right-[-12vw] sm:top-24 sm:w-[60vw] md:right-[-8vw] md:top-28 md:w-[56vw] lg:right-[-6vw] lg:top-1/2 lg:w-[44vw] lg:-translate-y-[58%] xl:right-[-8vw] xl:w-[41vw]"
       >
         <div ref="heroSunParallax">
           <div ref="heroSunInner">
@@ -21,21 +21,25 @@
       <Icon name="spark" class="hero-spark absolute bottom-[26%] right-[5%] h-8 w-8 animate-twinkle text-sun-deep [animation-delay:2.2s]" />
 
       <div class="shell relative z-10 flex flex-1 flex-col">
-        <p v-reveal class="label text-ink/60">MoodFlow ©2025</p>
+        <p v-reveal class="label text-ink/60">MoodFlow ©{{ currentYear }}</p>
 
         <h1 class="display mt-auto pt-40 text-[clamp(3.4rem,12.4vw,13.75rem)] leading-[0.84] tracking-[-0.055em] md:pt-0">
           <span class="sr-only">MoodFlow, </span>
-          <span v-split="{ immediate: true, delay: 0.25 }" class="block">
-            Prendre soin<br />
-            de <span class="accent text-[1.06em] text-coral">vos équipes</span>
+          <span ref="heroLine1" class="block will-change-transform">
+            <span v-split="{ immediate: true, delay: 0.25, chars: true }" class="block">Prendre soin</span>
+          </span>
+          <span ref="heroLine2" class="block will-change-transform">
+            <span v-split="{ immediate: true, delay: 0.5, chars: true }" class="block">
+              de <span class="accent text-[1.06em] text-coral">vos équipes</span>
+            </span>
           </span>
         </h1>
 
         <div class="mt-10 grid gap-8 md:mt-14 md:grid-cols-12 md:items-end">
-          <p v-reveal="0.55" class="text-pretty text-lg leading-snug text-ink/80 md:col-span-5 md:text-xl lg:col-span-4">
+          <p v-reveal="0.55" class="text-pretty text-lg leading-snug text-ink/80 md:col-span-8 md:text-xl lg:col-span-4">
             MoodFlow transforme le bien-être en entreprise avec une approche simple, anonyme et bienveillante
           </p>
-          <div v-reveal="0.65" class="flex flex-wrap gap-3 md:col-span-7 md:justify-end lg:col-span-8">
+          <div v-reveal="0.65" class="flex flex-wrap gap-3 md:col-span-12 lg:col-span-8 lg:justify-end">
             <button type="button" class="btn btn-ink btn-lg" v-magnetic @click="goToRegister">
               <RollText text="Essayer gratuitement" />
               <span class="btn-dot"><Icon name="arrow-right" /></span>
@@ -75,6 +79,23 @@
         </Marquee>
       </div>
     </div>
+
+    <!-- ============================================================
+         MANIFESTE : les mots s'allument au fil du défilement
+         ============================================================ -->
+    <section class="relative py-24 md:py-40">
+      <div class="shell grid gap-10 lg:grid-cols-12">
+        <p class="label text-ink/60 lg:col-span-3 lg:pt-4">Notre conviction</p>
+        <p class="display text-[clamp(2rem,4.6vw,4.6rem)] leading-[1.02] tracking-[-0.04em] lg:col-span-9">
+          <span v-scrub-words>Une équipe qui va bien crée, ose et reste.</span>
+          <MoodFace mood="very_happy" class="manifesto-face" />
+          <span v-scrub-words>MoodFlow offre à chacun un espace sûr pour dire comment il se sent,</span>
+          <MoodFace mood="neutral" class="manifesto-face" />
+          <span v-scrub-words>et donne aux managers les clés pour agir <span class="accent text-coral">au bon moment.</span></span>
+          <MoodFace mood="happy" class="manifesto-face" />
+        </p>
+      </div>
+    </section>
 
     <!-- ============================================================
          HUMEUR : la section prend la couleur de l'humeur choisie
@@ -237,7 +258,7 @@
               <div class="relative z-10 flex items-center justify-center md:col-span-5 md:justify-end">
                 <video
                   data-lazy-video
-                  class="aspect-[2424/3414] w-full max-w-[22rem] rounded-[1.5rem] object-cover ring-1 md:max-w-[calc(min(66svh,44rem)*0.71)] md:rounded-[2rem]"
+                  class="aspect-[4/3] w-full max-w-[22rem] md:aspect-[2424/3414] rounded-[1.5rem] object-cover ring-1 md:max-w-[calc(min(66svh,44rem)*0.71)] md:rounded-[2rem]"
                   :class="feature.dark ? 'ring-paper/15' : 'ring-ink/10'"
                   muted
                   playsinline
@@ -261,11 +282,66 @@
     </section>
 
     <!-- ============================================================
+         COMMENT ÇA MARCHE : défilement horizontal
+         ============================================================ -->
+    <section ref="stepsSection" class="relative overflow-hidden bg-ink py-24 text-paper lg:flex lg:h-[100svh] lg:flex-col lg:justify-center lg:pb-0 lg:pt-20">
+      <div class="shell flex items-end justify-between gap-8">
+        <div>
+          <p class="label text-paper/55">(03) Comment ça marche</p>
+          <h2 v-split class="display mt-6 text-display-lg lg:text-display-md">Quatre étapes, <span class="accent text-sun">zéro friction</span></h2>
+        </div>
+        <p class="label hidden text-paper/55 lg:block" aria-hidden="true">
+          <span ref="stepsCounter">01</span> / {{ String(steps.length).padStart(2, '0') }}
+        </p>
+      </div>
+
+      <div ref="stepsTrack" class="mt-12 flex flex-col gap-4 px-5 sm:px-8 lg:mt-14 lg:w-max lg:flex-row lg:gap-6 lg:pl-[max(3rem,calc((100vw-96rem)/2+3rem))] lg:pr-[12vw]">
+        <article
+          v-for="(step, i) in steps"
+          :key="step.title"
+          class="step-card relative flex min-h-[26rem] flex-col overflow-hidden rounded-[2rem] p-7 text-ink md:p-10 lg:h-[max(56svh,27rem)] lg:w-[min(46rem,56vw)] lg:rounded-[2.5rem]"
+          :style="{ backgroundColor: step.color }"
+        >
+          <div class="flex items-start justify-between gap-6">
+            <span class="display text-[clamp(4.5rem,9vw,9rem)] leading-[0.8] tracking-[-0.07em]">{{ String(i + 1).padStart(2, '0') }}</span>
+            <span class="chip border-ink/20">{{ step.tag }}</span>
+          </div>
+
+          <div class="step-visual pointer-events-none flex flex-1 items-center justify-end gap-2 py-8 lg:min-h-0 lg:py-5" aria-hidden="true">
+            <template v-if="step.visual === 'faces'">
+              <MoodFace v-for="m in step.faces" :key="m" :mood="m" class="h-12 w-12 md:h-16 md:w-16" />
+            </template>
+            <div v-else-if="step.visual === 'bars'" class="flex h-[8rem] items-end gap-2 lg:h-full lg:max-h-[8rem]">
+              <span
+                v-for="(h, j) in [38, 62, 48, 80, 66, 92]"
+                :key="j"
+                class="w-5 rounded-full bg-ink md:w-7"
+                :style="{ height: `${h}%`, opacity: 0.35 + j * 0.13 }"
+              />
+            </div>
+            <SunMark v-else state="very_happy" disc="#FFF8EF" :ray-colors="['#1A0E2B', '#FFF8EF']" class="w-28 md:w-44 [@media(min-width:1024px)_and_(max-height:860px)]:w-28" />
+          </div>
+
+          <div class="relative max-w-[26rem]">
+            <h3 class="display text-[clamp(2rem,3.4vw,3.4rem)] leading-[0.95] tracking-[-0.04em] [@media(min-width:1024px)_and_(max-height:860px)]:text-[2.25rem]">{{ step.title }}</h3>
+            <p class="mt-4 text-pretty text-lg leading-snug text-ink/75 md:text-xl [@media(min-width:1024px)_and_(max-height:860px)]:mt-3 [@media(min-width:1024px)_and_(max-height:860px)]:text-lg">{{ step.description }}</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="shell mt-10 hidden lg:block" aria-hidden="true">
+        <div class="h-1 overflow-hidden rounded-full bg-paper/15">
+          <div ref="stepsProgress" class="h-full origin-left scale-x-0 rounded-full bg-sun" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          EXPERTS
          ============================================================ -->
     <section class="relative overflow-hidden bg-blush py-28 md:py-40">
       <div class="shell grid gap-8 md:grid-cols-12 md:items-end">
-        <p class="label text-ink/60 md:col-span-12">(03) Témoignages</p>
+        <p class="label text-ink/60 md:col-span-12">(04) Témoignages</p>
         <h2 v-split class="display text-display-lg md:col-span-7">Conçu par des experts, livré avec soin</h2>
         <p v-reveal="0.1" class="text-pretty text-lg leading-relaxed text-ink/75 md:col-span-4 md:col-start-9">
           De l'expression libre aux insights en temps réel, notre équipe d'experts en bien-être au travail
@@ -360,7 +436,7 @@
       </div>
 
       <div class="shell relative z-10">
-        <p class="label text-paper/60">(04) En chiffres</p>
+        <p class="label text-paper/60">(05) En chiffres</p>
         <dl class="mt-12 grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-4">
           <div v-for="stat in stats" :key="stat.label" class="flex flex-col-reverse border-t border-paper/25 pt-6">
             <dt class="label mt-5 text-paper/70">{{ stat.label }}</dt>
@@ -389,7 +465,7 @@
          ============================================================ -->
     <section ref="ctaSection" class="relative mt-24 overflow-hidden bg-coral pb-40 pt-28 md:mt-32 md:pb-64 md:pt-40">
       <div class="shell relative z-10">
-        <p class="label text-ink/70">(05) Démo</p>
+        <p class="label text-ink/70">(06) Démo</p>
         <h2 v-split class="display mt-8 max-w-[13ch] text-display-xl">Prêt à transformer votre <span class="whitespace-nowrap">entreprise ?</span></h2>
         <p v-reveal="0.1" class="mt-8 max-w-xl text-pretty text-xl leading-snug md:text-2xl">
           Découvrez MoodFlow en action avec une démo personnalisée
@@ -411,6 +487,7 @@
 </template>
 
 <script setup lang="ts">
+const currentYear = new Date().getFullYear();
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import SunMark from '../components/brand/SunMark.vue';
@@ -441,8 +518,14 @@ const rootEl = ref<HTMLElement | null>(null);
 const heroSection = ref<HTMLElement | null>(null);
 const heroSunParallax = ref<HTMLElement | null>(null);
 const heroSunInner = ref<HTMLElement | null>(null);
+const heroLine1 = ref<HTMLElement | null>(null);
+const heroLine2 = ref<HTMLElement | null>(null);
 const featuresSection = ref<HTMLElement | null>(null);
 const ctaSection = ref<HTMLElement | null>(null);
+const stepsSection = ref<HTMLElement | null>(null);
+const stepsTrack = ref<HTMLElement | null>(null);
+const stepsProgress = ref<HTMLElement | null>(null);
+const stepsCounter = ref<HTMLElement | null>(null);
 const sunriseEl = ref<HTMLElement | null>(null);
 const moodButtons = ref<HTMLButtonElement[]>([]);
 const selectedMoodIndex = ref(1);
@@ -602,6 +685,46 @@ const features = [
   }
 ];
 
+const steps: {
+  title: string;
+  description: string;
+  tag: string;
+  color: string;
+  visual: 'faces' | 'bars' | 'sun';
+  faces?: MoodValue[];
+}[] = [
+  {
+    title: 'Invitez vos équipes',
+    description: 'Un simple lien suffit. Aucune installation, aucune formation : chacun rejoint en un clic.',
+    tag: 'Jour 1',
+    color: '#FED94E',
+    visual: 'faces',
+    faces: ['happy', 'very_happy', 'neutral'],
+  },
+  {
+    title: 'Chacun partage son humeur',
+    description: 'Quelques secondes par jour, en toute confidentialité. Un geste simple qui devient un rituel.',
+    tag: '10 secondes',
+    color: '#CDB8FF',
+    visual: 'faces',
+    faces: ['very_happy', 'happy', 'neutral', 'sad', 'very_sad'],
+  },
+  {
+    title: 'Les tendances se dessinent',
+    description: 'Des tableaux de bord clairs révèlent le climat réel et les signaux faibles, équipe par équipe.',
+    tag: 'Temps réel',
+    color: '#5EDDE7',
+    visual: 'bars',
+  },
+  {
+    title: 'Vous agissez au bon moment',
+    description: 'Des recommandations concrètes pour soutenir vos collaborateurs avant que les tensions ne s\'installent.',
+    tag: 'Impact',
+    color: '#FF8944',
+    visual: 'sun',
+  },
+];
+
 const experts = [
   {
     name: 'Sophie Durand',
@@ -736,6 +859,11 @@ onMounted(() => {
       scrollTrigger: { trigger: heroSection.value, start: 'top top', end: 'bottom top', scrub: true },
     });
 
+    // Les deux lignes du titre s'écartent quand on quitte le hero
+    const heroExit = { trigger: heroSection.value, start: 'top top', end: 'bottom top', scrub: true };
+    gsap.to(heroLine1.value, { xPercent: -14, ease: 'none', scrollTrigger: heroExit });
+    gsap.to(heroLine2.value, { xPercent: 12, ease: 'none', scrollTrigger: { ...heroExit } });
+
     // Cartes empilées : la carte recouverte recule et s'assombrit
     const mm = gsap.matchMedia();
     mm.add('(min-width: 768px)', () => {
@@ -754,6 +882,32 @@ onMounted(() => {
           })
           .to(card.querySelector('.feature-inner'), { scale: 0.9, ease: 'none' }, 0)
           .to(card.querySelector('.feature-shade'), { opacity: 0.35, ease: 'none' }, 0);
+      });
+    });
+
+    // Défilement horizontal des étapes
+    mm.add('(min-width: 1024px)', () => {
+      const track = stepsTrack.value;
+      if (!track || !stepsSection.value) return;
+      const distance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+      gsap.to(track, {
+        x: () => -distance(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: stepsSection.value,
+          start: 'top top',
+          end: () => `+=${distance()}`,
+          pin: true,
+          scrub: 0.6,
+          invalidateOnRefresh: true,
+          onUpdate(self) {
+            if (stepsProgress.value) gsap.set(stepsProgress.value, { scaleX: self.progress });
+            if (stepsCounter.value) {
+              const n = Math.min(steps.length, Math.floor(self.progress * steps.length) + 1);
+              stepsCounter.value.textContent = String(n).padStart(2, '0');
+            }
+          },
+        },
       });
     });
 
@@ -779,6 +933,24 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.manifesto-face {
+  display: inline-block;
+  width: 0.92em;
+  height: 0.92em;
+  margin: 0 0.12em;
+  vertical-align: -0.12em;
+  animation: manifesto-bob 4s ease-in-out infinite;
+}
+
+@keyframes manifesto-bob {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-0.08em) rotate(6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifesto-face { animation: none; }
+}
+
 .swap-enter-active,
 .swap-leave-active {
   transition:

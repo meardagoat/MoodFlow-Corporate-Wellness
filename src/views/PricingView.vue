@@ -54,7 +54,7 @@
 
         <div class="mt-14 grid gap-4 lg:grid-cols-3">
           <!-- Starter -->
-          <article v-reveal class="flex min-w-0 flex-col rounded-[2.25rem] border border-ink/10 bg-white p-7 md:p-10 lg:p-7 xl:p-10">
+          <article v-reveal v-tilt="5" class="flex min-w-0 flex-col rounded-[2.25rem] border border-ink/10 bg-white p-7 md:p-10 lg:p-7 xl:p-10">
             <div class="flex items-center justify-between gap-3">
               <h3 class="display text-3xl tracking-[-0.035em]">Starter</h3>
               <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-aqua xl:h-12 xl:w-12"><Icon name="rocket" class="h-5 w-5" /></span>
@@ -78,7 +78,7 @@
           </article>
 
           <!-- Professional -->
-          <article v-reveal="0.1" class="relative flex min-w-0 flex-col rounded-[2.25rem] bg-grape p-7 text-paper md:p-10 lg:-my-4 lg:p-7 lg:py-12 xl:p-10 xl:py-14">
+          <article v-reveal="0.1" v-tilt="5" class="relative flex min-w-0 flex-col rounded-[2.25rem] bg-grape p-7 text-paper md:p-10 lg:-my-4 lg:p-7 lg:py-12 xl:p-10 xl:py-14">
             <span
               class="absolute -top-4 right-8 inline-flex rotate-[4deg] items-center gap-2 rounded-full bg-sun px-4 py-2 text-sm font-bold text-ink shadow-[0_10px_30px_-10px_rgba(26,14,43,0.5)]"
             >
@@ -109,7 +109,7 @@
           </article>
 
           <!-- Enterprise -->
-          <article v-reveal="0.2" class="flex min-w-0 flex-col rounded-[2.25rem] bg-ink p-7 text-paper md:p-10 lg:p-7 xl:p-10">
+          <article v-reveal="0.2" v-tilt="5" class="flex min-w-0 flex-col rounded-[2.25rem] bg-ink p-7 text-paper md:p-10 lg:p-7 xl:p-10">
             <div class="flex items-center justify-between gap-3">
               <h3 class="display text-3xl tracking-[-0.035em]">Enterprise</h3>
               <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-candy text-ink xl:h-12 xl:w-12"><Icon name="building" class="h-5 w-5" /></span>

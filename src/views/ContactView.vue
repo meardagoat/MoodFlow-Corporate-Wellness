@@ -7,7 +7,7 @@
       tone="#5EDDE7"
       mood="happy"
     >
-      <span class="accent text-grape">Contactez</span>-nous
+      <span class="accent pr-[0.08em] text-grape">Contactez</span>-nous
     </PageHero>
 
     <!-- Comment nous joindre -->
@@ -24,7 +24,7 @@
         </div>
 
         <div class="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <article v-reveal class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-coral p-8 md:p-10">
+          <article v-reveal v-tilt="6" class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-coral p-8 md:p-10">
             <span class="grid h-16 w-16 place-items-center rounded-full bg-ink text-coral transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110">
               <Icon name="mail" class="h-7 w-7" />
             </span>
@@ -38,7 +38,7 @@
             </a>
           </article>
 
-          <article v-reveal="0.1" class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-grape p-8 text-paper md:p-10">
+          <article v-reveal="0.1" v-tilt="6" class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-grape p-8 text-paper md:p-10">
             <span class="grid h-16 w-16 place-items-center rounded-full bg-sun text-ink transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110">
               <Icon name="message" class="h-7 w-7" />
             </span>
@@ -52,7 +52,7 @@
             </button>
           </article>
 
-          <article v-reveal="0.2" class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-sun p-8 md:col-span-2 md:p-10 lg:col-span-1">
+          <article v-reveal="0.2" v-tilt="6" class="group flex min-h-[26rem] flex-col rounded-[2.25rem] bg-sun p-8 md:col-span-2 md:p-10 lg:col-span-1">
             <span class="grid h-16 w-16 place-items-center rounded-full bg-ink text-sun transition-transform duration-700 ease-out-back group-hover:rotate-[-12deg] group-hover:scale-110">
               <Icon name="phone" class="h-7 w-7" />
             </span>

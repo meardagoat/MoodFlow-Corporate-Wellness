@@ -15,7 +15,7 @@
         {{ label }}
       </p>
 
-      <h1 v-split="{ immediate: true, delay: 0.1 }" class="display mt-10 max-w-[15ch] text-display-xl md:mt-14 md:pr-[22vw]">
+      <h1 v-split="{ immediate: true, delay: 0.1, chars: true }" class="display mt-10 max-w-[15ch] text-display-xl md:mt-14 md:pr-[22vw]">
         <slot />
       </h1>
 
