@@ -34,7 +34,7 @@
             :class="mode === 'login' ? 'text-paper' : 'text-ink/70 hover:text-ink'"
             :aria-current="mode === 'login' ? 'page' : undefined"
           >
-            Sign In
+            Connexion
           </router-link>
           <router-link
             to="/register"
@@ -42,7 +42,7 @@
             :class="mode === 'register' ? 'text-paper' : 'text-ink/70 hover:text-ink'"
             :aria-current="mode === 'register' ? 'page' : undefined"
           >
-            Sign Up
+            Inscription
           </router-link>
         </nav>
 
@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <p class="label text-ink/40 lg:hidden">© 2025 MoodFlow. All rights reserved.</p>
+      <p class="label text-ink/40 lg:hidden">© 2025 MoodFlow. Tous droits réservés.</p>
     </div>
 
     <!-- Panneau de marque -->
@@ -73,9 +73,11 @@
             Le bien-être au travail, <span class="accent text-sun">simplifié</span>
           </p>
           <div class="mt-10 max-w-md border-t border-paper/20 pt-5 text-xs leading-relaxed text-paper/55">
-            <p class="text-sm text-paper/75">© 2025 MoodFlow. All rights reserved.</p>
-            <p class="mt-1">Unauthorized use or reproduction of any content or materials from this</p>
-            <p>prohibited. For more information, visit our Terms of Service and Privacy Policy</p>
+            <p class="text-sm text-paper/75">© 2025 MoodFlow. Tous droits réservés.</p>
+            <p class="mt-1">
+              Toute reproduction, même partielle, des contenus de ce site est interdite. Pour en savoir plus,
+              consultez notre <router-link to="/privacy" class="underline underline-offset-2 hover:text-paper">politique de confidentialité</router-link>.
+            </p>
           </div>
         </div>
       </div>

@@ -145,7 +145,7 @@
           </p>
         </div>
 
-        <div v-reveal class="mt-16 overflow-x-auto rounded-[2rem] bg-paper" data-lenis-prevent>
+        <div v-reveal class="relative mt-16 overflow-x-auto rounded-[2rem] bg-paper" data-lenis-prevent>
           <table class="w-full min-w-[40rem] border-collapse text-left">
             <thead>
               <tr class="border-b border-ink/15">
@@ -181,7 +181,7 @@
       <div class="shell grid gap-12 lg:grid-cols-12">
         <div class="lg:col-span-4">
           <p class="label text-ink/55">(03)</p>
-          <h2 v-split class="display mt-6 text-display-lg">Questions fréquentes</h2>
+          <h2 v-split class="display mt-6 text-display-lg lg:text-display-md">Questions fréquentes</h2>
         </div>
         <div class="lg:col-span-8">
           <FaqList :items="faqs" :open="openFaqs" @toggle="toggleFaq" />

@@ -77,7 +77,7 @@
       <div class="shell grid gap-12 lg:grid-cols-12">
         <div class="lg:col-span-4">
           <p class="label text-ink/55">(03)</p>
-          <h2 v-split class="display mt-6 text-display-lg">Questions sur la confidentialité</h2>
+          <h2 v-split class="display mt-6 text-display-lg lg:text-[clamp(2.1rem,3.9vw,4.5rem)]">Questions sur la confidentialité</h2>
           <p v-reveal class="mt-8 text-pretty text-xl text-ink/75">
             Les réponses aux questions les plus fréquentes sur la protection de vos données
           </p>

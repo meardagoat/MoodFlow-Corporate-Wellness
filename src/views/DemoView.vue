@@ -126,7 +126,7 @@
             <div>
               <label for="demo-size" class="label text-ink/60">Nombre d'employés</label>
               <select id="demo-size" v-model="form.size" required class="field-line mt-2">
-                <option value="">Sélectionnez la taille de votre entreprise</option>
+                <option value="">Choisir…</option>
                 <option value="1-50">1-50 employés</option>
                 <option value="51-200">51-200 employés</option>
                 <option value="201-1000">201-1000 employés</option>

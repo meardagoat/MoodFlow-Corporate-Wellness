@@ -1,7 +1,7 @@
 <template>
-  <section class="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-44" :style="{ backgroundColor: tone }">
+  <section class="relative overflow-hidden pb-20 pt-[18.5rem] md:pb-28 md:pt-44" :style="{ backgroundColor: tone }">
     <div
-      class="pointer-events-none absolute -right-[24vw] top-16 w-[62vw] md:-right-[7vw] md:top-20 md:w-[38vw] lg:w-[34vw]"
+      class="pointer-events-none absolute -right-8 top-20 w-[12.5rem] md:-right-[7vw] md:top-20 md:w-[38vw] lg:w-[34vw]"
       aria-hidden="true"
     >
       <div v-parallax="0.35">
@@ -15,7 +15,7 @@
         {{ label }}
       </p>
 
-      <h1 v-split="{ immediate: true, delay: 0.1 }" class="display mt-10 max-w-[15ch] text-display-xl md:mt-14">
+      <h1 v-split="{ immediate: true, delay: 0.1 }" class="display mt-10 max-w-[15ch] text-display-xl md:mt-14 md:pr-[22vw]">
         <slot />
       </h1>
 

@@ -153,7 +153,7 @@
             <div>
               <label for="contact-subject" class="label text-ink/60">Sujet</label>
               <select id="contact-subject" v-model="form.subject" required class="field-line mt-2">
-                <option value="">Sélectionnez un sujet</option>
+                <option value="">Choisir…</option>
                 <option value="demo">Demande de démo</option>
                 <option value="pricing">Question sur les tarifs</option>
                 <option value="support">Support technique</option>
@@ -187,7 +187,7 @@
       <div class="shell grid gap-12 lg:grid-cols-12">
         <div class="lg:col-span-4">
           <p class="label text-ink/55">(04)</p>
-          <h2 v-split class="display mt-6 text-display-lg">Questions fréquentes</h2>
+          <h2 v-split class="display mt-6 text-display-lg lg:text-display-md">Questions fréquentes</h2>
           <p v-reveal class="mt-8 text-pretty text-xl text-ink/75">Trouvez rapidement les réponses à vos questions</p>
         </div>
         <div class="lg:col-span-8">
